@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
 import { LayoutService } from './service/app.layout.service';
+import {SidebarModule} from "primeng/sidebar";
 
 @Component({
-    selector: 'app-rightmenu',
-    templateUrl: './app.rightmenu.component.html'
+  selector: 'app-rightmenu',
+  standalone: true,
+  imports: [
+    SidebarModule
+  ],
+  templateUrl: './app.rightmenu.component.html'
 })
 export class AppRightMenuComponent {
 

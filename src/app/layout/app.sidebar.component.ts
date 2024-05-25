@@ -7,10 +7,14 @@ import {
 } from '@angular/core';
 import { AppMenuProfileComponent } from './app.menuprofile.component';
 import { LayoutService } from './service/app.layout.service';
+import {AppMenuComponent} from "./app.menu.component";
+import {NgIf} from "@angular/common";
 
 @Component({
-    selector: 'app-sidebar',
-    templateUrl: './app.sidebar.component.html',
+  selector: 'app-sidebar',
+  templateUrl: './app.sidebar.component.html',
+  imports: [AppMenuProfileComponent, AppMenuComponent, NgIf],
+  standalone: true
 })
 export class AppSidebarComponent implements OnDestroy {
     timeout: any = null;

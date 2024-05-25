@@ -2,8 +2,8 @@
     <button class="p-link border-noround" (click)="toggleMenu()" pTooltip="Profile" [tooltipDisabled]="isTooltipDisabled">
         <img src="assets/layout/images/login/icon-login.svg" alt="avalon-ng" style="width: 52px; height: 52px;">
         <span>
-            <strong>{{user.name}}</strong>
-            <small>{{ user.email }}</small>
+            <strong>userName</strong>
+            <small>user Email</small>
         </span>
         <i class="layout-menu-profile-toggler pi pi-fw" [ngClass]="{'pi-angle-down': menuProfilePosition === 'start' || isHorizontal, 'pi-angle-up': menuProfilePosition === 'end' && !isHorizontal}"></i>
     </button>

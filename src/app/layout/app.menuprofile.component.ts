@@ -1,41 +1,42 @@
 import { Component, ElementRef } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { LayoutService } from './service/app.layout.service';
-import {Utilisateur} from "../core/interface/entities/user.model";
+import { TooltipModule} from "primeng/tooltip";
+import {NgClass, NgIf} from "@angular/common";
+import {RouterLink} from "@angular/router";
 
 @Component({
-    selector: 'app-menu-profile',
-    templateUrl: './app.menuprofile.component.html',
-    animations: [
-        trigger('menu', [
-            transition('void => inline', [
-                style({ height: 0 }),
-                animate(
-                    '400ms cubic-bezier(0.86, 0, 0.07, 1)',
-                    style({ opacity: 1, height: '*' })
-                ),
-            ]),
-            transition('inline => void', [
-                animate(
-                    '400ms cubic-bezier(0.86, 0, 0.07, 1)',
-                    style({ opacity: 0, height: '0' })
-                ),
-            ]),
-            transition('void => overlay', [
-                style({ opacity: 0, transform: 'scaleY(0.8)' }),
-                animate('.12s cubic-bezier(0, 0, 0.2, 1)'),
-            ]),
-            transition('overlay => void', [
-                animate('.1s linear', style({ opacity: 0 })),
-            ]),
-        ]),
-    ],
+  selector: 'app-menu-profile',
+  templateUrl: './app.menuprofile.component.html',
+  imports: [TooltipModule, NgClass, RouterLink, NgIf],
+  animations: [
+    trigger('menu', [
+      transition('void => inline', [
+        style({height: 0}),
+        animate(
+          '400ms cubic-bezier(0.86, 0, 0.07, 1)',
+          style({opacity: 1, height: '*'})
+        ),
+      ]),
+      transition('inline => void', [
+        animate(
+          '400ms cubic-bezier(0.86, 0, 0.07, 1)',
+          style({opacity: 0, height: '0'})
+        ),
+      ]),
+      transition('void => overlay', [
+        style({opacity: 0, transform: 'scaleY(0.8)'}),
+        animate('.12s cubic-bezier(0, 0, 0.2, 1)'),
+      ]),
+      transition('overlay => void', [
+        animate('.1s linear', style({opacity: 0})),
+      ]),
+    ]),
+  ],
+  standalone: true
 })
 export class AppMenuProfileComponent {
-    user!: Utilisateur;
     constructor(public layoutService: LayoutService, public el: ElementRef) {
-        this.user = JSON.parse(localStorage.getItem('user') as string);
-        console.log(this.user);
     }
 
     toggleMenu() {

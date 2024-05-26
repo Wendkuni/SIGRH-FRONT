@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRouteSnapshot, NavigationEnd, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import {AsyncPipe, NgForOf} from "@angular/common";
 
 interface Breadcrumb {
     label: string;
@@ -9,8 +10,13 @@ interface Breadcrumb {
 }
 
 @Component({
-    selector: 'app-breadcrumb',
-    templateUrl: './app.breadcrumb.component.html'
+  selector: 'app-breadcrumb',
+  standalone: true,
+  imports: [
+    NgForOf,
+    AsyncPipe
+  ],
+  templateUrl: './app.breadcrumb.component.html'
 })
 export class AppBreadcrumbComponent {
 

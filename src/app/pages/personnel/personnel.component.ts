@@ -1,8 +1,8 @@
 import {Component, ElementRef, inject, OnInit, ViewChild} from '@angular/core';
-import {personnelColonneTable, PersonnelResponse} from "../../core/data/personals/personnel.model";
+import {personnelColonneTable, PersonnelRequest, PersonnelResponse} from "../../core/data/personals/personnel.model";
 import {PersonnelService} from "../../core/data/personals/personnel.service";
 import {MessageService} from "primeng/api";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {CardModule} from "primeng/card";
 import {Table, TableModule} from "primeng/table";
 import {InputTextModule} from "primeng/inputtext";
@@ -14,6 +14,11 @@ import {RippleModule} from "primeng/ripple";
 import {RouterLink} from "@angular/router";
 import {ToastModule} from "primeng/toast";
 import {ToolbarModule} from "primeng/toolbar";
+import {DialogModule} from "primeng/dialog";
+import {FormValidatorsComponent} from "../../shared/form-validators/form-validators.component";
+import {CalendarModule} from "primeng/calendar";
+import {DividerModule} from "primeng/divider";
+import {FileUploadModule} from "primeng/fileupload";
 
 @Component({
   selector: 'mrt-personnel',
@@ -30,7 +35,13 @@ import {ToolbarModule} from "primeng/toolbar";
     RippleModule,
     RouterLink,
     ToastModule,
-    ToolbarModule
+    ToolbarModule,
+    DialogModule,
+    ReactiveFormsModule,
+    FormValidatorsComponent,
+    CalendarModule,
+    DividerModule,
+    FileUploadModule
   ],
   templateUrl: './personnel.component.html',
   providers: [MessageService]
@@ -82,6 +93,15 @@ export class PersonnelComponent implements OnInit{
       ministereorigine: this.fb.control('',[Validators.required]),
       Typeeducation: this.fb.control('',[Validators.required])
     });
+    this.getAllPersonnel();
+  }
+
+  // Methode pour recuperer la liste du personnel
+  getAllPersonnel() {
+    this.personalService.getAllPersonnels().subscribe((response) => {
+      this.listPersonnel$ = response;
+      this.loading = false;
+    });
   }
 
   //Methode pour afficher le formulaire d'ajout
@@ -97,6 +117,71 @@ export class PersonnelComponent implements OnInit{
     this.selectedPersonnel = personal;
     this.personnelForm.patchValue(personal);
   }
+
+  savePersonnel() {
+    const data = this.getFormData();
+    if (this.action === 'Add') {
+      this.createPersonnel(data);
+    } else {
+      this.updatePersonnel(data);
+    }
+  }
+
+  // Methode pour creer un personnel
+  createPersonnel(personnel:PersonnelRequest){
+    this.personalService.addPersonnel(personnel).subscribe(() => {
+        this.getAllPersonnel();
+        this.formDialog = false;
+        this.personnelForm.reset();
+        this.messageService.add({severity: 'success', summary: 'Successful', detail: 'Personnel Created', life: 3000});
+      },
+      error => {
+        this.messageService.add({severity: 'error', summary: 'Error', detail: 'Personnel not Created', life: 3000});
+
+      });
+  }
+
+  // Methode pour mettre a jour un personnel
+  updatePersonnel(personnel:PersonnelRequest){
+    let id = this.selectedPersonnel.id;
+    this.personalService.updatePersonnel(id, personnel).subscribe(() => {
+      this.getAllPersonnel();
+      this.formDialog = false;
+      this.personnelForm.reset();
+      this.messageService.add({severity: 'success', summary: 'Successful', detail: 'Personnel Updated', life: 3000});
+    });
+  }
+
+  // Methode de recuperation des elements du formulaire
+  getFormData(): PersonnelRequest {
+    const formData = this.personnelForm.value;
+    return<PersonnelRequest>{
+      matricule: formData.matricule,
+      photo: formData.photo,
+      nni: formData.nni,
+      nometprenom: formData.nometprenom,
+      nometprenomarab: formData.nometprenomarab,
+      actifornot: formData.actifornot,
+      dterecrutemnt: formData.dterecrutemnt,
+      dtetitularisation: formData.dtetitularisation,
+      dtedepart: formData.dtedepart,
+      statusemp: formData.statusemp,
+      adressemp: formData.adressemp,
+      debutcntrat: formData.debutcntrat,
+      tlphone: formData.tlphone,
+      fincntrat: formData.fincntrat,
+      dtenaiss: formData.dtenaiss,
+      lieunaiss: formData.lieunaiss,
+      bank: formData.bank,
+      codbank: formData.codbank,
+      numrocpte: formData.numrocpte,
+      clerib: formData.clerib,
+      detacher: formData.detacher,
+      ministereorigine: formData.ministereorigine,
+      Typeeducation: formData.Typeeducation
+    }
+  }
+
 
   // Fonction  qui retourne le style css du status de l'employer
   getStatusSeverity(status: string): any {

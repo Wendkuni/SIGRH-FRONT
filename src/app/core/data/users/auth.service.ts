@@ -15,26 +15,6 @@ export class AuthService {
   // Inject HttpClient
   http = inject(HttpClient);
 
-  // Inject Router
-  router = inject(Router);
-
-  //Inject message service from primeng
-  messageService = inject(MessageService);
-
-  //login
-  onLogin(email: string, password: string){
-    this.getAllUsers().subscribe((users: Utilisateur[]) => {
-      const user = users.find((user) => user.email === email && user.password === password);
-      if(user != null){
-        console.log(user);
-        localStorage.setItem('user', JSON.stringify(user));
-        this.router.navigateByUrl("/home");
-      }
-      else {
-        this.messageService.add({severity:'error', summary:'Error', detail:'Email ou Mot de passe incorrect'});
-      }
-    });
-  }
 
   // get all users
   getAllUsers(){

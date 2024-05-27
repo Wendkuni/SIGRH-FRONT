@@ -8,6 +8,8 @@ import {FormValidatorsComponent} from "../form-validators/form-validators.compon
 import {InputTextModule} from "primeng/inputtext";
 import {CheckboxModule} from "primeng/checkbox";
 import {ButtonModule} from "primeng/button";
+import {Utilisateur} from "../../core/data/users/user.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'mrt-login',
@@ -28,6 +30,10 @@ export class LoginComponent {
   layoutService = inject(LayoutService);
   authService = inject(AuthService);
   fb = inject(FormBuilder);
+  // Inject Router
+  router = inject(Router);
+  //Inject message service from primeng
+  messageService = inject(MessageService);
 
   loginForm =this.fb.group({
     email: this.fb.control('',[Validators.required, Validators.email]),
@@ -39,8 +45,18 @@ export class LoginComponent {
   }
 
   handleLogin() {
-    const email: any = this.loginForm.value.email;
-    const passwd: any = this.loginForm.value.password;
-    this.authService.onLogin(email, passwd);
+    const email:any = this.loginForm.value.email;
+    const passwd:any = this.loginForm.value.password;
+    this.authService.getAllUsers().subscribe((users: Utilisateur[]) => {
+      const user = users.find((user) => user.email === email && user.password === passwd);
+      if(user != null){
+        console.log(user);
+        localStorage.setItem('user', JSON.stringify(user));
+        this.router.navigateByUrl("/home");
+      }
+      else {
+        this.messageService.add({severity:'error', summary:'Error', detail:'Email ou Mot de passe incorrect'});
+      }
+    });
   }
 }

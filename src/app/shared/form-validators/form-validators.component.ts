@@ -40,7 +40,7 @@ export class FormValidatorsComponent {
         return "Ce champs n'est pas valide !"
       }
       else if (error['email']){
-        return "Ce champs n'est pas valide !"
+        return "Cet email n'est pas valide !"
       }
       else if(error['phone']){
         return "Ce champs n'est pas valide !"

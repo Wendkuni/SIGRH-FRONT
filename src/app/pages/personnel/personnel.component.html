@@ -1,1 +1,305 @@
-<p>personnel works!</p>
+<!-- Toast notification part start-->
+<p-toast [life]="3000"></p-toast>
+
+<!-- Toolbar start pour afficher les boutons des differentes actions realisable dans la gestion du personnels-->
+<p-card styleClass="mb-5">
+  <p-toolbar>
+    <ng-template pTemplate="right">
+      <div class="my-2">
+        <!--        Button d'ajout d'un personnel-->
+        <button
+          pButton
+          pRipple
+          label="Ajouter"
+          icon="pi pi-plus"
+          class="p-element p-ripple p-button-outlined p-button-primary p-button p-component mr-2"
+          (click)="openNew()"
+        ></button>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="left">
+      <div class="my-2">
+        <h4>Fiche personnel</h4>
+      </div>
+    </ng-template>
+  </p-toolbar>
+</p-card>
+
+
+<!-- Tableau d'affichage de la liste du personnel-->
+<p-card>
+  <p-table
+    [columns]="cols"
+    [value]="listPersonnel$"
+    #dt1
+    dataKey="id"
+    [rows]="5"
+    [loading]="loading"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Page {currentPage} sur {totalPages}"
+    [paginator]="true"
+    styleClass="p-datatable-gridlines p-datatable-striped"
+    responsiveLayout="scroll"
+    [rowHover]="true"
+    [rowsPerPageOptions]="[5,10, 20, 50]"
+    tableStyleClass="p-datatable-gridlines"
+    [globalFilterFields]="['nni','matricule','nometprenom','nometprenomarab','tlphone','ministereorigine','Typeeducation']"
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex justify-content-between flex-column sm:flex-row">
+              <span class="p-input-icon-left mb-2">
+							<i class="pi pi-search"></i>
+							<input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)"
+                     placeholder="Recherche..." class="w-full"/>
+						</span>
+      </div>
+    </ng-template>
+    <ng-template let-columns pTemplate="header">
+      <tr>
+        @for (col of columns; track col.field) {
+          <th
+            [pSortableColumn]="col.field"
+            class="font-weight-bold"
+          >
+            {{ col.header }}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+        }
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-personnel>
+      <tr class="align-items-center">
+        <td style=" min-width: 6rem;">
+          @if (personnel?.photo) {
+            <img src="{{personnel?.photo}}" alt="{{personnel?.nometprenom}}"
+                 class="w-4rem h-4rem border-circle shadow-4">
+          } @else {
+            <img src="assets/demo/images/avatar/user-avatar.png" alt="user.name"
+                 class="w-4rem h-4rem border-circle shadow-4">
+          }
+        </td>
+        <td style="min-width: 15rem;">
+          @if (personnel.nni) {
+            {{ personnel.nni }}
+          } @else {
+            -
+          }
+        </td>
+        <td
+          style="min-width: 15rem">
+          @if (personnel.matricule) {
+            {{ personnel.matricule }}
+          } @else {
+            -
+          }
+        </td>
+        <td
+          style="min-width: 15rem">
+          @if (personnel.nometprenom) {
+            {{ personnel.nometprenom  | uppercase }}
+          } @else {
+            -
+          }
+        </td>
+        <td
+          style="min-width: 15rem">
+          @if (personnel.nometprenomarab) {
+            {{ personnel.nometprenomarab  | uppercase }}
+          } @else {
+            -
+          }
+        </td>
+        <td
+          style="min-width: 15rem">
+          @if (personnel.tlphone) {
+            {{ personnel.tlphone }}
+          } @else {
+            -
+          }
+        </td>
+        <td
+          style="min-width: 15rem">
+          @if (personnel.adressemp) {
+            {{ personnel.adressemp  | uppercase }}
+          } @else {
+            -
+          }
+        </td>
+        <td
+          style="min-width: 15rem">
+          @if (personnel.dtenaiss) {
+            {{ personnel.dtenaiss | date: 'dd/MM/yyyy' }}
+          } @else {
+            -
+          }
+        </td>
+        <td
+          style="min-width: 15rem">
+          @if (personnel.lieunaiss) {
+            {{ personnel.lieunaiss  | uppercase }}
+          } @else {
+            -
+          }
+        </td>
+        <td
+          style="min-width: 15rem">
+
+          @if (personnel.dterecrutemnt) {
+            {{ personnel.dterecrutemnt | date: 'dd/MM/yyyy' }}
+          } @else {
+            -
+          }</td>
+        <td
+          style="min-width: 15rem">
+          @if (personnel.dtetitularisation) {
+            {{ personnel.dtetitularisation | date: 'dd/MM/yyyy' }}
+          } @else {
+            -
+          }
+        </td>
+        <td
+          style="min-width: 15rem">
+          @if (personnel.debutcntrat) {
+            {{ personnel.debutcntrat | date: 'dd/MM/yyyy' }}
+          } @else {
+            -
+          }
+        </td>
+        <td
+          style="min-width: 15rem">
+          @if (personnel.fincntrat) {
+            {{ personnel.fincntrat | date: 'dd/MM/yyyy' }}
+          } @else {
+            -
+          }
+        </td>
+        <td
+          style="min-width: 15rem">
+          @if (personnel.bank) {
+            {{ personnel.bank }}
+          } @else {
+            -
+          }
+        </td>
+        <td
+          style="min-width: 15rem">
+          @if (personnel.codbank) {
+            {{ personnel.codbank }}
+          } @else {
+            -
+          }
+        </td>
+        <td
+          style="min-width: 15rem">
+          @if (personnel.numrocpte) {
+            {{ personnel.numrocpte }}
+          } @else {
+            -
+
+          }
+        </td>
+        <td
+          style="min-width: 15rem">
+          @if (personnel.dtedepart) {
+            {{ personnel.dtedepart | date: 'dd/MM/yyyy' }}
+          } @else {
+            -
+          }
+        </td>
+        <td
+          style="min-width: 15rem">
+          @if (personnel.detacher) {
+            {{ personnel.detacher }}
+          } @else {
+            -
+          }
+        </td>
+        <td
+          style="min-width: 15rem">
+          @if (personnel.ministereorigine) {
+            {{ personnel.ministereorigine }}
+          } @else {
+            -
+          }
+        </td>
+        <td
+          style="min-width: 15rem">
+          @if (personnel.Typeeducation) {
+            {{ personnel.Typeeducation  | uppercase }}
+          } @else {
+            -
+          }
+        </td>
+        <td
+          style="min-width: 15rem">
+          @if (personnel.actifornot) {
+            <p-tag
+              [value]="personnel.actifornot"
+              [severity]="getStatusSeverity(personnel.actifornot)"
+            >
+            </p-tag>
+          } @else {
+            -
+          }
+        </td>
+        <td
+          style="min-width: 15rem">
+          @if (personnel.statusemp) {
+            {{ personnel.statusemp }}
+          } @else {
+            -
+          }
+        </td>
+        <td>
+          <!--          Bouton qui fait l'ouverture du formulaire de modification -->
+          <button
+            pButton
+            type="button"
+            pTooltip="Modifier"
+            tooltipPosition="top"
+            pRipple
+            icon="pi pi-pencil"
+            class="p-button-rounded p-button-primary mx-2"
+            iconPos="left"
+            (click)="viewEditPersonnel(personnel)"
+          ></button>
+        </td>
+        <td>
+          <!--          Bouton qui affiche la vue details du personnel -->
+          <button
+            pButton
+            type="button"
+            pTooltip="Dossier"
+            tooltipPosition="top"
+            pRipple
+            icon="pi pi-info"
+            class="p-button-rounded p-button-warning mx-2"
+            iconPos="left"
+            routerLink="/personnel-dossier/{{ personnel.id }}"
+          ></button>
+        </td>
+        <td>
+          <!--          Button qui supprime un personnel A verifier si la possibilite doit etre donner-->
+          <button
+            pButton
+            type="button"
+            pTooltip="Supprimer"
+            tooltipPosition="top"
+            pRipple
+            icon="pi pi-trash"
+            class="p-button-rounded p-button-danger mx-2"
+            iconPos="left"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="8">Aucun personnel trouvé(e).</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-card>

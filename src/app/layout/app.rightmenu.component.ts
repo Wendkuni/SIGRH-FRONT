@@ -3,7 +3,7 @@ import { LayoutService } from './service/app.layout.service';
 import {SidebarModule} from "primeng/sidebar";
 
 @Component({
-  selector: 'app-rightmenu',
+  selector: 'mrt-rightmenu',
   standalone: true,
   imports: [
     SidebarModule

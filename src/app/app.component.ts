@@ -5,7 +5,7 @@ import {ButtonModule} from "primeng/button";
 import {AppLayoutComponent} from "./layout/app.layout.component";
 
 @Component({
-  selector: 'app-root',
+  selector: 'mrt-root',
   standalone: true,
   imports: [RouterOutlet, ToolbarModule, ButtonModule, AppLayoutComponent],
   templateUrl: './app.component.html',

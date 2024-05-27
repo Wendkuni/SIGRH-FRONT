@@ -4,7 +4,7 @@ import {ButtonModule} from "primeng/button";
 import {RippleModule} from "primeng/ripple";
 
 @Component({
-  selector: 'app-footer',
+  selector: 'mrt-footer',
   standalone: true,
   imports: [
     ButtonModule,

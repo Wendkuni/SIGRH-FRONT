@@ -12,7 +12,7 @@
       },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "mtr",
+      "prefix": "mrt",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",

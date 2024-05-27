@@ -10,7 +10,7 @@ interface Breadcrumb {
 }
 
 @Component({
-  selector: 'app-breadcrumb',
+  selector: 'mrt-breadcrumb',
   standalone: true,
   imports: [
     NgForOf,

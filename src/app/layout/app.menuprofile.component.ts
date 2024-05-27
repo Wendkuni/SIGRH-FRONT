@@ -6,7 +6,7 @@ import {NgClass, NgIf} from "@angular/common";
 import {RouterLink} from "@angular/router";
 
 @Component({
-  selector: 'app-menu-profile',
+  selector: 'mrt-menu-profile',
   templateUrl: './app.menuprofile.component.html',
   imports: [TooltipModule, NgClass, RouterLink, NgIf],
   animations: [

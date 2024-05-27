@@ -4,7 +4,7 @@ import {AppMenuitemComponent} from "./app.menuitem.component";
 import {NgForOf, NgIf} from "@angular/common";
 
 @Component({
-  selector: 'app-menu',
+  selector: 'mrt-menu',
   standalone: true,
   imports: [
     AppMenuitemComponent,

@@ -4,7 +4,7 @@ import {StyleClassModule} from "primeng/styleclass";
 import {NgClass} from "@angular/common";
 
 @Component({
-  selector: 'app-topbar',
+  selector: 'mrt-topbar',
   standalone: true,
   imports: [
     StyleClassModule,

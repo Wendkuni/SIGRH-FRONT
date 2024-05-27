@@ -11,7 +11,7 @@ import {AppMenuComponent} from "./app.menu.component";
 import {NgIf} from "@angular/common";
 
 @Component({
-  selector: 'app-sidebar',
+  selector: 'mrt-sidebar',
   templateUrl: './app.sidebar.component.html',
   imports: [AppMenuProfileComponent, AppMenuComponent, NgIf],
   standalone: true

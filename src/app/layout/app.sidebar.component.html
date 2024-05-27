@@ -120,17 +120,17 @@
             type="button"
             (click)="anchor()"
         ></button>
-       
+
     </div>
-    <app-menu-profile
+    <mrt-menu-profile
         #menuProfileStart
         *ngIf="menuProfilePosition === 'start'"
-    ></app-menu-profile>
+    ></mrt-menu-profile>
     <div #menuContainer class="layout-menu-container">
-        <app-menu></app-menu>
+        <mrt-menu></mrt-menu>
     </div>
-    <app-menu-profile
+    <mrt-menu-profile
         #menuProfileEnd
         *ngIf="menuProfilePosition === 'end'"
-    ></app-menu-profile>
+    ></mrt-menu-profile>
 </div>

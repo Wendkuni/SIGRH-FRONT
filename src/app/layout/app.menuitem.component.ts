@@ -13,7 +13,7 @@ import {RippleModule} from "primeng/ripple";
 
 @Component({
   // eslint-disable-next-line
-  selector: '[app-menuitem]',
+  selector: '[mrt-menuitem]',
   standalone: true,
   template: `
     <ng-container>
@@ -57,7 +57,7 @@ import {RippleModule} from "primeng/ripple";
         <ul #submenu [@children]="submenuAnimation"
             (@children.done)="onSubmenuAnimated($event)">
           <ng-template ngFor let-child let-i="index" [ngForOf]="item.items">
-            <li app-menuitem [item]="child" [index]="i" [parentKey]="key" [class]="child.badgeClass"></li>
+            <li mrt-menuitem [item]="child" [index]="i" [parentKey]="key" [class]="child.badgeClass"></li>
           </ng-template>
         </ul>
       }

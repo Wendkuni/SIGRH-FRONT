@@ -16,7 +16,7 @@ import {AppRightMenuComponent} from "./app.rightmenu.component";
 import {AppBreadcrumbComponent} from "./app.breadcrumb.component";
 
 @Component({
-  selector: 'app-layout',
+  selector: 'mrt-layout',
   templateUrl: './app.layout.component.html',
   standalone: true,
   imports: [NgClass, RouterOutlet, AppTopbarComponent, AppRightMenuComponent, AppSidebarComponent, NgIf, AppBreadcrumbComponent]

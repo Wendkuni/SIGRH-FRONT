@@ -18,8 +18,11 @@ export const routes: Routes = [
     children: [
       {
         path: 'home',
-        loadComponent: () => import('./pages/dashboard/dashboard.component').then(item => item.DashboardComponent),
-        // component: DashboardComponent
+        loadComponent: () => import('./pages/dashboard/dashboard.component').then(item => item.DashboardComponent)
+      },
+      {
+        path: 'personnel',
+        loadComponent: () => import('./pages/personnel/personnel.component').then(item => item.PersonnelComponent)
       }
   ]
   },

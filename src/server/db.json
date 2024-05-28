@@ -347,5 +347,117 @@
       "ministereorigine": "Ministère des Finances",
       "Typeeducation": "Bac+5"
     }
+  ],
+  "fonctions": [
+    {
+      "fonction": "Ingénieur informatique",
+      "fonctionenarabe": "مهندس كمبيوتر",
+      "corps": "Administratif",
+      "grade": "Ingénieur",
+      "categorie": "A",
+      "echelon": "1",
+      "echelle": "Ingénieur",
+      "indice": "600",
+      "salairedebase": "1500000"
+    },
+    {
+      "fonction": "Comptable",
+      "fonctionenarabe": "محاسب",
+      "corps": "Administratif",
+      "grade": "Comptable",
+      "categorie": "B",
+      "echelon": "2",
+      "echelle": "Comptable",
+      "indice": "500",
+      "salairedebase": "1200000"
+    },
+    {
+      "fonction": "Professeur des écoles",
+      "fonctionenarabe": "معلم مدرسة",
+      "corps": "Enseignant",
+      "grade": "Professeur des écoles",
+      "categorie": "C",
+      "echelon": "1",
+      "echelle": "Enseignant",
+      "indice": "400",
+      "salairedebase": "1000000"
+    },
+    {
+      "fonction": "Médecin",
+      "fonctionenarabe": "طبيب",
+      "corps": "Médical",
+      "grade": "Interne",
+      "categorie": "A",
+      "echelon": "1",
+      "echelle": "Médical",
+      "indice": "700",
+      "salairedebase": "1800000"
+    },
+    {
+      "fonction": "Infirmier",
+      "fonctionenarabe": "ممرض",
+      "corps": "Paramédical",
+      "grade": "Infirmier diplômé d'état",
+      "categorie": "B",
+      "echelon": "1",
+      "echelle": "Paramédical",
+      "indice": "550",
+      "salairedebase": "1350000"
+    },
+    {
+      "fonction": "Agent de police",
+      "fonctionenarabe": "شرطي",
+      "corps": "Sécurité",
+      "grade": "Gardien de la paix",
+      "categorie": "C",
+      "echelon": "1",
+      "echelle": "Sécurité",
+      "indice": "450",
+      "salairedebase": "1100000"
+    },
+    {
+      "fonction": "Technicien supérieur",
+      "fonctionenarabe": "فني سامي",
+      "corps": "Technique",
+      "grade": "Technicien",
+      "categorie": "B",
+      "echelon": "2",
+      "echelle": "Technique",
+      "indice": "500",
+      "salairedebase": "1200000"
+    },
+    {
+      "fonction": "Ouvrier qualifié",
+      "fonctionenarabe": "عامل ماهر",
+      "corps": "Ouvrier",
+      "grade": "Ouvrier qualifié",
+      "categorie": "C",
+      "echelon": "2",
+      "echelle": "Ouvrier",
+      "indice": "350",
+      "salairedebase": "900000"
+    },
+    {
+      "fonction": "Chauffeur",
+      "fonctionenarabe": "سائق",
+      "corps": "Conduite",
+      "grade": "Chauffeur poids lourds",
+      "categorie": "B",
+      "echelon": "1",
+      "echelle": "Conduite",
+      "indice": "400",
+      "salairedebase": "1000000"
+    },
+    {
+      "fonction": "Secrétaire",
+      "fonctionenarabe": "سكرتير",
+      "corps": "Administratif",
+      "grade": "Secrétaire",
+      "categorie": "C",
+      "echelon": "1",
+      "echelle": "Administratif",
+      "indice": "350",
+      "salairedebase": "900000"
+    }
   ]
 }

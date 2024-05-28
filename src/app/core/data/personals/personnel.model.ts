@@ -170,13 +170,7 @@ export interface PersonnelResponse {
 }
 
 
-export interface Dossier {
-    id: string; // Attribute name: id
-    nom: string; // Attribute name: nom
-    date: string; // Attribute name: date
-    observation: string; // Attribute name: observation
-    // images: string[]; Attribute name: images (array of strings)
-}
+
 // Personnel model on database
 export interface Personnel{
     IDagent: bigint;

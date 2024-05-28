@@ -1,4 +1,4 @@
-import {Component, inject, Input} from '@angular/core';
+import {Component, inject, Input, OnInit} from '@angular/core';
 import {Avancement} from "../../core/data/fonction/fonction.model";
 import {AvancementService} from "../../core/data/fonction/avancement.service";
 import {PersonnelResponse} from "../../core/data/personals/personnel.model";
@@ -31,7 +31,7 @@ import {RippleModule} from "primeng/ripple";
   templateUrl: './fonction.component.html',
   styleUrl: './fonction.component.scss'
 })
-export class FonctionComponent {
+export class FonctionComponent implements OnInit{
 
   listAvancement$!: Avancement[]; //liste des dossiers
   avancementService = inject(AvancementService);

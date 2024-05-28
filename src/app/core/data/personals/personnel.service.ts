@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Dossier, PersonnelRequest, PersonnelResponse} from "./personnel.model";
+import { PersonnelRequest, PersonnelResponse} from "./personnel.model";
 
 @Injectable({
   providedIn: 'root'
@@ -38,8 +38,4 @@ export class PersonnelService {
     return this.http.delete(`${this.url}/${personnel.id}`);
   }
 
-  //   get all dossiers
-  getAllDossiers(){
-    return this.http.get<Dossier[]>(`${this.url}/dossiers`);
-  }
 }

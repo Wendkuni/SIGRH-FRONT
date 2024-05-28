@@ -1,5 +1,4 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {Dossier} from "../../core/data/personals/personnel.model";
 import {Cols} from "../../core/data/primeng/primeng.model";
 import {ButtonModule} from "primeng/button";
 import {RippleModule} from "primeng/ripple";
@@ -8,6 +7,8 @@ import {DatePipe} from "@angular/common";
 import {DialogModule} from "primeng/dialog";
 import {InputTextModule} from "primeng/inputtext";
 import {FileUploadModule} from "primeng/fileupload";
+import {DossierService} from "../../core/data/dossier/dossier.service";
+import {Dossier} from "../../core/data/dossier/dossier.model";
 
 @Component({
   selector: 'mrt-dossier',

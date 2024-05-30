@@ -459,5 +459,116 @@
       "indice": "350",
       "salairedebase": "900000"
     }
+  ],
+  "avancements": [
+    {
+      "nature": "Integration",
+      "corps": "Corps A",
+      "fonction": "Fonctionnaire",
+      "grade": "Grade 1",
+      "echelle": "Echelle A",
+      "echellon": "Echelon 1",
+      "dateEffet": "2023-10-01",
+      "idPersonnel": 1
+    },
+    {
+      "nature": "Titularisation",
+      "corps": "Corps B",
+      "fonction": "Fonctionnaire",
+      "grade": "Grade 2",
+      "echelle": "Echelle B",
+      "echellon": "Echelon 2",
+      "dateEffet": "2024-01-01",
+      "idPersonnel": 2
+    },
+    {
+      "nature": "Nominative",
+      "corps": "Corps C",
+      "fonction": "Fonctionnaire",
+      "grade": "Grade 3",
+      "echelle": "Echelle C",
+      "echellon": "Echelon 3",
+      "dateEffet": "2024-04-01",
+      "idPersonnel": 3
+    },
+    {
+      "nature": "Avancement",
+      "corps": "Corps A",
+      "fonction": "Fonctionnaire",
+      "grade": "Grade 1",
+      "echelle": "Echelle A",
+      "echellon": "Echelon 2",
+      "dateEffet": "2023-12-01",
+      "idPersonnel": 4
+    },
+    {
+      "nature": "Bonification",
+      "corps": "Corps B",
+      "fonction": "Fonctionnaire",
+      "grade": "Grade 2",
+      "echelle": "Echelle B",
+      "echellon": "Echelon 3",
+      "dateEffet": "2024-02-01",
+      "idPersonnel": 5
+    },
+    {
+      "nature": "Reclassement",
+      "corps": "Corps C",
+      "fonction": "Fonctionnaire",
+      "grade": "Grade 3",
+      "echelle": "Echelle C",
+      "echellon": "Echelon 4",
+      "dateEffet": "2024-05-01",
+      "idPersonnel": 6
+    },
+    {
+      "nature": "Sanction",
+      "corps": "Corps A",
+      "fonction": "Fonctionnaire",
+      "grade": "Grade 1",
+      "echelle": "Echelle A",
+      "echellon": "Echelon 3",
+      "dateEffet": "2024-01-01",
+      "idPersonnel": 7
+    },
+    {
+      "nature": "Decoration",
+      "corps": "Corps B",
+      "fonction": "Fonctionnaire",
+      "grade": "Grade 2",
+      "echelle": "Echelle B",
+      "echellon": "Echelon 4",
+      "dateEffet": "2024-03-01",
+      "idPersonnel": 8
+    },
+    {
+      "nature": "Demission",
+      "corps": "Corps C",
+      "fonction": "Fonctionnaire",
+      "grade": "Grade 3",
+      "echellon": "Echelon 5",
+      "dateEffet": "2024-06-01",
+      "idPersonnel": 9
+    },
+    {
+      "nature": "Retraite",
+      "corps": "Corps A",
+      "fonction": "Fonctionnaire",
+      "grade": "Grade 1",
+      "echelle": "Echelle A",
+      "echellon": "Echelon 4",
+      "dateEffet": "2024-02-01",
+      "idPersonnel": 10
+    },
+    {
+      "nature": "Deces",
+      "corps": "Corps B",
+      "fonction": "Fonctionnaire",
+      "grade": "Grade 2",
+      "echelle": "Echelle B",
+      "echellon": "Echelon 5",
+      "dateEffet": "2024-04-01",
+      "idPersonnel": 1
+    }
   ]
 }

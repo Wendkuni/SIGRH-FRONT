@@ -31,7 +31,6 @@ export class DossierComponent implements OnInit{
   lisDossiers$!: Dossier[]; //liste des dossiers
   dossierService = inject(DossierService);
   @Input() personnel!: PersonnelResponse;
-
 // colonne du tableau
   cols: Cols[] = [
     { field: 'nom', header: 'Nom Dossier' },
@@ -51,7 +50,7 @@ export class DossierComponent implements OnInit{
 
   private getAllDossiers() {
     this.dossierService.getAllDossiers().subscribe((response:Dossier[]) => {
-      this.lisDossiers$ = response;
+      return this.lisDossiers$ = response;
     });
   }
 }

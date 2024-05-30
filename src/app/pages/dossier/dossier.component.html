@@ -8,6 +8,8 @@
           (click)="showForm()"
   >
   </button>
+
+
   <p-table
     [columns]="cols"
     [value]="lisDossiers$"
@@ -63,6 +65,7 @@
       <input
         type="text"
         pInputText
+        [value]="personnel?.matricule"
         required
         autofocus
         disabled/>
@@ -72,6 +75,7 @@
       <input
         type="text"
         pInputText
+        [value]="personnel?.nometprenom"
         required
         autofocus
         disabled/>
@@ -81,6 +85,7 @@
       <input
         type="text"
         pInputText
+        [value]="personnel?.nni"
         required
         autofocus
         disabled
@@ -95,7 +100,7 @@
         accept="image/*"
         [maxFileSize]="1000000"
         styleClass="p-button-outlined p-button-plain w-full"
-        chooseLabel="Choisir une Image"></p-fileUpload>
+        chooseLabel="Choisir un fichier"></p-fileUpload>
     </div>
   </ng-template>
 

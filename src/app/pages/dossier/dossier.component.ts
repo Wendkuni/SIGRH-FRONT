@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, Input, OnInit} from '@angular/core';
 import {Cols} from "../../core/data/primeng/primeng.model";
 import {ButtonModule} from "primeng/button";
 import {RippleModule} from "primeng/ripple";
@@ -7,8 +7,8 @@ import {DatePipe} from "@angular/common";
 import {DialogModule} from "primeng/dialog";
 import {InputTextModule} from "primeng/inputtext";
 import {FileUploadModule} from "primeng/fileupload";
+import {Dossier, PersonnelResponse} from "../../core/data/personals/personnel.model";
 import {DossierService} from "../../core/data/dossier/dossier.service";
-import {Dossier} from "../../core/data/dossier/dossier.model";
 
 @Component({
   selector: 'mrt-dossier',
@@ -30,6 +30,8 @@ export class DossierComponent implements OnInit{
   showDialog = false;
   lisDossiers$!: Dossier[]; //liste des dossiers
   dossierService = inject(DossierService);
+  @Input() personnel!: PersonnelResponse;
+
 // colonne du tableau
   cols: Cols[] = [
     { field: 'nom', header: 'Nom Dossier' },
@@ -49,7 +51,7 @@ export class DossierComponent implements OnInit{
 
   private getAllDossiers() {
     this.dossierService.getAllDossiers().subscribe((response:Dossier[]) => {
-      return this.lisDossiers$ = response;
+      this.lisDossiers$ = response;
     });
   }
 }

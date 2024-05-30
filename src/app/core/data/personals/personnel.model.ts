@@ -97,7 +97,7 @@ export interface PersonnelRequest {
 
 export interface PersonnelResponse {
     // Identifiant unique du dossier personnel (probablement une chaîne de caractères)
-    id: string;
+    id: bigint;
 
     // Matricule du personnel (probablement une chaîne de caractères)
     matricule: string;
@@ -171,7 +171,7 @@ export interface PersonnelResponse {
 
 
 export interface Dossier {
-    id: string; // Attribute name: id
+    id: bigint; // Attribute name: id
     nom: string; // Attribute name: nom
     date: string; // Attribute name: date
     observation: string; // Attribute name: observation
@@ -180,7 +180,7 @@ export interface Dossier {
 
 export interface Mobilite {
     // Identifiant unique de la mobilité
-    id: string;
+    id: bigint;
     // Matricule de l'agent
     matricule: string;
     // Nom et prénom de l'agent

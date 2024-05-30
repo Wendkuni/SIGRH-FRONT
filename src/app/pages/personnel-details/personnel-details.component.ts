@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, Input, OnInit} from '@angular/core';
 import {Cols} from "../../core/data/primeng/primeng.model";
 import {PersonnelService} from "../../core/data/personals/personnel.service";
 import {ActivatedRoute} from "@angular/router";
@@ -30,17 +30,18 @@ export class PersonnelDetailsComponent implements OnInit{
 
   personalService = inject(PersonnelService)
   router = inject(ActivatedRoute);
-  personnel!: PersonnelResponse
+  personnel!: PersonnelResponse;
 
   ngOnInit(): void {
     let id  = this.router.snapshot.paramMap.get('id');
 
     if(id != null){
-      this.getPersonnel(id);
+      let idAgent = BigInt(id);
+      this.getPersonnel(idAgent);
     }
   }
 
-  getPersonnel(id:string){
+  getPersonnel(id:bigint){
     this.personalService.getPersonnelById(id).subscribe((response)=>{
       this.personnel = response;
     })

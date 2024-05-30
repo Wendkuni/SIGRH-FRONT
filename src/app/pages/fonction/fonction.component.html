@@ -11,6 +11,7 @@
               type="text"
               pInputText
               id="matricule"
+              [value]="personnel?.matricule"
               required
               autofocus
               disabled/>
@@ -21,19 +22,21 @@
               type="text"
               pInputText
               id="fullName"
+              [value]="personnel?.nometprenom"
               required
               autofocus
               disabled/>
           </div>
           <div class="field">
-            <label >Nature</label>
+            <label>Nature</label>
             <p-dropdown
               formControlName="nature"
               [options]="nature"
               placeholder="Selectionner la nature"
             >
             </p-dropdown>
-            <mrt-form-validators [entityField]="'nature'" [formGroup]="fonctionAgentForm"></mrt-form-validators>
+            <mrt-form-validators [entityField]="'nature'"
+                                 [formGroup]="fonctionAgentForm"></mrt-form-validators>
           </div>
           <div class="field">
             <label> Date Effet</label>
@@ -45,7 +48,8 @@
               [readonlyInput]="true"
               styleClass="mb-1"
             />
-            <mrt-form-validators [entityField]="'dateEffet'" [formGroup]="fonctionAgentForm"></mrt-form-validators>
+            <mrt-form-validators [entityField]="'dateEffet'"
+                                 [formGroup]="fonctionAgentForm"></mrt-form-validators>
           </div>
         </div>
         <div class="border-1 surface-border border-round p-fluid m-2">
@@ -59,7 +63,8 @@
                 formControlName="corps"
               >
               </p-dropdown>
-              <mrt-form-validators [entityField]="'corps'" [formGroup]="fonctionAgentForm"></mrt-form-validators>
+              <mrt-form-validators [entityField]="'corps'"
+                                   [formGroup]="fonctionAgentForm"></mrt-form-validators>
             </div>
             <div class="field">
               <label for="fonction">Fonction</label>
@@ -69,7 +74,8 @@
                 formControlName="fonction"
               >
               </p-dropdown>
-              <mrt-form-validators [entityField]="'fonction'" [formGroup]="fonctionAgentForm"></mrt-form-validators>
+              <mrt-form-validators [entityField]="'fonction'"
+                                   [formGroup]="fonctionAgentForm"></mrt-form-validators>
             </div>
             <div class="field">
               <label for="grade">Grade</label>
@@ -79,7 +85,8 @@
                 formControlName="grade"
               >
               </p-dropdown>
-              <mrt-form-validators [entityField]="'grade'" [formGroup]="fonctionAgentForm"></mrt-form-validators>
+              <mrt-form-validators [entityField]="'grade'"
+                                   [formGroup]="fonctionAgentForm"></mrt-form-validators>
             </div>
             <div class="field ">
               <label for="echelle">Echelle</label>
@@ -89,7 +96,8 @@
                 formControlName="echelle"
               >
               </p-dropdown>
-              <mrt-form-validators [entityField]="'echelle'" [formGroup]="fonctionAgentForm"></mrt-form-validators>
+              <mrt-form-validators [entityField]="'echelle'"
+                                   [formGroup]="fonctionAgentForm"></mrt-form-validators>
             </div>
             <div class="field ">
               <label for="echellon">Echellon</label>
@@ -99,17 +107,24 @@
                 formControlName="echellon"
               >
               </p-dropdown>
-              <mrt-form-validators [entityField]="'echellon'" [formGroup]="fonctionAgentForm"></mrt-form-validators>
+              <mrt-form-validators [entityField]="'echellon'"
+                                   [formGroup]="fonctionAgentForm"></mrt-form-validators>
             </div>
           </div>
         </div>
       </div>
       <div class="flex justify-content-between gap-3">
-        <button pButton pRipple class="p-button-primary flex-1" label="Enregistrer" icon="pi pi-fw pi-check"></button>
-        <button pButton pRipple class="p-button-danger flex-1 p-button-outlined" label="Annuler" icon="pi pi-fw pi-times"></button>
+        <button pButton pRipple class="p-button-primary flex-1" label="Enregistrer"
+                icon="pi pi-fw pi-check"></button>
+        <button pButton pRipple
+                class="p-button-danger flex-1 p-button-outlined"
+                label="Annuler" icon="pi pi-fw pi-times"
+                (click)="cancel()"
+        ></button>
       </div>
     </form>
   </div>
+
 
   <div class="col-12 lg:col-7">
     <p-table
@@ -147,10 +162,10 @@
           <td>{{ avancement.fonction }}</td>
           <td>{{ avancement.dateEffet  | uppercase }}</td>
           <td>{{ avancement.corps }}</td>
-          <td>{{avancement.grade}}</td>
-          <td>{{avancement.echelle}}</td>
-          <td>{{avancement.echellon}}</td>
-          <td>{{avancement.indice}}</td>
+          <td>{{ avancement.grade }}</td>
+          <td>{{ avancement.echelle }}</td>
+          <td>{{ avancement.echellon }}</td>
+          <td>{{ avancement.indice }}</td>
           <td>
             <!--          Bouton qui fait l'ouverture du formulaire de modification -->
             <button
@@ -162,6 +177,7 @@
               icon="pi pi-pencil"
               class="p-button-rounded p-button-primary mx-2"
               iconPos="left"
+              (click)="patchForm(avancement)"
             ></button>
           </td>
         </tr>

@@ -19,7 +19,7 @@ export class PersonnelService {
   }
 
   // get personnel by id
-  getPersonnelById(id: string){
+  getPersonnelById(id: bigint){
     return this.http.get<PersonnelResponse>(`${this.url}/${id}`);
   }
 
@@ -29,7 +29,7 @@ export class PersonnelService {
   }
 
   // update personnel
-  updatePersonnel(id: string, personnel: PersonnelRequest){
+  updatePersonnel(id: bigint, personnel: PersonnelRequest){
     return this.http.patch(`${this.url}/${id}`, personnel);
   }
 

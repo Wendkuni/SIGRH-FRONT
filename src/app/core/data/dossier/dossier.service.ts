@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Dossier} from "../personals/personnel.model";
+import {Dossier} from "./dossier.model";
 
 @Injectable({
   providedIn: 'root'
@@ -15,4 +15,5 @@ export class DossierService {
   getAllDossiers(){
     return this.http.get<Dossier[]>(this.url);
   }
+
 }

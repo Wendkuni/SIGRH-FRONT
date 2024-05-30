@@ -3,10 +3,10 @@
   <div class="flex align-items-center border-bottom-1 surface-border p-3 lg:p-4 ">
     <!--      Image du personnel et son nom -->
     <div class="relative flex align-items-center mr-3">
-      <img src="{{personnel?.photo}}" alt="{{personnel?.nometprenom}}" class="w-4rem h-4rem border-circle shadow-4">
+      <img src="{{personnel.photo}}" alt="{{personnel.nometprenom}}" class="w-4rem h-4rem border-circle shadow-4">
     </div>
     <div class="mr-2">
-      <span class="font-semibold block">{{personnel?.nometprenom}}</span>
+      <span class="font-semibold block">{{personnel.nometprenom}}</span>
     </div>
 
     <div class="flex align-items-center ml-auto">
@@ -32,7 +32,9 @@
       ></mrt-dossier>
     </p-tabPanel>
     <p-tabPanel header="Mobilite">
-      <mrt-affectation></mrt-affectation>
+      <mrt-affectation
+        [personnel]="personnel"
+      ></mrt-affectation>
     </p-tabPanel>
   </p-tabView>
 </p-card>

@@ -7,8 +7,9 @@ import {DatePipe} from "@angular/common";
 import {DialogModule} from "primeng/dialog";
 import {InputTextModule} from "primeng/inputtext";
 import {FileUploadModule} from "primeng/fileupload";
-import {Dossier, PersonnelResponse} from "../../core/data/personals/personnel.model";
+import { PersonnelResponse} from "../../core/data/personals/personnel.model";
 import {DossierService} from "../../core/data/dossier/dossier.service";
+import {Dossier} from "../../core/data/dossier/dossier.model";
 
 @Component({
   selector: 'mrt-dossier',

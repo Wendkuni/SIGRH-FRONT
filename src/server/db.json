@@ -570,5 +570,57 @@
       "dateEffet": "2024-04-01",
       "idPersonnel": 1
     }
+  ],
+  "dossiers": [
+    {
+      "nom": "Dossier 1",
+      "date": "2024-05-17",
+      "observation": "Aucune observation"
+    },
+    {
+      "nom": "Projet X",
+      "date": "2023-01-10",
+      "observation": "En cours de réalisation"
+    },
+    {
+      "nom": "Rapport annuel",
+      "date": "2022-12-31",
+      "observation": " soumis"
+    },
+    {
+      "nom": "Planification 2025",
+      "date": "2023-11-20",
+      "observation": "Approuvé"
+    },
+    {
+      "nom": "Dossier urgent",
+      "date": "2024-05-15",
+      "observation": "A traiter en priorité"
+    },
+    {
+      "nom": "Données clients",
+      "date": "2024-04-10",
+      "observation": "Confidentiel"
+    },
+    {
+      "nom": "Facturation",
+      "date": "2024-05-12",
+      "observation": "En attente de paiement"
+    },
+    {
+      "nom": "Contrat de travail",
+      "date": "2023-09-01",
+      "observation": "Signé"
+    },
+    {
+      "nom": "Archives",
+      "date": "2022-01-01",
+      "observation": "A conserver"
+    },
+    {
+      "nom": "Recherche et développement",
+      "date": "2024-03-14",
+      "observation": "En attente de financement"
+    }
   ]
 }

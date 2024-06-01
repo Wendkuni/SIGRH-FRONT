@@ -19,7 +19,7 @@ export interface Utilisateur {
     password: string;
 
     // Rôle de l'utilisateur
-    role: string;
+    role: string[];
 }
 
 

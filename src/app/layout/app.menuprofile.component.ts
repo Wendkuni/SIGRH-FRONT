@@ -1,9 +1,10 @@
-import { Component, ElementRef } from '@angular/core';
+import {Component, ElementRef, inject, OnInit} from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { LayoutService } from './service/app.layout.service';
 import { TooltipModule} from "primeng/tooltip";
 import {NgClass, NgIf} from "@angular/common";
 import {RouterLink} from "@angular/router";
+import {Utilisateur} from "../core/data/users/user.model";
 
 @Component({
   selector: 'mrt-menu-profile',
@@ -35,9 +36,12 @@ import {RouterLink} from "@angular/router";
   ],
   standalone: true
 })
-export class AppMenuProfileComponent {
-    constructor(public layoutService: LayoutService, public el: ElementRef) {
-    }
+export class AppMenuProfileComponent implements OnInit{
+
+  public layoutService = inject(LayoutService);
+  public el = inject(ElementRef);
+
+  currentUser:Utilisateur= JSON.parse(localStorage.getItem('user') as string);
 
     toggleMenu() {
         this.layoutService.onMenuProfileToggle();
@@ -60,4 +64,7 @@ export class AppMenuProfileComponent {
     get isTooltipDisabled(): boolean {
         return !this.layoutService.isSlim();
     }
+
+  ngOnInit(): void {
+  }
 }

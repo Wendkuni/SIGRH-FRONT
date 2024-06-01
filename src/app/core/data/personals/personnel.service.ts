@@ -19,7 +19,7 @@ export class PersonnelService {
   }
 
   // get personnel by id
-  getPersonnelById(id: bigint){
+  getPersonnelById(id: string){
     return this.http.get<PersonnelResponse>(`${this.url}/${id}`);
   }
 
@@ -29,7 +29,7 @@ export class PersonnelService {
   }
 
   // update personnel
-  updatePersonnel(id: bigint, personnel: PersonnelRequest){
+  updatePersonnel(id: string, personnel: PersonnelRequest){
     return this.http.patch(`${this.url}/${id}`, personnel);
   }
 
@@ -38,8 +38,4 @@ export class PersonnelService {
     return this.http.delete(`${this.url}/${personnel.id}`);
   }
 
-  // //   get all dossiers
-  // getAllDossiers(){
-  //   return this.http.get<Dossier[]>(`${this.url}/dossiers`);
-  // }
 }

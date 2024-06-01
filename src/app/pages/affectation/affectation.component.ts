@@ -1,19 +1,17 @@
-import {Component, inject, Input, OnInit} from '@angular/core';
-import { PersonnelResponse} from "../../core/data/personals/personnel.model";
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {Component, inject, OnInit} from '@angular/core';
+import {Mobilite} from "../../core/data/affectation/mobilite.model";
 import {Cols} from "../../core/data/primeng/primeng.model";
-import {MobiliteService} from "../../core/data/mobilite/mobilite.service";
-import {Mobilite} from "../../core/data/mobilite/mobilite.model";
+import {AffectationService} from "../../core/data/affectation/affectation.service";
 import {ButtonModule} from "primeng/button";
 import {RippleModule} from "primeng/ripple";
 import {CardModule} from "primeng/card";
 import {TableModule} from "primeng/table";
-import {DatePipe} from "@angular/common";
 import {DialogModule} from "primeng/dialog";
-import {InputTextModule} from "primeng/inputtext";
-import {FormValidatorsComponent} from "../../shared/form-validators/form-validators.component";
 import {DropdownModule} from "primeng/dropdown";
+import {InputTextModule} from "primeng/inputtext";
+import {DatePipe} from "@angular/common";
 import {InputNumberModule} from "primeng/inputnumber";
+import {CalendarModule} from "primeng/calendar";
 
 @Component({
   selector: 'mrt-affectation',
@@ -23,26 +21,21 @@ import {InputNumberModule} from "primeng/inputnumber";
     RippleModule,
     CardModule,
     TableModule,
-    DatePipe,
     DialogModule,
-    ReactiveFormsModule,
-    InputTextModule,
-    FormValidatorsComponent,
     DropdownModule,
-    InputNumberModule
+    InputTextModule,
+    DatePipe,
+    InputNumberModule,
+    CalendarModule
   ],
   templateUrl: './affectation.component.html',
   styleUrl: './affectation.component.scss'
 })
 export class AffectationComponent implements OnInit{
 
-
   showDialog = false;
   listAffections$!: Mobilite[]; //liste des affections
-  mobiliteService = inject(MobiliteService);
-  formAffection!: FormGroup;
-  fb = inject(FormBuilder);
-  @Input() personnel!: PersonnelResponse;
+  mobiliteService = inject(AffectationService);
 
   cols: Cols[] = [
     { field: 'matricule', header: 'Matricule' },
@@ -65,17 +58,8 @@ export class AffectationComponent implements OnInit{
   ];
 
   ngOnInit(): void {
-    this.formAffection = this.fb.group({
-      nature: ['', Validators.required],
-      dren: ['', Validators.required],
-      localite: ['', Validators.required],
-      moughataa: ['', Validators.required],
-      ecole: ['', Validators.required],
-      notepedagogique: ['', Validators.required],
-      dateEffet: ['', Validators.required]
-    });
-
     this.getAllAffections();
+
   }
 
   //Methode pour afficher le formulaire d'ajout
@@ -83,11 +67,10 @@ export class AffectationComponent implements OnInit{
     this.showDialog = true;
   }
 
+
   private getAllAffections() {
-    this.mobiliteService.getAllMobilites().subscribe((response) => {
+    this.mobiliteService.getAllMobilites().subscribe((response:Mobilite[]) => {
       this.listAffections$ = response;
     });
   }
-
-
 }

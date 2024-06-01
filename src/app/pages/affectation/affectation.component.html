@@ -54,7 +54,6 @@
   </p-card>
 </div>
 
-
 <!--  Formulaire Affectation -->
 <p-dialog
   [(visible)]="showDialog"
@@ -66,124 +65,88 @@
   styleClass="p-fluid"
 >
   <ng-template pTemplate="content">
-    <div class="container">
-      <form [formGroup]="formAffection">
-        <div class="p-fluid p-formgrid grid">
-          <div class="field col-12 md:col-6">
-            <label for="matricule">Matricule</label>
-            <input
-              type="text"
-              pInputText
-              id="matricule"
-              [value]="personnel.matricule"
-              disabled
-              autofocus
-            />
-            <mrt-form-validators [entityField]="'matricule'" [formGroup]="formAffection"></mrt-form-validators>
-          </div>
-          <div class="field col-12 md:col-6">
-            <label for="fullName">Nom Prenom</label>
-            <input
-              type="text"
-              pInputText
-              id="fullName"
-              [value]="personnel.nometprenom"
-              disabled
-              autofocus
-            />
-            <mrt-form-validators [entityField]="'nometprenom'" [formGroup]="formAffection"/>
-          </div>
-          <div class="field col-12 md:col-6">
-            <label for="raison">Nature</label>
-            <p-dropdown
-              [options]="nature"
-              id="raison"
-              formControlName="nature"
-              placeholder="Selectionner la raison"
-            >
-            </p-dropdown>
-            <mrt-form-validators [entityField]="'nature'" [formGroup]="formAffection" />
-          </div>
-          <div class="field col-12 md:col-6">
-            <label for="localite">Localite</label>
-            <p-dropdown
-              id="localite"
-              formControlName="localite"
-              placeholder="Selectionner la localite"
-            >
-            </p-dropdown>
-            <mrt-form-validators [entityField]="'localite'" [formGroup]="formAffection" />
-          </div>
-          <div class="field col-12 md:col-6">
-            <label for="moughataa">Moughataa</label>
-            <input
-              type="text"
-              id="moughataa"
-              formControlName="moughataa"
-              pInputText
-              required
-              autofocus
-            />
-            <mrt-form-validators [entityField]="'moughataa'" [formGroup]="formAffection" />
-          </div>
-          <div class="field col-12 md:col-6">
-            <label for="ecole">Ecole</label>
-            <p-dropdown
-              id="ecole"
-              formControlName="ecole"
-              placeholder="Selectionner l'ecole"
-            >
-            </p-dropdown>
-            <mrt-form-validators [entityField]="'ecole'" [formGroup]="formAffection"/>
-          </div>
-          <div class="field col-12 md:col-6">
-            <label for="notepedagogique">Note pedagogique</label>
-            <p-inputNumber
-              id="notepedagogique"
-              formControlName="notepedagogique"
-              mode="reel"
-              [min]="0"/>
-            <mrt-form-validators [entityField]="'notepedagogique'" [formGroup]="formAffection" />
-          </div>
-          <div class="field col-12 md:col-6">
-            <label for="dateEffet"> Date Effet</label>
-            <input
-              type="date"
-              id="dateEffet"
-              formControlName="dateEffet"
-              pInputText
-              required
-              autofocus
-            />
-            <!--                <p-calendar-->
-            <!--                    id="dateEffet"-->
-            <!--                    [dateFormat]="'yy-mm-dd'"-->
-            <!--                    placeholder="entrez une data (yyyy-mm-dd)"-->
-            <!--                    formControlName="dateEffet"-->
-            <!--                    [readonlyInput]="true"-->
-            <!--                    styleClass="mb-1"-->
-            <!--                />-->
-            <mrt-form-validators [entityField]="'dateEffet'" [formGroup]="formAffection" />
-          </div>
-          <div class="field col-12 ">
-            <label for="dren">DREN</label>
-            <input
-              type="text"
-              id="dren"
-              pInputText
-              formControlName="dren"
-              required
-              autofocus
-            />
-            <mrt-form-validators [entityField]="'dren'" [formGroup]="formAffection" />
-          </div>
-        </div>
-      </form>
+    <div class="field">
+      <label for="matricule">Matricule</label>
+      <input
+        type="text"
+        pInputText
+        id="matricule"
+        required
+        autofocus
+        disabled/>
+    </div>
+    <div class="field">
+      <label for="fullName">Nom Prenom</label>
+      <input
+        type="text"
+        pInputText
+        id="fullName"
+        required
+        autofocus
+        disabled/>
+    </div>
+    <div class="field">
+      <label >Nature</label>
+      <p-dropdown
+        [options]="nature"
+        id="raison"
+        placeholder="Selectionner la raison"
+      >
+      </p-dropdown>
+    </div>
+    <div class="field">
+      <label>DREN</label>
+      <input
+        type="text"
+        pInputText
+        required
+        autofocus
+      />
+    </div>
+    <div class="field">
+      <label >Localite</label>
+      <p-dropdown
+        placeholder="Selectionner la localite"
+      >
+      </p-dropdown>
+    </div>
+    <div class="field">
+      <label>Moughataa</label>
+      <input
+        type="text"
+        pInputText
+        required
+        autofocus
+      />
+    </div>
+    <div class="field">
+      <label>Ecole</label>
+      <p-dropdown
+        placeholder="Selectionner l'ecole"
+      >
+      </p-dropdown>
+    </div>
+    <div class="field">
+      <label>Note pedagogique</label>
+      <p-inputNumber
+        mode="reel"
+        [showButtons]="true"
+        inputId="min-buttons"
+        [min]="0"
+        [useGrouping]="false"/>
+    </div>
+    <div class="field">
+      <label> Date Effet</label>
+      <p-calendar
+        [dateFormat]="'yy-mm-dd'"
+        [readonlyInput]="true"
+        styleClass="mb-1"
+      />
     </div>
   </ng-template>
+
   <ng-template pTemplate="footer">
     <button pButton pRipple class="p-button-primary flex-1" label="Enregistrer" icon="pi pi-fw pi-check"></button>
     <button pButton pRipple class="p-button-danger flex-1 p-button-outlined" label="Annuler" icon="pi pi-fw pi-times"></button>
   </ng-template>
 </p-dialog>
-

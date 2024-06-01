@@ -622,5 +622,95 @@
       "date": "2024-03-14",
       "observation": "En attente de financement"
     }
+  ],
+  "mobilites": [
+    {
+      "matricule": "MAT-1001",
+      "nometprenom": "Nom Prenom 1",
+      "nature": "Enseignant 1er degré",
+      "dren": "DREN 2",
+      "localite": "Localité 1",
+      "moughataa": "Moughataa 1",
+      "ecole": "Ecole 1",
+      "notepedagogique": "17/20",
+      "dateEffet": "2024-05-12"
+    },
+    {
+      "matricule": "MAT-1002",
+      "nometprenom": "Nom Prenom 2",
+      "nature": "Enseignant 2nd degré",
+      "dren": "DREN 3",
+      "localite": "Localité 2",
+      "moughataa": "Moughataa 2",
+      "ecole": "Ecole 2",
+      "notepedagogique": "19/20",
+      "dateEffet": "2024-05-07"
+    },
+    {
+      "matricule": "MAT-1003",
+      "nometprenom": "Nom Prenom 3",
+      "nature": "Enseignant 1er degré",
+      "dren": "DREN 1",
+      "localite": "Localité 3",
+      "moughataa": "Moughataa 3",
+      "ecole": "Ecole 3",
+      "notepedagogique": "15/20",
+      "dateEffet": "2024-05-15"
+    },
+    {
+      "matricule": "MAT-1004",
+      "nometprenom": "Nom Prenom 4",
+      "nature": "Enseignant 2nd degré",
+      "dren": "DREN 4",
+      "localite": "Localité 4",
+      "moughataa": "Moughataa 4",
+      "ecole": "Ecole 4",
+      "notepedagogique": "18/20",
+      "dateEffet": "2024-05-02"
+    },
+    {
+      "matricule": "MAT-1005",
+      "nometprenom": "Nom Prenom 5",
+      "nature": "Enseignant 1er degré",
+      "dren": "DREN 5",
+      "localite": "Localité 5",
+      "moughataa": "Moughataa 5",
+      "ecole": "Ecole 5",
+      "notepedagogique": "20/20",
+      "dateEffet": "2024-05-20"
+    },
+    {
+      "matricule": "MAT-1006",
+      "nometprenom": "Nom Prenom 6",
+      "nature": "Enseignant 2nd degré",
+      "dren": "DREN 2",
+      "localite": "Localité 6",
+      "moughataa": "Moughataa 6",
+      "ecole": "Ecole 6",
+      "notepedagogique": "12/20",
+      "dateEffet": "2024-05-11"
+    },
+    {
+      "matricule": "MAT-1007",
+      "nometprenom": "Nom Prenom 7",
+      "nature": "Enseignant 1er degré",
+      "dren": "DREN 1",
+      "localite": "Localité 7",
+      "moughataa": "Moughataa 7",
+      "ecole": "Ecole 7",
+      "notepedagogique": "16/20",
+      "dateEffet": "2024-05-18"
+    },
+    {
+      "matricule": "MAT-1008",
+      "nometprenom": "Nom Prenom 8",
+      "nature": "Enseignant 2nd degré",
+      "dren": "DREN 3",
+      "localite": "Localité 8",
+      "moughataa": "Moughataa 8",
+      "ecole": "Ecole 8",
+      "notepedagogique": "17/20",
+      "dateEffect": "2024-05-09"
+    }
   ]
 }

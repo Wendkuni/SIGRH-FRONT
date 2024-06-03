@@ -3,13 +3,17 @@ import { trigger, transition, style, animate } from '@angular/animations';
 import { LayoutService } from './service/app.layout.service';
 import { TooltipModule} from "primeng/tooltip";
 import {NgClass, NgIf} from "@angular/common";
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {Utilisateur} from "../core/data/users/user.model";
+import {ConfirmationService, MessageService} from "primeng/api";
+import {ConfirmPopupModule} from "primeng/confirmpopup";
+import {ButtonModule} from "primeng/button";
+import {ToastModule} from "primeng/toast";
 
 @Component({
   selector: 'mrt-menu-profile',
   templateUrl: './app.menuprofile.component.html',
-  imports: [TooltipModule, NgClass, RouterLink, NgIf],
+  imports: [TooltipModule, NgClass, RouterLink, NgIf, ConfirmPopupModule, ButtonModule, ToastModule],
   animations: [
     trigger('menu', [
       transition('void => inline', [
@@ -34,13 +38,16 @@ import {Utilisateur} from "../core/data/users/user.model";
       ]),
     ]),
   ],
-  standalone: true
+  standalone: true,
+  providers: [ConfirmationService, MessageService]
 })
-export class AppMenuProfileComponent implements OnInit{
+export class AppMenuProfileComponent {
 
   public layoutService = inject(LayoutService);
   public el = inject(ElementRef);
-
+  public confirmationService = inject(ConfirmationService);
+  public messageService = inject(MessageService);
+  router = inject(Router);
   currentUser:Utilisateur= JSON.parse(localStorage.getItem('user') as string);
 
     toggleMenu() {
@@ -65,6 +72,28 @@ export class AppMenuProfileComponent implements OnInit{
         return !this.layoutService.isSlim();
     }
 
-  ngOnInit(): void {
+  confirm(event: Event) {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: 'Veuillez confirmer pour continuer. Etes-vous sure de vouloir quitter ?',
+      icon: 'pi pi-exclamation-circle',
+      acceptIcon: 'pi pi-check mr-1',
+      rejectIcon: 'pi pi-times mr-1',
+      acceptLabel: 'Oui',
+      rejectLabel: 'Non',
+      rejectButtonStyleClass: 'p-button-outlined p-button-sm',
+      acceptButtonStyleClass: 'p-button-danger p-button-sm',
+      accept: () => {
+        this.logOut();
+      },
+      reject: () => {
+        this.messageService.add({ severity: 'info', detail: 'Vous avez annuler', life: 3000 });
+      }
+    });
+  }
+
+  logOut() {
+    localStorage.removeItem('user');
+    this.router.navigate(['/']);
   }
 }

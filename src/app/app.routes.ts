@@ -29,7 +29,7 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/personnel-details/personnel-details.component').then(item => item.PersonnelDetailsComponent)
       },
       {
-        path: 'users',
+        path: 'users-profile',
         loadComponent: () => import('./pages/user-profile/user-profile.component').then(item => item.UserProfileComponent)
       }
   ]

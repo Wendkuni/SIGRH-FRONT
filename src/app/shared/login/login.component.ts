@@ -11,6 +11,8 @@ import {ButtonModule} from "primeng/button";
 import {Utilisateur} from "../../core/data/users/user.model";
 import {Router} from "@angular/router";
 import {PasswordModule} from "primeng/password";
+import {DialogModule} from "primeng/dialog";
+import {RippleModule} from "primeng/ripple";
 
 @Component({
   selector: 'mrt-login',
@@ -22,7 +24,9 @@ import {PasswordModule} from "primeng/password";
     InputTextModule,
     CheckboxModule,
     ButtonModule,
-    PasswordModule
+    PasswordModule,
+    DialogModule,
+    RippleModule
   ],
   templateUrl: './login.component.html',
   providers: [MessageService]
@@ -36,10 +40,15 @@ export class LoginComponent {
   router = inject(Router);
   //Inject message service from primeng
   messageService = inject(MessageService);
+  forgotPassFormVisible: boolean = false;
 
   loginForm =this.fb.group({
     email: this.fb.control('',[Validators.required, Validators.email]),
     password: this.fb.control('',[Validators.required]),
+  });
+
+  forgotPasswordForm = this.fb.group({
+    email: this.fb.control('',[Validators.required, Validators.email])
   });
 
   get dark(): boolean {
@@ -60,5 +69,14 @@ export class LoginComponent {
         this.messageService.add({severity:'error', summary:'Error', detail:'Email ou Mot de passe incorrect'});
       }
     });
+  }
+
+  showForgotPassForm() {
+    this.forgotPassFormVisible = true;
+  }
+
+  close() {
+    this.forgotPassFormVisible = false;
+    this.forgotPasswordForm.reset();
   }
 }

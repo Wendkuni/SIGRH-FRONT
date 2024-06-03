@@ -10,6 +10,7 @@ import {CheckboxModule} from "primeng/checkbox";
 import {ButtonModule} from "primeng/button";
 import {Utilisateur} from "../../core/data/users/user.model";
 import {Router} from "@angular/router";
+import {PasswordModule} from "primeng/password";
 
 @Component({
   selector: 'mrt-login',
@@ -20,7 +21,8 @@ import {Router} from "@angular/router";
     FormValidatorsComponent,
     InputTextModule,
     CheckboxModule,
-    ButtonModule
+    ButtonModule,
+    PasswordModule
   ],
   templateUrl: './login.component.html',
   providers: [MessageService]

@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, Input, OnInit} from '@angular/core';
 import {Mobilite} from "../../core/data/affectation/mobilite.model";
 import {Cols} from "../../core/data/primeng/primeng.model";
 import {AffectationService} from "../../core/data/affectation/affectation.service";
@@ -12,6 +12,7 @@ import {InputTextModule} from "primeng/inputtext";
 import {DatePipe} from "@angular/common";
 import {InputNumberModule} from "primeng/inputnumber";
 import {CalendarModule} from "primeng/calendar";
+import {PersonnelResponse} from "../../core/data/personals/personnel.model";
 
 @Component({
   selector: 'mrt-affectation',
@@ -36,6 +37,7 @@ export class AffectationComponent implements OnInit{
   showDialog = false;
   listAffections$!: Mobilite[]; //liste des affections
   mobiliteService = inject(AffectationService);
+  @Input() personnel!: PersonnelResponse;
 
   cols: Cols[] = [
     { field: 'matricule', header: 'Matricule' },

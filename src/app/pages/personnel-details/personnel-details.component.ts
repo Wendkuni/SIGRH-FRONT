@@ -36,12 +36,11 @@ export class PersonnelDetailsComponent implements OnInit{
     let id  = this.router.snapshot.paramMap.get('id');
 
     if(id != null){
-      let idAgent = BigInt(id);
-      this.getPersonnel(idAgent);
+      this.getPersonnel(id);
     }
   }
 
-  getPersonnel(id:bigint){
+  getPersonnel(id:string){
     this.personalService.getPersonnelById(id).subscribe((response)=>{
       this.personnel = response;
     })

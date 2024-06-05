@@ -4,7 +4,7 @@ export interface Mobilite {
   // Matricule de l'agent
   matricule: string;
   // Nom et prénom de l'agent
-  nometprenom: string;
+  nomPrenom: string;
   // Nature de la mobilité
   nature: string;
   // Dren de la mobilité
@@ -16,7 +16,7 @@ export interface Mobilite {
   // Ecole de la mobilité
   ecole: string;
   // Note pedagogique de la mobilité
-  notepedagogique: string;
+  notePedagogique: string;
   // Date de la mobilité
   dateEffet: string;
 

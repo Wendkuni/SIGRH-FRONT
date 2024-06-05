@@ -47,6 +47,11 @@
         <td>Image</td>
       </tr>
     </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="8">Aucun élement trouvé(e).</td>
+      </tr>
+    </ng-template>
   </p-table>
 </div>
 <!-- Formulaire d'ajout de dossier au personnel -->
@@ -75,7 +80,7 @@
       <input
         type="text"
         pInputText
-        [value]="personnel.nometprenom"
+        [value]="personnel.nomPrenom"
         required
         autofocus
         disabled/>

@@ -46,7 +46,7 @@
     [rowHover]="true"
     [rowsPerPageOptions]="[5,10, 20, 50]"
     tableStyleClass="p-datatable-gridlines"
-    [globalFilterFields]="['nni','matricule','nometprenom','nometprenomarab','tlphone','ministereorigine','Typeeducation']"
+    [globalFilterFields]="['nni','matricule','nomPrenom','nomPrenomArab','tlphone','ministereOrigine','typeEducation']"
   >
     <ng-template pTemplate="caption">
       <div class="flex justify-content-between flex-column sm:flex-row">
@@ -79,7 +79,7 @@
       <tr class="align-items-center align-content-center">
         <td style=" min-width: 6rem;">
           @if (personnel.photo) {
-            <img src="{{personnel.photo}}" alt="{{personnel.nometprenom}}"
+            <img src="{{personnel.photo}}" alt="{{personnel.nomPrenom}}"
                  class="w-4rem h-4rem border-circle shadow-4">
           } @else {
             <img src="assets/demo/images/avatar/user-avatar.png" alt="user.name"
@@ -95,11 +95,11 @@
         </td>
         <td
           style="min-width: 15rem">
-          {{ personnel.nometprenom  | uppercase }}
+          {{ personnel.nomPrenom  | uppercase }}
         </td>
         <td
           style="min-width: 15rem">
-          {{ personnel.nometprenomarab  | uppercase }}
+          {{ personnel.nomPrenomArab  | uppercase }}
         </td>
         <td
           style="min-width: 15rem">
@@ -107,30 +107,30 @@
         </td>
         <td
           style="min-width: 15rem">
-          {{ personnel.adressemp  | uppercase }}
+          {{ personnel.adressEmp  | uppercase }}
         </td>
         <td
           style="min-width: 15rem">
-          {{ personnel.dtenaiss | date: 'dd/MM/yyyy' }}
+          {{ personnel.dteNaiss | date: 'dd/MM/yyyy' }}
         </td>
         <td
           style="min-width: 15rem">
-          {{ personnel.lieunaiss  | uppercase }}
+          {{ personnel.lieuNaiss  | uppercase }}
         </td>
         <td style="min-width: 15rem">
-          {{ personnel.dterecrutemnt | date: 'dd/MM/yyyy' }}
+          {{ personnel.dteRecrutemnt | date: 'dd/MM/yyyy' }}
         </td>
         <td
           style="min-width: 15rem">
-          {{ personnel.dtetitularisation | date: 'dd/MM/yyyy' }}
+          {{ personnel.dteTitularisation | date: 'dd/MM/yyyy' }}
         </td>
         <td
           style="min-width: 15rem">
-          {{ personnel.debutcntrat | date: 'dd/MM/yyyy' }}
+          {{ personnel.debutCntrat | date: 'dd/MM/yyyy' }}
         </td>
         <td
           style="min-width: 15rem">
-          {{ personnel.fincntrat | date: 'dd/MM/yyyy' }}
+          {{ personnel.finCntrat | date: 'dd/MM/yyyy' }}
         </td>
         <td
           style="min-width: 15rem">
@@ -138,15 +138,15 @@
         </td>
         <td
           style="min-width: 15rem">
-          {{ personnel.codbank }}
+          {{ personnel.codBank }}
         </td>
         <td
           style="min-width: 15rem">
-          {{ personnel.numrocpte }}
+          {{ personnel.numroCpte }}
         </td>
         <td
           style="min-width: 15rem">
-          {{ personnel.dtedepart | date: 'dd/MM/yyyy' }}
+          {{ personnel.dteDepart | date: 'dd/MM/yyyy' }}
         </td>
         <td
           style="min-width: 15rem">
@@ -154,23 +154,23 @@
         </td>
         <td
           style="min-width: 15rem">
-          {{ personnel.ministereorigine }}
+          {{ personnel.ministereOrigine }}
         </td>
         <td
           style="min-width: 15rem">
-          {{ personnel.Typeeducation  | uppercase }}
+          {{ personnel.typeEducation  | uppercase }}
         </td>
         <td
           style="min-width: 15rem">
           <p-tag
-            [value]="personnel.actifornot"
-            [severity]="getStatusSeverity(personnel.actifornot)"
+            [value]="personnel.actifOrNot"
+            [severity]="getStatusSeverity(personnel.actifOrNot)"
           >
           </p-tag>
         </td>
         <td
           style="min-width: 15rem">
-          {{ personnel.statusemp }}
+          {{ personnel.statusEmp }}
         </td>
         <td>
           <!--          Bouton qui fait l'ouverture du formulaire de modification -->

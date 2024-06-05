@@ -33,6 +33,10 @@ export const routes: Routes = [
       {
         path: 'users-profile',
         loadComponent: () => import('./pages/user-profile/user-profile.component').then(item => item.UserProfileComponent)
+      },
+      {
+        path: 'conge-absence',
+        loadComponent: () => import('./pages/conge-absence/conge-absence.component').then(item => item.CongeAbsenceComponent)
       }
   ]
   },

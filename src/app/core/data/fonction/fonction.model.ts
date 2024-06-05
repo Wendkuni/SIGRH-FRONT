@@ -4,7 +4,7 @@ export interface Fonction {
     // Fonction de l'agent
   fonction: string;
     // Fonction de l'agent en arabe
-  fonctionenarabe: string;
+  fonctionArabe: string;
     // Corps de l'agent
   corps: string;
     // Grade de l'agent
@@ -18,7 +18,7 @@ export interface Fonction {
     // Salaire de base de l'agent
   indice: string;
     // Salaire de base de l'agent
-  salairedebase: string;
+  salaireBase: string;
 }
 
 export interface Avancement{
@@ -34,29 +34,29 @@ export interface Avancement{
 
 // Interface fonction agent on database
 export interface Fonctionagent{
-    IDFONCTIONAGENT: bigint;
-    IDagent:bigint;
-    fonctionlib: string;
-    datefonction: Date;
-    ECHELLE: string;
+    IdFonctionAgent: bigint;
+    IdAgent:bigint;
+    fonctionLib: string;
+    dateFonction: Date;
+    echelle: string;
     echelon: string;
-    GroupeA: string;
-    CAtegoriA: string;
-    CorpsA: string;
-    GRADE:string;
-    INDIXE:string;
-    CORPSAarab: string;
-    fonctionliarab:string;
+    groupeA: string;
+    categoriA: string;
+    corpsA: string;
+    grade:string;
+    indixe:string;
+    corpsAarab: string;
+    fonctionLiArab:string;
 }
 
 //  Interface fonction list
 export interface fonctionliste{
-    IDFONCTIONLISTE: bigint;
-    libfonctn:string;
-    libfonctnarab:string;
-    GRADE: string;
-    ECHELLE: string;
-    salbase: GLfloat;
-    INDIXE: string;
+    IdFonctionList: bigint;
+    libFonctn:string;
+    libFonctnArab:string;
+    grade: string;
+    echelle: string;
+    salBase: GLfloat;
+    indixe: string;
     echelon :string;
 }

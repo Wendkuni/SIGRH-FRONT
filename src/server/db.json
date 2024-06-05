@@ -886,5 +886,97 @@
       "echelle": "A",
       "indice": 800
     }
+  ],
+  "assurances": [
+    {
+      "matricule": "ASSU-1001",
+      "nometprenom": "Nom Prenom 1",
+      "designation": "Contrat Assurance 1",
+      "dateDebut": "2024-05-15",
+      "dateFin": "2024-05-25",
+      "etat": "En cours",
+      "nombredepersonne": 3,
+      "type": "Formation"
+    },
+    {
+      "matricule": "ASSU-1002",
+      "nometprenom": "Nom Prenom 2",
+      "designation": "Contrat Assurance 2",
+      "dateDebut": "2024-05-10",
+      "dateFin": "2024-05-17",
+      "etat": "Terminée",
+      "nombredepersonne": 5,
+      "type": "Audit"
+    },
+    {
+      "matricule": "ASSU-1003",
+      "nometprenom": "Nom Prenom 3",
+      "designation": "Contrat Assurance 3",
+      "dateDebut": "2024-05-07",
+      "dateFin": "2024-05-20",
+      "etat": "Planifiée",
+      "nombredepersonne": 1,
+      "type": "Intervention"
+    },
+    {
+      "matricule": "ASSU-1004",
+      "nometprenom": "Nom Prenom 4",
+      "designation": "Contrat Assurance 4",
+      "dateDebut": "2024-05-12",
+      "dateFin": "2024-05-22",
+      "etat": "En attente",
+      "nombredepersonne": 2,
+      "type": "Evaluation"
+    },
+    {
+      "matricule": "ASSU-1005",
+      "nometprenom": "Nom Prenom 5",
+      "designation": "Contrat Assurance 5",
+      "dateDebut": "2024-05-09",
+      "dateFin": "2024-05-16",
+      "etat": "Terminée",
+      "nombredepersonne": 4,
+      "type": "Installation"
+    },
+    {
+      "matricule": "ASSU-1006",
+      "nometprenom": "Nom Prenom 6",
+      "designation": "Contrat Assurance 6",
+      "dateDebut": "2024-05-14",
+      "dateFin": "2024-05-24",
+      "etat": "En cours",
+      "nombredepersonne": 1,
+      "type": "Maintenance"
+    },
+    {
+      "matricule": "ASSU-1007",
+      "nometprenom": "Nom Prenom 7",
+      "designation": "Contrat Assurance 7",
+      "dateDebut": "2024-05-08",
+      "dateFin": "2024-05-18",
+      "etat": "Planifiée",
+      "nombredepersonne": 3,
+      "type": "Etude"
+    },
+    {
+      "matricule": "ASSU-1008",
+      "nometprenom": "Nom Prenom 8",
+      "designation": "Contrat Assurance 8",
+      "dateDebut": "2024-05-11",
+      "dateFin": "2024-05-21",
+      "etat": "En attente",
+      "nombredepersonne": 2,
+      "type": "Recherche"
+    },
+    {
+      "matricule": "ASSU-1009",
+      "nometprenom": "Nom Prenom 9",
+      "designation": "Contrat Assurance",
+      "dateDebut": "2024-05-06",
+      "dateFin": "2024-05-16",
+      "etat": "Terminée",
+      "nombredepersonne": 4,
+      "type": "Développement"
+    }
   ]
 }

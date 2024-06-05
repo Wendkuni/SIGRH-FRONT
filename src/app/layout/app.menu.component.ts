@@ -53,7 +53,7 @@ export class AppMenuComponent implements OnInit {
                     {
                         label: 'Remuneration',
                         icon: 'pi pi-fw pi-dollar',
-                        routerLink: ['/remunerations'],
+                        routerLink: ['/remuneration'],
                     },
                     {
                         label: 'Affaires Sociales-Assurances',

@@ -37,6 +37,10 @@ export const routes: Routes = [
       {
         path: 'conge-absence',
         loadComponent: () => import('./pages/conge-absence/conge-absence.component').then(item => item.CongeAbsenceComponent)
+      },
+      {
+        path:'remuneration',
+        loadComponent: () => import('./pages/remuneration/remuneration.component').then(item => item.RemunerationComponent)
       }
   ]
   },

@@ -62,8 +62,7 @@ export class AppMenuComponent implements OnInit {
                     },
                     {
                         label: 'Courriels',
-                        icon: 'pi pi-fw pi-at',
-                        routerLink: ['couriers'],
+                        icon: 'pi pi-fw pi-at'
                     },
                 ],
             },

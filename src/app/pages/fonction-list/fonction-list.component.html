@@ -118,12 +118,13 @@
   <ng-template pTemplate="content">
     <div class ="p-fluid p-formgrid grid" >
       <div class="field col-12 md:col-6">
-        <label>Fonction</label>
+        <label for="fonction" class="font-medium text-900">Fonction</label>
         <input
+          id="fonction"
           type="text"
           pInputText
           required
-          autofocus />
+           >
       </div>
       <div class="field col-12 md:col-6">
         <label >Fonction en Arab</label>
@@ -131,64 +132,69 @@
           type="text"
           pInputText
           required
-          autofocus />
+        />
       </div>
       <div class="field col-12 md:col-6">
-        <label >Corps</label>
+        <label for="corps" >Corps</label>
         <input
+          id="corps"
           type="text"
           pInputText
           required
-          autofocus />
+           />
       </div>
 
       <div class="field col-12 md:col-6">
-        <label >Grade</label>
+        <label for="grade" class="font-medium text-900">Grade</label>
         <p-dropdown
+          id="grade"
           placeholder="Selectionner le grade"
         >
         </p-dropdown>
       </div>
       <div class="field col-12 md:col-6">
-        <label >Categorie</label>
+        <label for="category" class="font-medium text-900" >Categorie</label>
         <p-dropdown
+          id="category"
           placeholder="Selectionner la categorie"
         >
         </p-dropdown>
       </div>
       <div class="field col-12 md:col-3">
-        <label >Echelle</label>
+        <label for="echelle" class="font-medium text-900" >Echelle</label>
         <p-dropdown
+          id="echelle"
           placeholder="Selectionner l'echelle"
         >
         </p-dropdown>
       </div>
       <div class="field col-12 md:col-3">
-        <label >Echelon</label>
+        <label for="echelon" class="font-medium text-900">Echelon</label>
         <p-dropdown
+          id="echelon"
           placeholder="Selectionner l'echelon"
         >
         </p-dropdown>
       </div>
 
       <div class="field col-12 md:col-6">
-        <label >Salaire de base</label>
-        <p-inputNumber
-          mode="reel"
-          [showButtons]="true"
-          inputId="min-buttons"
-          [min]="0"
-          [useGrouping]="false"/>
+        <label for="salBase" class="font-medium text-900">Salaire de base</label>
+        <input
+          id="salBase"
+          type="text"
+          pInputText
+          required
+        />
       </div>
 
       <div class="field col-12 md:col-6">
-        <label >Indice</label>
-        <p-inputNumber
-          mode="reel"
-          [showButtons]="true"
-          inputId="min-buttons"
-          [min]="0"
-          [useGrouping]="false"/>
+        <label for="indice" class="font-medium text-900">Indice</label>
+        <input
+          id="indice"
+          type="text"
+          pInputText
+          required
+        />
       </div>
     </div>
 
@@ -196,20 +202,15 @@
   </ng-template>
 
   <ng-template pTemplate="footer">
-    <p-button
-      pRipple
-      label="Save"
-      icon="pi pi-check"
-      severity="success"
-      [text]="true"
-    />
-    <p-button
-      pRipple
-      label="Cancel"
-      icon="pi pi-times"
-      severity="danger"
-      [text]="true"
-    />
+    <button pButton pRipple
+            class="p-button-primary flex-1"
+            label="Enregistrer"
+            icon="pi pi-fw pi-check"
+    >
+
+    </button>
+    <button pButton pRipple class="p-button-danger flex-1 p-button-outlined" label="Annuler"
+            icon="pi pi-fw pi-times" ></button>
   </ng-template>
 </p-dialog>
 

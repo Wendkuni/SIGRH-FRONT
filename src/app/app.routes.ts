@@ -45,6 +45,10 @@ export const routes: Routes = [
       {
         path:'social-assurance',
         loadComponent: () => import('./pages/affaire-social-assurance/affaire-social-assurance.component').then(item => item.AffaireSocialAssuranceComponent)
+      },
+      {
+        path: 'fonction-list',
+        loadComponent: () => import('./pages/fonction-list/fonction-list.component').then(item => item.FonctionListComponent)
       }
   ]
   },

@@ -19,6 +19,8 @@ import {FormValidatorsComponent} from "../../shared/form-validators/form-validat
 import {InputNumberModule} from "primeng/inputnumber";
 import {CalendarModule} from "primeng/calendar";
 import {MessageService} from "primeng/api";
+import {TabViewModule} from "primeng/tabview";
+import {UpperCasePipe} from "@angular/common";
 
 @Component({
   selector: 'mrt-remuneration',
@@ -37,7 +39,9 @@ import {MessageService} from "primeng/api";
     DropdownModule,
     FormValidatorsComponent,
     InputNumberModule,
-    CalendarModule
+    CalendarModule,
+    TabViewModule,
+    UpperCasePipe
   ],
   templateUrl: './remuneration.component.html',
   styleUrl: './remuneration.component.scss',
@@ -58,6 +62,13 @@ export class RemunerationComponent implements OnInit{
     {field: 'echelle', header: 'Echelle'},
     {field: 'indice', header: 'Indice'}
   ];
+
+  // colonne indemnite par fonction
+  colsIndemnite: Cols[] = [
+    {field: 'libelle', header: 'Libelle'},
+    {field: 'valeur', header: 'Valeur'}
+  ];
+
   remunerationForm!: FormGroup;
   fb = inject(FormBuilder);
   remunerationService = inject(RemunerationService);

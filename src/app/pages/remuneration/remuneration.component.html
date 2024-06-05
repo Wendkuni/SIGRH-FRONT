@@ -31,141 +31,300 @@
   </p-toolbar>
 </p-card>
 
-
-<p-card>
-  <p-table
-    [columns]="cols"
-    #dt1
-    [value]="remunerations$"
-    dataKey="id"
-    [rows]="5"
-    [showCurrentPageReport]="true"
-    currentPageReportTemplate="Page {currentPage} sur {totalPages}"
-    [paginator]="true"
-    styleClass="p-datatable-gridlines p-datatable-striped"
-    responsiveLayout="scroll"
-    [rowHover]="true"
-    [rowsPerPageOptions]="[5,10, 20, 50]"
-    tableStyleClass="p-datatable-gridlines"
-    [globalFilterFields]="['fonction','matricule','nometprenom','corps','grade','echelon','echelle']"
-  >
-    <ng-template pTemplate="caption">
-      <div class="flex justify-content-between flex-column sm:flex-row">
+<p-tabView>
+  <p-tabPanel header="Listes Remuneration">
+    <p-card>
+      <p-table
+        [columns]="cols"
+        #dt1
+        [value]="remunerations$"
+        dataKey="id"
+        [rows]="5"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="Page {currentPage} sur {totalPages}"
+        [paginator]="true"
+        styleClass="p-datatable-gridlines p-datatable-striped"
+        responsiveLayout="scroll"
+        [rowHover]="true"
+        [rowsPerPageOptions]="[5,10, 20, 50]"
+        tableStyleClass="p-datatable-gridlines"
+        [globalFilterFields]="['fonction','matricule','nometprenom','corps','grade','echelon','echelle']"
+      >
+        <ng-template pTemplate="caption">
+          <div class="flex justify-content-between flex-column sm:flex-row">
               <span class="p-input-icon-left mb-2">
 							<i class="pi pi-search"></i>
 							<input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)"
                      placeholder="Recherche..." class="w-full"/>
 						</span>
-      </div>
-    </ng-template>
-    <ng-template let-columns pTemplate="header">
-      <tr>
-        @for (col of columns; track col.field) {
-          <th
-            style="min-width: 15rem"
-            [pSortableColumn]="col.field"
-            class="font-weight-bold"
-          >
-            {{ col.header }}
-            <p-sortIcon [field]="col.field"></p-sortIcon>
-          </th>
-        }
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-remu>
-      <tr class="align-items-center">
-        <td> {{remu.nomPrenom}} </td>
-        <td> {{remu.matricule}} </td>
-        <td> {{remu.fonction}} </td>
-        <td> {{remu.netapayer}} </td>
-        <td> {{remu.banquecompte}} </td>
-        <td> {{remu.date}} </td>
-        <td> {{remu.corps}} </td>
-        <td> {{remu.grade}} </td>
-        <td> {{remu.echelon}} </td>
-        <td> {{remu.echelle}} </td>
-        <td> {{remu.indice}} </td>
-        <td>
-          <!--          Bouton qui fait l'ouverture du formulaire de modification -->
-          <button
-            pButton
-            type="button"
-            pTooltip="Modifier"
-            tooltipPosition="top"
-            pRipple
-            icon="pi pi-pencil"
-            class="p-button-rounded p-button-primary mx-2"
-            iconPos="left"
-            (click)="showEditFormDialog(remu)"
-          ></button>
-        </td>
-        <td>
-          <!--          Bouton qui fait l'ouverture du formulaire de modification -->
-          <button
-            pButton
-            type="button"
-            pTooltip="Indemnités"
-            tooltipPosition="top"
-            pRipple
-            icon="pi pi-refresh"
-            class="p-button-rounded p-button-warning mx-2"
-            iconPos="left"
-          ></button>
-        </td>
-        <td>
-          <!--          Bouton qui fait l'ouverture du formulaire de modification -->
-          <button
-            pButton
-            type="button"
-            pTooltip="Indemnités"
-            tooltipPosition="top"
-            pRipple
-            icon="pi pi-dollar"
-            class="p-button-rounded p-button-secondary mx-2"
-            iconPos="left"
-          ></button>
-        </td>
-        <td>
-          <!--          Bouton qui fait l'ouverture du formulaire de modification -->
-          <button
-            pButton
-            type="button"
-            pTooltip="Indemnités"
-            tooltipPosition="top"
-            pRipple
-            icon="pi pi-dollar"
-            class="p-button-rounded p-button-info mx-2"
-            iconPos="left"
-          ></button>
-        </td>
-        <td>
-          <!--          Button qui supprime -->
-          <button
-            pButton
-            type="button"
-            pTooltip="Supprimer"
-            tooltipPosition="top"
-            pRipple
-            icon="pi pi-trash"
-            class="p-button-rounded p-button-danger mx-2"
-            iconPos="left"
-          ></button>
-        </td>
-      </tr>
+          </div>
+        </ng-template>
+        <ng-template let-columns pTemplate="header">
+          <tr>
+            @for (col of columns; track col.field) {
+              <th
+                style="min-width: 15rem"
+                [pSortableColumn]="col.field"
+                class="font-weight-bold"
+              >
+                {{ col.header }}
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+              </th>
+            }
+            <th></th>
+            <th></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-remu>
+          <tr class="align-items-center">
+            <td> {{remu.nomPrenom}} </td>
+            <td> {{remu.matricule}} </td>
+            <td> {{remu.fonction}} </td>
+            <td> {{remu.netapayer}} </td>
+            <td> {{remu.banquecompte}} </td>
+            <td> {{remu.date}} </td>
+            <td> {{remu.corps}} </td>
+            <td> {{remu.grade}} </td>
+            <td> {{remu.echelon}} </td>
+            <td> {{remu.echelle}} </td>
+            <td> {{remu.indice}} </td>
+            <td>
+              <!--          Bouton qui fait l'ouverture du formulaire de modification -->
+              <button
+                pButton
+                type="button"
+                pTooltip="Modifier"
+                tooltipPosition="top"
+                pRipple
+                icon="pi pi-pencil"
+                class="p-button-rounded p-button-primary mx-2"
+                iconPos="left"
+                (click)="showEditFormDialog(remu)"
+              ></button>
+            </td>
+            <td>
+              <!--          Button qui supprime -->
+              <button
+                pButton
+                type="button"
+                pTooltip="Supprimer"
+                tooltipPosition="top"
+                pRipple
+                icon="pi pi-trash"
+                class="p-button-rounded p-button-danger mx-2"
+                iconPos="left"
+              ></button>
+            </td>
+          </tr>
 
-    </ng-template>
-    <ng-template pTemplate="emptymessage">
-      <tr>
-        <td colspan="8">Aucun remuneration trouvé(e).</td>
-      </tr>
-    </ng-template>
-  </p-table>
-</p-card>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="8">Aucun remuneration trouvé(e).</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-card>
+  </p-tabPanel>
+  <p-tabPanel header="Indemnite">
+    <p-tabView>
+      <p-tabPanel header="Fonction">
+        <span class="block text-900 font-bold text-xl mb-4">Indemnite par fonction</span>
+        <div class="grid">
+          <div class="col-12 lg:col-5">
+            <form>
+              <div class="border-1 surface-border border-round p-fluid mb-4">
+                <span class="text-900 font-bold block border-bottom-1 surface-border p-3">Formulaire Fonction</span>
+                <div class="p-3">
+                  <div class="field">
+                    <label>Fonction</label>
+                    <p-dropdown
+                      placeholder="Selectionner la fonction"
+                    >
+                    </p-dropdown>
+                  </div>
+                  <div class="field">
+                    <label>Grade</label>
+                    <p-dropdown
+                      placeholder="Selectionner le grade"
+                    >
+                    </p-dropdown>
+                  </div>
+                  <div class="field">
+                    <label for="type">Type indemnite</label>
+                    <input
+                      type="text"
+                      pInputText
+                      id="type"
+                      required
+                      />
+                  </div>
+                  <div class="field">
+                    <label for="valeur">Valeur</label>
+                    <input
+                      type="text"
+                      pInputText
+                      id="valeur"
+                      required
+                    />
+                  </div>
+
+                </div>
+              </div>
+              <div class="flex justify-content-between gap-3">
+                <button pButton pRipple class="p-button-primary flex-1" label="Enregistrer"
+                        icon="pi pi-fw pi-check"></button>
+                <button pButton pRipple
+                        class="p-button-danger flex-1 p-button-outlined"
+                        label="Annuler" icon="pi pi-fw pi-times"
+                ></button>
+              </div>
+            </form>
+          </div>
+          <div class="col-12 lg:col-7">
+            <p-table
+              [columns]="colsIndemnite"
+              #dt1
+              dataKey="id"
+              [rows]="5"
+              [showCurrentPageReport]="true"
+              currentPageReportTemplate="Page {currentPage} sur {totalPages}"
+              [paginator]="true"
+              styleClass="p-datatable-gridlines p-datatable-striped"
+              responsiveLayout="scroll"
+              [rowHover]="true"
+              [rowsPerPageOptions]="[5,10]"
+              tableStyleClass="p-datatable-gridlines"
+            >
+              <ng-template let-columns pTemplate="header">
+                <tr>
+                  @for (col of columns; track col.field) {
+                    <th
+                      style="min-width: 15rem"
+                      [pSortableColumn]="col.field"
+                      class="font-weight-bold"
+                    >
+                      {{ col.header }}
+                      <p-sortIcon [field]="col.field"></p-sortIcon>
+                    </th>
+                  }
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td colspan="8">Aucun élement.</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+      </p-tabPanel>
+      <p-tabPanel header="Personnel">
+        <span class="block text-900 font-bold text-xl mb-4">Indemnite par personnel</span>
+        <div class="grid">
+          <div class="col-12 lg:col-5">
+            <form>
+              <div class="border-1 surface-border border-round p-fluid mb-4">
+                <span class="text-900 font-bold block border-bottom-1 surface-border p-3">Formulaire personnel</span>
+                <div class="p-3">
+                  <div class="field">
+                    <label for="matricule1">Matricule</label>
+                    <input
+                      type="text"
+                      pInputText
+                      id="matricule1"
+                      required/>
+                  </div>
+                  <div class="field">
+                    <label for="fullName">Nom Prenom</label>
+                    <input
+                      type="text"
+                      pInputText
+                      id="fullName"
+                      required/>
+                  </div>
+                  <div class="field">
+                    <label for="Nni">Nni</label>
+                    <input
+                      type="text"
+                      pInputText
+                      id="Nni"
+                      required
+                    />
+                  </div>
+                  <div class="field">
+                    <label for="type1">Type indemnite</label>
+                    <input
+                      type="text"
+                      pInputText
+                      id="type1"
+                      required
+                    />
+                  </div>
+                  <div class="field">
+                    <label for="valeur1">Valeur</label>
+                    <input
+                      type="text"
+                      pInputText
+                      id="valeur1"
+                      required
+                    />
+                  </div>
+
+                </div>
+              </div>
+              <div class="flex justify-content-between gap-3">
+                <button pButton pRipple class="p-button-primary flex-1" label="Enregistrer"
+                        icon="pi pi-fw pi-check"></button>
+                <button pButton pRipple
+                        class="p-button-danger flex-1 p-button-outlined"
+                        label="Annuler" icon="pi pi-fw pi-times"
+                ></button>
+              </div>
+            </form>
+          </div>
+          <div class="col-12 lg:col-7">
+            <p-table
+              [columns]="colsIndemnite"
+              #dt1
+              dataKey="id"
+              [rows]="5"
+              [showCurrentPageReport]="true"
+              currentPageReportTemplate="Page {currentPage} sur {totalPages}"
+              [paginator]="true"
+              styleClass="p-datatable-gridlines p-datatable-striped"
+              responsiveLayout="scroll"
+              [rowHover]="true"
+              [rowsPerPageOptions]="[5,10]"
+              tableStyleClass="p-datatable-gridlines"
+            >
+              <ng-template let-columns pTemplate="header">
+                <tr>
+                  @for (col of columns; track col.field) {
+                    <th
+                      style="min-width: 15rem"
+                      [pSortableColumn]="col.field"
+                      class="font-weight-bold"
+                    >
+                      {{ col.header }}
+                      <p-sortIcon [field]="col.field"></p-sortIcon>
+                    </th>
+                  }
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td colspan="8">Aucun élement.</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+      </p-tabPanel>
+    </p-tabView>
+  </p-tabPanel>
+</p-tabView>
+
 
 
 <p-dialog

@@ -11,7 +11,7 @@
               type="text"
               pInputText
               id="matricule"
-              [value]="personnel.matricule"
+              [value]="personnel?.matricule"
               required
               autofocus
               disabled/>
@@ -22,7 +22,7 @@
               type="text"
               pInputText
               id="fullName"
-              [value]="personnel.nometprenom"
+              [value]="personnel?.nometprenom"
               required
               autofocus
               disabled/>
@@ -124,8 +124,6 @@
       </div>
     </form>
   </div>
-
-
   <div class="col-12 lg:col-7">
     <p-table
       [columns]="cols"
@@ -155,6 +153,7 @@
             </th>
           }
           <th></th>
+          <th></th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-avancement>
@@ -178,6 +177,19 @@
               class="p-button-rounded p-button-primary mx-2"
               iconPos="left"
               (click)="patchForm(avancement)"
+            ></button>
+          </td>
+          <td>
+            <!--          Bouton qui fait la validation de l'avancement  -->
+            <button
+              pButton
+              type="button"
+              pTooltip="Valider"
+              tooltipPosition="top"
+              pRipple
+              icon="pi pi-check-circle"
+              class="p-button-rounded p-button-warning mx-2"
+              iconPos="left"
             ></button>
           </td>
         </tr>

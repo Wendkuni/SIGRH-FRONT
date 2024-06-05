@@ -13,6 +13,7 @@ import {DatePipe} from "@angular/common";
 import {InputNumberModule} from "primeng/inputnumber";
 import {CalendarModule} from "primeng/calendar";
 import {PersonnelResponse} from "../../core/data/personals/personnel.model";
+import {TooltipModule} from "primeng/tooltip";
 
 @Component({
   selector: 'mrt-affectation',
@@ -27,7 +28,8 @@ import {PersonnelResponse} from "../../core/data/personals/personnel.model";
     InputTextModule,
     DatePipe,
     InputNumberModule,
-    CalendarModule
+    CalendarModule,
+    TooltipModule
   ],
   templateUrl: './affectation.component.html',
   styleUrl: './affectation.component.scss'

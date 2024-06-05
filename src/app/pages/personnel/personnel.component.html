@@ -1,5 +1,9 @@
 <!-- Toast notification part start-->
-<p-toast [life]="3000"></p-toast>
+<p-toast
+  [showTransformOptions]="'translateY(100%)'"
+  [showTransitionOptions]="'1000ms'"
+  [hideTransitionOptions]="'1000ms'"
+  [showTransformOptions]="'translateX(100%)'" />
 
 <!-- Toolbar start pour afficher les boutons des differentes actions realisable dans la gestion du personnels-->
 <p-card styleClass="mb-5">
@@ -83,176 +87,90 @@
           }
         </td>
         <td style="min-width: 15rem;">
-          @if (personnel.nni) {
             {{ personnel.nni }}
-          } @else {
-            -
-          }
         </td>
         <td
           style="min-width: 15rem">
-          @if (personnel.matricule) {
-            {{ personnel.matricule }}
-          } @else {
-            -
-          }
+          {{ personnel.matricule }}
         </td>
         <td
           style="min-width: 15rem">
-          @if (personnel.nometprenom) {
-            {{ personnel.nometprenom  | uppercase }}
-          } @else {
-            -
-          }
+          {{ personnel.nometprenom  | uppercase }}
         </td>
         <td
           style="min-width: 15rem">
-          @if (personnel.nometprenomarab) {
-            {{ personnel.nometprenomarab  | uppercase }}
-          } @else {
-            -
-          }
+          {{ personnel.nometprenomarab  | uppercase }}
         </td>
         <td
           style="min-width: 15rem">
-          @if (personnel.tlphone) {
-            {{ personnel.tlphone }}
-          } @else {
-            -
-          }
+          {{ personnel.tlphone }}
         </td>
         <td
           style="min-width: 15rem">
-          @if (personnel.adressemp) {
-            {{ personnel.adressemp  | uppercase }}
-          } @else {
-            -
-          }
+          {{ personnel.adressemp  | uppercase }}
         </td>
         <td
           style="min-width: 15rem">
-          @if (personnel.dtenaiss) {
-            {{ personnel.dtenaiss | date: 'dd/MM/yyyy' }}
-          } @else {
-            -
-          }
+          {{ personnel.dtenaiss | date: 'dd/MM/yyyy' }}
         </td>
         <td
           style="min-width: 15rem">
-          @if (personnel.lieunaiss) {
-            {{ personnel.lieunaiss  | uppercase }}
-          } @else {
-            -
-          }
+          {{ personnel.lieunaiss  | uppercase }}
+        </td>
+        <td style="min-width: 15rem">
+          {{ personnel.dterecrutemnt | date: 'dd/MM/yyyy' }}
         </td>
         <td
           style="min-width: 15rem">
-
-          @if (personnel.dterecrutemnt) {
-            {{ personnel.dterecrutemnt | date: 'dd/MM/yyyy' }}
-          } @else {
-            -
-          }</td>
-        <td
-          style="min-width: 15rem">
-          @if (personnel.dtetitularisation) {
-            {{ personnel.dtetitularisation | date: 'dd/MM/yyyy' }}
-          } @else {
-            -
-          }
+          {{ personnel.dtetitularisation | date: 'dd/MM/yyyy' }}
         </td>
         <td
           style="min-width: 15rem">
-          @if (personnel.debutcntrat) {
-            {{ personnel.debutcntrat | date: 'dd/MM/yyyy' }}
-          } @else {
-            -
-          }
+          {{ personnel.debutcntrat | date: 'dd/MM/yyyy' }}
         </td>
         <td
           style="min-width: 15rem">
-          @if (personnel.fincntrat) {
-            {{ personnel.fincntrat | date: 'dd/MM/yyyy' }}
-          } @else {
-            -
-          }
+          {{ personnel.fincntrat | date: 'dd/MM/yyyy' }}
         </td>
         <td
           style="min-width: 15rem">
-          @if (personnel.bank) {
-            {{ personnel.bank }}
-          } @else {
-            -
-          }
+          {{ personnel.bank }}
         </td>
         <td
           style="min-width: 15rem">
-          @if (personnel.codbank) {
-            {{ personnel.codbank }}
-          } @else {
-            -
-          }
+          {{ personnel.codbank }}
         </td>
         <td
           style="min-width: 15rem">
-          @if (personnel.numrocpte) {
-            {{ personnel.numrocpte }}
-          } @else {
-            -
-
-          }
+          {{ personnel.numrocpte }}
         </td>
         <td
           style="min-width: 15rem">
-          @if (personnel.dtedepart) {
-            {{ personnel.dtedepart | date: 'dd/MM/yyyy' }}
-          } @else {
-            -
-          }
+          {{ personnel.dtedepart | date: 'dd/MM/yyyy' }}
         </td>
         <td
           style="min-width: 15rem">
-          @if (personnel.detacher) {
-            {{ personnel.detacher }}
-          } @else {
-            -
-          }
+          {{ personnel.detacher }}
         </td>
         <td
           style="min-width: 15rem">
-          @if (personnel.ministereorigine) {
-            {{ personnel.ministereorigine }}
-          } @else {
-            -
-          }
+          {{ personnel.ministereorigine }}
         </td>
         <td
           style="min-width: 15rem">
-          @if (personnel.Typeeducation) {
-            {{ personnel.Typeeducation  | uppercase }}
-          } @else {
-            -
-          }
+          {{ personnel.Typeeducation  | uppercase }}
         </td>
         <td
           style="min-width: 15rem">
-          @if (personnel.actifornot) {
-            <p-tag
-              [value]="personnel.actifornot"
-              [severity]="getStatusSeverity(personnel.actifornot)"
-            >
-            </p-tag>
-          } @else {
-            -
-          }
+          <p-tag
+            [value]="personnel.actifornot"
+            [severity]="getStatusSeverity(personnel.actifornot)"
+          >
+          </p-tag>
         </td>
         <td
           style="min-width: 15rem">
-          @if (personnel.statusemp) {
-            {{ personnel.statusemp }}
-          } @else {
-            -
-          }
+          {{ personnel.statusemp }}
         </td>
         <td>
           <!--          Bouton qui fait l'ouverture du formulaire de modification -->

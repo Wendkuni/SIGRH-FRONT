@@ -712,5 +712,37 @@
       "notepedagogique": "17/20",
       "dateEffect": "2024-05-09"
     }
+  ],
+  "conges": [
+    {
+      "matricule": "10001",
+      "nometprenom": "Pierre Dubois",
+      "dateEffet": "2024-05-20",
+      "intervalleConge": "2024-05-20 au 2024-05-24",
+      "autorisation": "Demande en cours",
+      "raison": "Congé de maladie",
+      "motif": "",
+      "signataire": ""
+    },
+    {
+      "matricule": "10002",
+      "nometprenom": "Sophie Lefèvre",
+      "dateEffet": "2024-06-10",
+      "intervalleConge": "2024-06-10 au 2024-06-21",
+      "autorisation": "Demande rejetée",
+      "raison": "Congés payés",
+      "motif": "Période de forte activité, effectifs insuffisants",
+      "signataire": "Directeur des Ressources Humaines"
+    },
+    {
+      "matricule": "10003",
+      "nometprenom": "Marie Martin",
+      "dateEffet": "2024-07-01",
+      "intervalleConge": "2024-07-01 au 2024-12-31",
+      "autorisation": "Demande acceptée",
+      "raison": "Disponibilité",
+      "motif": "",
+      "signataire": "Directeur des Ressources Humaines"
+    }
   ]
 }

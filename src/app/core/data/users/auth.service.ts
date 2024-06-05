@@ -15,6 +15,15 @@ export class AuthService {
   // Inject HttpClient
   http = inject(HttpClient);
 
+  isAuthenticated() {
+    let currentUser:Utilisateur = JSON.parse(localStorage.getItem('user') as string);
+    if(currentUser){
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
 
   // get all users
   getAllUsers(){

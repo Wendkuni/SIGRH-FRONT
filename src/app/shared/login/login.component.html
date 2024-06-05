@@ -4,7 +4,6 @@
   [hideTransitionOptions]="'1000ms'"
   [showTransformOptions]="'translateX(100%)'" />
 
-
 <div class=" bg-primary-reverse bg-primary-50">
   <div class="flex justify-content-center">
     <div class="w-full lg:w-5 h-screen text-center flex justify-content-center align-items-start">
@@ -13,7 +12,7 @@
           <img src="assets/layout/images/logo/img.png" alt="sigrh" class="w-6rem"/>
         </div>
         <h1 class="text-4xl font-light mt-4 text-primary-500">Connectez-vous à SIGRH</h1>
-        <form [formGroup]="loginForm">
+        <form  [formGroup]="loginForm" >
           <div class="mt-5 text-left">
             <label
               for="email"
@@ -91,7 +90,6 @@
 
   </div>
 </div>
-
 
 <!-- Forgot password dialog -->
 <p-dialog header="Mot de passe oublié" [(visible)]="forgotPassFormVisible" [closable]="false" [modal]="true"

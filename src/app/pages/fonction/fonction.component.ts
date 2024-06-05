@@ -1,6 +1,6 @@
 import {Component, inject, Input, OnInit} from '@angular/core';
-import {Avancement} from "../../core/data/fonction/fonction.model";
-import {AvancementService} from "../../core/data/fonction/avancement.service";
+import {Avancement} from "../../core/data/avancement/fonction.model";
+import {AvancementService} from "../../core/data/avancement/avancement.service";
 import {PersonnelResponse} from "../../core/data/personals/personnel.model";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";

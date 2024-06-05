@@ -14,12 +14,13 @@ import { LayoutService } from './service/app.layout.service';
 import {NgClass, NgIf} from "@angular/common";
 import {AppRightMenuComponent} from "./app.rightmenu.component";
 import {AppBreadcrumbComponent} from "./app.breadcrumb.component";
+import {AppFooterComponent} from "./app.footer.component";
 
 @Component({
   selector: 'mrt-layout',
   templateUrl: './app.layout.component.html',
   standalone: true,
-  imports: [NgClass, RouterOutlet, AppTopbarComponent, AppRightMenuComponent, AppSidebarComponent, NgIf, AppBreadcrumbComponent]
+  imports: [NgClass, RouterOutlet, AppTopbarComponent, AppRightMenuComponent, AppSidebarComponent, NgIf, AppBreadcrumbComponent, AppFooterComponent]
 })
 export class AppLayoutComponent implements OnDestroy {
     overlayMenuOpenSubscription: Subscription;

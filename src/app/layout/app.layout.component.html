@@ -5,15 +5,16 @@
     <mrt-sidebar></mrt-sidebar>
 
     <div class="layout-content-wrapper">
-        <mrt-breadcrumb></mrt-breadcrumb>
 
         <div class="layout-content">
             <router-outlet></router-outlet>
         </div>
+
+      <mrt-footer />
+
     </div>
 
   @if(layoutService.state.staticMenuMobileActive){
     <div class="layout-mask"></div>
   }
-<!--    <div *ngIf="layoutService.state.staticMenuMobileActive" class="layout-mask"></div>-->
 </div>

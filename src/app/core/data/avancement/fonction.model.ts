@@ -22,6 +22,7 @@ export interface Fonction {
 }
 
 export interface Avancement{
+  id:string,
     nature:string,
     corps: string;
     fonction: string,

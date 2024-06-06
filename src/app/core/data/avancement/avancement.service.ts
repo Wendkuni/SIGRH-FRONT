@@ -17,6 +17,17 @@ export class AvancementService {
     return this.http.get<Avancement[]>(`${this.url}`);
   }
 
+  // create avancement
+  addAvancement(avancement:Avancement){
+    return this.http.post(this.url, avancement);
+  }
+
+  // update avancement
+  updateAvancement(id:string, avancement:Avancement){
+    return this.http.put(`${this.url}/${id}`, avancement);
+  }
+
+
   // get all avancement by personnel
   getAvancementsByPersonnel(idPersonnel:string){
     let avancementByPersonnel!: Avancement[];
@@ -36,4 +47,8 @@ export class AvancementService {
     return avancementByPersonnel
   }
 
+//   delete avancement
+  delateAvancement(avancement: Avancement){
+    return this.http.delete(`${this.url}/${avancement.id}`);
+  }
 }

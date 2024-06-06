@@ -30,7 +30,7 @@ export class PersonnelService {
 
   // update personnel
   updatePersonnel(id: string, personnel: PersonnelRequest){
-    return this.http.patch(`${this.url}/${id}`, personnel);
+    return this.http.put(`${this.url}/${id}`, personnel);
   }
 
   // delete personnel

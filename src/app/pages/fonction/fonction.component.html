@@ -1,4 +1,4 @@
-<span class="block text-900 font-bold text-xl mb-4">Fonction</span>
+<span class="block text-900 font-bold text-xl mb-4">Carrières</span>
 <div class="grid">
   <div class="col-12 lg:col-5">
     <form [formGroup]="fonctionAgentForm">
@@ -115,6 +115,7 @@
       </div>
       <div class="flex justify-content-between gap-3">
         <button pButton pRipple class="p-button-primary flex-1" label="Enregistrer"
+                [disabled]="fonctionAgentForm.invalid"
                 icon="pi pi-fw pi-check"></button>
         <button pButton pRipple
                 class="p-button-danger flex-1 p-button-outlined"

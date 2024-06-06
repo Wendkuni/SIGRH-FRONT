@@ -29,8 +29,8 @@ export class CongeService {
   }
 
   // update demande
-  updateDemande(demande: DemandeConge){
-    return this.http.patch(`${this.url}/${demande.id}`, demande);
+  updateDemande(id: number,demande: DemandeConge){
+    return this.http.patch(`${this.url}/${id}`, demande);
   }
 
   // delete demande

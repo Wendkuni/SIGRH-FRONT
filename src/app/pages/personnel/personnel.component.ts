@@ -19,6 +19,7 @@ import {FormValidatorsComponent} from "../../shared/form-validators/form-validat
 import {CalendarModule} from "primeng/calendar";
 import {DividerModule} from "primeng/divider";
 import {FileUploadModule} from "primeng/fileupload";
+import {DropdownModule} from "primeng/dropdown";
 
 @Component({
   selector: 'mrt-personnel',
@@ -41,7 +42,8 @@ import {FileUploadModule} from "primeng/fileupload";
     FormValidatorsComponent,
     CalendarModule,
     DividerModule,
-    FileUploadModule
+    FileUploadModule,
+    DropdownModule
   ],
   templateUrl: './personnel.component.html',
   providers: [MessageService]
@@ -70,28 +72,32 @@ export class PersonnelComponent implements OnInit{
   ngOnInit(): void {
     this.personnelForm = this.fb.group({
       matricule: this.fb.control('',[ Validators.required]),
-      photo: this.fb.control('',[Validators.required]),
       nni: this.fb.control('', [Validators.required]),
-      nometprenom: this.fb.control('',[ Validators.required]),
-      nometprenomarab: this.fb.control('',[Validators.required]),
-      actifornot: this.fb.control('',[Validators.required]),
-      dterecrutemnt: this.fb.control('',[Validators.required]),
-      dtetitularisation: this.fb.control('',[Validators.required]),
-      dtedepart: this.fb.control('',[Validators.required]),
-      statusemp: this.fb.control('',[Validators.required]),
-      adressemp: this.fb.control('',[Validators.required]),
-      debutcntrat: this.fb.control('',[Validators.required]),
+      nomEtPrenom: this.fb.control('',[ Validators.required]),
+      nomPrenomArab: this.fb.control('',[Validators.required]),
+
+      actifOrNot: this.fb.control(''),
+      dteRecrutemnt: this.fb.control('',[Validators.required]),
+      dteTitularisation: this.fb.control(''),
+      dteDepart: this.fb.control(''),
+
+      statusEmp: this.fb.control(''),
+      adressEmp: this.fb.control(''),
+      debutCntrat: this.fb.control(''),
       tlphone: this.fb.control('',[Validators.required]),
-      fincntrat: this.fb.control('',[Validators.required]),
-      dtenaiss: this.fb.control('',[Validators.required]),
-      lieunaiss: this.fb.control('',[Validators.required]),
+
+      finCntrat: this.fb.control(''),
+      dteNaiss: this.fb.control('',[Validators.required]),
+      lieuNaiss: this.fb.control('',[Validators.required]),
       bank: this.fb.control('',[Validators.required]),
-      codbank: this.fb.control('',[Validators.required]),
-      numrocpte: this.fb.control('',[Validators.required]),
-      clerib: this.fb.control('',[Validators.required]),
+
+      codBank: this.fb.control('',[Validators.required]),
+      numroCpte: this.fb.control('',[Validators.required]),
+      cleRib: this.fb.control('',[Validators.required]),
       detacher: this.fb.control('',[Validators.required]),
-      ministereorigine: this.fb.control('',[Validators.required]),
-      Typeeducation: this.fb.control('',[Validators.required])
+
+      ministereOrigine: this.fb.control(''),
+      typeEducation: this.fb.control('')
     });
     this.getAllPersonnel();
   }
@@ -100,6 +106,7 @@ export class PersonnelComponent implements OnInit{
   getAllPersonnel() {
     this.personalService.getAllPersonnels().subscribe((response) => {
       this.listPersonnel$ = response;
+      console.log(this.listPersonnel$);
       this.loading = false;
     });
   }
@@ -133,10 +140,10 @@ export class PersonnelComponent implements OnInit{
         this.getAllPersonnel();
         this.formDialog = false;
         this.personnelForm.reset();
-        this.messageService.add({severity: 'success', summary: 'Successful', detail: 'Personnel Created', life: 3000});
+        this.messageService.add({severity: 'success', summary: 'Successful', detail: 'Personnel ajouter', life: 3000});
       },
       error => {
-        this.messageService.add({severity: 'error', summary: 'Error', detail: 'Personnel not Created', life: 3000});
+        this.messageService.add({severity: 'error', summary: 'Error', detail: 'Personnel non ajouter', life: 3000});
 
       });
   }
@@ -148,8 +155,12 @@ export class PersonnelComponent implements OnInit{
       this.getAllPersonnel();
       this.formDialog = false;
       this.personnelForm.reset();
-      this.messageService.add({severity: 'success', summary: 'Successful', detail: 'Personnel Updated', life: 3000});
-    });
+      this.messageService.add({severity: 'success', summary: 'Successful', detail: 'Personnel Modifier', life: 3000});
+    },
+      error => {
+        this.messageService.add({severity: 'error', summary: 'Error', detail: 'Personnel non Modifier', life: 3000});
+
+      });
   }
 
   // Methode de recuperation des elements du formulaire
@@ -157,28 +168,27 @@ export class PersonnelComponent implements OnInit{
     const formData = this.personnelForm.value;
     return<PersonnelRequest>{
       matricule: formData.matricule,
-      photo: formData.photo,
       nni: formData.nni,
-      nomPrenom: formData.nometprenom,
-      nomPrenomArab: formData.nometprenomarab,
-      actifOrNot: formData.actifornot,
-      dteRecrutemnt: formData.dterecrutemnt,
-      dteTitularisation: formData.dtetitularisation,
-      dteDepart: formData.dtedepart,
-      statusEmp: formData.statusemp,
-      adressEmp: formData.adressemp,
-      debutCntrat: formData.debutcntrat,
+      nomEtPrenom: formData.nomEtPrenom,
+      nomPrenomArab: formData.nomPrenomArab,
+      actifOrNot: formData.actifOrNot,
+      dteRecrutemnt: formData.dteRecrutemnt,
+      dteTitularisation: formData.dteTitularisation,
+      dteDepart: formData.dteDepart,
+      statusEmp: formData.statusEmp,
+      adressEmp: formData.adressEmp,
+      debutCntrat: formData.debutCntrat,
       tlphone: formData.tlphone,
-      finCntrat: formData.fincntrat,
-      dteNaiss: formData.dtenaiss,
-      lieuNaiss: formData.lieunaiss,
+      finCntrat: formData.finCntrat,
+      dteNaiss: formData.dteNaiss,
+      lieuNaiss: formData.lieuNaiss,
       bank: formData.bank,
-      codBank: formData.codbank,
-      numroCpte: formData.numrocpte,
-      cleRib: formData.clerib,
+      codBank: formData.codBank,
+      numroCpte: formData.numroCpte,
+      cleRib: formData.cleRib,
       detacher: formData.detacher,
-      ministereOrigine: formData.ministereorigine,
-      typeEducation: formData.Typeeducation
+      ministereOrigine: formData.ministereOrigine,
+      typeEducation: formData.typeEducation
     }
   }
 
@@ -208,6 +218,18 @@ export class PersonnelComponent implements OnInit{
   // Methode pour filtrer les elements du tableau
   onGlobalFilter(table: Table, event: Event) {
     table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+  }
+
+//   Delete Method
+  deletePersonnel(personnel: PersonnelResponse) {
+    this.personalService.deletePersonnel(personnel).subscribe(() => {
+      this.getAllPersonnel();
+      this.messageService.add({severity: 'success', summary: 'Successful', detail: 'Personnel supprimer', life: 3000});
+    },
+      error => {
+        this.messageService.add({severity: 'error', summary: 'Error', detail: 'Personnel non supprimer', life: 3000});
+
+      });
   }
 
 }

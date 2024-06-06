@@ -5,25 +5,25 @@ export let personnelColonneTable : Cols[] = [
     {field: 'photo', header: 'Photo'},
     {field: 'nni', header: 'NNI'},
     {field: 'matricule', header: 'Matricule'},
-    {field: 'nometprenom', header: 'Nom et prénom'},
-    {field: 'nometprenomarab', header: 'Nom et prénom Arab'},
+    {field: 'nomEtPrenom', header: 'Nom et prénom'},
+    {field: 'nomPrenomArab', header: 'Nom et prénom Arab'},
     {field: 'tlphone', header: 'Téléphone'},
-    {field: 'adrssemp', header: 'Adresse'},
-    {field: 'dtenaiss', header: 'Date naissance'},
-    {field: 'lieunaiss', header: 'Lieu naissance'},
-    {field: 'dterecrutmnt', header: 'Date recrutement'},
-    {field: 'dtetitularisation', header: 'Date titularisation'},
-    {field: 'debucntrat', header: 'Début contrat'},
-    {field: 'fincntrat', header: 'Fin contrat'},
+    {field: 'adrssEmp', header: 'Adresse'},
+    {field: 'lieuNaiss', header: 'Lieu naissance'},
+    {field: 'dteNaiss', header: 'Date naissance'},
+    {field: 'dteRerutmnt', header: 'Date recrutement'},
+    {field: 'dteTitularisation', header: 'Date titularisation'},
+    {field: 'debuCntrat', header: 'Début contrat'},
+    {field: 'finCntrat', header: 'Fin contrat'},
     {field: 'bank', header: 'Banque'},
-    {field: 'codbank', header: 'Code banque'},
-    {field: 'numrocpte', header: 'Numéro compte'},
-    {field: 'clerib', header: 'Clé rib'},
+    {field: 'codBank', header: 'Code banque'},
+    {field: 'numroCpte', header: 'Numéro compte'},
+    {field: 'cleRib', header: 'Clé rib'},
     {field: 'detacher', header: 'Détacher'},
-    {field: 'ministereorigine', header: 'Ministère origine'},
-    {field: 'Typeeducation', header: 'Type éducation'},
-    {field: 'statusemp', header: 'Statut employé'},
-    {field: 'actifornot', header: 'Situation'}
+    {field: 'ministereOrigine', header: 'Ministère origine'},
+    {field: 'typeEducation', header: 'Type éducation'},
+    {field: 'statusEmp', header: 'Statut employé'},
+    {field: 'actifOrNot', header: 'Situation'}
 ];
 
 export interface PersonnelRequest {
@@ -37,7 +37,7 @@ export interface PersonnelRequest {
     nni: string;
 
     // Nom et prénom en caractères latins (probablement une chaîne de caractères)
-    nomPrenom: string;
+    nomEtPrenom: string;
 
     // Nom et prénom en caractères arabes (probablement une chaîne de caractères)
     nomPrenomArab: string;
@@ -110,7 +110,7 @@ export interface PersonnelResponse {
   nni: string;
 
   // Nom et prénom en caractères latins (probablement une chaîne de caractères)
-  nomPrenom: string;
+  nomEtPrenom: string;
 
   // Nom et prénom en caractères arabes (probablement une chaîne de caractères)
   nomPrenomArab: string;

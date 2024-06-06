@@ -5,35 +5,45 @@
       "name": "admin",
       "email": "admin@email.com",
       "password": "admin123",
-      "roles": ["Administrateur"]
+      "roles": [
+        "Administrateur"
+      ]
     },
     {
       "id": "2",
       "name": "Martin Durand",
       "email": "durand.martin@exemple.com",
       "password": "motdepasse456",
-      "role": ["Utilisateur"]
+      "role": [
+        "Utilisateur"
+      ]
     },
     {
       "id": "3",
       "name": "Durant Sylvie",
       "email": "sylvie.durant@exemple.com",
       "password": "motdepasse789",
-      "role": ["GPU"]
+      "role": [
+        "GPU"
+      ]
     },
     {
       "id": "4",
       "name": "Leroy Pierre",
       "email": "pierre.leroy@exemple.com",
       "password": "motdepasse012",
-      "role": ["GCA"]
+      "role": [
+        "GCA"
+      ]
     },
     {
       "id": "5",
       "name": "Petit Nicolas",
       "email": "nicolas.petit@exemple.com",
       "password": "motdepasse345",
-      "role": ["GM"]
+      "role": [
+        "GM"
+      ]
     },
     {
       "id": "6",
@@ -85,267 +95,266 @@
       "role": "GSR"
     }
   ],
-  "personnels":[
+  "personnels": [
     {
       "id": "1",
       "photo": "assets/demo/images/avatar/circle/avatar-m-2@2x.png",
       "matricule": "12345",
       "nni": "01234567890",
-      "nometprenom": "Pierre Dubois",
-      "nometprenomarab": "بيير دوبوا",
-      "actifornot": "Actif",
-      "dterecrutemnt": "2020-01-01",
-      "dtetitularisation": "2022-01-01",
-      "dtedepart": null,
-      "statusemp": "Titulaire",
+      "nomEtPrenom": "Pierre Dubois",
+      "nomPrenomArab": "بيير دوبوا",
+      "actifOrNot": "Actif",
+      "dteRecrutemnt": "2020-01-01",
+      "dteTitularisation": "2022-01-01",
+      "dteDepart": null,
+      "statusEmp": "Titulaire",
       "tlphone": "+33123456789",
-      "adressemp": "1 rue de l'Hôtel de Ville, 75001 Paris",
-      "debutcntrat": "2020-01-01",
-      "fincntrat": null,
-      "dtenaiss": "1980-05-15",
-      "lieunaiss": "Paris, France",
+      "adressEmp": "1 rue de l'Hôtel de Ville, 75001 Paris",
+      "debutCntrat": "2020-01-01",
+      "finCntrat": null,
+      "dteNaiss": "1980-05-15",
+      "lieuNaiss": "Paris, France",
       "bank": "BNP Paribas",
-      "codbank": "30004",
-      "numrocpte": "FR7610177000000001234567890",
-      "clerib": "12",
+      "codBank": "30004",
+      "numroCpte": "FR7610177000000001234567890",
+      "cleRib": "12",
       "detacher": "Non",
-      "ministereorigine": "Ministère de l'Éducation nationale",
-      "Typeeducation": "Diplôme d'Ingénieur"
+      "ministereOrigine": "Ministère de l'Éducation nationale",
+      "typeEducation": "Diplôme d'Ingénieur"
     },
     {
       "id": "2",
       "photo": "assets/demo/images/avatar/circle/avatar-f-1@2x.png",
       "matricule": "54321",
       "nni": "98765432101",
-      "nometprenom": "Marie Durand",
-      "nometprenomarab": "ماري دوراند",
-      "actifornot": "Actif",
-      "dterecrutemnt": "2021-07-15",
-      "dtetitularisation": null,
-      "dtedepart": null,
-      "statusemp": "Contractuel",
+      "nomEtPrenom": "Marie Durand",
+      "nomPrenomArab": "ماري دوراند",
+      "actifOrNot": "Actif",
+      "dteRecrutemnt": "2021-07-15",
+      "dteTitularisation": null,
+      "dteDepart": null,
+      "statusEmp": "Contractuel",
       "tlphone": "+33698765432",
-      "adressemp": "2 rue Victor Hugo, 33000 Bordeaux",
-      "debutcntrat": "2021-07-15",
-      "fincntrat": null,
-      "dtenaiss": "1990-10-20",
-      "lieunaiss": "Lyon, France",
+      "adressEmp": "2 rue Victor Hugo, 33000 Bordeaux",
+      "debutCntrat": "2021-07-15",
+      "finCntrat": null,
+      "dteNaiss": "1990-10-20",
+      "lieuNaiss": "Lyon, France",
       "bank": "Crédit Agricole",
-      "codbank": "14500",
-      "numrocpte": "FR1230006000001234567890123",
-      "clerib": "34",
+      "codBank": "14500",
+      "numroCpte": "FR1230006000001234567890123",
+      "cleRib": "34",
       "detacher": "Non",
-      "ministereorigine": "Ministère de la Culture",
-      "Typeeducation": "Master en Administration des Affaires"
+      "ministereOrigine": "Ministère de la Culture",
+      "typeEducation": "Master en Administration des Affaires"
     },
     {
       "id": "3",
       "photo": "assets/demo/images/avatar/circle/avatar-m-1@2x.png",
       "matricule": "67890",
       "nni": "12345678902",
-      "nometprenom": "Ahmed Hassan",
-      "nometprenomarab": "احمد حسن",
-      "actifornot": "Actif",
-      "dterecrutemnt": "2018-03-01",
-      "dtetitularisation": "2020-09-01",
-      "dtedepart": null,
-      "statusemp": "Titulaire",
+      "nomEtPrenom": "Ahmed Hassan",
+      "nomPrenomArab": "احمد حسن",
+      "actifOrNot": "Actif",
+      "dteRecrutemnt": "2018-03-01",
+      "dteTitularisation": "2020-09-01",
+      "dteDepart": null,
+      "statusEmp": "Titulaire",
       "tlphone": "+212654321098",
-      "adressemp": "3 avenue Mohammed V, Rabat, Maroc",
-      "debutcntrat": "2018-03-01",
-      "fincntrat": null,
-      "dtenaiss": "1975-12-24",
-      "lieunaiss": "Casablanca, Maroc",
+      "adressEmp": "3 avenue Mohammed V, Rabat, Maroc",
+      "debutCntrat": "2018-03-01",
+      "finCntrat": null,
+      "dteNaiss": "1975-12-24",
+      "lieuNaiss": "Casablanca, Maroc",
       "bank": "Attijariwafa Bank",
-      "codbank": "005",
-      "numrocpte": "MA000000000100001234567890",
-      "clerib": "04",
+      "codBank": "005",
+      "numroCpte": "MA000000000100001234567890",
+      "cleRib": "04",
       "detacher": "Non",
-      "ministereorigine": "Ministère de la Santé",
-      "Typeeducation": "Master en Administration des Affaires"
+      "ministereOrigine": "Ministère de la Santé",
+      "typeEducation": "Master en Administration des Affaires"
     },
     {
       "id": "4",
       "photo": "assets/demo/images/avatar/circle/avatar-f-2@2x.png",
       "matricule": "34567",
       "nni": "98765432103",
-      "nometprenom": "Fatoumata Diallo",
-      "nometprenomarab": "فاطمة جالو",
-      "actifornot": "Actif",
-      "dterecrutemnt": "2022-02-14",
-      "dtetitularisation": null,
-      "dtedepart": null,
-      "statusemp": "Contractuel",
+      "nomEtPrenom": "Fatoumata Diallo",
+      "nomPrenomArab": "فاطمة جالو",
+      "actifOrNot": "Actif",
+      "dteRecrutemnt": "2022-02-14",
+      "dteTitularisation": null,
+      "dteDepart": null,
+      "statusEmp": "Contractuel",
       "tlphone": "+221776543210",
-      "adressemp": "4 rue Blaise Diagne, Dakar, Sénégal",
-      "debutcntrat": "2022-02-14",
-      "fincntrat": null,
-      "dtenaiss": "1995-03-08",
-      "lieunaiss": "Dakar, Sénégal",
+      "adressEmp": "4 rue Blaise Diagne, Dakar, Sénégal",
+      "debutCntrat": "2022-02-14",
+      "finCntrat": null,
+      "dteNaiss": "1995-03-08",
+      "lieuNaiss": "Dakar, Sénégal",
       "bank": "Société Générale des Banques au Sénégal (SGBS)",
-      "codbank": "00081",
-      "numrocpte": "SN100000000100001234567890",
-      "clerib": "03",
+      "codBank": "00081",
+      "numroCpte": "SN100000000100001234567890",
+      "cleRib": "03",
       "detacher": "Non",
-      "ministereorigine": null,
-      "Typeeducation": "Licence en Sciences économiques et de gestion"
+      "ministereOrigine": null,
+      "typeEducation": "Licence en Sciences économiques et de gestion"
     },
     {
       "id": "5",
       "photo": "assets/demo/images/avatar/circle/avatar-m-3@2x.png",
       "matricule": "89012",
       "nni": "12345678904",
-      "nometprenom": "Jean-Marc Tremblay",
-      "nometprenomarab": "جان مارك تريمبلاي",
-      "actifornot": "Actif",
-      "dterecrutemnt": "2019-04-05",
-      "dtetitularisation": "2021-05-12",
-      "dtedepart": null,
-      "statusemp": "Titulaire",
+      "nomEtPrenom": "Jean-Marc Tremblay",
+      "nomPrenomArab": "جان مارك تريمبلاي",
+      "actifOrNot": "Actif",
+      "dteRecrutemnt": "2019-04-05",
+      "dteTitularisation": "2021-05-12",
+      "dteDepart": null,
+      "statusEmp": "Titulaire",
       "tlphone": "+15149876543",
-      "adressemp": "5 rue Sherbrooke Ouest, Montréal, Québec, Canada",
-      "debutcntrat": "2019-04-05",
-      "fincntrat": null,
-      "dtenaiss": "1985-06-21",
-      "lieunaiss": "Montréal, Canada",
+      "adressEmp": "5 rue Sherbrooke Ouest, Montréal, Québec, Canada",
+      "debutCntrat": "2019-04-05",
+      "finCntrat": null,
+      "dteNaiss": "1985-06-21",
+      "lieuNaiss": "Montréal, Canada",
       "bank": "Banque Nationale du Canada",
-      "codbank": "00003",
-      "numrocpte": "CA123456789012345678901234",
-      "clerib": "02",
+      "codBank": "00003",
+      "numroCpte": "CA123456789012345678901234",
+      "cleRib": "02",
       "detacher": "Non",
-      "ministereorigine": null,
-      "Typeeducation": "Baccalauréat en sciences informatiques"
+      "ministereOrigine": null,
+      "typeEducation": "Baccalauréat en sciences informatiques"
     },
     {
       "id": "6",
       "photo": "assets/demo/images/avatar/circle/avatar-f-4@2x.png",
       "matricule": "23456",
       "nni": "12345678905",
-      "nometprenom": "Maria Sanchez",
-      "nometprenomarab": "ماريا سانشيز",
-      "actifornot": "Actif",
-      "dterecrutemnt": "2020-08-10",
-      "dtetitularisation": null,
-      "dtedepart": null,
-      "statusemp": "Contractuel",
+      "nomEtPrenom": "Maria Sanchez",
+      "nomPrenomArab": "ماريا سانشيز",
+      "actifOrNot": "Actif",
+      "dteRecrutemnt": "2020-08-10",
+      "dteTitularisation": null,
+      "dteDepart": null,
+      "statusEmp": "Contractuel",
       "tlphone": "+34654321098",
-      "adressemp": "6 Calle Mayor, Madrid, Espagne",
-      "debutcntrat": "2020-08-10",
-      "fincntrat": null,
-      "dtenaiss": "1992-01-16",
-      "lieunaiss": "Madrid, Espagne",
+      "adressEmp": "6 Calle Mayor, Madrid, Espagne",
+      "debutCntrat": "2020-08-10",
+      "finCntrat": null,
+      "dteNaiss": "1992-01-16",
+      "lieuNaiss": "Madrid, Espagne",
       "bank": "Banco Santander",
-      "codbank": "0049",
-      "numrocpte": "ES661234567890123456789012",
-      "clerib": "2",
+      "codBank": "0049",
+      "numroCpte": "ES661234567890123456789012",
+      "cleRib": "2",
       "detacher": "Non",
-      "ministereorigine": null,
-      "Typeeducation": "Licence en Sciences économiques et de gestion"
+      "ministereOrigine": null,
+      "typeEducation": "Licence en Sciences économiques et de gestion"
     },
     {
       "id": "7",
       "photo": "assets/demo/images/avatar/circle/avatar-m-5@2x.png",
       "matricule": "M123",
       "nni": "123456789",
-      "nometprenom": "Jean Dupont",
-      "nometprenomarab": "جان دوبون",
-      "actifornot": "Actif",
-      "dterecrutemnt": "2022-01-15",
-      "dtetitularisation": "2022-03-10",
-      "dtedepart": null,
-      "statusemp": "Permanent",
+      "nomEtPrenom": "Jean Dupont",
+      "nomPrenomArab": "جان دوبون",
+      "actifOrNot": "Actif",
+      "dteRecrutemnt": "2022-01-15",
+      "dteTitularisation": "2022-03-10",
+      "dteDepart": null,
+      "statusEmp": "Permanent",
       "tlphone": "+33 6 12 34 56 78",
-      "adressemp": "123 Rue des Employés",
-      "debutcntrat": "2022-01-15",
-      "fincntrat": "2025-01-14",
-      "dtenaiss": "1985-05-20",
-      "lieunaiss": "Paris, France",
+      "adressEmp": "123 Rue des Employés",
+      "debutCntrat": "2022-01-15",
+      "finCntrat": "2025-01-14",
+      "dteNaiss": "1985-05-20",
+      "lieuNaiss": "Paris, France",
       "bank": "Banque XYZ",
-      "codbank": "XYZ123",
-      "numrocpte": "FR12345678901234567890123",
-      "clerib": "12",
+      "codBank": "XYZ123",
+      "numroCpte": "FR12345678901234567890123",
+      "cleRib": "12",
       "detacher": "Non",
-      "ministereorigine": "Ministère des Finances",
-      "Typeeducation": "Bac+5"
+      "ministereOrigine": "Ministère des Finances",
+      "typeEducation": "Bac+5"
     },
     {
       "id": "8",
       "photo": "assets/demo/images/avatar/circle/avatar-f-6@2x.png",
       "matricule": "M456",
       "nni": "987654321",
-      "nometprenom": "Fatoumata Diop",
-      "nometprenomarab": "فاطمة جوب",
-      "actifornot": "Actif",
-      "dterecrutemnt": "2021-05-20",
-      "dtetitularisation": "2021-07-15",
-      "dtedepart": null,
-      "statusemp": "Permanent",
+      "nomEtPrenom": "Fatoumata Diop",
+      "nomPrenomArab": "فاطمة جوب",
+      "actifOrNot": "Actif",
+      "dteRecrutemnt": "2021-05-20",
+      "dteTitularisation": "2021-07-15",
+      "dteDepart": null,
+      "statusEmp": "Permanent",
       "tlphone": "+221 77 654 32 10",
-      "adressemp": "456 Avenue des Employés",
-      "debutcntrat": "2021-05-20",
-      "fincntrat": "2024-05-19",
-      "dtenaiss": "1990-10-20",
-      "lieunaiss": "Dakar, Sénégal",
+      "adressEmp": "456 Avenue des Employés",
+      "debutCntrat": "2021-05-20",
+      "finCntrat": "2024-05-19",
+      "dteNaiss": "1990-10-20",
+      "lieuNaiss": "Dakar, Sénégal",
       "bank": "Banque ABC",
-      "codbank": "ABC456",
-      "numrocpte": "SN12345678901234567890123",
-      "clerib": "34",
+      "codBank": "ABC456",
+      "numroCpte": "SN12345678901234567890123",
+      "cleRib": "34",
       "detacher": "Non",
-      "ministereorigine": "Ministère de l'Éducation",
-      "Typeeducation": "Bac+3"
-
+      "ministereOrigine": "Ministère de l'Éducation",
+      "typeEducation": "Bac+3"
     },
     {
       "id": "9",
       "photo": "assets/demo/images/avatar/circle/avatar-m-8@2x.png",
       "matricule": "M789",
       "nni": "123456789",
-      "nometprenom": "Ahmed Mohamed",
-      "nometprenomarab": "احمد محمد",
-      "actifornot": "Actif",
-      "dterecrutemnt": "2020-03-15",
-      "dtetitularisation": "202",
-      "dtedepart": null,
-      "statusemp": "Permanent",
+      "nomEtPrenom": "Ahmed Mohamed",
+      "nomPrenomArab": "احمد محمد",
+      "actifOrNot": "Actif",
+      "dteRecrutemnt": "2020-03-15",
+      "dteTitularisation": "202",
+      "dteDepart": null,
+      "statusEmp": "Permanent",
       "tlphone": "+212 65 43 21 09",
-      "adressemp": "789 Boulevard des Employés",
-      "debutcntrat": "2020-03-15",
-      "fincntrat": "2023-03-14",
-      "dtenaiss": "1975-12-24",
-      "lieunaiss": "Casablanca, Maroc",
+      "adressEmp": "789 Boulevard des Employés",
+      "debutCntrat": "2020-03-15",
+      "finCntrat": "2023-03-14",
+      "dteNaiss": "1975-12-24",
+      "lieuNaiss": "Casablanca, Maroc",
       "bank": "Banque 123",
-      "codbank": "123789",
-      "numrocpte": "MA12345678901234567890123",
-      "clerib": "04",
+      "codBank": "123789",
+      "numroCpte": "MA12345678901234567890123",
+      "cleRib": "04",
       "detacher": "Non",
-      "ministereorigine": "Ministère de la Santé",
-      "Typeeducation": "Bac+5"
+      "ministereOrigine": "Ministère de la Santé",
+      "typeEducation": "Bac+5"
     },
     {
       "id": "10",
       "photo": "assets/demo/images/avatar/circle/avatar-f-11@2x.png",
       "matricule": "M101",
       "nni": "987654321",
-      "nometprenom": "Jeanne Dupuis",
-      "nometprenomarab": "جان دوبوا",
-      "actifornot": "Actif",
-      "dterecrutemnt": "2021-01-15",
-      "dtetitularisation": "2021-03-10",
-      "dtedepart": null,
-      "statusemp": "Permanent",
+      "nomEtPrenom": "Jeanne Dupuis",
+      "nomPrenomArab": "جان دوبوا",
+      "actifOrNot": "Actif",
+      "dteRecrutemnt": "2021-01-15",
+      "dteTitularisation": "2021-03-10",
+      "dteDepart": null,
+      "statusEmp": "Permanent",
       "tlphone": "+33 6 12 34 56 78",
-      "adressemp": "101 Rue des Employés",
-      "debutcntrat": "2021-01-15",
-      "fincntrat": "2024-01-14",
-      "dtenaiss": "1985-05-20",
-      "lieunaiss": "Paris, France",
+      "adressEmp": "101 Rue des Employés",
+      "debutCntrat": "2021-01-15",
+      "finCntrat": "2024-01-14",
+      "dteNaiss": "1985-05-20",
+      "lieuNaiss": "Paris, France",
       "bank": "Banque XYZ",
-      "codbank": "XYZ123",
-      "numrocpte": "FR12345678901234567890123",
-      "clerib": "12",
+      "codBank": "XYZ123",
+      "numroCpte": "FR12345678901234567890123",
+      "cleRib": "12",
       "detacher": "Non",
-      "ministereorigine": "Ministère des Finances",
-      "Typeeducation": "Bac+5"
+      "ministereOrigine": "Ministère des Finances",
+      "typeEducation": "Bac+5"
     }
   ],
   "fonctions": [
@@ -358,7 +367,8 @@
       "echelon": "1",
       "echelle": "Ingénieur",
       "indice": "600",
-      "salairedebase": "1500000"
+      "salairedebase": "1500000",
+      "id": "ca8b"
     },
     {
       "fonction": "Comptable",
@@ -369,7 +379,8 @@
       "echelon": "2",
       "echelle": "Comptable",
       "indice": "500",
-      "salairedebase": "1200000"
+      "salairedebase": "1200000",
+      "id": "cbb6"
     },
     {
       "fonction": "Professeur des écoles",
@@ -380,7 +391,8 @@
       "echelon": "1",
       "echelle": "Enseignant",
       "indice": "400",
-      "salairedebase": "1000000"
+      "salairedebase": "1000000",
+      "id": "a108"
     },
     {
       "fonction": "Médecin",
@@ -391,7 +403,8 @@
       "echelon": "1",
       "echelle": "Médical",
       "indice": "700",
-      "salairedebase": "1800000"
+      "salairedebase": "1800000",
+      "id": "1cf2"
     },
     {
       "fonction": "Infirmier",
@@ -402,7 +415,8 @@
       "echelon": "1",
       "echelle": "Paramédical",
       "indice": "550",
-      "salairedebase": "1350000"
+      "salairedebase": "1350000",
+      "id": "cd2c"
     },
     {
       "fonction": "Agent de police",
@@ -413,7 +427,8 @@
       "echelon": "1",
       "echelle": "Sécurité",
       "indice": "450",
-      "salairedebase": "1100000"
+      "salairedebase": "1100000",
+      "id": "a047"
     },
     {
       "fonction": "Technicien supérieur",
@@ -424,7 +439,8 @@
       "echelon": "2",
       "echelle": "Technique",
       "indice": "500",
-      "salairedebase": "1200000"
+      "salairedebase": "1200000",
+      "id": "d595"
     },
     {
       "fonction": "Ouvrier qualifié",
@@ -435,7 +451,8 @@
       "echelon": "2",
       "echelle": "Ouvrier",
       "indice": "350",
-      "salairedebase": "900000"
+      "salairedebase": "900000",
+      "id": "f569"
     },
     {
       "fonction": "Chauffeur",
@@ -446,7 +463,8 @@
       "echelon": "1",
       "echelle": "Conduite",
       "indice": "400",
-      "salairedebase": "1000000"
+      "salairedebase": "1000000",
+      "id": "eb65"
     },
     {
       "fonction": "Secrétaire",
@@ -457,7 +475,8 @@
       "echelon": "1",
       "echelle": "Administratif",
       "indice": "350",
-      "salairedebase": "900000"
+      "salairedebase": "900000",
+      "id": "5de8"
     }
   ],
   "avancements": [
@@ -469,7 +488,8 @@
       "echelle": "Echelle A",
       "echellon": "Echelon 1",
       "dateEffet": "2023-10-01",
-      "idPersonnel": 1
+      "idPersonnel": 1,
+      "id": "4d9e"
     },
     {
       "nature": "Titularisation",
@@ -479,7 +499,8 @@
       "echelle": "Echelle B",
       "echellon": "Echelon 2",
       "dateEffet": "2024-01-01",
-      "idPersonnel": 2
+      "idPersonnel": 2,
+      "id": "24be"
     },
     {
       "nature": "Nominative",
@@ -489,7 +510,8 @@
       "echelle": "Echelle C",
       "echellon": "Echelon 3",
       "dateEffet": "2024-04-01",
-      "idPersonnel": 3
+      "idPersonnel": 3,
+      "id": "cd73"
     },
     {
       "nature": "Avancement",
@@ -499,7 +521,8 @@
       "echelle": "Echelle A",
       "echellon": "Echelon 2",
       "dateEffet": "2023-12-01",
-      "idPersonnel": 4
+      "idPersonnel": 4,
+      "id": "2565"
     },
     {
       "nature": "Bonification",
@@ -509,7 +532,8 @@
       "echelle": "Echelle B",
       "echellon": "Echelon 3",
       "dateEffet": "2024-02-01",
-      "idPersonnel": 5
+      "idPersonnel": 5,
+      "id": "d921"
     },
     {
       "nature": "Reclassement",
@@ -519,7 +543,8 @@
       "echelle": "Echelle C",
       "echellon": "Echelon 4",
       "dateEffet": "2024-05-01",
-      "idPersonnel": 6
+      "idPersonnel": 6,
+      "id": "f034"
     },
     {
       "nature": "Sanction",
@@ -529,7 +554,8 @@
       "echelle": "Echelle A",
       "echellon": "Echelon 3",
       "dateEffet": "2024-01-01",
-      "idPersonnel": 7
+      "idPersonnel": 7,
+      "id": "3ec5"
     },
     {
       "nature": "Decoration",
@@ -539,7 +565,8 @@
       "echelle": "Echelle B",
       "echellon": "Echelon 4",
       "dateEffet": "2024-03-01",
-      "idPersonnel": 8
+      "idPersonnel": 8,
+      "id": "7667"
     },
     {
       "nature": "Demission",
@@ -548,7 +575,8 @@
       "grade": "Grade 3",
       "echellon": "Echelon 5",
       "dateEffet": "2024-06-01",
-      "idPersonnel": 9
+      "idPersonnel": 9,
+      "id": "6981"
     },
     {
       "nature": "Retraite",
@@ -558,7 +586,8 @@
       "echelle": "Echelle A",
       "echellon": "Echelon 4",
       "dateEffet": "2024-02-01",
-      "idPersonnel": 10
+      "idPersonnel": 10,
+      "id": "8226"
     },
     {
       "nature": "Deces",
@@ -568,59 +597,70 @@
       "echelle": "Echelle B",
       "echellon": "Echelon 5",
       "dateEffet": "2024-04-01",
-      "idPersonnel": 1
+      "idPersonnel": 1,
+      "id": "df9d"
     }
   ],
   "dossiers": [
     {
       "nom": "Dossier 1",
       "date": "2024-05-17",
-      "observation": "Aucune observation"
+      "observation": "Aucune observation",
+      "id": "502e"
     },
     {
       "nom": "Projet X",
       "date": "2023-01-10",
-      "observation": "En cours de réalisation"
+      "observation": "En cours de réalisation",
+      "id": "11f8"
     },
     {
       "nom": "Rapport annuel",
       "date": "2022-12-31",
-      "observation": " soumis"
+      "observation": " soumis",
+      "id": "9a59"
     },
     {
       "nom": "Planification 2025",
       "date": "2023-11-20",
-      "observation": "Approuvé"
+      "observation": "Approuvé",
+      "id": "a697"
     },
     {
       "nom": "Dossier urgent",
       "date": "2024-05-15",
-      "observation": "A traiter en priorité"
+      "observation": "A traiter en priorité",
+      "id": "5d59"
     },
     {
       "nom": "Données clients",
       "date": "2024-04-10",
-      "observation": "Confidentiel"
+      "observation": "Confidentiel",
+      "id": "298d"
     },
     {
       "nom": "Facturation",
       "date": "2024-05-12",
-      "observation": "En attente de paiement"
+      "observation": "En attente de paiement",
+      "id": "05bd"
     },
     {
       "nom": "Contrat de travail",
       "date": "2023-09-01",
-      "observation": "Signé"
+      "observation": "Signé",
+      "id": "0076"
     },
     {
       "nom": "Archives",
       "date": "2022-01-01",
-      "observation": "A conserver"
+      "observation": "A conserver",
+      "id": "53b2"
     },
     {
       "nom": "Recherche et développement",
       "date": "2024-03-14",
-      "observation": "En attente de financement"
+      "observation": "En attente de financement",
+      "id": "897b"
     }
   ],
   "mobilites": [
@@ -633,7 +673,8 @@
       "moughataa": "Moughataa 1",
       "ecole": "Ecole 1",
       "notepedagogique": "17/20",
-      "dateEffet": "2024-05-12"
+      "dateEffet": "2024-05-12",
+      "id": "bdfb"
     },
     {
       "matricule": "MAT-1002",
@@ -644,7 +685,8 @@
       "moughataa": "Moughataa 2",
       "ecole": "Ecole 2",
       "notepedagogique": "19/20",
-      "dateEffet": "2024-05-07"
+      "dateEffet": "2024-05-07",
+      "id": "5d9f"
     },
     {
       "matricule": "MAT-1003",
@@ -655,7 +697,8 @@
       "moughataa": "Moughataa 3",
       "ecole": "Ecole 3",
       "notepedagogique": "15/20",
-      "dateEffet": "2024-05-15"
+      "dateEffet": "2024-05-15",
+      "id": "9026"
     },
     {
       "matricule": "MAT-1004",
@@ -666,7 +709,8 @@
       "moughataa": "Moughataa 4",
       "ecole": "Ecole 4",
       "notepedagogique": "18/20",
-      "dateEffet": "2024-05-02"
+      "dateEffet": "2024-05-02",
+      "id": "826d"
     },
     {
       "matricule": "MAT-1005",
@@ -677,7 +721,8 @@
       "moughataa": "Moughataa 5",
       "ecole": "Ecole 5",
       "notepedagogique": "20/20",
-      "dateEffet": "2024-05-20"
+      "dateEffet": "2024-05-20",
+      "id": "8e92"
     },
     {
       "matricule": "MAT-1006",
@@ -688,7 +733,8 @@
       "moughataa": "Moughataa 6",
       "ecole": "Ecole 6",
       "notepedagogique": "12/20",
-      "dateEffet": "2024-05-11"
+      "dateEffet": "2024-05-11",
+      "id": "50b6"
     },
     {
       "matricule": "MAT-1007",
@@ -699,7 +745,8 @@
       "moughataa": "Moughataa 7",
       "ecole": "Ecole 7",
       "notepedagogique": "16/20",
-      "dateEffet": "2024-05-18"
+      "dateEffet": "2024-05-18",
+      "id": "77fb"
     },
     {
       "matricule": "MAT-1008",
@@ -710,7 +757,8 @@
       "moughataa": "Moughataa 8",
       "ecole": "Ecole 8",
       "notepedagogique": "17/20",
-      "dateEffect": "2024-05-09"
+      "dateEffect": "2024-05-09",
+      "id": "519e"
     }
   ],
   "conges": [
@@ -722,7 +770,8 @@
       "autorisation": "Demande en cours",
       "raison": "Congé de maladie",
       "motif": "",
-      "signataire": ""
+      "signataire": "",
+      "id": "3be0"
     },
     {
       "matricule": "10002",
@@ -732,7 +781,8 @@
       "autorisation": "Demande rejetée",
       "raison": "Congés payés",
       "motif": "Période de forte activité, effectifs insuffisants",
-      "signataire": "Directeur des Ressources Humaines"
+      "signataire": "Directeur des Ressources Humaines",
+      "id": "4c49"
     },
     {
       "matricule": "10003",
@@ -742,7 +792,8 @@
       "autorisation": "Demande acceptée",
       "raison": "Disponibilité",
       "motif": "",
-      "signataire": "Directeur des Ressources Humaines"
+      "signataire": "Directeur des Ressources Humaines",
+      "id": "408d"
     }
   ],
   "remunerations": [
@@ -896,7 +947,8 @@
       "dateFin": "2024-05-25",
       "etat": "En cours",
       "nombredepersonne": 3,
-      "type": "Formation"
+      "type": "Formation",
+      "id": "4d44"
     },
     {
       "matricule": "ASSU-1002",
@@ -906,7 +958,8 @@
       "dateFin": "2024-05-17",
       "etat": "Terminée",
       "nombredepersonne": 5,
-      "type": "Audit"
+      "type": "Audit",
+      "id": "31d3"
     },
     {
       "matricule": "ASSU-1003",
@@ -916,7 +969,8 @@
       "dateFin": "2024-05-20",
       "etat": "Planifiée",
       "nombredepersonne": 1,
-      "type": "Intervention"
+      "type": "Intervention",
+      "id": "41de"
     },
     {
       "matricule": "ASSU-1004",
@@ -926,7 +980,8 @@
       "dateFin": "2024-05-22",
       "etat": "En attente",
       "nombredepersonne": 2,
-      "type": "Evaluation"
+      "type": "Evaluation",
+      "id": "fd6e"
     },
     {
       "matricule": "ASSU-1005",
@@ -936,7 +991,8 @@
       "dateFin": "2024-05-16",
       "etat": "Terminée",
       "nombredepersonne": 4,
-      "type": "Installation"
+      "type": "Installation",
+      "id": "d736"
     },
     {
       "matricule": "ASSU-1006",
@@ -946,7 +1002,8 @@
       "dateFin": "2024-05-24",
       "etat": "En cours",
       "nombredepersonne": 1,
-      "type": "Maintenance"
+      "type": "Maintenance",
+      "id": "1cd5"
     },
     {
       "matricule": "ASSU-1007",
@@ -956,7 +1013,8 @@
       "dateFin": "2024-05-18",
       "etat": "Planifiée",
       "nombredepersonne": 3,
-      "type": "Etude"
+      "type": "Etude",
+      "id": "82e4"
     },
     {
       "matricule": "ASSU-1008",
@@ -966,7 +1024,8 @@
       "dateFin": "2024-05-21",
       "etat": "En attente",
       "nombredepersonne": 2,
-      "type": "Recherche"
+      "type": "Recherche",
+      "id": "57a6"
     },
     {
       "matricule": "ASSU-1009",
@@ -976,12 +1035,13 @@
       "dateFin": "2024-05-16",
       "etat": "Terminée",
       "nombredepersonne": 4,
-      "type": "Développement"
+      "type": "Développement",
+      "id": "c640"
     }
   ],
   "couriels": [
     {
-      "id": 1,
+      "id": "1",
       "libelle": "Mise à jour importante",
       "type": "Notification",
       "source": "Système",
@@ -998,7 +1058,7 @@
       "se": "IT"
     },
     {
-      "id": 2,
+      "id": "2",
       "libelle": "Nouveau rapport disponible",
       "type": "Rapport",
       "source": "Service des ventes",
@@ -1014,7 +1074,7 @@
       "se": "Marketing"
     },
     {
-      "id": 3,
+      "id": "3",
       "libelle": "Demande d'approbation",
       "type": "Requête",
       "source": "Département RH",
@@ -1031,7 +1091,7 @@
       "se": "RH"
     },
     {
-      "id": 4,
+      "id": "4",
       "libelle": "Invitation à la réunion",
       "type": "Événement",
       "source": "Calendrier",
@@ -1047,7 +1107,7 @@
       "se": ""
     },
     {
-      "id": 5,
+      "id": "5",
       "libelle": "Alerte de sécurité",
       "type": "Avertissement",
       "source": "Sécurité informatique",
@@ -1064,7 +1124,7 @@
       "se": "Informatique"
     },
     {
-      "id": 6,
+      "id": "6",
       "libelle": "Facture en attente de paiement",
       "type": "Facture",
       "source": "Comptabilité",
@@ -1079,10 +1139,9 @@
       "numDoc": "123456",
       "annotation": "Veuillez effectuer le paiement dans les plus brefs délais.",
       "se": "Comptabilité"
-
     },
     {
-      "id": 7,
+      "id": "7",
       "libelle": "Nouveau projet à valider",
       "type": "Projet",
       "source": "Service des ventes",
@@ -1099,7 +1158,7 @@
       "se": "Marketing"
     },
     {
-      "id": 8,
+      "id": "8",
       "libelle": "Demande de congé",
       "type": "Requête",
       "source": "Collaborateur",

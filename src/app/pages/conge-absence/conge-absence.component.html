@@ -74,7 +74,7 @@
     <ng-template pTemplate="body" let-dmd>
       <tr>
         <td> {{ dmd.matricule }}</td>
-        <td>{{ dmd.nometprenom }}</td>
+        <td>{{ dmd.nomPrenom }}</td>
         <td> {{ dmd.raison }}</td>
         <td> {{dmd.dateEffet }} </td>
         <td> {{ dmd.intervalleConge }}</td>
@@ -192,33 +192,44 @@
 >
   <ng-template pTemplate="content">
     <form [formGroup]="formDemande">
-        <div class="field">
-          <label for="matricule">Matricule</label>
-          <input
-            type="text"
-            pInputText
-            id="matricule"
-            placeholder="Matricule"
-            formControlName="matricule"
-            required
-            autofocus />
-          <mrt-form-validators [entityField]="'matricule'" [formGroup]="formDemande"></mrt-form-validators>
-        </div>
-        <div class="field">
-          <label for="raison">Raison</label>
-          <p-dropdown
-            [options]="raison"
-            id="raison"
-            formControlName="raison"
-            [filter]="true"
-            [showClear]="true"
-            appendTo="body"
-            placeholder="Selectionner la raison"
-          >
-            <mrt-form-validators [entityField]="'raison'" [formGroup]="formDemande"></mrt-form-validators>
-          </p-dropdown>
-        </div>
-        <div class="p-fluid p-formgrid grid">
+        <div class="grid">
+          <div class="field col-12">
+            <label for="matricule">Matricule</label>
+            <input
+              type="text"
+              pInputText
+              id="matricule"
+              placeholder="Matricule"
+              formControlName="matricule"
+              required/>
+            <mrt-form-validators [entityField]="'matricule'" [formGroup]="formDemande"></mrt-form-validators>
+          </div>
+          <div class="field col-12">
+            <label for="nomPrenom">Nom Prenom</label>
+            <input
+              type="text"
+              pInputText
+              id="nomPrenom"
+              placeholder="nom et prenom"
+              formControlName="nomPrenom"
+              required/>
+            <mrt-form-validators [entityField]="'nomPrenom'" [formGroup]="formDemande"></mrt-form-validators>
+          </div>
+          <div class="field col-12">
+            <label for="raison">Raison</label>
+            <p-dropdown
+              [options]="raison"
+              id="raison"
+              formControlName="raison"
+              [filter]="true"
+              [showClear]="true"
+              appendTo="body"
+              placeholder="Selectionner la raison"
+            >
+              <mrt-form-validators [entityField]="'raison'" [formGroup]="formDemande"></mrt-form-validators>
+            </p-dropdown>
+          </div>
+
           <div class="field col-12 md:col-6">
             <label for="dateEffet">Date Effet</label>
             <p-calendar
@@ -242,12 +253,11 @@
               [showButtons]="true"
               inputId="min-buttons"
               [min]="1"
-              formControlName="nombrejr"
+              formControlName="nombreJr"
               [useGrouping]="false"/>
-            <mrt-form-validators [entityField]="'nombrejr'" [formGroup]="formDemande"></mrt-form-validators>
+            <mrt-form-validators [entityField]="'nombreJr'" [formGroup]="formDemande"></mrt-form-validators>
           </div>
         </div>
-
     </form>
 
   </ng-template>
@@ -258,46 +268,46 @@
   </ng-template>
 </p-dialog>
 
-<!--<p-dialog-->
-<!--  [(visible)]="showFormActionDialog"-->
-<!--  [style]="{ width: '50vw', height: 'auto'}"-->
-<!--  header="Conge Formulaire"-->
-<!--  (onHide)="cancel()"-->
-<!--  [modal]="true"-->
-<!--  [draggable]="false"-->
-<!--  [resizable]="false"-->
-<!--  cdk-scrollable-->
-<!--  styleClass="p-fluid"-->
-<!--&gt;-->
-<!--  <form >-->
-<!--    <div class="field">-->
-<!--      <label for="signataire">Signataire</label>-->
-<!--      <input-->
-<!--        type="text"-->
-<!--        pInputText-->
-<!--        id="signataire"-->
-<!--        required-->
-<!--        formControlName="signataire"-->
-<!--        autofocus />-->
-<!--&lt;!&ndash;      <mrt-form-validators [entityField]="'signataire'" [formGroup]="formDemande"></mrt-form-validators>&ndash;&gt;-->
-<!--    </div>-->
-<!--    <div class="field">-->
-<!--      <label for="autorisation">Autorisation</label>-->
-<!--      <p-dropdown-->
-<!--        [options]="autorisation"-->
-<!--        id="autorisation"-->
-<!--        formControlName="autorisation"-->
-<!--        placeholder="Selectionner la reponse"-->
-<!--      />-->
-<!--&lt;!&ndash;      <mrt-form-validators [entityField]="'autorisation'" [formGroup]="formDemande"></mrt-form-validators>&ndash;&gt;-->
-<!--    </div>-->
-<!--    <div class="field">-->
-<!--      <label for="motif">Motif</label>-->
-<!--      <textarea id="motif" rows="5" cols="30" placeholder="Motif" pInputTextarea></textarea>-->
-<!--    </div>-->
-<!--  </form>-->
-<!--  <ng-template pTemplate="footer">-->
-<!--    <button pButton pRipple class="p-button-primary flex-1" label="Enregistrer" icon="pi pi-fw pi-check" ></button>-->
-<!--    <button pButton pRipple class="p-button-danger flex-1 p-button-outlined" label="Annuler" icon="pi pi-fw pi-times" ></button>-->
-<!--  </ng-template>-->
-<!--</p-dialog>-->
+<p-dialog
+  [(visible)]="showFormActionDialog"
+  [style]="{ width: '50vw', height: 'auto'}"
+  header="Conge Formulaire"
+  (onHide)="cancel()"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  cdk-scrollable
+  styleClass="p-fluid"
+>
+  <form [formGroup]="formDemandeProcessing">
+    <div class="field">
+      <label for="signataire">Signataire</label>
+      <input
+        type="text"
+        pInputText
+        id="signataire"
+        required
+        formControlName="signataire"
+        autofocus />
+      <mrt-form-validators [entityField]="'signataire'" [formGroup]="formDemandeProcessing"></mrt-form-validators>
+    </div>
+    <div class="field">
+      <label for="autorisation">Autorisation</label>
+      <p-dropdown
+        [options]="autorisation"
+        id="autorisation"
+        formControlName="autorisation"
+        placeholder="Selectionner la reponse"
+      />
+      <mrt-form-validators [entityField]="'autorisation'" [formGroup]="formDemandeProcessing"></mrt-form-validators>
+    </div>
+    <div class="field">
+      <label for="motif">Motif</label>
+      <textarea id="motif" rows="5" cols="30" placeholder="Motif" pInputTextarea formControlName="motif"></textarea>
+    </div>
+  </form>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple class="p-button-primary flex-1" label="Enregistrer" icon="pi pi-fw pi-check" [disabled]="formDemandeProcessing.invalid" (click)="onSubmit()"></button>
+    <button pButton pRipple class="p-button-danger flex-1 p-button-outlined" label="Annuler" icon="pi pi-fw pi-times" (click)="cancel()"></button>
+  </ng-template>
+</p-dialog>

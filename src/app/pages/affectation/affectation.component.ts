@@ -63,7 +63,6 @@ export class AffectationComponent implements OnInit{
 
   ngOnInit(): void {
     this.getAllAffections();
-
   }
 
   //Methode pour afficher le formulaire d'ajout

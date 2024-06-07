@@ -1,7 +1,7 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {Cols} from "../../core/data/primeng/primeng.model";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {DemandeConge} from "../../core/data/conge/conge_absence.model";
+import {DemandeAutorisation, DemandeConge} from "../../core/data/conge/conge_absence.model";
 import {CongeService} from "../../core/data/conge/conge.service";
 import {Table, TableModule} from "primeng/table";
 import {ToastModule} from "primeng/toast";
@@ -65,6 +65,7 @@ export class CongeAbsenceComponent implements OnInit{
   showFormActionDialog = false;
   rangeDates: Date[] | undefined;
   formDemande!: FormGroup;
+  formDemandeProcessing!: FormGroup;
   fb = inject(FormBuilder);
   action = 'Add';
   selectedDemande: DemandeConge = {} as DemandeConge;
@@ -81,7 +82,6 @@ export class CongeAbsenceComponent implements OnInit{
   ];
   autorisation = [
     'Demande acceptée',
-    'Demande en cours',
     'Demande refusée',
     'Demande annulée'
   ];
@@ -94,12 +94,15 @@ export class CongeAbsenceComponent implements OnInit{
   ngOnInit(): void {
     this.formDemande = this.fb.group({
       matricule: this.fb.control('', [Validators.required]),
+      nomPrenom: this.fb.control('', [Validators.required]),
       raison: this.fb.control('', [Validators.required]),
       dateEffet: this.fb.control('', [Validators.required]),
-      nombrejr: this.fb.control('', [Validators.required]),
-      // autorisation: this.fb.control('', [Validators.required]),
-      // motif: this.fb.control('', [Validators.required]),
-      // signataire: this.fb.control('', [Validators.required])
+      nombreJr: this.fb.control('', [Validators.required])
+    });
+    this.formDemandeProcessing = this.fb.group({
+       autorisation: this.fb.control('', [Validators.required]),
+       motif: this.fb.control(''),
+       signataire: this.fb.control('', [Validators.required])
     });
 
     this.getAllDemandeConge();
@@ -126,7 +129,7 @@ export class CongeAbsenceComponent implements OnInit{
       return 'success'
     }
     else if(autorisation === "Demande en cours"){
-      return 'primary'
+      return 'info'
     }
     return 'danger'
   }
@@ -161,27 +164,63 @@ export class CongeAbsenceComponent implements OnInit{
     this.selectedDemande = dmd;
   }
 
-
   // Methode pour le formulaire
   onSubmit() {
-    if(this.action === 'Add') {
-      this.congeService.addDemande(this.formDemande.value).subscribe(next => {
+    const data = this.getFromData();
+    const dataProcessing = this.getProcessingFormData();
+    switch (this.action){
+      case 'Add':
+        this.createDemande(data);
+        break;
+      case 'Edit':
+        this.updateDemande(this.selectedDemande.id, data);
+        break;
+      default:
+        this.processingDemande(dataProcessing);
+        break;
+    }
+  }
+
+  createDemande(demandeConge: DemandeConge){
+    this.congeService.addDemande(demandeConge).subscribe(next => {
         this.getAllDemandeConge();
         this.messageService.add({severity:'success', summary:'Succès', detail:'Demande ajoutée avec succès'});
         this.showFormVisibility = false;
         this.formDemande.reset();
       },
-        error => {
-          this.messageService.add({severity:'error', summary:'Erreur', detail:'Erreur lors de l\'ajout de la demande'});
-        });
-    }else if(this.action === 'Edit') {
-      this.congeService.updateDemande(this.selectedDemande.id, this.selectedDemande).subscribe(() => {
-        this.getAllDemandeConge();
-        this.messageService.add({severity:'success', summary:'Succès', detail:'Demande modifiée avec succès'});
-        this.showFormVisibility = false;
-        this.formDemande.reset();
+      error => {
+        this.messageService.add({severity:'error', summary:'Erreur', detail:'Erreur lors de l\'ajout de la demande'});
       });
+  }
 
+  updateDemande(id:number, demandeConge: DemandeConge){
+    this.congeService.updateDemande(this.selectedDemande.id, this.selectedDemande).subscribe(() => {
+      this.getAllDemandeConge();
+      this.messageService.add({severity:'success', summary:'Succès', detail:'Demande modifiée avec succès'});
+      this.showFormVisibility = false;
+      this.formDemande.reset();
+    });
+  }
+
+  // Recuperer les elements du formulaire
+  private getFromData():DemandeConge{
+    const formData = this.formDemande.value;
+    return <DemandeConge>{
+      matricule: formData.matricule,
+      nomPrenom: formData.nomPrenom,
+      raison: formData.raison,
+      dateEffet: formData.dateEffet,
+      intervalleConge: formData.nombreJr,
+      autorisation: 'Demande en cours'
+    }
+  }
+
+  private getProcessingFormData():DemandeConge{
+    const formData = this.formDemandeProcessing.value;
+    return <DemandeConge>{
+      autorisation: formData.autorisation,
+      motif: formData.motif,
+      signataire: formData.signataire
     }
   }
 
@@ -192,5 +231,17 @@ export class CongeAbsenceComponent implements OnInit{
     this.action = 'Add';
     this.selectedDemande = {} as DemandeConge;
   }
+
+  processingDemande(demandeConge:DemandeConge) {
+    this.congeService.updateDemande(this.selectedDemande.id, demandeConge).subscribe(() => {
+      this.getAllDemandeConge();
+      this.messageService.add({severity:'success', summary:'Succès', detail:'Demande taiter avec succès'});
+      this.showFormActionDialog = false;
+      this.formDemandeProcessing.reset();
+    },
+      error => {
+        this.messageService.add({severity:'error', summary:'Erreur', detail:'Erreur lors du traitement de la demande'});
+      }
+  )};
 
 }

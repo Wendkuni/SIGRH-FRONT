@@ -764,18 +764,18 @@
   "conges": [
     {
       "matricule": "10001",
-      "nometprenom": "Pierre Dubois",
+      "nomPrenom": "Pierre Dubois",
       "dateEffet": "2024-05-20",
       "intervalleConge": "2024-05-20 au 2024-05-24",
-      "autorisation": "Demande en cours",
+      "autorisation": "Demande refusée",
       "raison": "Congé de maladie",
-      "motif": "",
-      "signataire": "",
+      "motif": "Trop de demande acepter recement.",
+      "signataire": "Nienaba Jean Jacques",
       "id": "3be0"
     },
     {
       "matricule": "10002",
-      "nometprenom": "Sophie Lefèvre",
+      "nomPrenom": "Sophie Lefèvre",
       "dateEffet": "2024-06-10",
       "intervalleConge": "2024-06-10 au 2024-06-21",
       "autorisation": "Demande rejetée",
@@ -786,7 +786,7 @@
     },
     {
       "matricule": "10003",
-      "nometprenom": "Marie Martin",
+      "nomPrenom": "Marie Martin",
       "dateEffet": "2024-07-01",
       "intervalleConge": "2024-07-01 au 2024-12-31",
       "autorisation": "Demande acceptée",
@@ -794,6 +794,15 @@
       "motif": "",
       "signataire": "Directeur des Ressources Humaines",
       "id": "408d"
+    },
+    {
+      "id": "912a",
+      "matricule": "1013412",
+      "nomPrenom": "Nienaba Jean",
+      "raison": "Disponibilite",
+      "dateEffet": "2024-06-14T00:00:00.000Z",
+      "nombreJr": 5,
+      "autorisation": "Demande en cours"
     }
   ],
   "remunerations": [

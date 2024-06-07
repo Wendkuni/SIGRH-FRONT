@@ -24,7 +24,7 @@ export interface DemandeConge {
   // Intervalle de congé
   intervalleConge: string;
     // Autorisation de la demande
-  autorisation: DemandeAutorisation;
+  autorisation: string;
     // Raison de la demande
   raison: DemandeRaison;
     // Motif de la demande
@@ -33,7 +33,7 @@ export interface DemandeConge {
   signataire: string;
 }
 
-enum DemandeAutorisation {
+export enum DemandeAutorisation {
   EnCours = "Demande en cours",
   Rejetee = "Demande rejetée",
   Refusee = "Demande refusée"

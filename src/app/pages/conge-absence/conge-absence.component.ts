@@ -1,7 +1,7 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {Cols} from "../../core/data/primeng/primeng.model";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {DemandeAutorisation, DemandeConge} from "../../core/data/conge/conge_absence.model";
+import { DemandeConge} from "../../core/data/conge/conge_absence.model";
 import {CongeService} from "../../core/data/conge/conge.service";
 import {Table, TableModule} from "primeng/table";
 import {ToastModule} from "primeng/toast";
@@ -38,12 +38,12 @@ import {MessageService} from "primeng/api";
     TooltipModule,
     DialogModule,
     CdkScrollable,
-    ReactiveFormsModule,
     FormValidatorsComponent,
     DropdownModule,
     CalendarModule,
     InputNumberModule,
-    InputTextareaModule
+    InputTextareaModule,
+    ReactiveFormsModule
   ],
   templateUrl: './conge-absence.component.html',
   providers: [MessageService]
@@ -63,13 +63,11 @@ export class CongeAbsenceComponent implements OnInit{
   ];
   showFormVisibility = false;
   showFormActionDialog = false;
-  rangeDates: Date[] | undefined;
   formDemande!: FormGroup;
   formDemandeProcessing!: FormGroup;
   fb = inject(FormBuilder);
   action = 'Add';
   selectedDemande: DemandeConge = {} as DemandeConge;
-  selectedRaison: string | null = null;
   raison = [
     'Absence',
     'Congé',

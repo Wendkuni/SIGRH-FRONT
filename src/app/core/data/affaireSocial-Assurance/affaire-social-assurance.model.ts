@@ -38,3 +38,15 @@ export interface Assurance {
     // Type d'assurance
     type: string;
 }
+
+//  import {PersonnelResponse} from "../personals/personnel.model";
+//
+// export interface Assurance {
+//    idAssurances: number;
+//    personnel: PersonnelResponse;
+//    typeAssurance: string;
+//    liblAssurance: string;
+//    debutAssurance: Date;
+//    finAssurance: Date;
+//    etatAct: string;
+//  }

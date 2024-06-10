@@ -21,6 +21,7 @@ import {CalendarModule} from "primeng/calendar";
 import {InputNumberModule} from "primeng/inputnumber";
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {MessageService} from "primeng/api";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'mrt-conge-absence',
@@ -43,7 +44,8 @@ import {MessageService} from "primeng/api";
     CalendarModule,
     InputNumberModule,
     InputTextareaModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterLink
   ],
   templateUrl: './conge-absence.component.html',
   providers: [MessageService]

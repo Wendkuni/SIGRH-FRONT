@@ -21,28 +21,30 @@ import {CalendarModule} from "primeng/calendar";
 import {MessageService} from "primeng/api";
 import {TabViewModule} from "primeng/tabview";
 import {UpperCasePipe} from "@angular/common";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'mrt-remuneration',
   standalone: true,
-  imports: [
-    ToastModule,
-    CardModule,
-    ToolbarModule,
-    ButtonModule,
-    RippleModule,
-    TableModule,
-    InputTextModule,
-    TooltipModule,
-    DialogModule,
-    ReactiveFormsModule,
-    DropdownModule,
-    FormValidatorsComponent,
-    InputNumberModule,
-    CalendarModule,
-    TabViewModule,
-    UpperCasePipe
-  ],
+    imports: [
+        ToastModule,
+        CardModule,
+        ToolbarModule,
+        ButtonModule,
+        RippleModule,
+        TableModule,
+        InputTextModule,
+        TooltipModule,
+        DialogModule,
+        ReactiveFormsModule,
+        DropdownModule,
+        FormValidatorsComponent,
+        InputNumberModule,
+        CalendarModule,
+        TabViewModule,
+        UpperCasePipe,
+        RouterLink
+    ],
   templateUrl: './remuneration.component.html',
   styleUrl: './remuneration.component.scss',
   providers: [MessageService]

@@ -19,6 +19,7 @@ import {DropdownModule} from "primeng/dropdown";
 import {InputNumberModule} from "primeng/inputnumber";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {FormValidatorsComponent} from "../../shared/form-validators/form-validators.component";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'mrt-affaire-social-assurance',
@@ -38,7 +39,8 @@ import {FormValidatorsComponent} from "../../shared/form-validators/form-validat
     DropdownModule,
     InputNumberModule,
     ReactiveFormsModule,
-    FormValidatorsComponent
+    FormValidatorsComponent,
+    RouterLink
   ],
   templateUrl: './affaire-social-assurance.component.html',
   styleUrl: './affaire-social-assurance.component.scss',

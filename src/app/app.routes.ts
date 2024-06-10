@@ -49,6 +49,10 @@ export const routes: Routes = [
       {
         path: 'fonction-list',
         loadComponent: () => import('./pages/fonction-list/fonction-list.component').then(item => item.FonctionListComponent)
+      },
+      {
+        path: 'stats',
+        loadComponent: () => import('./pages/personnel/stats/stats.component').then(item => item.StatsComponent)
       }
   ]
   },

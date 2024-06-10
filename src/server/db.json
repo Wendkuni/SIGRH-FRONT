@@ -808,7 +808,7 @@
   "remunerations": [
     {
       "id": "1",
-      "nometprenom": "Alice Dupont",
+      "nomPrenom": "Alice Dupont",
       "matricule": "12345",
       "fonction": "Ingénieur",
       "netapayer": 4500,
@@ -822,7 +822,7 @@
     },
     {
       "id": "2",
-      "nometprenom": "Bob Martin",
+      "nomPrenom": "Bob Martin",
       "matricule": "67890",
       "fonction": "Technicien",
       "netapayer": 3200,
@@ -836,7 +836,7 @@
     },
     {
       "id": "3",
-      "nometprenom": "Claire Lambert",
+      "nomPrenom": "Claire Lambert",
       "matricule": "54321",
       "fonction": "Comptable",
       "netapayer": 3800,
@@ -850,7 +850,7 @@
     },
     {
       "id": "4",
-      "nometprenom": "David Leclerc",
+      "nomPrenom": "David Leclerc",
       "matricule": "98765",
       "fonction": "Analyste",
       "netapayer": 4200,
@@ -864,7 +864,7 @@
     },
     {
       "id": "5",
-      "nometprenom": "Élise Renaud",
+      "nomPrenom": "Élise Renaud",
       "matricule": "13579",
       "fonction": "Développeur",
       "netapayer": 3800,
@@ -878,7 +878,7 @@
     },
     {
       "id": "6",
-      "nometprenom": "Fabien Martin",
+      "nomPrenom": "Fabien Martin",
       "matricule": "24680",
       "fonction": "Chef de projet",
       "netapayer": 5000,
@@ -892,7 +892,7 @@
     },
     {
       "id": "7",
-      "nometprenom": "Gisèle Dubois",
+      "nomPrenom": "Gisèle Dubois",
       "matricule": "80246",
       "fonction": "Architecte",
       "netapayer": 5500,
@@ -906,7 +906,7 @@
     },
     {
       "id": "8",
-      "nometprenom": "Hugo Lefebvre",
+      "nomPrenom": "Hugo Lefebvre",
       "matricule": "35791",
       "fonction": "Responsable RH",
       "netapayer": 4800,
@@ -920,7 +920,7 @@
     },
     {
       "id": "9",
-      "nometprenom": "Inès Moreau",
+      "nomPrenom": "Inès Moreau",
       "matricule": "46802",
       "fonction": "Consultant",
       "netapayer": 4200,
@@ -934,7 +934,7 @@
     },
     {
       "id": "10",
-      "nometprenom": "Jérôme Petit",
+      "nomPrenom": "Jérôme Petit",
       "matricule": "67913",
       "fonction": "Ingénieur",
       "netapayer": 4600,
@@ -949,61 +949,6 @@
   ],
   "assurances": [
     {
-      "matricule": "ASSU-1002",
-      "nomPrenom": "Nom Prenom 2",
-      "designation": "Contrat Assurance 2",
-      "dateDebut": "2024-05-10",
-      "dateFin": "2024-05-17",
-      "etat": "Terminée",
-      "nombrePersonne": 5,
-      "type": "Audit",
-      "id": "31d3"
-    },
-    {
-      "matricule": "ASSU-1003",
-      "nomPrenom": "Nom Prenom 3",
-      "designation": "Contrat Assurance 3",
-      "dateDebut": "2024-05-07",
-      "dateFin": "2024-05-20",
-      "etat": "Planifiée",
-      "nombrePersonne": 1,
-      "type": "Intervention",
-      "id": "41de"
-    },
-    {
-      "matricule": "ASSU-1004",
-      "nomPrenom": "Nom Prenom 4",
-      "designation": "Contrat Assurance 4",
-      "dateDebut": "2024-05-12",
-      "dateFin": "2024-05-22",
-      "etat": "En attente",
-      "nombrePersonne": 2,
-      "type": "Evaluation",
-      "id": "fd6e"
-    },
-    {
-      "matricule": "ASSU-1005",
-      "nomPrenom": "Nom Prenom 5",
-      "designation": "Contrat Assurance 5",
-      "dateDebut": "2024-05-09",
-      "dateFin": "2024-05-16",
-      "etat": "Terminée",
-      "nombrePersonne": 4,
-      "type": "Installation",
-      "id": "d736"
-    },
-    {
-      "matricule": "ASSU-1006",
-      "nomPrenom": "Nom Prenom 6",
-      "designation": "Contrat Assurance 6",
-      "dateDebut": "2024-05-14",
-      "dateFin": "2024-05-24",
-      "etat": "En cours",
-      "nombrePersonne": 1,
-      "type": "Maintenance",
-      "id": "1cd5"
-    },
-    {
       "matricule": "ASSU-1007",
       "nomPrenom": "Nom Prenom 7",
       "designation": "Contrat Assurance 7",
@@ -1015,28 +960,6 @@
       "id": "82e4"
     },
     {
-      "matricule": "ASSU-1008",
-      "nomPrenom": "Nom Prenom 8",
-      "designation": "Contrat Assurance 8",
-      "dateDebut": "2024-05-11",
-      "dateFin": "2024-05-21",
-      "etat": "En attente",
-      "nombrePersonne": 2,
-      "type": "Recherche",
-      "id": "57a6"
-    },
-    {
-      "matricule": "ASSU-1009",
-      "nomPrenom": "Nom Prenom 9",
-      "designation": "Contrat Assurance",
-      "dateDebut": "2024-05-06",
-      "dateFin": "2024-05-16",
-      "etat": "Terminée",
-      "nombrePersonne": 4,
-      "type": "Développement",
-      "id": "c640"
-    },
-    {
       "id": "0859",
       "matricule": "1013412",
       "nomPrenom": "Nienaba Jean Jacques",
@@ -1044,6 +967,17 @@
       "dateDebut": "2024-08-01T00:00:00.000Z",
       "dateFin": "2024-08-31T00:00:00.000Z",
       "etat": "En cours",
+      "nombrePersonne": 3,
+      "type": "Allocations familiales"
+    },
+    {
+      "id": "77bf",
+      "matricule": "1013412",
+      "nomPrenom": "Nienaba Jean Jacques",
+      "designation": "Allocation familiale",
+      "dateDebut": "2024-07-01T00:00:00.000Z",
+      "dateFin": "2024-09-30T00:00:00.000Z",
+      "etat": "En attente",
       "nombrePersonne": 3,
       "type": "Allocations familiales"
     }

@@ -35,16 +35,17 @@ export class AppMenuComponent implements OnInit {
                     {
                         label: 'Recrutement-Mobilité-Carrière',
                         icon: 'pi pi-fw pi-user',
-                        routerLink: ['/personnel'],
+                        routerLink: ['/personnel']
                     },
                     {
                         label: 'Congés et Absences',
                         icon: 'pi pi-fw pi-calendar',
-                        routerLink: ['/conge-absence'],
+                        routerLink: ['/conge-absence']
                     },
                     {
                         label: 'Sanctions-Recompenses',
-                        icon: 'pi pi-fw pi-wallet'
+                        icon: 'pi pi-fw pi-wallet',
+                      routerLink: ['/personnel']
                     },
                     {
                         label: 'Formations',
@@ -53,12 +54,12 @@ export class AppMenuComponent implements OnInit {
                     {
                         label: 'Remuneration',
                         icon: 'pi pi-fw pi-dollar',
-                        routerLink: ['/remuneration'],
+                        routerLink: ['/remuneration']
                     },
                     {
                         label: 'Affaires Sociales-Assurances',
                         icon: 'pi pi-fw pi-shield',
-                        routerLink: ['social-assurance'],
+                        routerLink: ['/social-assurance']
                     },
                     {
                         label: 'Courriels',
@@ -76,7 +77,7 @@ export class AppMenuComponent implements OnInit {
             {
               label: 'Fonction-list',
               icon: 'pi pi-fw pi-user',
-              routerLink: ['fonction-list'],
+              routerLink: ['fonction-list']
             }
           ]
         }

@@ -35,35 +35,91 @@ export class AppMenuComponent implements OnInit {
                     {
                         label: 'Recrutement-Mobilité-Carrière',
                         icon: 'pi pi-fw pi-user',
-                        routerLink: ['/personnel']
+                        items: [
+                          {
+                            label: 'Enregistrements',
+                            routerLink: ['/personnel']
+                          },
+                          {
+                            label: 'Etats',
+                            routerLink: ['/etats-personnel']
+                          }
+                        ]
                     },
                     {
                         label: 'Congés et Absences',
                         icon: 'pi pi-fw pi-calendar',
-                        routerLink: ['/conge-absence']
+                      items: [
+                        {
+                          label: 'Enregistrements',
+                          routerLink: ['/conge-absence']
+                        },
+                        {
+                          label: 'Etats'
+                        }
+                      ]
                     },
                     {
                         label: 'Sanctions-Recompenses',
                         icon: 'pi pi-fw pi-wallet',
-                      routerLink: ['/personnel']
+                      items: [
+                        {
+                          label: 'Enregistrements',
+                        },
+                        {
+                          label: 'Etats'
+                        }
+                      ]
                     },
                     {
                         label: 'Formations',
-                        icon: 'pi pi-fw pi-briefcase'
+                        icon: 'pi pi-fw pi-briefcase',
+                      items: [
+                        {
+                          label: 'Enregistrements'
+                        },
+                        {
+                          label: 'Etats'
+                        }
+                      ]
                     },
                     {
                         label: 'Remuneration',
                         icon: 'pi pi-fw pi-dollar',
-                        routerLink: ['/remuneration']
+                      items: [
+                        {
+                          label: 'Enregistrements',
+                          routerLink: ['/remuneration']
+                        },
+                        {
+                          label: 'Etats'
+                        }
+                      ]
                     },
                     {
                         label: 'Affaires Sociales-Assurances',
                         icon: 'pi pi-fw pi-shield',
-                        routerLink: ['/social-assurance']
+                      items: [
+                        {
+                          label: 'Enregistrements',
+                          routerLink: ['/social-assurance']
+                        },
+                        {
+                          label: 'Etats'
+                        }
+                      ]
                     },
                     {
                         label: 'Courriels',
-                        icon: 'pi pi-fw pi-at'
+                        icon: 'pi pi-fw pi-at',
+                      items: [
+                        {
+                          label: 'Enregistrements',
+                        },
+                        {
+                          label: 'Etats'
+                        }
+                      ]
                     },
                 ],
             },

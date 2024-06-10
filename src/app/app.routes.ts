@@ -51,8 +51,8 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/fonction-list/fonction-list.component').then(item => item.FonctionListComponent)
       },
       {
-        path: 'stats',
-        loadComponent: () => import('./pages/personnel/stats/stats.component').then(item => item.StatsComponent)
+        path: 'etats-personnel',
+        loadComponent: () => import('./pages/etats-personnel/etats-personnel.component').then(item => item.EtatsPersonnelComponent)
       }
   ]
   },

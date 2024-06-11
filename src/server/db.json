@@ -1117,5 +1117,159 @@
       "annotation": "",
       "se": "RH"
     }
+  ],
+  "statePersonnel": [
+    {
+      "matricule": "123456",
+      "nomPrenom": "Dupont Jean",
+      "region": "Île-de-France",
+      "direction": "Marketing",
+      "affectation": "Paris"
+    },
+    {
+      "matricule": "654321",
+      "nomPrenom": "Durand Léa",
+      "region": "Provence-Alpes-Côte d'Azur",
+      "direction": "Ressources Humaines",
+      "affectation": "Marseille"
+    },
+    {
+      "matricule": "789012",
+      "nomPrenom": "Rossi Alessandro",
+      "region": "Lombardie (Italie)",
+      "direction": "Vente",
+      "affectation": "Milan"
+    },
+    {
+      "matricule": "345678",
+      "nomPrenom": "Schmidt Anna",
+      "region": "Rhénanie-Palatinat (Allemagne)",
+      "direction": "Recherche et Développement",
+      "affectation": "Francfort-sur-le-Main"
+    },
+    {
+      "matricule": "901234",
+      "nomPrenom": "Suzuki Taro",
+      "region": "Kantō (Japon)",
+      "direction": "Production",
+      "affectation": "Tokyo"
+    },
+    {
+      "matricule": "567890",
+      "nomPrenom": "Khan Priya",
+      "region": "Delhi (Inde)",
+      "direction": "Finance",
+      "affectation": "New Delhi"
+    },
+    {
+      "matricule": "135792",
+      "nomPrenom": "Cohen David",
+      "region": "Tel Aviv (Israël)",
+      "direction": "Juridique",
+      "affectation": "Tel Aviv"
+    },
+    {
+      "matricule": "246803",
+      "nomPrenom": "Fernandez Maria",
+      "direction": "Direction Générale",
+      "affectation": "Paris"
+    },
+    {
+      "matricule": "802467",
+      "nomPrenom": "Wang Li",
+      "region": "Shanghai (Chine)",
+      "direction": "Marketing",
+      "affectation": "Shanghai"
+    },
+    {
+      "matricule": "479135",
+      "nomPrenom": "Garcia Miguel",
+      "region": "Andalousie (Espagne)",
+      "direction": "Commercial",
+      "affectation": "Séville"
+    }
+  ],
+  "statePersonnelDisponible": [
+    {
+      "matricule": "123456",
+      "nomPrenom": "Dupont Jean",
+      "disponible": true,
+      "actiforno": false,
+      "absent": false,
+      "conge": false
+    },
+    {
+      "matricule": "654321",
+      "nomPrenom": "Durand Léa",
+      "disponible": false,
+      "actiforno": true,
+      "absent": false,
+      "conge": false
+    },
+    {
+      "matricule": "789012",
+      "nomPrenom": "Rossi Alessandro",
+      "disponible": true,
+      "actiforno": false,
+      "absent": false,
+      "conge": true
+    },
+    {
+      "matricule": "345678",
+      "nomPrenom": "Schmidt Anna",
+      "disponible": false,
+      "actiforno": false,
+      "absent": true,
+      "conge": false
+    },
+    {
+      "matricule": "901234",
+      "nomPrenom": "鈴木 太郎 (Suzuki Taro)",
+      "disponible": true,
+      "actiforno": false,
+      "absent": false,
+      "conge": false
+    },
+    {
+      "matricule": "567890",
+      "nomPrenom": "Khan Priya",
+      "disponible": false,
+      "actiforno": true,
+      "absent": false,
+      "conge": false
+    },
+    {
+      "matricule": "135792",
+      "nomPrenom": "Cohen David",
+      "disponible": true,
+      "actiforno": false,
+      "absent": false,
+      "conge": false
+    },
+    {
+      "matricule": "246803",
+      "nomPrenom": "Fernandez Maria",
+      "disponible": false,
+      "actiforno": false,
+      "absent": true,
+      "conge": true
+    },
+    {
+      "matricule": "802467",
+      "nomPrenom": "Wang Li",
+      "disponible": true,
+      "actiforno": true,
+      "absent": false,
+      "conge": false
+    },
+    {
+      "matricule": "479135",
+      "nomPrenom": "Garcia Miguel",
+      "disponible": false,
+      "actiforno": false,
+      "absent": false,
+      "conge": false
+    }
   ]
+
 }

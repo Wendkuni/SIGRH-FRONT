@@ -2,6 +2,23 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import { PersonnelRequest, PersonnelResponse} from "./personnel.model";
 
+interface statPersonnel{
+  matricule:string;
+  nomPrenom:string;
+  region:string;
+  direction:string;
+  affectation:string;
+}
+
+interface statePersonnelDisponible{
+  matricule:string,
+  nomPrenom:string,
+  disponible:boolean,
+  actiforno:boolean,
+  absent:boolean,
+  conge:boolean
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,6 +33,14 @@ export class PersonnelService {
   // get all personnels
   getAllPersonnels(){
     return this.http.get<PersonnelResponse[]>(this.url);
+  }
+
+  getStatPersonnel(){
+    return this.http.get<statPersonnel[]>('http://localhost:3000/statePersonnel');
+  }
+
+  getPersonnelDisponible(){
+    return this.http.get<statePersonnelDisponible[]>('http://localhost:3000/statePersonnelDisponible');
   }
 
   // get personnel by id

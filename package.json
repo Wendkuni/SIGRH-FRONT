@@ -26,6 +26,8 @@
     "@ngrx/router-store": "^17.2.0",
     "@ngrx/store": "^17.2.0",
     "@txtextcontrol/tx-ng-document-editor": "^32.3.0",
+    "file-save": "^0.2.0",
+    "file-saver": "^2.0.5",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.8.2",
     "pdfmake": "^0.2.10",

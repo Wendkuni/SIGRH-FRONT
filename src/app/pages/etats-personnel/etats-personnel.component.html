@@ -1,8 +1,13 @@
 <p-card>
   <h2 class="text-center underline mb-5">ETATS PERSONNELS</h2>
 
-  <p-tabView>
-    <p-tabPanel   header="DREN">
+  <p-tabView >
+    <p-tabPanel header="Absent">
+    </p-tabPanel>
+    <p-tabPanel header="Actif"></p-tabPanel>
+    <p-tabPanel header="Conge"></p-tabPanel>
+    <p-tabPanel header="Annee Recrutement"></p-tabPanel>
+    <p-tabPanel header="Direction">
       <p-table
         [columns]="colDren"
         [value]="list"
@@ -52,7 +57,7 @@
                 class="font-weight-bold "
               >
                 {{ col.header }}
-                @if(col.header != 'Photo'){
+                @if (col.header != 'Photo') {
                   <p-sortIcon [field]="col.field"></p-sortIcon>
                 }
               </th>
@@ -85,7 +90,8 @@
         </ng-template>
       </p-table>
     </p-tabPanel>
-    <p-tabPanel header="DISPONIBILITE">
+    <p-tabPanel header="Disponible"></p-tabPanel>
+    <p-tabPanel header="Lieu Affectation">
       <p-table
         [columns]="colDispo"
         [value]="listDispo"
@@ -137,7 +143,7 @@
                 class="font-weight-bold "
               >
                 {{ col.header }}
-                @if(col.header != 'Photo'){
+                @if (col.header != 'Photo') {
                   <p-sortIcon [field]="col.field"></p-sortIcon>
                 }
               </th>
@@ -173,8 +179,6 @@
         </ng-template>
       </p-table>
     </p-tabPanel>
+    <p-tabPanel header="Region"></p-tabPanel>
   </p-tabView>
-
-
-
 </p-card>

@@ -13,6 +13,9 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 import autoTable from "jspdf-autotable";
 import {UpperCasePipe} from "@angular/common";
+import {DropdownModule} from "primeng/dropdown";
+import {FormsModule} from "@angular/forms";
+import {DataViewModule} from "primeng/dataview";
 
 @Component({
   selector: 'mrt-etats-personnel',
@@ -25,7 +28,10 @@ import {UpperCasePipe} from "@angular/common";
     SharedModule,
     TabViewModule,
     TableModule,
-    UpperCasePipe
+    UpperCasePipe,
+    DropdownModule,
+    FormsModule,
+    DataViewModule
   ],
   templateUrl: './etats-personnel.component.html',
   styleUrl: './etats-personnel.component.scss'
@@ -49,7 +55,6 @@ export class EtatsPersonnelComponent implements OnInit{
     {field: 'absent', header: 'Absent'},
     {field: 'congé', header: 'congé'}
   ];
-  _selectedColumns!: any[];
   exportColumns!: any;
   list!: any[];
   listDispo!: any[];
@@ -89,4 +94,7 @@ export class EtatsPersonnelComponent implements OnInit{
     })
   }
 
+  onSortChange($event: any) {
+
+  }
 }

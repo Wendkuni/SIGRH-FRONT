@@ -7,7 +7,7 @@
     // Id de l'agent (foreign key)
     IdAgent: bigint;
     // Valeur de la renumeration(Net à payer)
-    valMnt: string;
+    valMnt: number;
     // Banque de l'agent(ou de la renumeration)
     bankLib:string;
     // Mois de la renumeration

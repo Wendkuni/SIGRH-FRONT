@@ -114,7 +114,7 @@ export class AppMenuComponent implements OnInit {
                         icon: 'pi pi-fw pi-at',
                       items: [
                         {
-                          label: 'Enregistrements',
+                          label: 'Enregistrements'
                         },
                         {
                           label: 'Etats'

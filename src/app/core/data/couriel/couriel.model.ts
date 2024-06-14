@@ -1,6 +1,4 @@
-export interface Couriel {
-
-
+export interface Courier {
     /** ID */
     id: number;
 
@@ -46,3 +44,5 @@ export interface Couriel {
     /** Date Couriel (Email Date) */
     dateCouriel: string;
 }
+
+export type Couriers = Courier[];

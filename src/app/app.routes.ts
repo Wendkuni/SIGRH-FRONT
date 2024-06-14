@@ -54,6 +54,10 @@ export const routes: Routes = [
         path: 'etats-personnel',
         loadComponent: () => import('./pages/etats-personnel/etats-personnel.component').then(item => item.EtatsPersonnelComponent)
       }
+      // {
+      //   path: 'courriel',
+      //   loadComponent: () => import('./pages/couriel/couriel.component').then(item => item.CourielComponent)
+      // }
   ]
   },
   {

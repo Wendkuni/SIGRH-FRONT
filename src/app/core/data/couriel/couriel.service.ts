@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Couriel} from "./couriel.model";
+import {Courier, Couriers} from "./couriel.model";
 
 @Injectable({
   providedIn: 'root'
@@ -14,21 +14,21 @@ export class CourielService {
 
   // get all couriels
   getAllCouriels(){
-    return this.http.get<Couriel[]>(this.url);
+    return this.http.get<Couriers>(this.url);
   }
 
   //add couriel
-  addCouriel(couriel: Couriel){
+  addCouriel(couriel: Courier){
     return this.http.post(this.url, couriel);
   }
 
   //update couriel
-  updateCouriel(id: string, couriel: Couriel){
+  updateCouriel(id: string, couriel: Courier){
     return this.http.patch(`${this.url}/${id}`, couriel);
   }
 
   //delete couriel
-  deleteCouriel(couriel: Couriel){
+  deleteCouriel(couriel: Courier){
     return this.http.delete(`${this.url}/${couriel.id}`);
   }
 }

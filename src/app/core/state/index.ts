@@ -1,13 +1,27 @@
-import * as fromPersonnel from './personals/personal.reducer';
-import {ActionReducerMap} from "@ngrx/store";
+import {Courier, Couriers} from "../data/couriel/couriel.model";
+import {patchState, signalStore, withMethods, withState} from "@ngrx/signals";
 
-
-// The shape of the entire application state
-export interface AppState {
-  personnels: fromPersonnel.PersonnelState;
+export type CourierState = {
+  couriers: Couriers;
+  isLoading: boolean;
+  filter: {query: string, order: 'asc' | 'desc'};
 }
 
-// Add the feature reducers into combined reducer
-export const reducers: ActionReducerMap<AppState> = {
-  personnels: fromPersonnel.personnelReducers
+export const initialCourierState: CourierState = {
+  couriers: [],
+  isLoading: false,
+  filter: { query: '', order: 'asc' },
 }
+
+export const courierStore = signalStore(
+  { providedIn: 'root'},
+  withState(initialCourierState),
+  withMethods( store => ({
+    addCourier: (courier: Courier) => {
+      patchState(store, {isLoading: true});
+      patchState(store, {couriers: [ ...store.couriers(), courier]});
+      patchState(store, {isLoading: false});
+    }
+  }))
+
+)

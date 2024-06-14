@@ -245,7 +245,7 @@
             <div class="p-fluid p-formgrid grid">
 <!--              Nom Prenom-->
               <div class="field col-12 md:col-6">
-                <label for="nometprenom" class="font-medium text-900">Nom et Prenom</label>
+                <label for="nometprenom" class="font-medium text-900">Nom et Prenom </label>
                 <input id="nometprenom" pInputText class="w-full p-component p-element form-control mb-1" type="text"
                        formControlName="nomEtPrenom"/>
                 <mrt-form-validators
@@ -284,6 +284,8 @@
                   placeholder="Entre la date(yyyy-mm-dd)"
                   formControlName="dteNaiss"
                   styleClass="mb-1"
+                  appendTo="body"
+                  [showTime]="false"
                 />
                 <mrt-form-validators
                   [entityField]="'dteNaiss'"
@@ -448,6 +450,8 @@
                   [dateFormat]="'yy-mm-dd'"
                   placeholder="Entre la date(yyyy-mm-dd)"
                   styleClass="mb-1"
+                  appendTo="body"
+                  [showTime]="false"
                   formControlName="dteRecrutemnt"
                 />
                 <mrt-form-validators
@@ -464,6 +468,8 @@
                   [dateFormat]="'yy-mm-dd'"
                   placeholder="Entre la date(yyyy-mm-dd)"
                   styleClass="mb-1"
+                  appendTo="body"
+                  [showTime]="false"
                   formControlName="dteTitularisation"
                 />
 <!--                <mrt-form-validators-->
@@ -480,6 +486,8 @@
                   [dateFormat]="'yy-mm-dd'"
                   placeholder="Entre la date(yyyy-mm-dd)"
                   styleClass="mb-1"
+                  appendTo="body"
+                  [showTime]="false"
                   formControlName="debutCntrat"
                 />
 <!--                <mrt-form-validators-->
@@ -495,6 +503,8 @@
                   [dateFormat]="'yy-mm-dd'"
                   placeholder="Entre la date(yyyy-mm-dd)"
                   styleClass="mb-1"
+                  appendTo="body"
+                  [showTime]="false"
                   formControlName="finCntrat"
                 />
 <!--                <mrt-form-validators-->
@@ -510,6 +520,8 @@
                   [dateFormat]="'yy-mm-dd'"
                   placeholder="Entre la date(yyyy-mm-dd)"
                   styleClass="mb-1"
+                  appendTo="body"
+                  [showTime]="false"
                   formControlName="dteDepart"
                 />
 <!--                <mrt-form-validators-->

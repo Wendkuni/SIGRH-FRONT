@@ -171,8 +171,6 @@ export interface PersonnelResponse {
 
 }
 
-
-
 // Personnel model on database
 export interface Personnel{
     idAgent: bigint;

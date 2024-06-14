@@ -1,5 +1,5 @@
 import {Component, ElementRef, inject, OnInit, ViewChild} from '@angular/core';
-import {personnelColonneTable, PersonnelRequest, PersonnelResponse} from "../../core/data/personals/personnel.model";
+import {Personnel, personnelColonneTable} from "../../core/data/personals/personnel.model";
 import {PersonnelService} from "../../core/data/personals/personnel.service";
 import {MessageService} from "primeng/api";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
@@ -53,10 +53,10 @@ export class PersonnelComponent implements OnInit{
   @ViewChild('filter') filter!: ElementRef;
 // colonne du tableau
   cols= personnelColonneTable
-//personnel selectionner pour un traitement
-  selectedPersonnel: PersonnelResponse = {} as PersonnelResponse
+//personnel selection pour un traitement
+  selectedPersonnel: Personnel = {} as Personnel;
 //variable pour recuperer la liste de tous les personnels
-  listPersonnel$!: PersonnelResponse[];
+  listPersonnel$!: Personnel[];
   //service pour la gestion du personnel
   personalService = inject(PersonnelService)
   messageService = inject(MessageService)
@@ -135,7 +135,7 @@ export class PersonnelComponent implements OnInit{
   }
 
   // Methode pour creer un personnel
-  createPersonnel(personnel:PersonnelRequest){
+  createPersonnel(personnel:Personnel){
     this.personalService.addPersonnel(personnel).subscribe(() => {
         this.getAllPersonnel();
         this.formDialog = false;
@@ -149,9 +149,9 @@ export class PersonnelComponent implements OnInit{
   }
 
   // Methode pour mettre a jour un personnel
-  updatePersonnel(personnel:PersonnelRequest){
-    let id = this.selectedPersonnel.id;
-    this.personalService.updatePersonnel(id, personnel).subscribe(() => {
+  updatePersonnel(personnel:Personnel){
+    personnel.idAgent = this.selectedPersonnel.idAgent;
+    this.personalService.updatePersonnel(personnel).subscribe(() => {
       this.getAllPersonnel();
       this.formDialog = false;
       this.personnelForm.reset();
@@ -164,36 +164,37 @@ export class PersonnelComponent implements OnInit{
   }
 
   // Methode de recuperation des elements du formulaire
-  getFormData(): PersonnelRequest {
+  getFormData(): Personnel {
     const formData = this.personnelForm.value;
-    return<PersonnelRequest>{
+    return<Personnel>{
       matricule: formData.matricule,
       nni: formData.nni,
-      nomEtPrenom: formData.nomEtPrenom,
+      nomPrenom: formData.nomPrenom,
       nomPrenomArab: formData.nomPrenomArab,
-      actifOrNot: formData.actifOrNot,
-      dteRecrutemnt: formData.dteRecrutemnt,
-      dteTitularisation: formData.dteTitularisation,
-      dteDepart: formData.dteDepart,
-      statusEmp: formData.statusEmp,
-      adressEmp: formData.adressEmp,
-      debutCntrat: formData.debutCntrat,
+      dateNaiss: formData.dteNaiss,
       tlphone: formData.tlphone,
-      finCntrat: formData.finCntrat,
-      dteNaiss: formData.dteNaiss,
+      adrssEmp: formData.adressEmp,
       lieuNaiss: formData.lieuNaiss,
+      dteRecrutmnt: formData.dteRecrutemnt,
+      dteTitularisation: formData.dteTitularisation,
+      debuCntrat: formData.debutCntrat,
+      finCntrat: formData.finCntrat,
       bank: formData.bank,
       codBank: formData.codBank,
       numroCpte: formData.numroCpte,
       cleRib: formData.cleRib,
       detacher: formData.detacher,
-      ministereOrigine: formData.ministereOrigine,
-      typeEducation: formData.typeEducation
+      ministereOrigne: formData.ministereOrigine,
+      typeEducation: formData.typeEducation,
+      statusEmp: formData.statusEmp,
+      actifOrNnot: formData.actifOrNot,
+      dteSortie: formData.dteDepart
+
     }
   }
 
 
-  // Fonction  qui retourne le style css du status de l'employer
+  // Fonction qui retourne le style css du status de l'employer
   getStatusSeverity(status: string): any {
     if (status) {
       return 'success'
@@ -204,13 +205,13 @@ export class PersonnelComponent implements OnInit{
   // Methode qui permet de vider la selection et les formulaires apres la fermeture de la vue
   close() {
     this.detailsVisibility = false
-    this.selectedPersonnel = {} as PersonnelResponse
+    this.selectedPersonnel = {} as Personnel
     // a completer par le formGroup
   }
 
   // Methode pour fermer la vue du formulaire
   cancel() {
-    this.selectedPersonnel = {} as PersonnelResponse;
+    this.selectedPersonnel = {} as Personnel;
     this.formDialog = false;
     this.personnelForm.reset();
   }
@@ -221,7 +222,7 @@ export class PersonnelComponent implements OnInit{
   }
 
 //   Delete Method
-  deletePersonnel(personnel: PersonnelResponse) {
+  deletePersonnel(personnel: Personnel) {
     this.personalService.deletePersonnel(personnel).subscribe(() => {
       this.getAllPersonnel();
       this.messageService.add({severity: 'success', summary: 'Successful', detail: 'Personnel supprimer', life: 3000});

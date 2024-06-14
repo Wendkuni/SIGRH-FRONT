@@ -1,7 +1,9 @@
+import {Personnel} from "../personals/personnel.model";
+
 export interface Dossier {
-  id: string; // Attribute name: id
-  nom: string; // Attribute name: nom
-  date: string; // Attribute name: date
-  observation: string; // Attribute name: observation
-  // images: string[]; Attribute name: images (array of strings)
+  idDossierScan: string; // Attribute name: id
+  libelDossier: string; // Attribute name: nom
+  dateUpload: Date; // Attribute name: date
+  observvation: string; // Attribute name: observation
+  personnel: Personnel
 }

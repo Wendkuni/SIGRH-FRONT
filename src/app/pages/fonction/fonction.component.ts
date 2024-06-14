@@ -1,7 +1,6 @@
 import {Component, inject, Input, OnInit} from '@angular/core';
 import {Avancement} from "../../core/data/avancement/fonction.model";
 import {AvancementService} from "../../core/data/avancement/avancement.service";
-import {PersonnelResponse} from "../../core/data/personals/personnel.model";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 import {Cols} from "../../core/data/primeng/primeng.model";
@@ -14,6 +13,7 @@ import {UpperCasePipe} from "@angular/common";
 import {TooltipModule} from "primeng/tooltip";
 import {RippleModule} from "primeng/ripple";
 import {MessageService} from "primeng/api";
+import {Personnel} from "../../core/data/personals/personnel.model";
 
 @Component({
   selector: 'mrt-fonction',
@@ -37,7 +37,7 @@ export class FonctionComponent implements OnInit{
 
   listAvancement$!: Avancement[]; //liste des dossiers
   avancementService = inject(AvancementService);
-  @Input() personnel!: PersonnelResponse;
+  @Input() personnel!: Personnel;
   fonctionAgentForm!: FormGroup;
   fb = inject(FormBuilder);
   router = inject(ActivatedRoute);

@@ -30,6 +30,6 @@ export class DossierService {
 
   //delete dossier
   deleteDossier(dossier: Dossier){
-    return this.http.delete(`${this.url}/${dossier.id}`);
+    return this.http.delete(`${this.url}/${dossier.idDossierScan}`);
   }
 }

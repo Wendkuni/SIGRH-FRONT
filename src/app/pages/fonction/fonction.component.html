@@ -1,4 +1,11 @@
-<span class="block text-900 font-bold text-xl mb-4">Carrières</span>
+
+<div class="flex justify-content-between border-bottom-1 surface-border p-3">
+  <span class="block text-900 font-bold text-xl mb-4">Carrières</span>
+  <span class="text-sm">
+                Champs obligatoires:
+                <span class="text-red-500">*</span>
+              </span>
+</div>
 <div class="grid">
   <div class="col-12 lg:col-5">
     <form [formGroup]="fonctionAgentForm">
@@ -22,14 +29,15 @@
               type="text"
               pInputText
               id="fullName"
-              [value]="personnel.nomEtPrenom"
+              [value]="personnel.nomPrenom"
               required
               autofocus
               disabled/>
           </div>
           <div class="field">
-            <label>Nature</label>
+            <label for="nature" class="font-medium text-900">Nature <span class="text-red-500">*</span></label>
             <p-dropdown
+              id="nature"
               formControlName="nature"
               [options]="nature"
               placeholder="Selectionner la nature"
@@ -39,8 +47,9 @@
                                  [formGroup]="fonctionAgentForm"></mrt-form-validators>
           </div>
           <div class="field">
-            <label> Date Effet</label>
+            <label for="dateEffet" class="font-medium text-900"> Date Effet <span class="text-red-500">*</span></label>
             <p-calendar
+              id="dateEffet"
               formControlName="dateEffet"
               [dateFormat]="'yy-mm-dd'"
               [showButtonBar]="true"
@@ -56,7 +65,7 @@
           <span class="text-900 font-bold block  border-bottom-1 surface-border p-3">INCIDENCE, GRADE, ECHELLE ET ECHELLON</span>
           <div class="p-3">
             <div class="field">
-              <label for="corps">CORPS</label>
+              <label for="corps" class="font-medium text-900">CORPS <span class="text-red-500">*</span></label>
               <p-dropdown
                 id="corps"
                 placeholder="Selectionner la nature"
@@ -67,7 +76,7 @@
                                    [formGroup]="fonctionAgentForm"></mrt-form-validators>
             </div>
             <div class="field">
-              <label for="fonction">Fonction</label>
+              <label for="fonction" class="font-medium text-900">Fonction <span class="text-red-500">*</span></label>
               <p-dropdown
                 id="fonction"
                 placeholder="Selectionner la fonction"
@@ -78,7 +87,7 @@
                                    [formGroup]="fonctionAgentForm"></mrt-form-validators>
             </div>
             <div class="field">
-              <label for="grade">Grade</label>
+              <label for="grade" class="font-medium text-900">Grade <span class="text-red-500">*</span></label>
               <p-dropdown
                 id="grade"
                 placeholder="Selectionner le grade"
@@ -88,8 +97,8 @@
               <mrt-form-validators [entityField]="'grade'"
                                    [formGroup]="fonctionAgentForm"></mrt-form-validators>
             </div>
-            <div class="field ">
-              <label for="echelle">Echelle</label>
+            <div class="field " >
+              <label for="echelle" class="font-medium text-900">Echelle <span class="text-red-500">*</span></label>
               <p-dropdown
                 id="echelle"
                 placeholder="Selectionner l'echelle"
@@ -100,7 +109,7 @@
                                    [formGroup]="fonctionAgentForm"></mrt-form-validators>
             </div>
             <div class="field ">
-              <label for="echellon">Echellon</label>
+              <label for="echellon" class="font-medium text-900">Echellon <span class="text-red-500">*</span></label>
               <p-dropdown
                 id="echellon"
                 placeholder="Selectionner l'echellon"

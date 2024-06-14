@@ -84,7 +84,12 @@
   styleClass="p-fluid"
 >
   <ng-template pTemplate="content">
-    <div class="field">
+      <span class="text-sm">
+                Champs obligatoires:
+                <span class="text-red-500">*</span>
+              </span>
+
+    <div class="field mt-4">
       <label for="matricule">Matricule</label>
       <input
         type="text"
@@ -105,7 +110,7 @@
         disabled/>
     </div>
     <div class="field">
-      <label >Nature</label>
+      <label for="raison">Nature</label>
       <p-dropdown
         [options]="nature"
         id="raison"

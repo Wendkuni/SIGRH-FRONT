@@ -65,7 +65,12 @@
   styleClass="p-fluid"
 >
   <ng-template pTemplate="content">
-    <div class="field">
+      <span class="text-sm">
+                Champs obligatoires:
+                <span class="text-red-500">*</span>
+              </span>
+
+    <div class="field mt-4">
       <label class="font-medium text-900">Matricule</label>
       <input
         type="text"
@@ -80,7 +85,7 @@
       <input
         type="text"
         pInputText
-        [value]="personnel.nomEtPrenom"
+        [value]="personnel.nomPrenom"
         required
         autofocus
         disabled/>
@@ -97,7 +102,7 @@
       />
     </div>
     <div class="field">
-      <label class="font-medium text-900">Dossier</label>
+      <label class="font-medium text-900">Dossier <span class="text-red-500">*</span></label>
       <p-fileUpload
         mode="basic"
         name="avatar"

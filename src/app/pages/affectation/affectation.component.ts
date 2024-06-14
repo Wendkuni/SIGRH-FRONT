@@ -12,8 +12,8 @@ import {InputTextModule} from "primeng/inputtext";
 import {DatePipe} from "@angular/common";
 import {InputNumberModule} from "primeng/inputnumber";
 import {CalendarModule} from "primeng/calendar";
-import {PersonnelResponse} from "../../core/data/personals/personnel.model";
 import {TooltipModule} from "primeng/tooltip";
+import {Personnel} from "../../core/data/personals/personnel.model";
 
 @Component({
   selector: 'mrt-affectation',
@@ -39,7 +39,7 @@ export class AffectationComponent implements OnInit{
   showDialog = false;
   listAffections$!: Mobilite[]; //liste des affections
   mobiliteService = inject(AffectationService);
-  @Input() personnel!: PersonnelResponse;
+  @Input() personnel!: Personnel;
 
   cols: Cols[] = [
     { field: 'matricule', header: 'Matricule' },

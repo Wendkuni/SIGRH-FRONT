@@ -4,7 +4,6 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {RemunerationService} from "../../core/data/remuneration/remuneration.service";
 import {Remuneration} from "../../core/data/remuneration/renumeration.model";
 import {PersonnelService} from "../../core/data/personals/personnel.service";
-import {PersonnelResponse} from "../../core/data/personals/personnel.model";
 import {Table, TableModule} from "primeng/table";
 import {ToastModule} from "primeng/toast";
 import {CardModule} from "primeng/card";
@@ -22,6 +21,7 @@ import {MessageService} from "primeng/api";
 import {TabViewModule} from "primeng/tabview";
 import {UpperCasePipe} from "@angular/common";
 import {RouterLink} from "@angular/router";
+import {Personnel} from "../../core/data/personals/personnel.model";
 
 @Component({
   selector: 'mrt-remuneration',
@@ -76,7 +76,7 @@ export class RemunerationComponent implements OnInit{
   remunerationService = inject(RemunerationService);
   remunerations$!: Remuneration[];
   personnelService = inject(PersonnelService);
-  listPersonnel!: PersonnelResponse[];
+  listPersonnel!: Personnel[];
   formVisible: boolean = false;
 
   ngOnInit(): void {

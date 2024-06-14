@@ -7,9 +7,9 @@ import {DatePipe} from "@angular/common";
 import {DialogModule} from "primeng/dialog";
 import {InputTextModule} from "primeng/inputtext";
 import {FileUploadModule} from "primeng/fileupload";
-import { PersonnelResponse} from "../../core/data/personals/personnel.model";
 import {DossierService} from "../../core/data/dossier/dossier.service";
 import {Dossier} from "../../core/data/dossier/dossier.model";
+import {Personnel} from "../../core/data/personals/personnel.model";
 
 @Component({
   selector: 'mrt-dossier',
@@ -31,7 +31,7 @@ export class DossierComponent implements OnInit{
   showDialog = false;
   lisDossiers$!: Dossier[]; //liste des dossiers
   dossierService = inject(DossierService);
-  @Input() personnel!: PersonnelResponse;
+  @Input() personnel!: Personnel;
 // colonne du tableau
   cols: Cols[] = [
     { field: 'nom', header: 'Nom Dossier' },

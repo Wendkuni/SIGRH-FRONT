@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import { PersonnelRequest, PersonnelResponse} from "./personnel.model";
+import {Personnel} from "./personnel.model";
 
 interface statPersonnel{
   matricule:string;
@@ -32,7 +32,7 @@ export class PersonnelService {
 
   // get all personnels
   getAllPersonnels(){
-    return this.http.get<PersonnelResponse[]>(this.url);
+    return this.http.get<Personnel[]>(this.url);
   }
 
   getStatPersonnel(){
@@ -45,22 +45,22 @@ export class PersonnelService {
 
   // get personnel by id
   getPersonnelById(id: string){
-    return this.http.get<PersonnelResponse>(`${this.url}/${id}`);
+    return this.http.get<Personnel>(`${this.url}/${id}`);
   }
 
   // create personnel
-  addPersonnel(personnel: PersonnelRequest){
+  addPersonnel(personnel: Personnel){
     return this.http.post(this.url, personnel);
   }
 
   // update personnel
-  updatePersonnel(id: string, personnel: PersonnelRequest){
-    return this.http.put(`${this.url}/${id}`, personnel);
+  updatePersonnel(personnel: Personnel){
+    return this.http.put(`${this.url}/${personnel.idAgent}`, personnel);
   }
 
   // delete personnel
-  deletePersonnel(personnel: PersonnelResponse){
-    return this.http.delete(`${this.url}/${personnel.id}`);
+  deletePersonnel(personnel: Personnel){
+    return this.http.delete(`${this.url}/${personnel.idAgent}`);
   }
 
 }

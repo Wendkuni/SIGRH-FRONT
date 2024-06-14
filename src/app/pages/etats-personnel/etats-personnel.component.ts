@@ -1,7 +1,6 @@
 import {Component, inject, OnInit, ViewChild} from '@angular/core';
 import {Cols} from "../../core/data/primeng/primeng.model";
 import {SelectItem, SharedModule} from "primeng/api";
-import {PersonnelResponse} from "../../core/data/personals/personnel.model";
 import {PersonnelService} from "../../core/data/personals/personnel.service";
 import {ButtonModule} from "primeng/button";
 import {CardModule} from "primeng/card";

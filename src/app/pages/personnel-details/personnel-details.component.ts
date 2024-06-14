@@ -1,7 +1,6 @@
 import {Component, inject, Input, OnInit} from '@angular/core';
 import {PersonnelService} from "../../core/data/personals/personnel.service";
 import {ActivatedRoute} from "@angular/router";
-import {PersonnelResponse} from "../../core/data/personals/personnel.model";
 import {CardModule} from "primeng/card";
 import {ButtonModule} from "primeng/button";
 import {RippleModule} from "primeng/ripple";
@@ -11,6 +10,7 @@ import {DossierComponent} from "../dossier/dossier.component";
 import {AffectationComponent} from "../affectation/affectation.component";
 import {ToastModule} from "primeng/toast";
 import {MessageService} from "primeng/api";
+import {Personnel} from "../../core/data/personals/personnel.model";
 
 @Component({
   selector: 'mrt-personnel-details',
@@ -32,7 +32,7 @@ export class PersonnelDetailsComponent implements OnInit{
 
   personalService = inject(PersonnelService)
   router = inject(ActivatedRoute);
-  personnel!: PersonnelResponse;
+  personnel!: Personnel;
   messageService = inject(MessageService);
 
   ngOnInit(): void {

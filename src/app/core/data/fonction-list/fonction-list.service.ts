@@ -28,7 +28,7 @@ export class FonctionListService {
 
   // update fonction
   updateFonction(fonction: Fonction){
-    return this.http.patch(`${this.url}/${fonction.id}`, fonction);
+    return this.http.patch(`${this.url}/${fonction.idFonction}`, fonction);
   }
 
 }

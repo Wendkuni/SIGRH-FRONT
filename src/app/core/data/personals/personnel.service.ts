@@ -1,6 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Personnel} from "./personnel.model";
+import {Personnel, Personnels} from "./personnel.model";
+import {environment} from "../../../../environments/environment";
 
 interface statPersonnel{
   matricule:string;
@@ -25,14 +26,14 @@ interface statePersonnelDisponible{
 export class PersonnelService {
 
   // url du server Json
-  url = 'http://localhost:3000/personnels';
+  apiUrl = environment.apiURL;
 
   // Inject HttpClient
   http = inject(HttpClient);
 
   // get all personnels
   getAllPersonnels(){
-    return this.http.get<Personnel[]>(this.url);
+    return this.http.get<Personnels>(this.apiUrl + '/personnels');
   }
 
   getStatPersonnel(){
@@ -43,24 +44,32 @@ export class PersonnelService {
     return this.http.get<statePersonnelDisponible[]>('http://localhost:3000/statePersonnelDisponible');
   }
 
-  // get personnel by id
-  getPersonnelById(id: string){
-    return this.http.get<Personnel>(`${this.url}/${id}`);
+  // find personnel by id
+  findPersonnelById(id: number){
+    return this.http.get<Personnel>(`${this.apiUrl}/personnelsBy/${id}`);
   }
 
   // create personnel
-  addPersonnel(personnel: Personnel){
-    return this.http.post(this.url, personnel);
+  createPersonnel(personnel: Personnel){
+    return this.http.post(`${this.apiUrl}/personnel`, personnel);
   }
 
   // update personnel
   updatePersonnel(personnel: Personnel){
-    return this.http.put(`${this.url}/${personnel.idAgent}`, personnel);
+    return this.http.put(`${this.apiUrl}/personnel/${personnel.idAgent}`,  personnel);
   }
 
   // delete personnel
   deletePersonnel(personnel: Personnel){
-    return this.http.delete(`${this.url}/${personnel.idAgent}`);
+    return this.http.delete(`${this.apiUrl}/personnel/delete/${personnel.idAgent}`);
+  }
+
+  getPersonnelByAffectation(id:number){
+    return this.http.get<Personnels>(`${this.apiUrl}/personnelsByAffectation/${id}`);
+  }
+
+  getPersonnelByLocalite(id:number){
+    return this.http.get<Personnels>(`${this.apiUrl}/personnelsByLocalite/${id}`);
   }
 
 }

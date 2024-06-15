@@ -1,5 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Personnel, Personnels} from "./personnel.model";
 import {environment} from "../../../../environments/environment";
 
@@ -25,11 +25,13 @@ interface statePersonnelDisponible{
 })
 export class PersonnelService {
 
-  // url du server Json
+  // url
   apiUrl = environment.apiURL;
 
   // Inject HttpClient
   http = inject(HttpClient);
+
+
 
   // get all personnels
   getAllPersonnels(){
@@ -56,7 +58,14 @@ export class PersonnelService {
 
   // update personnel
   updatePersonnel(personnel: Personnel){
-    return this.http.put(`${this.apiUrl}/personnel/${personnel.idAgent}`,  personnel);
+
+   let options = {
+      headers: new HttpHeaders().set("Content-Type", "application/x-www-form-urlencoded"),
+      params: new HttpParams().set('id', personnel.idAgent)
+    }
+
+
+    return this.http.put(`${this.apiUrl}/personnel/${personnel.idAgent}`,personnel, options );
   }
 
   // delete personnel

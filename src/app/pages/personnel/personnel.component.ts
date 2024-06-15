@@ -150,6 +150,7 @@ export class PersonnelComponent implements OnInit{
   // Methode pour mettre a jour un personnel
   updatePersonnel(personnel:Personnel){
     personnel.idAgent = this.selectedPersonnel.idAgent;
+    console.log(personnel);
     this.personalService.updatePersonnel(personnel).subscribe(() => {
       this.getAllPersonnel();
       this.formDialog = false;

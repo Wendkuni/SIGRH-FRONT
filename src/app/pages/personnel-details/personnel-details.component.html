@@ -10,7 +10,12 @@
   <div class="flex align-items-center border-bottom-1 surface-border p-3 lg:p-4 ">
     <!--      Image du personnel et son nom -->
     <div class="relative flex align-items-center mr-3">
-      <img src="{{personnel.photo}}" alt="{{personnel.nomPrenom}}" class="w-4rem h-4rem border-circle shadow-4">
+      @if (personnel.photo) {
+        <img src="{{personnel.photo}}" alt="Profile" class="w-4rem h-4rem border-circle shadow-4">
+      } @else {
+        <img src="assets/demo/images/avatar/user-avatar.png" alt="user.name"
+             class="w-4rem h-4rem border-circle shadow-4">
+      }
     </div>
     <div class="mr-2">
       <span class="font-semibold block">{{personnel.nomPrenom}}</span>

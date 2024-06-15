@@ -1,35 +1,45 @@
 import {inject, Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Dossier} from "./dossier.model";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {Dossier, Dossiers} from "./dossier.model";
+import {environment} from "../../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DossierService {
 
-  // url du server Json
-  url = 'http://localhost:3000/dossiers';
+  // url
+  apiUrl = environment.apiURL;
 
   // Inject HttpClient
   http = inject(HttpClient);
 
+
   // get all dossiers
   getAllDossiers(){
-    return this.http.get<Dossier[]>(this.url);
+    return this.http.get<Dossiers>(`${this.apiUrl}/dossiers`);
   }
 
   //add dossier
   addDossier(dossier: Dossier){
-    return this.http.post(this.url, dossier);
+    return this.http.post(`${this.apiUrl}/dossier`, dossier);
+  }
+
+  findPersonnelById(id: number){
+    return this.http.get(`${this.apiUrl}/dossiersBy/${id}`)
   }
 
   //update dossier
-  updateDossier(id: string, dossier: Dossier){
-    return this.http.patch(`${this.url}/${id}`, dossier);
+  updateDossier(dossier: Dossier){
+    let options = {
+      headers: new HttpHeaders().set("Content-Type", "application/x-www-form-urlencoded"),
+      params: new HttpParams().set('id', dossier.idDossierScan)
+    }
+    return this.http.patch(`${this.apiUrl}/dossier/${dossier.idDossierScan}`, dossier, options);
   }
 
   //delete dossier
   deleteDossier(dossier: Dossier){
-    return this.http.delete(`${this.url}/${dossier.idDossierScan}`);
+    return this.http.delete(`${this.apiUrl}/dossier/delete/${dossier.idDossierScan}`);
   }
 }

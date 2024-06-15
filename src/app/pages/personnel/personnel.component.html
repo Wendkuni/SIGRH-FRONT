@@ -202,7 +202,7 @@
             icon="pi pi-info"
             class="p-button-rounded p-button-warning mx-2"
             iconPos="left"
-            routerLink="/personnel-details/{{ personnel.id }}"
+            [routerLink]="['/personnel-details',  personnel.idAgent]"
           ></button>
         </td>
         <td>

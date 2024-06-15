@@ -34,17 +34,20 @@ export class PersonnelDetailsComponent implements OnInit{
   router = inject(ActivatedRoute);
   personnel!: Personnel;
   messageService = inject(MessageService);
+  id!: number;
 
   ngOnInit(): void {
-    let id  = this.router.snapshot.paramMap.get('id');
+    this.router.params.subscribe( params => {
+       this.id= params['idAgent'];
+    })
 
-    if(id != null){
-      this.getPersonnel(id);
+    if(this.id != null){
+      this.getPersonnel(this.id);
     }
   }
 
-  getPersonnel(id:string){
-    this.personalService.getPersonnelById(id).subscribe((response) => {
+  getPersonnel(id:number){
+    this.personalService.findPersonnelById(id).subscribe((response) => {
       this.personnel = response;
       },error => {
         this.messageService.add({severity:'error', summary: 'Erreur', detail: 'Une erreur est survenue lors de la récupération des données'})

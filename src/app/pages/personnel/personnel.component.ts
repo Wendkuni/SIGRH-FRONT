@@ -1,5 +1,5 @@
 import {Component, ElementRef, inject, OnInit, ViewChild} from '@angular/core';
-import {Personnel, personnelColonneTable} from "../../core/data/personals/personnel.model";
+import {Personnel, personnelColonneTable, Personnels} from "../../core/data/personals/personnel.model";
 import {PersonnelService} from "../../core/data/personals/personnel.service";
 import {MessageService} from "primeng/api";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
@@ -56,15 +56,13 @@ export class PersonnelComponent implements OnInit{
 //personnel selection pour un traitement
   selectedPersonnel: Personnel = {} as Personnel;
 //variable pour recuperer la liste de tous les personnels
-  listPersonnel$!: Personnel[];
+  listPersonnel$!: Personnels;
   //service pour la gestion du personnel
   personalService = inject(PersonnelService)
   messageService = inject(MessageService)
   detailsVisibility = false
   formDialog = false
   action = 'Add';
-  minDate!: Date
-  maxDate!: Date
   personnelForm!: FormGroup;
   fb = inject(FormBuilder);
   loading: boolean = true;
@@ -73,11 +71,11 @@ export class PersonnelComponent implements OnInit{
     this.personnelForm = this.fb.group({
       matricule: this.fb.control('',[ Validators.required]),
       nni: this.fb.control('', [Validators.required]),
-      nomEtPrenom: this.fb.control('',[ Validators.required]),
+      nomPrenom: this.fb.control('',[ Validators.required]),
       nomPrenomArab: this.fb.control('',[Validators.required]),
 
       actifOrNot: this.fb.control(''),
-      dteRecrutemnt: this.fb.control('',[Validators.required]),
+      dteRecrutement: this.fb.control('',[Validators.required]),
       dteTitularisation: this.fb.control(''),
       dteDepart: this.fb.control(''),
 
@@ -91,13 +89,14 @@ export class PersonnelComponent implements OnInit{
       lieuNaiss: this.fb.control('',[Validators.required]),
       bank: this.fb.control('',[Validators.required]),
 
-      codBank: this.fb.control('',[Validators.required]),
+      codeBank: this.fb.control('',[Validators.required]),
       numroCpte: this.fb.control('',[Validators.required]),
       cleRib: this.fb.control('',[Validators.required]),
       detacher: this.fb.control('',[Validators.required]),
 
-      ministereOrigine: this.fb.control(''),
-      typeEducation: this.fb.control('')
+      ministerOrigine: this.fb.control(''),
+      typeeducation: this.fb.control(''),
+      dteSortie: this.fb.control(''),
     });
     this.getAllPersonnel();
   }
@@ -136,7 +135,7 @@ export class PersonnelComponent implements OnInit{
 
   // Methode pour creer un personnel
   createPersonnel(personnel:Personnel){
-    this.personalService.addPersonnel(personnel).subscribe(() => {
+    this.personalService.createPersonnel(personnel).subscribe(() => {
         this.getAllPersonnel();
         this.formDialog = false;
         this.personnelForm.reset();
@@ -173,23 +172,22 @@ export class PersonnelComponent implements OnInit{
       nomPrenomArab: formData.nomPrenomArab,
       dateNaiss: formData.dteNaiss,
       tlphone: formData.tlphone,
-      adrssEmp: formData.adressEmp,
+      adressEmp: formData.adressEmp,
       lieuNaiss: formData.lieuNaiss,
-      dteRecrutmnt: formData.dteRecrutemnt,
+      dteRecrutement: formData.dteRecrutement,
       dteTitularisation: formData.dteTitularisation,
-      debuCntrat: formData.debutCntrat,
+      debutCntrat: formData.debutCntrat,
       finCntrat: formData.finCntrat,
       bank: formData.bank,
-      codBank: formData.codBank,
+      codeBank: formData.codeBank,
       numroCpte: formData.numroCpte,
       cleRib: formData.cleRib,
       detacher: formData.detacher,
-      ministereOrigne: formData.ministereOrigine,
-      typeEducation: formData.typeEducation,
+      ministerOrigine: formData.ministerOrigine,
+      typeeducation: formData.typeeducation,
       statusEmp: formData.statusEmp,
-      actifOrNnot: formData.actifOrNot,
+      actifOrNot: formData.actifOrNot,
       dteSortie: formData.dteDepart
-
     }
   }
 

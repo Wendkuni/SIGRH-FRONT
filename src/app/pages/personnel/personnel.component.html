@@ -4,6 +4,7 @@
   [showTransitionOptions]="'1000ms'"
   [hideTransitionOptions]="'1000ms'"
   [showTransformOptions]="'translateX(100%)'" />
+<p-confirmDialog />
 
 <!-- Toolbar start pour afficher les boutons des differentes actions realisable dans la gestion du personnels-->
 <p-card styleClass="mb-5">
@@ -188,7 +189,7 @@
             icon="pi pi-pencil"
             class="p-button-rounded p-button-primary mx-2"
             iconPos="left"
-            (click)="viewEditPersonnel(personnel)"
+            (click)="openEdit(personnel)"
           ></button>
         </td>
         <td>
@@ -216,7 +217,7 @@
             icon="pi pi-trash"
             class="p-button-rounded p-button-danger mx-2"
             iconPos="left"
-            (click)="deletePersonnel(personnel)"
+            (click)="confirm(personnel)"
           ></button>
         </td>
       </tr>

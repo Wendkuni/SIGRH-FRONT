@@ -1,7 +1,7 @@
 import {Component, ElementRef, inject, OnInit, ViewChild} from '@angular/core';
 import {Personnel, personnelColonneTable, Personnels} from "../../core/data/personals/personnel.model";
 import {PersonnelService} from "../../core/data/personals/personnel.service";
-import {MessageService} from "primeng/api";
+import {ConfirmationService, MessageService} from "primeng/api";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {CardModule} from "primeng/card";
 import {Table, TableModule} from "primeng/table";
@@ -20,6 +20,7 @@ import {CalendarModule} from "primeng/calendar";
 import {DividerModule} from "primeng/divider";
 import {FileUploadModule} from "primeng/fileupload";
 import {DropdownModule} from "primeng/dropdown";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
 
 @Component({
   selector: 'mrt-personnel',
@@ -43,10 +44,11 @@ import {DropdownModule} from "primeng/dropdown";
     CalendarModule,
     DividerModule,
     FileUploadModule,
-    DropdownModule
+    DropdownModule,
+    ConfirmDialogModule
   ],
   templateUrl: './personnel.component.html',
-  providers: [MessageService]
+  providers: [MessageService, ConfirmationService]
 })
 export class PersonnelComponent implements OnInit{
 
@@ -66,6 +68,7 @@ export class PersonnelComponent implements OnInit{
   personnelForm!: FormGroup;
   fb = inject(FormBuilder);
   loading: boolean = true;
+  confirService = inject(ConfirmationService);
 
   ngOnInit(): void {
     this.personnelForm = this.fb.group({
@@ -105,7 +108,6 @@ export class PersonnelComponent implements OnInit{
   getAllPersonnel() {
     this.personalService.getAllPersonnels().subscribe((response) => {
       this.listPersonnel$ = response;
-      console.log(this.listPersonnel$);
       this.loading = false;
     });
   }
@@ -117,12 +119,13 @@ export class PersonnelComponent implements OnInit{
   }
 
   //Methode pour afficher le formulaire de modification avec les donnees de l'agent selectionner deja rempli
-  viewEditPersonnel(personal: any) {
+  openEdit(personal: any) {
     this.formDialog = true;
     this.action = 'Update';
     this.selectedPersonnel = personal;
     this.personnelForm.patchValue(personal);
   }
+
 
   savePersonnel() {
     const data = this.getFormData();
@@ -218,6 +221,25 @@ export class PersonnelComponent implements OnInit{
   // Methode pour filtrer les elements du tableau
   onGlobalFilter(table: Table, event: Event) {
     table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+  }
+
+  confirm(personnel: Personnel) {
+    this.confirService.confirm({
+      message: 'Êtes-vous sûr de vouloir continuer ?',
+      icon: 'pi pi-exclamation-circle',
+      acceptIcon: 'pi pi-check mr-1',
+      rejectIcon: 'pi pi-times mr-1',
+      acceptLabel: 'Oui',
+      rejectLabel: 'Non',
+      rejectButtonStyleClass: 'p-button-outlined p-button-sm',
+      acceptButtonStyleClass: 'p-button-danger p-button-sm',
+      accept: () => {
+        this.deletePersonnel(personnel);
+      },
+      reject: () => {
+        this.messageService.add({ severity: 'info', detail: 'Vous avez annuler', life: 3000 });
+      }
+    });
   }
 
 //   Delete Method

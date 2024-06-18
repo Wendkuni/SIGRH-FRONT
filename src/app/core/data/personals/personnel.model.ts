@@ -54,7 +54,8 @@ export interface Personnel{
   detacher: string;
   ministerOrigine: string;
   typeeducation: string;
-  photo?: string;
+  photo: string;
 }
 
 export type Personnels = Personnel[];
+

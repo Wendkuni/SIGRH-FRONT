@@ -100,7 +100,7 @@
     </div>
 <!--    Libelle Dossier-->
     <div class="field">
-      <label for="libelDossier" class="font-medium text-900">Libelle Dossier<span class="text-red-500">*</span></label>
+      <label for="libelDossier" class="font-medium text-900">Libelle Dossier <span class="text-red-500">*</span></label>
       <input id="libelDossier" pInputText class="w-full p-component p-element form-control mb-1" type="text"
              formControlName="libelDossier"/>
       <mrt-form-validators
@@ -150,7 +150,7 @@
   </ng-template>
 
   <ng-template pTemplate="footer">
-    <button pButton pRipple class="p-button-primary flex-1" label="Enregistrer" icon="pi pi-fw pi-check"></button>
+    <button pButton pRipple class="p-button-primary flex-1" label="Enregistrer" (click)="saveDossier()" icon="pi pi-fw pi-check"></button>
     <button pButton pRipple class="p-button-danger flex-1 p-button-outlined" label="Annuler" icon="pi pi-fw pi-times"></button>
   </ng-template>
 </p-dialog>

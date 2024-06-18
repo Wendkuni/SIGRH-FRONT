@@ -14,6 +14,7 @@ import {InputNumberModule} from "primeng/inputnumber";
 import {CalendarModule} from "primeng/calendar";
 import {TooltipModule} from "primeng/tooltip";
 import {Personnel} from "../../core/data/personals/personnel.model";
+import {FormBuilder, Validators} from "@angular/forms";
 
 @Component({
   selector: 'mrt-affectation',
@@ -40,6 +41,18 @@ export class AffectationComponent implements OnInit{
   listAffections$!: Mobilite[]; //liste des affections
   mobiliteService = inject(AffectationService);
   @Input() personnel!: Personnel;
+  fb = inject(FormBuilder);
+  action = 'Add';
+  selectedAffection: Mobilite = {} as Mobilite;
+  affectionForm = this.fb.group({
+    nature: this.fb.control('',[Validators.required]),
+    dren: this.fb.control('',[Validators.required]),
+    localite: this.fb.control('',[Validators.required]),
+    moughataa: this.fb.control('',[Validators.required]),
+    ecole: this.fb.control('',[Validators.required]),
+    notepedagogique: this.fb.control('',[Validators.required]),
+    dateEffet: this.fb.control('',[Validators.required]),
+  });
 
   cols: Cols[] = [
     { field: 'matricule', header: 'Matricule' },

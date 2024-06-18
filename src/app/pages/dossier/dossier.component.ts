@@ -50,7 +50,7 @@ export class DossierComponent implements OnInit{
   dossierForm: FormGroup = this.fb.group({
     libelDossier: this.fb.control('',[Validators.required]),
     dateUpload:this.fb.control('',[Validators.required]),
-    observation: this.fb.control('',[Validators.required])
+    observation: this.fb.control('',[Validators.required]),
   });
 // colonne du tableau
   cols: Cols[] = [
@@ -89,8 +89,7 @@ export class DossierComponent implements OnInit{
     return<Dossier>{
       libelDossier: formData.libelDossier,
       dateUpload: formData.dateUpload,
-      observation: formData.observation,
-      imageFold: this.imageFold
+      observation: formData.observation
     }
   }
 

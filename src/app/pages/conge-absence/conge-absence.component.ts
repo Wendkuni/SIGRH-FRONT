@@ -1,7 +1,12 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {Cols} from "../../core/data/primeng/primeng.model";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import { DemandeConge} from "../../core/data/conge/conge_absence.model";
+import {
+  AbsenceEtConge,
+  AbsenceEtCongeList,
+  DemandeConge,
+  DemandeRaison
+} from "../../core/data/conge/conge_absence.model";
 import {CongeService} from "../../core/data/conge/conge.service";
 import {Table, TableModule} from "primeng/table";
 import {ToastModule} from "primeng/toast";
@@ -50,18 +55,19 @@ import {RouterLink} from "@angular/router";
   templateUrl: './conge-absence.component.html',
   providers: [MessageService]
 })
-export class CongeAbsenceComponent implements OnInit{
+export class CongeAbsenceComponent implements OnInit {
 
+  protected readonly DemandeRaison: any = DemandeRaison;
   // colonne du tableau
   colNT: Cols[] = [
-    { field: 'matricule', header: 'Matricule' },
-    { field: 'nometprenom', header: 'Nom et prénom' },
-    { field: 'raison', header: 'Type' },
-    { field: 'dateEffet', header: 'Date Effet' },
-    { field: 'intervalleConge', header: 'Intervalle Date'},
-    { field: 'autorisation', header:'Autorisation'},
-    { field: 'motif', header: 'Motif'},
-    { field: 'signataire', header: 'Signataire'}
+    {field: 'matricule', header: 'Matricule'},
+    {field: 'nometprenom', header: 'Nom et prénom'},
+    {field: 'raison', header: 'Type'},
+    {field: 'dateEffet', header: 'Date Effet'},
+    {field: 'intervalleConge', header: 'Intervalle Date'},
+    {field: 'autorisation', header: 'Autorisation'},
+    {field: 'motif', header: 'Motif'},
+    {field: 'signataire', header: 'Signataire'}
   ];
   showFormVisibility = false;
   showFormActionDialog = false;
@@ -69,7 +75,7 @@ export class CongeAbsenceComponent implements OnInit{
   formDemandeProcessing!: FormGroup;
   fb = inject(FormBuilder);
   action = 'Add';
-  selectedDemande: DemandeConge = {} as DemandeConge;
+  selectedDemande: AbsenceEtConge = {} as AbsenceEtConge;
   raison = [
     'Absence',
     'Congé',
@@ -86,7 +92,7 @@ export class CongeAbsenceComponent implements OnInit{
     'Demande annulée'
   ];
   //variable pour recuperer la liste de tous les personnels
-  listDemande$!: DemandeConge[];
+  listDemande$!: AbsenceEtCongeList;
   congeService = inject(CongeService);
   messageService = inject(MessageService);
 
@@ -94,15 +100,16 @@ export class CongeAbsenceComponent implements OnInit{
   ngOnInit(): void {
     this.formDemande = this.fb.group({
       matricule: this.fb.control('', [Validators.required]),
-      nomPrenom: this.fb.control('', [Validators.required]),
-      raison: this.fb.control('', [Validators.required]),
+      libelleAb: this.fb.control(''),
+      raison: this.fb.control('',[Validators.required]),
       dateEffet: this.fb.control('', [Validators.required]),
-      nombreJr: this.fb.control('', [Validators.required])
+      nbJour: this.fb.control('', [Validators.required]),
     });
+
     this.formDemandeProcessing = this.fb.group({
-       autorisation: this.fb.control('', [Validators.required]),
-       motif: this.fb.control(''),
-       signataire: this.fb.control('', [Validators.required])
+      autorisation: this.fb.control('', [Validators.required]),
+      signataire: this.fb.control('', [Validators.required]),
+      motif: this.fb.control(''),
     });
 
     this.getAllDemandeConge();
@@ -118,7 +125,7 @@ export class CongeAbsenceComponent implements OnInit{
   }
 
   getAllDemandeConge() {
-    this.congeService.getAllDemandes().subscribe((response) => {
+    this.congeService.getAll().subscribe((response) => {
       this.listDemande$ = response;
     });
   }
@@ -127,40 +134,34 @@ export class CongeAbsenceComponent implements OnInit{
   getStatusSeverity(autorisation: any): any {
     if (autorisation === "Demande acceptée") {
       return 'success'
-    }
-    else if(autorisation === "Demande en cours"){
+    } else if (autorisation === "Demande en cours") {
       return 'info'
     }
     return 'danger'
   }
 
-  addDemande() {
-    this.action = 'Add';
-    this.showFormVisibility = true;
-  }
-
-  editDemande(dmd:DemandeConge) {
+  editDemande(dmd: AbsenceEtConge) {
     this.action = 'Edit';
     this.showFormVisibility = true;
     this.selectedDemande = dmd;
     this.formDemande.patchValue(this.selectedDemande);
   }
 
-  acceptDemande(dmd:DemandeConge) {
+  acceptDemande(dmd: AbsenceEtConge) {
     this.showFormActionDialog = true;
     this.selectedDemande = dmd;
-    this.action= 'Accetp';
+    this.action = 'Accetp';
   }
 
-  rejectDemande(dmd:DemandeConge) {
+  rejectDemande(dmd: AbsenceEtConge) {
     this.showFormActionDialog = true;
-    this.action= 'Refuse';
+    this.action = 'Refuse';
     this.selectedDemande = dmd;
   }
 
-  cancelDemande(dmd:DemandeConge) {
+  cancelDemande(dmd: AbsenceEtConge) {
     this.showFormActionDialog = true;
-    this.action= 'Cancel';
+    this.action = 'Cancel';
     this.selectedDemande = dmd;
   }
 
@@ -168,58 +169,60 @@ export class CongeAbsenceComponent implements OnInit{
   onSubmit() {
     const data = this.getFromData();
     const dataProcessing = this.getProcessingFormData();
-    switch (this.action){
+    switch (this.action) {
       case 'Add':
         this.createDemande(data);
         break;
       case 'Edit':
-        this.updateDemande(this.selectedDemande.id, data);
+        this.updateDemande(data);
         break;
-      default:
-        this.processingDemande(dataProcessing);
-        break;
+      // default:
+      //   this.processingDemande(dataProcessing);
+      //   break;
     }
   }
 
-  createDemande(demandeConge: DemandeConge){
-    this.congeService.addDemande(demandeConge).subscribe(next => {
+  createDemande(dmd: AbsenceEtConge) {
+    this.congeService.add(dmd).subscribe(next => {
         this.getAllDemandeConge();
-        this.messageService.add({severity:'success', summary:'Succès', detail:'Demande ajoutée avec succès'});
+        this.messageService.add({severity: 'success', summary: 'Succès', detail: 'Demande ajoutée avec succès'});
         this.showFormVisibility = false;
         this.formDemande.reset();
       },
       error => {
-        this.messageService.add({severity:'error', summary:'Erreur', detail:'Erreur lors de l\'ajout de la demande'});
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Erreur',
+          detail: 'Erreur lors de l\'ajout de la demande'
+        });
       });
   }
 
-  updateDemande(id:number, demandeConge: DemandeConge){
-    this.congeService.updateDemande(this.selectedDemande.id, this.selectedDemande).subscribe(() => {
+  updateDemande(demandeConge: AbsenceEtConge) {
+    this.congeService.update(demandeConge).subscribe(() => {
       this.getAllDemandeConge();
-      this.messageService.add({severity:'success', summary:'Succès', detail:'Demande modifiée avec succès'});
+      this.messageService.add({severity: 'success', summary: 'Succès', detail: 'Demande modifiée avec succès'});
       this.showFormVisibility = false;
       this.formDemande.reset();
     });
   }
 
   // Recuperer les elements du formulaire
-  private getFromData():DemandeConge{
+  private getFromData(): AbsenceEtConge {
     const formData = this.formDemande.value;
-    return <DemandeConge>{
-      matricule: formData.matricule,
-      nomPrenom: formData.nomPrenom,
-      raison: formData.raison,
+    return <AbsenceEtConge>{
+      libelleAb: formData.libelleAb,
       dateEffet: formData.dateEffet,
-      intervalleConge: formData.nombreJr,
-      autorisation: 'Demande en cours'
+      nbJour: formData.nombreJr,
+      autorisation: 'Demande en cours',
+      motif: formData.motif,
     }
   }
 
-  private getProcessingFormData():DemandeConge{
+  private getProcessingFormData(): AbsenceEtConge {
     const formData = this.formDemandeProcessing.value;
-    return <DemandeConge>{
+    return <AbsenceEtConge>{
       autorisation: formData.autorisation,
-      motif: formData.motif,
       signataire: formData.signataire
     }
   }
@@ -229,19 +232,25 @@ export class CongeAbsenceComponent implements OnInit{
     this.showFormActionDialog = false;
     this.formDemande.reset();
     this.action = 'Add';
-    this.selectedDemande = {} as DemandeConge;
+    this.selectedDemande = {} as AbsenceEtConge;
   }
 
-  processingDemande(demandeConge:DemandeConge) {
-    this.congeService.updateDemande(this.selectedDemande.id, demandeConge).subscribe(() => {
-      this.getAllDemandeConge();
-      this.messageService.add({severity:'success', summary:'Succès', detail:'Demande taiter avec succès'});
-      this.showFormActionDialog = false;
-      this.formDemandeProcessing.reset();
-    },
-      error => {
-        this.messageService.add({severity:'error', summary:'Erreur', detail:'Erreur lors du traitement de la demande'});
-      }
-  )};
+  processingDemande(demandeConge: AbsenceEtConge) {
+    // this.congeService.updateDemande(this.selectedDemande.id, demandeConge).subscribe(() => {
+    //     this.getAllDemandeConge();
+    //     this.messageService.add({severity: 'success', summary: 'Succès', detail: 'Demande taiter avec succès'});
+    //     this.showFormActionDialog = false;
+    //     this.formDemandeProcessing.reset();
+    //   },
+    //   error => {
+    //     this.messageService.add({
+    //       severity: 'error',
+    //       summary: 'Erreur',
+    //       detail: 'Erreur lors du traitement de la demande'
+    //     });
+    //   }
+    // )
+  };
+
 
 }

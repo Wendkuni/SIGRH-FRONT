@@ -19,14 +19,6 @@
           class="p-element p-ripple p-button-outlined p-button-primary p-button p-component mr-2"
           (click)="showForm()"
         ></button>
-
-        <button
-          pButton
-          pRipple
-          label="Etats"
-          icon="pi pi-chart-bar"
-          class="p-element p-ripple p-button-outlined p-button-info p-button p-component mr-2"
-        ></button>
       </div>
     </ng-template>
 
@@ -199,10 +191,14 @@
   styleClass="p-fluid"
 >
   <ng-template pTemplate="content">
+    <div class="text-sm p-4">
+                Champs obligatoires:
+                <span class="text-red-500">*</span>
+    </div>
     <form [formGroup]="formDemande">
         <div class="grid">
           <div class="field col-12">
-            <label for="matricule">Matricule</label>
+            <label for="matricule">Matricule  <span class="text-red-500">*</span></label>
             <input
               type="text"
               pInputText
@@ -213,18 +209,7 @@
             <mrt-form-validators [entityField]="'matricule'" [formGroup]="formDemande"></mrt-form-validators>
           </div>
           <div class="field col-12">
-            <label for="nomPrenom">Nom Prenom</label>
-            <input
-              type="text"
-              pInputText
-              id="nomPrenom"
-              placeholder="nom et prenom"
-              formControlName="nomPrenom"
-              required/>
-            <mrt-form-validators [entityField]="'nomPrenom'" [formGroup]="formDemande"></mrt-form-validators>
-          </div>
-          <div class="field col-12">
-            <label for="raison">Raison</label>
+            <label for="raison">Raison  <span class="text-red-500">*</span></label>
             <p-dropdown
               [options]="raison"
               id="raison"
@@ -234,12 +219,12 @@
               appendTo="body"
               placeholder="Selectionner la raison"
             >
-              <mrt-form-validators [entityField]="'raison'" [formGroup]="formDemande"></mrt-form-validators>
             </p-dropdown>
+            <mrt-form-validators [entityField]="'raison'" [formGroup]="formDemande"></mrt-form-validators>
           </div>
 
           <div class="field col-12 md:col-6">
-            <label for="dateEffet">Date Effet</label>
+            <label for="dateEffet">Date Effet  <span class="text-red-500">*</span></label>
             <p-calendar
               id="dateEffet"
               appendTo="body"
@@ -254,16 +239,16 @@
           </div>
 
           <div class="field col-12 md:col-6">
-            <label for="nombre_jr">Nombre de jours</label>
+            <label for="nombre_jr">Nombre de jours  <span class="text-red-500">*</span></label>
             <p-inputNumber
               mode="decimal"
               id="nombre_jr"
               [showButtons]="true"
               inputId="min-buttons"
               [min]="1"
-              formControlName="nombreJr"
+              formControlName="nbJour"
               [useGrouping]="false"/>
-            <mrt-form-validators [entityField]="'nombreJr'" [formGroup]="formDemande"></mrt-form-validators>
+            <mrt-form-validators [entityField]="'nbJour'" [formGroup]="formDemande"></mrt-form-validators>
           </div>
         </div>
     </form>
@@ -287,9 +272,13 @@
   cdk-scrollable
   styleClass="p-fluid"
 >
+  <div class="text-sm p-4">
+    Champs obligatoires:
+    <span class="text-red-500">*</span>
+  </div>
   <form [formGroup]="formDemandeProcessing">
     <div class="field">
-      <label for="signataire">Signataire</label>
+      <label for="signataire">Signataire <span class="text-red-500">*</span></label>
       <input
         type="text"
         pInputText
@@ -300,7 +289,7 @@
       <mrt-form-validators [entityField]="'signataire'" [formGroup]="formDemandeProcessing"></mrt-form-validators>
     </div>
     <div class="field">
-      <label for="autorisation">Autorisation</label>
+      <label for="autorisation">Autorisation <span class="text-red-500">*</span></label>
       <p-dropdown
         [options]="autorisation"
         id="autorisation"

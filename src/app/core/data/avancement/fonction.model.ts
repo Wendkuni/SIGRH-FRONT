@@ -29,44 +29,4 @@ export interface Fonction {
   indice: string;
 }
 
-export interface Avancement{
-  id:string,
-    nature:string,
-    corps: string;
-    fonction: string,
-    grade: string,
-    echelle: string,
-    echellon: string,
-    dateEffet: Date
-    idPersonnel: string
-}
-
-// Interface fonction agent on database
-export interface Fonctionagent{
-    IdFonctionAgent: bigint;
-    IdAgent:bigint;
-    fonctionLib: string;
-    dateFonction: Date;
-    echelle: string;
-    echelon: string;
-    groupeA: string;
-    categoriA: string;
-    corpsA: string;
-    grade:string;
-    indixe:string;
-    corpsAarab: string;
-    fonctionLiArab:string;
-}
-
-
-//  Interface fonction list
-export interface fonctionliste{
-    IdFonctionList: bigint;
-    libFonctn:string;
-    libFonctnArab:string;
-    grade: string;
-    echelle: string;
-    salBase: GLfloat;
-    indixe: string;
-    echelon :string;
-}
+export type Fonctions = Fonction[];

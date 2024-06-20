@@ -34,11 +34,11 @@
 <p-card>
   <p-table
     [columns]="cols"
-    [value]="listPersonnel$"
+    [value]="store.personnel()"
     #dt1
     dataKey="id"
     [rows]="5"
-    [loading]="loading"
+    [loading]="store.loading()"
     [showCurrentPageReport]="true"
     currentPageReportTemplate="Page {currentPage} sur {totalPages}"
     [paginator]="true"
@@ -243,7 +243,7 @@
 >
   <ng-template pTemplate="content">
     <div class="container py-5">
-      <form [formGroup]="personnelForm">
+      <form [formGroup]="personnelForm" #personalFormRef="ngForm">
         <div class="col-12">
           <div class="card">
             <!--          Informations personnels de l'agent-->
@@ -403,13 +403,10 @@
 
               <!--              Activation-->
               <div class="field col-12 md:col-5">
-                <label for="actifOrNot" class="font-medium text-900">Activation </label>
-                <p-dropdown
-                  id="actifOrNot"
-                  formControlName="actifOrNot"
-                  placeholder="Activer ou desactiver"
-                >
-                </p-dropdown>
+                <label for="actifOrNot" class="font-medium text-900">Activation</label>
+                <input pInputText id="actifOrNot"
+                       class="w-full p-component p-element form-control mb-1" type="text"
+                       formControlName="actifOrNot"/>
               </div>
 
               <!--              Detacher    -->
@@ -433,9 +430,14 @@
               <!--              Type Education -->
               <div class="field col-12 md:col-6">
                 <label for="typeEducation" class="font-medium text-900">Type Education </label>
-                <input pInputText id="typeEducation" class="w-full p-component p-element form-control mb-1"
-                       type="text"
-                       formControlName="typeeducation"/>
+                <p-dropdown
+                  id="typeEducation"
+                  [options]="typeEducation | keyvalue"
+                  optionLabel="value"
+                  formControlName="typeeducation"
+                  placeholder="Activer ou desactiver"
+                >
+                </p-dropdown>
               </div>
 
               <!--              Date recrutement -->

@@ -89,7 +89,7 @@ export class RemunerationComponent implements OnInit{
       date: this.fb.control('',[Validators.required]),
     });
     this.getRemunerations();
-    this.getPersonnels();
+    // this.getPersonnels();
   }
 
   // Methode pour filtrer les elements du tableau
@@ -105,11 +105,11 @@ export class RemunerationComponent implements OnInit{
     });
   }
 
-  getPersonnels(){
-    this.personnelService.getAllPersonnels().subscribe((data) => {
-      this.listPersonnel = data;
-    });
-  }
+  // getPersonnels(){
+  //   this.personnelService.getAllPersonnels().subscribe((data) => {
+  //     this.listPersonnel = data;
+  //   });
+  // }
 
   showFormDialog(){
     this.formVisible = true;

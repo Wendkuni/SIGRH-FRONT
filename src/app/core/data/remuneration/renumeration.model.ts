@@ -1,26 +1,17 @@
 /*
  * Interface pour l'entité renumeration
  */
-  export interface Remuneration{
+  import {Personnel} from "../personals/personnel.model";
 
-    IdRemunerationAgent: bigint;
-    // Id de l'agent (foreign key)
-    IdAgent: bigint;
-    // Valeur de la renumeration(Net à payer)
-    valMnt: number;
-    // Banque de l'agent(ou de la renumeration)
-    bankLib:string;
-    // Mois de la renumeration
+export interface Remuneration{
+
+    IdRemunerationAgent: number;
     dateEffet:Date;
+    libelleBank: string;
+    codeBank: string;
+    valeurMontant: number;
+    personnel: Personnel;
 
     }
 
-
-    export interface RemunerationWithAgent{
-      IdRemunerationAgent: bigint;
-      valMnt: string;
-      bankLib:string;
-      dateEffet:Date;
-      IdAgent: bigint;
-    }
-
+export type Remunerations = Remuneration[];

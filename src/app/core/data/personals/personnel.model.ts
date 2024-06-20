@@ -53,9 +53,15 @@ export interface Personnel{
   cleRib: string;
   detacher: string;
   ministerOrigine: string;
-  typeeducation: string;
+  typeeducation: TypeEducation;
   photo?: string;
 }
 
 export type Personnels = Personnel[];
 
+export enum TypeEducation {
+  'Aucun' ='AUCUN',
+  'Scolaire' = 'SCOLAIRE',
+  'Formation' = 'FORMATION',
+  'Professionnel' = 'PROFESSIONNEL',
+}

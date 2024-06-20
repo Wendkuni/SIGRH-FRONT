@@ -2,6 +2,7 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Personnel, Personnels} from "./personnel.model";
 import {environment} from "../../../../environments/environment";
+import {Observable} from "rxjs";
 
 interface statPersonnel{
   matricule:string;
@@ -31,11 +32,22 @@ export class PersonnelService {
   // Inject HttpClient
   http = inject(HttpClient);
 
-
+  httpOptions = {
+    headers: new HttpHeaders( { 'Access-Control-Allow-Origin': '*' })
+  };
 
   // get all personnels
   getAllPersonnels(){
-    return this.http.get<Personnels>(this.apiUrl + '/personnels');
+    return this.http.get<Personnels>(this.apiUrl + '/personnel/All', this.httpOptions);
+  }
+
+  // find personnel by locality
+  findPersonnelByLocalite(id: number){
+    return this.http.get<Personnels>(`${this.apiUrl}/personnel/ByLocalite/${id}`);
+  }
+
+  findPersonnelByAffectation(id: number){
+    return this.http.get<Personnels>(`${this.apiUrl}/personnel/ByAffectation/${id}`);
   }
 
   getStatPersonnel(){
@@ -48,37 +60,28 @@ export class PersonnelService {
 
   // find personnel by id
   findPersonnelById(id: number){
-    return this.http.get<Personnel>(`${this.apiUrl}/personnelsBy/${id}`);
+    return this.http.get<Personnel>(`${this.apiUrl}/ById/${id}`,this.httpOptions);
   }
 
   // create personnel
   createPersonnel(personnel: Personnel){
-    return this.http.post(`${this.apiUrl}/personnel`, personnel);
+    return this.http.post(`${this.apiUrl}/personnel/create`, personnel, this.httpOptions);
   }
 
   // update personnel
   updatePersonnel(personnel: Personnel){
 
    let options = {
-      headers: new HttpHeaders().set("Content-Type", "application/x-www-form-urlencoded"),
+     headers: new HttpHeaders( { 'Access-Control-Allow-Origin': '*' }),
       params: new HttpParams().set('id', personnel.idAgent)
     }
 
-
-    return this.http.put(`${this.apiUrl}/personnel/${personnel.idAgent}`,personnel, options );
+    return this.http.put(`${this.apiUrl}/personnel/updade/${personnel.idAgent}`,personnel, options );
   }
 
   // delete personnel
   deletePersonnel(personnel: Personnel){
-    return this.http.delete(`${this.apiUrl}/personnel/delete/${personnel.idAgent}`);
-  }
-
-  getPersonnelByAffectation(id:number){
-    return this.http.get<Personnels>(`${this.apiUrl}/personnelsByAffectation/${id}`);
-  }
-
-  getPersonnelByLocalite(id:number){
-    return this.http.get<Personnels>(`${this.apiUrl}/personnelsByLocalite/${id}`);
+    return this.http.delete(`${this.apiUrl}/personnel/delete/${personnel.idAgent}`,this.httpOptions);
   }
 
 }

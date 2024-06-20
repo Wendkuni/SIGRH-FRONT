@@ -1,12 +1,12 @@
-import {Component, ElementRef, inject, OnInit, ViewChild} from '@angular/core';
-import {Personnel, personnelColonneTable, Personnels} from "../../core/data/personals/personnel.model";
+import {ChangeDetectionStrategy, Component, ElementRef, inject, OnInit, ViewChild} from '@angular/core';
+import {Personnel, personnelColonneTable, Personnels, TypeEducation} from "../../core/data/personals/personnel.model";
 import {PersonnelService} from "../../core/data/personals/personnel.service";
 import {ConfirmationService, MessageService} from "primeng/api";
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {CardModule} from "primeng/card";
 import {Table, TableModule} from "primeng/table";
 import {InputTextModule} from "primeng/inputtext";
-import {DatePipe, UpperCasePipe} from "@angular/common";
+import {DatePipe, KeyValuePipe, NgForOf, NgStyle, UpperCasePipe} from "@angular/common";
 import {TagModule} from "primeng/tag";
 import {ButtonModule} from "primeng/button";
 import {TooltipModule} from "primeng/tooltip";
@@ -21,6 +21,8 @@ import {DividerModule} from "primeng/divider";
 import {FileUploadModule} from "primeng/fileupload";
 import {DropdownModule} from "primeng/dropdown";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
+import {PersonnelStore} from "../../core/state/personals/personal.store";
+import {SkeletonModule} from "primeng/skeleton";
 
 @Component({
   selector: 'mrt-personnel',
@@ -45,12 +47,20 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
     DividerModule,
     FileUploadModule,
     DropdownModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    SkeletonModule,
+    NgStyle,
+    NgForOf,
+    FormsModule,
+    KeyValuePipe
   ],
   templateUrl: './personnel.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [MessageService, ConfirmationService]
 })
 export class PersonnelComponent implements OnInit{
+
+  store = inject(PersonnelStore);
 
   @ViewChild('filter') filter!: ElementRef;
 // colonne du tableau
@@ -69,6 +79,7 @@ export class PersonnelComponent implements OnInit{
   fb = inject(FormBuilder);
   loading: boolean = true;
   confirService = inject(ConfirmationService);
+  typeEducation =  TypeEducation;
 
   ngOnInit(): void {
     this.personnelForm = this.fb.group({
@@ -101,15 +112,19 @@ export class PersonnelComponent implements OnInit{
       typeeducation: this.fb.control(''),
       dteSortie: this.fb.control(''),
     });
-    this.getAllPersonnel();
+    this.getAllPersonnel().then(
+      () => console.log("personnel recuperer")
+    );
+    console.table(this.store.personnel());
   }
 
   // Methode pour recuperer la liste du personnel
-  getAllPersonnel() {
-    this.personalService.getAllPersonnels().subscribe((response) => {
-      this.listPersonnel$ = response;
-      this.loading = false;
-    });
+  async getAllPersonnel() {
+    this.store.getAllPersonnel();
+    // this.personalService.getAllPersonnels().subscribe((response) => {
+    //   this.listPersonnel$ = response;
+    //   this.loading = false;
+    // });
   }
 
   //Methode pour afficher le formulaire d'ajout
@@ -254,4 +269,5 @@ export class PersonnelComponent implements OnInit{
       });
   }
 
+  protected readonly TypeEducation = TypeEducation;
 }

@@ -54,14 +54,16 @@ export interface Personnel{
   detacher: string;
   ministerOrigine: string;
   typeeducation: TypeEducation;
-  photo?: string;
+  imagPers: File;
 }
 
 export type Personnels = Personnel[];
 
-export enum TypeEducation {
-  'Aucun' ='AUCUN',
-  'Scolaire' = 'SCOLAIRE',
-  'Formation' = 'FORMATION',
-  'Professionnel' = 'PROFESSIONNEL',
+export interface TypeEducation{
+  label: string;
+}
+
+export interface UploadEvent {
+  originalEvent: Event;
+  files: File[];
 }

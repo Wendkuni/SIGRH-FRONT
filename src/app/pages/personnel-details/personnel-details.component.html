@@ -10,26 +10,27 @@
   <div class="flex align-items-center border-bottom-1 surface-border p-3 lg:p-4 ">
     <!--      Image du personnel et son nom -->
     <div class="relative flex align-items-center mr-3">
-      @if (personnel.photo) {
-        <img src="{{personnel.photo}}" alt="Profile" class="w-4rem h-4rem border-circle shadow-4">
+      @if (personnel.imagPers) {
+        <img src="{{personnel.imagPers}}" alt="Profile" class="w-4rem h-4rem border-circle shadow-4">
       } @else {
         <img src="assets/demo/images/avatar/user-avatar.png" alt="user.name"
              class="w-4rem h-4rem border-circle shadow-4">
       }
     </div>
+
     <div class="mr-2">
-      <span class="font-semibold block">{{personnel.nomPrenom}}</span>
+      <span class="font-semibold block">{{ personnel.nomPrenom }}</span>
     </div>
 
-    <div class="flex align-items-center ml-auto">
-      <!--      Bouton de téléchargement -->
-      <button pButton=""
-              pRipple=""
-              label="Télécharger"
-              icon="pi pi-print"
-              class="p-element p-ripple p-button-outlined p-button-primary p-button p-component mx-1">
-      </button>
-    </div>
+<!--    <div class="flex align-items-center ml-auto">-->
+<!--      &lt;!&ndash;      Bouton de téléchargement &ndash;&gt;-->
+<!--      <button pButton=""-->
+<!--              pRipple=""-->
+<!--              label="Télécharger"-->
+<!--              icon="pi pi-print"-->
+<!--              class="p-element p-ripple p-button-outlined p-button-primary p-button p-component mx-1">-->
+<!--      </button>-->
+<!--    </div>-->
   </div>
 
   <p-tabView>
@@ -38,15 +39,15 @@
         [personnel]="personnel"
       ></mrt-fonction>
     </p-tabPanel>
-    <p-tabPanel header="Dossier">
-      <mrt-dossier
-        [personnel]="personnel"
-      ></mrt-dossier>
-    </p-tabPanel>
-    <p-tabPanel header="Mobilite">
-      <mrt-affectation
-        [personnel]="personnel"
-      ></mrt-affectation>
-    </p-tabPanel>
+<!--    <p-tabPanel header="Dossier">-->
+<!--      <mrt-dossier-->
+<!--        [personnel]="personnel"-->
+<!--      ></mrt-dossier>-->
+<!--    </p-tabPanel>-->
+<!--    <p-tabPanel header="Mobilite">-->
+<!--      <mrt-affectation-->
+<!--        [personnel]="personnel"-->
+<!--      ></mrt-affectation>-->
+<!--    </p-tabPanel>-->
   </p-tabView>
 </p-card>

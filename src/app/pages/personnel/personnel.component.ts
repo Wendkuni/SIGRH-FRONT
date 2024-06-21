@@ -1,5 +1,11 @@
 import {ChangeDetectionStrategy, Component, ElementRef, inject, OnInit, ViewChild} from '@angular/core';
-import {Personnel, personnelColonneTable, Personnels, TypeEducation} from "../../core/data/personals/personnel.model";
+import {
+  Personnel,
+  personnelColonneTable,
+  Personnels,
+  TypeEducation,
+  UploadEvent
+} from "../../core/data/personals/personnel.model";
 import {PersonnelService} from "../../core/data/personals/personnel.service";
 import {ConfirmationService, MessageService} from "primeng/api";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
@@ -18,7 +24,7 @@ import {DialogModule} from "primeng/dialog";
 import {FormValidatorsComponent} from "../../shared/form-validators/form-validators.component";
 import {CalendarModule} from "primeng/calendar";
 import {DividerModule} from "primeng/divider";
-import {FileUploadModule} from "primeng/fileupload";
+import {FileUploadEvent, FileUploadModule} from "primeng/fileupload";
 import {DropdownModule} from "primeng/dropdown";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {PersonnelStore} from "../../core/state/personals/personal.store";
@@ -55,7 +61,6 @@ import {SkeletonModule} from "primeng/skeleton";
     KeyValuePipe
   ],
   templateUrl: './personnel.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [MessageService, ConfirmationService]
 })
 export class PersonnelComponent implements OnInit{
@@ -78,8 +83,14 @@ export class PersonnelComponent implements OnInit{
   personnelForm!: FormGroup;
   fb = inject(FormBuilder);
   loading: boolean = true;
+  userFile: any;
   confirService = inject(ConfirmationService);
-  typeEducation =  TypeEducation;
+  typeEducation = [
+    'AUCUN',
+    'SCOLAIRE',
+    'FORMATION',
+    'PROFESSIONNEL'
+  ];
 
   ngOnInit(): void {
     this.personnelForm = this.fb.group({
@@ -110,12 +121,11 @@ export class PersonnelComponent implements OnInit{
 
       ministerOrigine: this.fb.control(''),
       typeeducation: this.fb.control(''),
-      dteSortie: this.fb.control(''),
+      dteSortie: this.fb.control('')
     });
     this.getAllPersonnel().then(
       () => console.log("personnel recuperer")
     );
-    console.table(this.store.personnel());
   }
 
   // Methode pour recuperer la liste du personnel
@@ -134,7 +144,7 @@ export class PersonnelComponent implements OnInit{
   }
 
   //Methode pour afficher le formulaire de modification avec les donnees de l'agent selectionner deja rempli
-  openEdit(personal: any) {
+  openEdit(personal: Personnel) {
     this.formDialog = true;
     this.action = 'Update';
     this.selectedPersonnel = personal;
@@ -144,6 +154,7 @@ export class PersonnelComponent implements OnInit{
 
   savePersonnel() {
     const data = this.getFormData();
+    data.imagPers = this.userFile;
     if (this.action === 'Add') {
       this.createPersonnel(data);
     } else {
@@ -223,7 +234,7 @@ export class PersonnelComponent implements OnInit{
   close() {
     this.detailsVisibility = false
     this.selectedPersonnel = {} as Personnel
-    // a completer par le formGroup
+    this.personnelForm.reset();
   }
 
   // Methode pour fermer la vue du formulaire
@@ -269,5 +280,7 @@ export class PersonnelComponent implements OnInit{
       });
   }
 
-  protected readonly TypeEducation = TypeEducation;
+  onSelectedFiles(event:any) {
+   this.userFile = event.currentFiles;
+  }
 }

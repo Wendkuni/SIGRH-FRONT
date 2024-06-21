@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, OnInit} from '@angular/core';
 import {Cols} from "../../core/data/primeng/primeng.model";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {
@@ -27,6 +27,8 @@ import {InputNumberModule} from "primeng/inputnumber";
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {MessageService} from "primeng/api";
 import {RouterLink} from "@angular/router";
+import {PersonnelService} from "../../core/data/personals/personnel.service";
+import {Personnels} from "../../core/data/personals/personnel.model";
 
 @Component({
   selector: 'mrt-conge-absence',
@@ -61,15 +63,15 @@ export class CongeAbsenceComponent implements OnInit {
   // colonne du tableau
   colNT: Cols[] = [
     {field: 'matricule', header: 'Matricule'},
-    {field: 'nometprenom', header: 'Nom et prénom'},
+    {field: 'nomPrenom', header: 'Nom et prénom'},
     {field: 'raison', header: 'Type'},
     {field: 'dateEffet', header: 'Date Effet'},
-    {field: 'intervalleConge', header: 'Intervalle Date'},
+    {field: 'nbJour', header: 'Nombre de jours'},
     {field: 'autorisation', header: 'Autorisation'},
     {field: 'motif', header: 'Motif'},
     {field: 'signataire', header: 'Signataire'}
   ];
-  showFormVisibility = false;
+  showFormDialog = false;
   showFormActionDialog = false;
   formDemande!: FormGroup;
   formDemandeProcessing!: FormGroup;
@@ -95,6 +97,8 @@ export class CongeAbsenceComponent implements OnInit {
   listDemande$!: AbsenceEtCongeList;
   congeService = inject(CongeService);
   messageService = inject(MessageService);
+  personnalService = inject(PersonnelService);
+  listeAgent: Personnels = [];
 
 
   ngOnInit(): void {
@@ -104,24 +108,31 @@ export class CongeAbsenceComponent implements OnInit {
       raison: this.fb.control('',[Validators.required]),
       dateEffet: this.fb.control('', [Validators.required]),
       nbJour: this.fb.control('', [Validators.required]),
+      motif: this.fb.control('')
     });
 
     this.formDemandeProcessing = this.fb.group({
       autorisation: this.fb.control('', [Validators.required]),
       signataire: this.fb.control('', [Validators.required]),
-      motif: this.fb.control(''),
     });
 
     this.getAllDemandeConge();
+    this.getAllPersonnel();
   }
 
   showForm() {
-    this.showFormVisibility = true;
+    this.showFormDialog = true;
   }
 
   // Methode pour filtrer les elements du tableau
   onGlobalFilter(table: Table, event: Event) {
     table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+  }
+
+  getAllPersonnel() {
+    this.personnalService.getAllPersonnels().subscribe((response) => {
+      this.listeAgent = response;
+    });
   }
 
   getAllDemandeConge() {
@@ -142,7 +153,7 @@ export class CongeAbsenceComponent implements OnInit {
 
   editDemande(dmd: AbsenceEtConge) {
     this.action = 'Edit';
-    this.showFormVisibility = true;
+    this.showFormDialog = true;
     this.selectedDemande = dmd;
     this.formDemande.patchValue(this.selectedDemande);
   }
@@ -186,7 +197,7 @@ export class CongeAbsenceComponent implements OnInit {
     this.congeService.add(dmd).subscribe(next => {
         this.getAllDemandeConge();
         this.messageService.add({severity: 'success', summary: 'Succès', detail: 'Demande ajoutée avec succès'});
-        this.showFormVisibility = false;
+        this.showFormDialog = false;
         this.formDemande.reset();
       },
       error => {
@@ -202,7 +213,7 @@ export class CongeAbsenceComponent implements OnInit {
     this.congeService.update(demandeConge).subscribe(() => {
       this.getAllDemandeConge();
       this.messageService.add({severity: 'success', summary: 'Succès', detail: 'Demande modifiée avec succès'});
-      this.showFormVisibility = false;
+      this.showFormDialog = false;
       this.formDemande.reset();
     });
   }
@@ -228,7 +239,7 @@ export class CongeAbsenceComponent implements OnInit {
   }
 
   cancel() {
-    this.showFormVisibility = false;
+    this.showFormDialog = false;
     this.showFormActionDialog = false;
     this.formDemande.reset();
     this.action = 'Add';

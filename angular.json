@@ -66,12 +66,16 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "proxyConfig": "proxy.conf.json"
+          },
           "configurations": {
             "production": {
               "buildTarget": "Sigrh-mtr-angular:build:production"
             },
             "development": {
-              "buildTarget": "Sigrh-mtr-angular:build:development"
+              "buildTarget": "Sigrh-mtr-angular:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

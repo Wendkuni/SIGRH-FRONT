@@ -47,7 +47,7 @@
     [rowHover]="true"
     [rowsPerPageOptions]="[5,10, 20, 50]"
     tableStyleClass="p-datatable-gridlines"
-    [globalFilterFields]="['nni','matricule','nomEtPrenom','nomPrenomArab','tlphone','ministereOrigine','typeEducation']"
+    [globalFilterFields]="['nni','matricule','nomPrenom','nomPrenomArab','tlphone','ministereOrigine','typeEducation']"
   >
     <ng-template pTemplate="caption">
       <div class="flex justify-content-between flex-column sm:flex-row">
@@ -79,8 +79,8 @@
     <ng-template pTemplate="body" let-personnel>
       <tr class="align-items-center align-content-center">
         <td style=" min-width: 6rem;">
-          @if (personnel.photo) {
-            <img src="{{personnel.photo}}" alt="{{personnel.nomPrenom}}"
+          @if (personnel.imagPers) {
+            <img src="{{personnel.imagPers}}" alt="{{personnel.nomPrenom}}"
                  class="w-4rem h-4rem border-circle shadow-4">
           } @else {
             <img src="assets/demo/images/avatar/user-avatar.png" alt="user.name"
@@ -432,10 +432,9 @@
                 <label for="typeEducation" class="font-medium text-900">Type Education </label>
                 <p-dropdown
                   id="typeEducation"
-                  [options]="typeEducation | keyvalue"
-                  optionLabel="value"
+                  [options]="typeEducation"
                   formControlName="typeeducation"
-                  placeholder="Activer ou desactiver"
+                  placeholder="Choisir le type d'education"
                 >
                 </p-dropdown>
               </div>
@@ -535,9 +534,9 @@
                 <p-fileUpload
                   mode="basic"
                   id="avatar"
-                  url="./upload.php"
-                  accept="image/*"
+                  accept=".jpg,.jpeg,.png"
                   [maxFileSize]="1000000"
+                  (onSelect)="onSelectedFiles($event)"
                   styleClass="p-button-outlined p-button-plain w-full"
                   chooseLabel="Choisir une Image"></p-fileUpload>
               </div>
@@ -554,7 +553,6 @@
             class="p-button-primary flex-1"
             label="Enregistrer"
             icon="pi pi-fw pi-check"
-            [disabled]="personnelForm.invalid"
             (click)="savePersonnel()"
     >
     </button>

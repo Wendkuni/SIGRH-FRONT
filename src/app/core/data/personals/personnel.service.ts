@@ -33,12 +33,16 @@ export class PersonnelService {
   http = inject(HttpClient);
 
   httpOptions = {
-    headers: new HttpHeaders( { 'Access-Control-Allow-Origin': '*' })
+    headers: new HttpHeaders( { 'Content-Type': 'application/json' })
   };
 
   // get all personnels
   getAllPersonnels(){
     return this.http.get<Personnels>(this.apiUrl + '/personnel/All', this.httpOptions);
+  }
+
+  getTypeEducations(){
+    return this.http.get(`${this.apiUrl}/personnel/TypeEducations`, this.httpOptions);
   }
 
   // find personnel by locality
@@ -60,8 +64,9 @@ export class PersonnelService {
 
   // find personnel by id
   findPersonnelById(id: number){
-    return this.http.get<Personnel>(`${this.apiUrl}/ById/${id}`,this.httpOptions);
-  }
+    return this.http.get<Personnel>(`${this.apiUrl}/personnel/ById/${id}`,this.httpOptions);
+  };
+
 
   // create personnel
   createPersonnel(personnel: Personnel){
@@ -72,11 +77,10 @@ export class PersonnelService {
   updatePersonnel(personnel: Personnel){
 
    let options = {
-     headers: new HttpHeaders( { 'Access-Control-Allow-Origin': '*' }),
       params: new HttpParams().set('id', personnel.idAgent)
     }
 
-    return this.http.put(`${this.apiUrl}/personnel/updade/${personnel.idAgent}`,personnel, options );
+    return this.http.put(`${this.apiUrl}/personnel/updade/${personnel.idAgent}`,personnel ,options);
   }
 
   // delete personnel

@@ -55,7 +55,8 @@ export class AppMenuComponent implements OnInit {
                           routerLink: ['/conge-absence']
                         },
                         {
-                          label: 'Etats'
+                          label: 'Etats',
+                          routerLink: ['/etats-absence']
                         }
                       ]
                     },
@@ -65,6 +66,7 @@ export class AppMenuComponent implements OnInit {
                       items: [
                         {
                           label: 'Enregistrements',
+                          routerLink: ['/personnel']
                         },
                         {
                           label: 'Etats'
@@ -92,7 +94,8 @@ export class AppMenuComponent implements OnInit {
                           routerLink: ['/remuneration']
                         },
                         {
-                          label: 'Etats'
+                          label: 'Etats',
+                          routerLink: ['/etats-remuneration']
                         }
                       ]
                     },

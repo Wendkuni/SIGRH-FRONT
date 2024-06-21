@@ -27,7 +27,7 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/personnel/personnel.component').then(item => item.PersonnelComponent)
       },
       {
-        path: 'personnel-details/:idAgent',
+        path: 'personnel-details/:id',
         loadComponent: () => import('./pages/personnel-details/personnel-details.component').then(item => item.PersonnelDetailsComponent)
       },
       {
@@ -52,7 +52,15 @@ export const routes: Routes = [
       },
       {
         path: 'etats-personnel',
-        loadComponent: () => import('./pages/etats-personnel/etats-personnel.component').then(item => item.EtatsPersonnelComponent)
+        loadComponent: () => import('./etats/etats-personnel/etats-personnel.component').then(item => item.EtatsPersonnelComponent)
+      },
+      {
+        path: 'etats-absence',
+        loadComponent: () => import('./etats/etats-absences/etats-absences.component').then(item => item.EtatsAbsencesComponent)
+      },
+      {
+        path: 'etats-remuneration',
+        loadComponent: () => import('./etats/etats-remuneration/etats-remuneration.component').then(item => item.EtatsRemunerationComponent)
       }
       // {
       //   path: 'courriel',

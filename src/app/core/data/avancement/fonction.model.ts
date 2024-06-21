@@ -1,4 +1,5 @@
 import {Personnel} from "../personals/personnel.model";
+import {Cols} from "../primeng/primeng.model";
 
 export interface Fonction {
     // Identifiant unique de la fonction
@@ -30,3 +31,17 @@ export interface Fonction {
 }
 
 export type Fonctions = Fonction[];
+
+export let fonctionColonneTable: Cols[] = [
+  { field: 'libelleFonction', header: 'Fonction' },
+  {field: 'libelleFonctionArab',header: 'Fonction Arab'},
+  { field: 'dateDebFonction', header: 'Date Effect' },
+  { field: 'categorie', header: 'Categorie'},
+  { field: 'corps', header: 'Corps' },
+  { field: 'corpsArab', header: 'Corps Arab'},
+  { field: 'grade', header: 'Grade' },
+  { field: 'groupe', header: 'Groupe'},
+  { field: 'echelle', header: "Echelle"},
+  { field: 'echelon', header: "Echelon"},
+  { field: 'indice', header: "Indice"}
+];

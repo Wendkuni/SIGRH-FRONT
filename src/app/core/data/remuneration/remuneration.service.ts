@@ -1,5 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Remuneration, Remunerations} from "./renumeration.model";
 import {environment} from "../../../../environments/environment";
 
@@ -15,26 +15,33 @@ export class RemunerationService {
   http = inject(HttpClient);
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    headers: new HttpHeaders( { 'Content-Type': 'application/json' })
   };
 
 //Get all remunerations
   getAllRemunerations() {
-    return this.http.get<Remunerations>(`${this.url}/remunerations`);
+    return this.http.get<Remunerations>(`${this.url}/remunerations`, this.httpOptions);
+  }
+
+  findRemunerationById(id: number){
+    return this.http.get<Remuneration>(`${this.url}/remunerations/${id}`);
   }
 
   // Add remuneration
   addRemuneration(remuneration: Remuneration) {
-    return this.http.post<Remuneration>(`${this.url}/remuneration`, remuneration);
+    return this.http.post(`${this.url}/remuneration`, remuneration);
   }
 
   // Update remuneration
   updateRemuneration( remuneration: Remuneration) {
-    return this.http.patch<Remuneration>(`${this.url}/remuneration/${remuneration.IdRemunerationAgent}`, remuneration);
+    let options = {
+      params: new HttpParams().set('id', remuneration.IdRemunerationAgent)
+    }
+    return this.http.put(`${this.url}/remuneration/${remuneration.IdRemunerationAgent}`, remuneration, options);
   }
 
   // Delete remuneration
   deleteRemuneration(id: number) {
-    return this.http.delete<Remuneration>(`${this.url}/remuneration/delete/${id}`);
+    return this.http.delete(`${this.url}/remuneration/delete/${id}`);
   }
 }

@@ -1,5 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import { AbsenceEtConge, AbsenceEtCongeList,  DemandeConge} from "./conge_absence.model";
 import {environment} from "../../../../environments/environment.development";
 
@@ -15,9 +15,13 @@ export class CongeService {
   // Inject HttpClient
   http = inject(HttpClient);
 
+  httpOptions = {
+    headers: new HttpHeaders( { 'Access-Control-Allow-Origin': '*' })
+  };
+
   // get all demandes
   getAll(){
-    return this.http.get<AbsenceEtCongeList>(`${this.url}/absences`);
+    return this.http.get<AbsenceEtCongeList>(`${this.url}/absence/All`,this.httpOptions);
   }
 
 // get demande by id
@@ -28,7 +32,7 @@ export class CongeService {
 
   // create demande
   add(absence: AbsenceEtConge){
-    return this.http.post(`${this.url}/absence`, absence);
+    return this.http.post(`${this.url}//absence/create`, absence);
   }
 
   // update demande

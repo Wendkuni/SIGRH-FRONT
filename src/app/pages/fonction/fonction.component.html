@@ -1,4 +1,9 @@
-
+<p-toast
+  [showTransformOptions]="'translateY(100%)'"
+  [showTransitionOptions]="'1000ms'"
+  [hideTransitionOptions]="'1000ms'"
+  [showTransformOptions]="'translateX(100%)'" />
+<p-confirmDialog />
 <div class="flex justify-content-between border-bottom-1 surface-border p-3">
   <span class="block text-900 font-bold text-xl mb-4">Carrières</span>
   <span class="text-sm">
@@ -20,7 +25,6 @@
               id="matricule"
               [value]="personnel.matricule"
               required
-              autofocus
               disabled/>
           </div>
           <div class="field">
@@ -31,7 +35,6 @@
               id="fullName"
               [value]="personnel.nomPrenom"
               required
-              autofocus
               disabled/>
           </div>
           <div class="field">
@@ -39,25 +42,25 @@
             <p-dropdown
               id="nature"
               formControlName="nature"
-              [options]="nature"
-              placeholder="Selectionner la nature"
+              [options]="categorie"
+              placeholder="Selectionner la categorie"
             >
             </p-dropdown>
-            <mrt-form-validators [entityField]="'nature'"
+            <mrt-form-validators [entityField]="'categorie'"
                                  [formGroup]="fonctionAgentForm"></mrt-form-validators>
           </div>
           <div class="field">
-            <label for="dateEffet" class="font-medium text-900"> Date Effet <span class="text-red-500">*</span></label>
+            <label for="dateDebFonction" class="font-medium text-900"> Date Effet <span class="text-red-500">*</span></label>
             <p-calendar
-              id="dateEffet"
-              formControlName="dateEffet"
+              id="dateDebFonction"
+              formControlName="dateDebFonction"
               [dateFormat]="'yy-mm-dd'"
               [showButtonBar]="true"
               [firstDayOfWeek]="1"
               [readonlyInput]="true"
               styleClass="mb-1"
             />
-            <mrt-form-validators [entityField]="'dateEffet'"
+            <mrt-form-validators [entityField]="'dateDebFonction'"
                                  [formGroup]="fonctionAgentForm"></mrt-form-validators>
           </div>
         </div>
@@ -80,10 +83,10 @@
               <p-dropdown
                 id="fonction"
                 placeholder="Selectionner la fonction"
-                formControlName="fonction"
+                formControlName="libelleFonction"
               >
               </p-dropdown>
-              <mrt-form-validators [entityField]="'fonction'"
+              <mrt-form-validators [entityField]="'libelleFonction'"
                                    [formGroup]="fonctionAgentForm"></mrt-form-validators>
             </div>
             <div class="field">
@@ -109,14 +112,14 @@
                                    [formGroup]="fonctionAgentForm"></mrt-form-validators>
             </div>
             <div class="field ">
-              <label for="echellon" class="font-medium text-900">Echellon <span class="text-red-500">*</span></label>
+              <label for="echelon" class="font-medium text-900">Echelon <span class="text-red-500">*</span></label>
               <p-dropdown
-                id="echellon"
-                placeholder="Selectionner l'echellon"
-                formControlName="echellon"
+                id="echelon"
+                placeholder="Selectionner l'echelon"
+                formControlName="echelon"
               >
               </p-dropdown>
-              <mrt-form-validators [entityField]="'echellon'"
+              <mrt-form-validators [entityField]="'echelon'"
                                    [formGroup]="fonctionAgentForm"></mrt-form-validators>
             </div>
           </div>
@@ -137,7 +140,7 @@
   <div class="col-12 lg:col-7">
     <p-table
       [columns]="cols"
-      [value]="listAvancement$"
+      [value]="listeFonctionByAgent"
       #dt1
       dataKey="id"
       [rows]="5"
@@ -168,12 +171,16 @@
       </ng-template>
       <ng-template pTemplate="body" let-avancement>
         <tr>
-          <td>{{ avancement.fonction }}</td>
-          <td>{{ avancement.dateEffet  | uppercase }}</td>
+          <td>{{ avancement.libelleFonction }}</td>
+          <td>{{ avancement.libelleFonctionArab }}</td>
+          <td>{{ avancement.dateDebutFonction  | uppercase }}</td>
+          <td>{{ avancement.categorie }}</td>
           <td>{{ avancement.corps }}</td>
+          <td>{{ avancement.corpsArab }}</td>
           <td>{{ avancement.grade }}</td>
+          <td>{{ avancement.groupe }}</td>
           <td>{{ avancement.echelle }}</td>
-          <td>{{ avancement.echellon }}</td>
+          <td>{{ avancement.echelon }}</td>
           <td>{{ avancement.indice }}</td>
           <td>
             <!--          Bouton qui fait l'ouverture du formulaire de modification -->

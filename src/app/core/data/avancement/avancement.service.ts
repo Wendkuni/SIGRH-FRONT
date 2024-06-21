@@ -40,7 +40,7 @@ export class AvancementService {
 
   // get all avancement by personnel
   findAvancementByAgent(id: number){
-    return this.http.get<Fonctions>(`${this.url}/fonctionAgent/ByAgent/${id}`,this.httpOptions);
+    return this.http.get<Fonctions>(`${this.url}/fonctionAgent/ByAgent/${id}`);
   }
 
   findAvancementById(id: number){

@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {MessageService} from "primeng/api";
+import { MessageService} from "primeng/api";
 import {LayoutService} from "../../layout/service/app.layout.service";
 import {AuthService} from "../../core/data/users/auth.service";
 import {FormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
@@ -70,6 +70,8 @@ export class LoginComponent {
       }
     });
   }
+
+
 
   showForgotPassForm() {
     this.forgotPassFormVisible = true;

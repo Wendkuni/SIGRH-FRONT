@@ -1,19 +1,22 @@
 import {Component, inject, Input, OnInit} from '@angular/core';
-import {Avancement} from "../../core/data/avancement/fonction.model";
+import { Fonction,
+  fonctionColonneTable,
+  Fonctions
+} from "../../core/data/avancement/fonction.model";
 import {AvancementService} from "../../core/data/avancement/avancement.service";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
-import {Cols} from "../../core/data/primeng/primeng.model";
 import {InputTextModule} from "primeng/inputtext";
 import {DropdownModule} from "primeng/dropdown";
 import {FormValidatorsComponent} from "../../shared/form-validators/form-validators.component";
 import {CalendarModule} from "primeng/calendar";
 import {TableModule} from "primeng/table";
-import {UpperCasePipe} from "@angular/common";
+import {DatePipe, KeyValuePipe, UpperCasePipe} from "@angular/common";
 import {TooltipModule} from "primeng/tooltip";
 import {RippleModule} from "primeng/ripple";
-import {MessageService} from "primeng/api";
+import {ConfirmationService, MessageService} from "primeng/api";
 import {Personnel} from "../../core/data/personals/personnel.model";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
+import {ToastModule} from "primeng/toast";
 
 @Component({
   selector: 'mrt-fonction',
@@ -27,76 +30,91 @@ import {Personnel} from "../../core/data/personals/personnel.model";
     TableModule,
     UpperCasePipe,
     TooltipModule,
-    RippleModule
+    RippleModule,
+    KeyValuePipe,
+    ConfirmDialogModule,
+    ToastModule,
+    DatePipe
   ],
   templateUrl: './fonction.component.html',
   styleUrl: './fonction.component.scss',
-  providers: [MessageService]
+  providers: [MessageService, ConfirmationService]
 })
 export class FonctionComponent implements OnInit{
 
-  listAvancement$!: Avancement[]; //liste des dossiers
+  //liste des dossiers
+  listeFonctionByAgent!: Fonctions;
+
+  //service avancement
   avancementService = inject(AvancementService);
-  @Input() personnel!: Personnel;
+
+  //personnel requis pour la fonction
+  @Input({ required: true }) personnel!: Personnel;
+
+  //formulaire fonction
   fonctionAgentForm!: FormGroup;
+
+  //formBuilder
   fb = inject(FormBuilder);
-  router = inject(ActivatedRoute);
-  fonctionService = inject(AvancementService);
-  selectedAvancement!: Avancement;
-  action = 'Add';
-  selectAvancement :Avancement = {} as Avancement;
+
+  //action pour les methodes
+  action = 'Add'
+
+  //fonction selectionner
+  selectFonction :Fonction = {} as Fonction;
+
+  //service message
   messageService = inject(MessageService);
+
   // colonne du tableau
-  cols: Cols[] = [
-    { field: 'fonction', header: 'Fonction' },
-    { field: 'dateEffet', header: 'Date Effect' },
-    { field: 'corps', header: 'Corps' },
-    { field: 'grade', header: 'Grade' },
-    { field: 'echelle', header: "Echelle"},
-    { field: 'echellon', header: "Echellon"},
-    { field: 'indice', header: "Indice"}
-  ];
-  // Nature de la fonction
-  nature = [
-    'Integration',
-    'Titularisation',
-    'Nominative',
+  cols = fonctionColonneTable;
+
+  // categorie de la fonction
+  categorie = [
+    'Integration' ,
+    'Titularisation' ,
+    'Nominative' ,
     'Avancement',
-    'Bonification',
-    'Reclassement',
-    'Sanction',
-    'Decoration',
-    'Demission',
-    'Retraite',
+    'Bonification' ,
+    'Reclassement' ,
+    'Sanction' ,
+    'Decoration' ,
+    'Demission' ,
+    'Retraite' ,
     'Deces'
   ];
 
 
   ngOnInit(): void {
+    // Initialisation du formulaire
     this.fonctionAgentForm = this.fb.group({
-      nature: this.fb.control('',[Validators.required]),
+      libelleFonction: this.fb.control('',[Validators.required]),
       corps: this.fb.control('',[Validators.required]),
-      fonction: this.fb.control('',[Validators.required]),
       grade: this.fb.control('',[Validators.required]),
       echelle: this.fb.control('', [Validators.required]),
-      echellon: this.fb.control('', [Validators.required]),
-      dateEffet: this.fb.control('',[Validators.required])
+      echelon: this.fb.control('', [Validators.required]),
+      dateDebFonction: this.fb.control('',[Validators.required]),
+      categorie: this.fb.control('', [Validators.required]),
+      groupe: this.fb.control('', [Validators.required]),
+      corpsArab: this.fb.control('', [Validators.required]),
+      libelleFonctionArab: this.fb.control('', [Validators.required]),
+      indice: this.fb.control('', [Validators.required])
     })
     this.getAvancements();
   }
 
   // Recuperer la liste des avancements du personnel selectionner
   private getAvancements() {
-    this.avancementService.getAllAvancements().subscribe((response) => {
-      this.listAvancement$ = response;
+    this.avancementService.findAvancementByAgent(this.personnel.idAgent).subscribe((response) => {
+      this.listeFonctionByAgent = response;
     });
   }
 
   // Rempli le formulaire pour modification
-  patchForm(selectedAvancement: Avancement) {
+  patchForm(fonction: Fonction) {
     this.action = 'Edit';
-    this.fonctionAgentForm.patchValue(selectedAvancement);
-    this.selectedAvancement = selectedAvancement;
+    this.fonctionAgentForm.patchValue(fonction);
+    this.selectFonction = fonction;
   }
 
   // Methode d'enregistrement d'un avancement dans la base de donnee qui choisi entre l'ajout et la modification
@@ -112,14 +130,14 @@ export class FonctionComponent implements OnInit{
 
   // Methode pour annuler une methode
   cancel() {
-    this.selectedAvancement = {} as Avancement;
+    this.selectFonction = {} as Fonction;
     this.fonctionAgentForm.reset();
     this.action = 'Add';
   }
 
   // Methode pour ajouter un avancement
-  private addAvancement(avancement:Avancement) {
-    this.avancementService.addAvancement(avancement).subscribe(next=>{
+  private addAvancement(fonction:Fonction) {
+    this.avancementService.createAvancement(fonction).subscribe(next=>{
       this.getAvancements();
       this.fonctionAgentForm.reset();
       this.messageService.add({severity: 'success', summary: 'Successful', detail: 'Avancement ajouter', life: 3000});
@@ -129,27 +147,43 @@ export class FonctionComponent implements OnInit{
   }
 
   // Recuperation des elements du formulaire
-  private getFormData():Avancement {
+  private getFormData() {
     const formData = this.fonctionAgentForm.value;
-    return<Avancement>{
-      nature: formData.nature,
+    return<Fonction>{
+      libelleFonction: formData.libelleFonction,
       corps: formData.corps,
-      fonction: formData.fonction,
       grade: formData.grade,
       echelle: formData.echelle,
-      echellon: formData.echellon,
-      dateEffet: formData.dateEffet
+      echelon: formData.echelon,
+      dateDebFonction: formData.dateDebFonction,
+      categorie: formData.categorie,
+      groupe: formData.groupe,
+      corpsArab: formData.corpsArab,
+      libelleFonctionArab: formData.libelleFonctionArab,
+      indice: formData.indice
     }
   }
 
   // Methode pour modifier un avancement
-  private updateAvancement(avancement: Avancement) {
-    this.avancementService.updateAvancement(avancement.id, avancement).subscribe(next=>{
+  private updateAvancement(fonction: Fonction) {
+    this.avancementService.updateAvancement(fonction).subscribe(next=>{
       this.getAvancements();
       this.fonctionAgentForm.reset();
       this.messageService.add({severity: 'success', summary: 'Successful', detail: 'Avancement modifier', life: 3000});
     },error => {
       this.messageService.add({severity: 'error', summary: 'Error', detail: 'Avancement non modifier', life: 3000});
     })
+  }
+
+  // Methode pour supprimer un avancement
+  private deleteAvancement(id: number){
+    this.avancementService.delateAvancement(id).subscribe(() => {
+        this.getAvancements();
+        this.messageService.add({severity: 'success', summary: 'Successful', detail: 'Personnel supprimer', life: 3000});
+      },
+      error => {
+        this.messageService.add({severity: 'error', summary: 'Error', detail: 'Personnel non supprimer', life: 3000});
+
+      });
   }
 }

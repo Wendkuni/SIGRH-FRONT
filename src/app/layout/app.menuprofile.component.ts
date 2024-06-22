@@ -75,7 +75,7 @@ export class AppMenuProfileComponent {
   confirm(event: Event) {
     this.confirmationService.confirm({
       target: event.target as EventTarget,
-      message: 'Veuillez confirmer pour continuer. Etes-vous sure de vouloir quitter ?',
+      message: 'Êtes-vous sûr de vouloir continuer ?',
       icon: 'pi pi-exclamation-circle',
       acceptIcon: 'pi pi-check mr-1',
       rejectIcon: 'pi pi-times mr-1',

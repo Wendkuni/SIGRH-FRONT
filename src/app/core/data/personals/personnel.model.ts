@@ -2,54 +2,69 @@ import {Cols} from "../primeng/primeng.model";
 
 
 export let personnelColonneTable : Cols[] = [
-    {field: 'photo', header: 'Photo'},
-    {field: 'nni', header: 'NNI'},
-    {field: 'matricule', header: 'Matricule'},
-    {field: 'nomEtPrenom', header: 'Nom et prénom'},
-    {field: 'nomPrenomArab', header: 'Nom et prénom Arab'},
-    {field: 'tlphone', header: 'Téléphone'},
-    {field: 'adrssEmp', header: 'Adresse'},
-    {field: 'lieuNaiss', header: 'Lieu naissance'},
-    {field: 'dteNaiss', header: 'Date naissance'},
-    {field: 'dteRerutmnt', header: 'Date recrutement'},
-    {field: 'dteTitularisation', header: 'Date titularisation'},
-    {field: 'debuCntrat', header: 'Début contrat'},
-    {field: 'finCntrat', header: 'Fin contrat'},
-    {field: 'bank', header: 'Banque'},
-    {field: 'codBank', header: 'Code banque'},
-    {field: 'numroCpte', header: 'Numéro compte'},
-    {field: 'cleRib', header: 'Clé rib'},
-    {field: 'detacher', header: 'Détacher'},
-    {field: 'ministereOrigine', header: 'Ministère origine'},
-    {field: 'typeEducation', header: 'Type éducation'},
-    {field: 'statusEmp', header: 'Statut employé'},
-    {field: 'actifOrNot', header: 'Situation'}
+  {field: 'photo', header: 'Photo'},
+  {field: 'nni', header: 'NNI'},
+  {field: 'matricule', header: 'Matricule'},
+  {field: 'nomPrenom', header: 'Nom et prénom'},
+  {field: 'nomPrenomArab', header: 'Nom et prénom Arab'},
+  {field: 'tlphone', header: 'Téléphone'},
+  {field: 'adressEmp', header: 'Adresse'},
+  {field: 'lieuNaiss', header: 'Lieu naissance'},
+  {field: 'dateNaiss', header: 'Date naissance'},
+  {field: 'dteRecrutement', header: 'Date recrutement'},
+  {field: 'dteTitularisation', header: 'Date titularisation'},
+  {field: 'dteSortie', header: 'Date sortie'},
+  {field: 'debutCntrat', header: 'Début contrat'},
+  {field: 'finCntrat', header: 'Fin contrat'},
+  {field: 'bank', header: 'Banque'},
+  {field: 'codeBank', header: 'Code banque'},
+  {field: 'numroCpte', header: 'Numéro compte'},
+  {field: 'cleRib', header: 'Clé rib'},
+  {field: 'dteSortie', header: 'Date Sortie'},
+  {field: 'detacher', header: 'Détacher'},
+  {field: 'ministerOrigine', header: 'Ministère origine'},
+  {field: 'typeeducation', header: 'Type éducation'},
+  {field: 'statusEmp', header: 'Statut employé'},
+  {field: 'actifOrNot', header: 'Situation'}
 ];
 
-// Personnel model on database
+/*
+* Personnel model
+*/
 export interface Personnel{
-    idAgent: bigint;
-    matricule: string;
+  idAgent: number;
+  matricule: string;
+  nomPrenom: string;
+  nomPrenomArab: string;
   nni: string;
-    nomPrenom: string;
-    nomPrenomArab: string;
-    dateNaiss: Date;
-    tlphone: string;
-    adrssEmp: string;
-    lieuNaiss: string;
-    dteRecrutmnt: Date;
-    dteTitularisation: Date;
-    debuCntrat: Date;
+  dteRecrutement: Date;
+  dteTitularisation: Date;
+  dteSortie: Date;
+  statusEmp: string;
+  tlphone: string;
+  adressEmp: string;
+  debutCntrat: Date;
   finCntrat: Date;
+  dateNaiss: Date;
+  lieuNaiss: string;
+  actifOrNot: string;
   bank: string;
-  codBank: string;
-  numroCpte: string;
+  codeBank: string;
+  numroCpte: number;
   cleRib: string;
   detacher: string;
-  ministereOrigne: string;
-  typeEducation: string;
-  statusEmp: string;
-  actifOrNnot: boolean;
-  dteSortie: Date;
-    photo: string;
+  ministerOrigine: string;
+  typeeducation: TypeEducation;
+  imagPers: File;
+}
+
+export type Personnels = Personnel[];
+
+export interface TypeEducation{
+  label: string;
+}
+
+export interface UploadEvent {
+  originalEvent: Event;
+  files: File[];
 }

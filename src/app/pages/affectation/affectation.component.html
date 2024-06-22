@@ -40,14 +40,14 @@
       </ng-template>
       <ng-template pTemplate="body" let-mobilite>
         <tr>
-          <td>{{mobilite.matricule}}</td>
-          <td>{{mobilite.nomPrenom}}</td>
+          <td>{{mobilite.personnel.matricule}}</td>
+          <td>{{mobilite.personnel.nomPrenom}}</td>
           <td>{{mobilite.nature}}</td>
           <td>{{mobilite.dren}}</td>
           <td>{{mobilite.localite}}</td>
           <td>{{mobilite.moughataa}}</td>
-          <td>{{mobilite.ecole}}</td>
-          <td>{{mobilite.notePedagogique}}</td>
+          <td>{{mobilite.serviceEcole}}</td>
+          <td>{{mobilite.notePedagogiq}}</td>
           <td>{{mobilite.dateEffet |date}}</td>
           <td>
             <!--          Bouton qui fait la validation de l'avancement  -->
@@ -77,100 +77,131 @@
 <p-dialog
   [(visible)]="showDialog"
   [style]="{ width: '40vw'}"
-  header="Dossier Formulaire"
+  header="Affectation Formulaire"
+  (onHide)="cancel()"
   [modal]="true"
   [draggable]="false"
   [resizable]="false"
   styleClass="p-fluid"
 >
   <ng-template pTemplate="content">
-      <span class="text-sm">
+
+    <div class="container py-5">
+      <form [formGroup]="affectionForm" >
+             <span class="text-sm">
                 Champs obligatoires:
                 <span class="text-red-500">*</span>
               </span>
+<!--Matricule-->
+        <div class="field mt-4">
+          <label for="matricule">Matricule</label>
+          <input
+            type="text"
+            pInputText
+            id="matricule"
+            [value]="personnel.matricule"
+            required
+            disabled/>
+        </div>
 
-    <div class="field mt-4">
-      <label for="matricule">Matricule</label>
-      <input
-        type="text"
-        pInputText
-        id="matricule"
-        required
-        autofocus
-        disabled/>
+<!--Nom Prenom-->
+        <div class="field">
+          <label for="fullName">Nom Prenom</label>
+          <input
+            type="text"
+            pInputText
+            id="fullName"
+            [value]="personnel.nomPrenom"
+            required
+            disabled/>
+        </div>
+
+<!--        Localite-->
+        <div class="field">
+          <label for="localite">Localite <span class="text-red-500">*</span></label>
+          <p-dropdown
+            id="localite"
+            formControlName="localite"
+            placeholder="Selectionner la localite"
+          >
+          </p-dropdown>
+        </div>
+
+<!--        Service ecole -->
+        <div class="field">
+          <label for="ecole">Ecole <span class="text-red-500">*</span></label>
+          <p-dropdown
+            id="ecole"
+            formControlName="serviceEcole"
+            placeholder="Selectionner l'ecole"
+          >
+          </p-dropdown>
+        </div>
+
+<!--        nature -->
+        <div class="field">
+          <label for="raison">Nature <span class="text-red-500">*</span></label>
+          <p-dropdown
+            [options]="nature"
+            id="raison"
+            formControlName="nature"
+            placeholder="Selectionner la raison"
+          >
+          </p-dropdown>
+        </div>
+
+<!--        dren -->
+        <div class="field">
+          <label for="dren">DREN <span class="text-red-500">*</span></label>
+          <p-dropdown
+            id="dren"
+            formControlName="dren"
+            placeholder="Selectionner le dren"
+          >
+          </p-dropdown>
+        </div>
+
+<!--        moughataa -->
+        <div class="field">
+          <label for="moughataa">Moughataa <span class="text-red-500">*</span></label>
+          <input
+            type="text"
+            pInputText
+            formControlName="moughataa"
+            id="moughataa"
+            required
+          />
+        </div>
+
+<!--        note pedagogique -->
+        <div class="field">
+          <label for="notePedagogiq">Note pedagogique <span class="text-red-500">*</span></label>
+          <input
+            type="number"
+            pInputText
+            formControlName="notePedagogiq"
+            id="notePedagogiq"
+            required
+          />
+        </div>
+
+<!--        date effet -->
+        <div class="field">
+          <label for="dateeffet"> Date Effet <span class="text-red-500">*</span></label>
+          <p-calendar
+            [dateFormat]="'yy-mm-dd'"
+            id="dateeffet"
+            [readonlyInput]="true"
+            styleClass="mb-1"
+          />
+        </div>
+      </form>
     </div>
-    <div class="field">
-      <label for="fullName">Nom Prenom</label>
-      <input
-        type="text"
-        pInputText
-        id="fullName"
-        required
-        autofocus
-        disabled/>
-    </div>
-    <div class="field">
-      <label for="raison">Nature</label>
-      <p-dropdown
-        [options]="nature"
-        id="raison"
-        placeholder="Selectionner la raison"
-      >
-      </p-dropdown>
-    </div>
-    <div class="field">
-      <label>DREN</label>
-      <input
-        type="text"
-        pInputText
-        required
-        autofocus
-      />
-    </div>
-    <div class="field">
-      <label >Localite</label>
-      <p-dropdown
-        placeholder="Selectionner la localite"
-      >
-      </p-dropdown>
-    </div>
-    <div class="field">
-      <label>Moughataa</label>
-      <input
-        type="text"
-        pInputText
-        required
-        autofocus
-      />
-    </div>
-    <div class="field">
-      <label>Ecole</label>
-      <p-dropdown
-        placeholder="Selectionner l'ecole"
-      >
-      </p-dropdown>
-    </div>
-    <div class="field">
-      <label>Note pedagogique</label>
-      <p-inputNumber
-        mode="reel"
-        [showButtons]="true"
-        inputId="min-buttons"
-        [min]="0"
-        [useGrouping]="false"/>
-    </div>
-    <div class="field">
-      <label> Date Effet</label>
-      <p-calendar
-        [dateFormat]="'yy-mm-dd'"
-        [readonlyInput]="true"
-        styleClass="mb-1"
-      />
-    </div>
+
   </ng-template>
 
   <ng-template pTemplate="footer">
-    <button pButton pRipple class="p-button-primary flex-1" label="Enregistrer" icon="pi pi-fw pi-check"></button>
-    <button pButton pRipple class="p-button-danger flex-1 p-button-outlined" label="Annuler" icon="pi pi-fw pi-times"></button>
+    <button pButton pRipple class="p-button-primary flex-1" label="Enregistrer" (click)="save()" icon="pi pi-fw pi-check"></button>
+    <button pButton pRipple class="p-button-danger flex-1 p-button-outlined" label="Annuler" (click)="cancel()" icon="pi pi-fw pi-times"></button>
   </ng-template>
 </p-dialog>

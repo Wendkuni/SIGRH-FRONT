@@ -1,6 +1,8 @@
 import {inject, Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Personnel} from "./personnel.model";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {Personnel, Personnels} from "./personnel.model";
+import {environment} from "../../../../environments/environment";
+import {Observable} from "rxjs";
 
 interface statPersonnel{
   matricule:string;
@@ -24,15 +26,32 @@ interface statePersonnelDisponible{
 })
 export class PersonnelService {
 
-  // url du server Json
-  url = 'http://localhost:3000/personnels';
+  // url
+  apiUrl = environment.apiURL;
 
   // Inject HttpClient
   http = inject(HttpClient);
 
+  httpOptions = {
+    headers: new HttpHeaders( { 'Content-Type': 'application/json' })
+  };
+
   // get all personnels
   getAllPersonnels(){
-    return this.http.get<Personnel[]>(this.url);
+    return this.http.get<Personnels>(this.apiUrl + '/personnel/All', this.httpOptions);
+  }
+
+  getTypeEducations(){
+    return this.http.get(`${this.apiUrl}/personnel/TypeEducations`, this.httpOptions);
+  }
+
+  // find personnel by locality
+  findPersonnelByLocalite(id: number){
+    return this.http.get<Personnels>(`${this.apiUrl}/personnel/ByLocalite/${id}`);
+  }
+
+  findPersonnelByAffectation(id: number){
+    return this.http.get<Personnels>(`${this.apiUrl}/personnel/ByAffectation/${id}`);
   }
 
   getStatPersonnel(){
@@ -43,24 +62,35 @@ export class PersonnelService {
     return this.http.get<statePersonnelDisponible[]>('http://localhost:3000/statePersonnelDisponible');
   }
 
-  // get personnel by id
-  getPersonnelById(id: string){
-    return this.http.get<Personnel>(`${this.url}/${id}`);
-  }
+  // find personnel by id
+  findPersonnelById(id: number){
+    return this.http.get<Personnel>(`${this.apiUrl}/personnel/ById/${id}`,this.httpOptions);
+  };
+
 
   // create personnel
-  addPersonnel(personnel: Personnel){
-    return this.http.post(this.url, personnel);
+  createPersonnel(personnel: Personnel){
+    return this.http.post(`${this.apiUrl}/personnel/create`, personnel);
+  }
+
+  createPersonnelWithImage(imagePers: File,personnel: Personnel){
+    personnel.imagPers = imagePers;
+    return this.http.post(`${this.apiUrl}/personnel/createWithImage`,personnel);
   }
 
   // update personnel
   updatePersonnel(personnel: Personnel){
-    return this.http.put(`${this.url}/${personnel.idAgent}`, personnel);
+
+   let options = {
+      params: new HttpParams().set('id', personnel.idAgent)
+    }
+
+    return this.http.put(`${this.apiUrl}/personnel/updade/${personnel.idAgent}`,personnel ,options);
   }
 
   // delete personnel
   deletePersonnel(personnel: Personnel){
-    return this.http.delete(`${this.url}/${personnel.idAgent}`);
+    return this.http.delete(`${this.apiUrl}/personnel/delete/${personnel.idAgent}`,this.httpOptions);
   }
 
 }

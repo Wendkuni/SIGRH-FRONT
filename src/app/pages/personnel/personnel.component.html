@@ -4,6 +4,7 @@
   [showTransitionOptions]="'1000ms'"
   [hideTransitionOptions]="'1000ms'"
   [showTransformOptions]="'translateX(100%)'" />
+<p-confirmDialog />
 
 <!-- Toolbar start pour afficher les boutons des differentes actions realisable dans la gestion du personnels-->
 <p-card styleClass="mb-5">
@@ -33,11 +34,11 @@
 <p-card>
   <p-table
     [columns]="cols"
-    [value]="listPersonnel$"
-    #dt1
+    [value]="store.personnel()"
+    #personnelTable
     dataKey="id"
     [rows]="5"
-    [loading]="loading"
+    [loading]="store.loading()"
     [showCurrentPageReport]="true"
     currentPageReportTemplate="Page {currentPage} sur {totalPages}"
     [paginator]="true"
@@ -46,17 +47,18 @@
     [rowHover]="true"
     [rowsPerPageOptions]="[5,10, 20, 50]"
     tableStyleClass="p-datatable-gridlines"
-    [globalFilterFields]="['nni','matricule','nomEtPrenom','nomPrenomArab','tlphone','ministereOrigine','typeEducation']"
+    [globalFilterFields]="['nni','matricule','nomPrenom','nomPrenomArab','nni','dteRecrutement','dteTitularisation','lieuNaiss','bank','codeBank','ministereOrigine','typeeducation']"
   >
     <ng-template pTemplate="caption">
       <div class="flex justify-content-between flex-column sm:flex-row">
               <span class="p-input-icon-left mb-2">
 							<i class="pi pi-search"></i>
-							<input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)"
+							<input pInputText type="text" #filter (input)="onGlobalFilter(personnelTable, $event)"
                      placeholder="Recherche..." class="w-full"/>
 						</span>
       </div>
     </ng-template>
+
     <ng-template let-columns pTemplate="header">
       <tr>
         @for (col of columns; track col.field) {
@@ -78,8 +80,8 @@
     <ng-template pTemplate="body" let-personnel>
       <tr class="align-items-center align-content-center">
         <td style=" min-width: 6rem;">
-          @if (personnel.photo) {
-            <img src="{{personnel.photo}}" alt="{{personnel.nomEtPrenom}}"
+          @if (personnel.imagPers) {
+            <img src="{{personnel.imagPers}}" alt="{{personnel.nomPrenom}}"
                  class="w-4rem h-4rem border-circle shadow-4">
           } @else {
             <img src="assets/demo/images/avatar/user-avatar.png" alt="user.name"
@@ -87,7 +89,7 @@
           }
         </td>
         <td style="min-width: 15rem;">
-            {{ personnel.nni }}
+          {{ personnel.nni }}
         </td>
         <td
           style="min-width: 15rem">
@@ -95,7 +97,7 @@
         </td>
         <td
           style="min-width: 15rem">
-          {{ personnel.nomEtPrenom  | uppercase }}
+          {{ personnel.nomPrenom  | uppercase }}
         </td>
         <td
           style="min-width: 15rem">
@@ -115,14 +117,17 @@
         </td>
         <td
           style="min-width: 15rem">
-          {{ personnel.dteNaiss | date: 'dd/MM/yyyy' }}
+          {{ personnel.dateNaiss | date: 'dd/MM/yyyy' }}
         </td>
         <td style="min-width: 15rem">
-          {{ personnel.dteRecrutemnt | date: 'dd/MM/yyyy' }}
+          {{ personnel.dteRecrutement | date: 'dd/MM/yyyy' }}
         </td>
         <td
           style="min-width: 15rem">
           {{ personnel.dteTitularisation | date: 'dd/MM/yyyy' }}
+        </td>
+        <td style="min-width: 15rem">
+          {{ personnel.dteSortie | date: 'dd/MM/yyyy'}}
         </td>
         <td
           style="min-width: 15rem">
@@ -138,7 +143,7 @@
         </td>
         <td
           style="min-width: 15rem">
-          {{ personnel.codBank }}
+          {{ personnel.codeBank }}
         </td>
         <td
           style="min-width: 15rem">
@@ -146,7 +151,11 @@
         </td>
         <td
           style="min-width: 15rem">
-          {{ personnel.dteDepart | date: 'dd/MM/yyyy' }}
+          {{ personnel.cleRib }}
+        </td>
+        <td
+          style="min-width: 15rem">
+          {{ personnel.dteSortie | date: 'dd/MM/yyyy' }}
         </td>
         <td
           style="min-width: 15rem">
@@ -154,19 +163,15 @@
         </td>
         <td
           style="min-width: 15rem">
-          {{ personnel.ministereOrigine }}
+          {{ personnel.ministerOrigine }}
         </td>
         <td
           style="min-width: 15rem">
-          {{ personnel.typeEducation  | uppercase }}
+          {{ personnel.typeeducation  | uppercase }}
         </td>
         <td
           style="min-width: 15rem">
-          <p-tag
-            [value]="personnel.actifOrNot"
-            [severity]="getStatusSeverity(personnel.actifOrNot)"
-          >
-          </p-tag>
+          {{personnel.actifOrNot}}
         </td>
         <td
           style="min-width: 15rem">
@@ -183,7 +188,7 @@
             icon="pi pi-pencil"
             class="p-button-rounded p-button-primary mx-2"
             iconPos="left"
-            (click)="viewEditPersonnel(personnel)"
+            (click)="openEdit(personnel)"
           ></button>
         </td>
         <td>
@@ -197,7 +202,7 @@
             icon="pi pi-info"
             class="p-button-rounded p-button-warning mx-2"
             iconPos="left"
-            routerLink="/personnel-details/{{ personnel.id }}"
+            [routerLink]="['/personnel-details',  personnel.idAgent]"
           ></button>
         </td>
         <td>
@@ -211,7 +216,7 @@
             icon="pi pi-trash"
             class="p-button-rounded p-button-danger mx-2"
             iconPos="left"
-            (click)="deletePersonnel(personnel)"
+            (click)="confirm(personnel)"
           ></button>
         </td>
       </tr>
@@ -237,7 +242,7 @@
 >
   <ng-template pTemplate="content">
     <div class="container py-5">
-      <form [formGroup]="personnelForm">
+      <form [formGroup]="personnelForm" #personalFormRef="ngForm">
         <div class="col-12">
           <div class="card">
             <!--          Informations personnels de l'agent-->
@@ -251,18 +256,18 @@
             </div>
 
             <div class="p-fluid p-formgrid grid mt-2">
-<!--              Nom Prenom-->
+              <!--              Nom Prenom-->
               <div class="field col-12 md:col-6">
                 <label for="nometprenom" class="font-medium text-900">Nom et Prenom <span class="text-red-500">*</span></label>
                 <input id="nometprenom" pInputText class="w-full p-component p-element form-control mb-1" type="text"
-                       formControlName="nomEtPrenom"/>
+                       formControlName="nomPrenom"/>
                 <mrt-form-validators
-                  [entityField]="'nomEtPrenom'"
+                  [entityField]="'nomPrenom'"
                   [formGroup]="personnelForm"
                 />
               </div>
 
-<!--              Nom Prenom Arab-->
+              <!--              Nom Prenom Arab-->
               <div class="field col-12 md:col-6">
                 <label for="nometprenomarab" class="font-medium text-900">Nom et Prenom Arab <span class="text-red-500">*</span></label>
                 <input id="nometprenomarab" pInputText class="w-full p-component p-element form-control mb-1" type="text"
@@ -273,7 +278,7 @@
                 />
               </div>
 
-<!--              Numero de telephone-->
+              <!--              Numero de telephone-->
               <div class="field col-12 md:col-4">
                 <label for="tlphone"  class="font-medium text-900">Numero de telephone <span class="text-red-500">*</span></label>
                 <input id="tlphone" pInputText class="w-full p-component p-element form-control mb-1" type="text"
@@ -283,24 +288,24 @@
                   [formGroup]="personnelForm"/>
               </div>
 
-<!--            Date de naissance  -->
+              <!--            Date de naissance  -->
               <div class="field col-12 md:col-4">
                 <label for="dtenaiss" class="font-medium text-900">Date de naissance <span class="text-red-500">*</span></label>
                 <p-calendar
                   id="dtenaiss"
                   [dateFormat]="'yy-mm-dd'"
                   placeholder="Entre la date(yyyy-mm-dd)"
-                  formControlName="dteNaiss"
+                  formControlName="dateNaiss"
                   styleClass="mb-1"
                   appendTo="body"
                   [showTime]="false"
                 />
                 <mrt-form-validators
-                  [entityField]="'dteNaiss'"
+                  [entityField]="'dateNaiss'"
                   [formGroup]="personnelForm"/>
               </div>
 
-<!--              Lieu de naissance-->
+              <!--              Lieu de naissance-->
               <div class="field col-12 md:col-4">
                 <label for="lieunaiss" class="font-medium text-900">Lieu de naissance <span class="text-red-500">*</span></label>
                 <input id="lieunaiss" pInputText class="w-full p-component p-element form-control mb-1" type="text"
@@ -310,7 +315,7 @@
                   [formGroup]="personnelForm"/>
               </div>
 
-<!--          Adresse de l'agent    -->
+              <!--          Adresse de l'agent    -->
               <div class="field col-12 md:col-12">
                 <label for="adressemp" class="font-medium text-900">Adresse de l'agent</label>
                 <input id="adressemp" pInputText class="w-full p-component p-element form-control mb-1" type="text"
@@ -324,7 +329,7 @@
             <h5>Informations relatif au metier</h5>
             <div class="p-fluid p-formgrid grid">
 
-<!--              Matricule-->
+              <!--              Matricule-->
               <div class="field col-12 md:col-6">
                 <label for="matricule" class="font-medium text-900">Matricule <span class="text-red-500">*</span></label>
                 <input pInputText id="matricule"
@@ -336,7 +341,7 @@
                 />
               </div>
 
-<!--              NNI-->
+              <!--              NNI-->
               <div class="field col-12 md:col-6">
                 <label for="nni" class="font-medium text-900">NNI <span class="text-red-500">*</span></label>
                 <input pInputText id="nni" class="w-full p-component p-element form-control mb-1"
@@ -348,7 +353,7 @@
                 />
               </div>
 
-<!--              Bank-->
+              <!--              Bank-->
               <div class="field col-12 md:col-4">
                 <label for="bank"  class="font-medium text-900">Bank <span class="text-red-500">*</span></label>
                 <input id="bank" pInputText class="w-full p-component p-element form-control mb-1" type="text"
@@ -358,17 +363,17 @@
                   [formGroup]="personnelForm"/>
               </div>
 
-<!--              Code Bank-->
+              <!--              Code Bank-->
               <div class="field col-12 md:col-3">
                 <label for="codebank" class="font-medium text-900">Code Bank <span class="text-red-500">*</span></label>
                 <input id="codebank" pInputText class="w-full p-component p-element form-control mb-1" type="text"
-                       formControlName="codBank"/>
+                       formControlName="codeBank"/>
                 <mrt-form-validators
-                  [entityField]="'codBank'"
+                  [entityField]="'codeBank'"
                   [formGroup]="personnelForm"/>
               </div>
 
-<!--              Numero Compte-->
+              <!--              Numero Compte-->
               <div class="field col-12 md:col-5">
                 <label for="numeroCompte" class="font-medium text-900">Numero Compte <span class="text-red-500">*</span></label>
                 <input id="numeroCompte" pInputText class="w-full p-component p-element form-control mb-1" type="text"
@@ -378,7 +383,7 @@
                   [formGroup]="personnelForm"/>
               </div>
 
-<!--              Cle Rib-->
+              <!--              Cle Rib-->
               <div class="field col-12 md:col-4">
                 <label for="cleRib"  class="font-medium text-900">Cle Rib <span class="text-red-500">*</span></label>
                 <input id="cleRib" pInputText class="w-full p-component p-element form-control mb-1" type="text"
@@ -388,25 +393,22 @@
                   [formGroup]="personnelForm"/>
               </div>
 
-<!--              Status Employe-->
+              <!--              Status Employe-->
               <div class="field col-12 md:col-3">
                 <label for="statusEmp" class="font-medium text-900">Status Employe </label>
                 <input id="statusEmp" pInputText class="w-full p-component p-element form-control mb-1" type="text"
                        formControlName="statusEmp"/>
               </div>
 
-<!--              Activation-->
+              <!--              Activation-->
               <div class="field col-12 md:col-5">
-                <label for="actifOrNot" class="font-medium text-900">Activation </label>
-                <p-dropdown
-                  id="actifOrNot"
-                  formControlName="actifOrNot"
-                  placeholder="Activer ou desactiver"
-                >
-                </p-dropdown>
+                <label for="actifOrNot" class="font-medium text-900">Activation</label>
+                <input pInputText id="actifOrNot"
+                       class="w-full p-component p-element form-control mb-1" type="text"
+                       formControlName="actifOrNot"/>
               </div>
 
-<!--              Detacher    -->
+              <!--              Detacher    -->
               <div class="field col-12 md:col-6">
                 <label for="detacher" class="font-medium text-900">Detacher <span class="text-red-500">*</span></label>
                 <input id="detacher" pInputText class="w-full p-component p-element form-control mb-1" type="text"
@@ -416,23 +418,27 @@
                   [formGroup]="personnelForm"/>
               </div>
 
-<!--              Ministere d'origine-->
+              <!--              Ministere d'origine-->
               <div class="field col-12 md:col-6">
                 <label for="ministereOrigine" class="font-medium text-900">Ministere d'origine </label>
                 <input pInputText id="ministereOrigine"
                        class="w-full p-component p-element form-control mb-1" type="text"
-                       formControlName="ministereOrigine"/>
+                       formControlName="ministerOrigine"/>
               </div>
 
-<!--              Type Education -->
+              <!--              Type Education -->
               <div class="field col-12 md:col-6">
                 <label for="typeEducation" class="font-medium text-900">Type Education </label>
-                <input pInputText id="typeEducation" class="w-full p-component p-element form-control mb-1"
-                       type="text"
-                       formControlName="typeEducation"/>
+                <p-dropdown
+                  id="typeEducation"
+                  [options]="typeEducation"
+                  formControlName="typeeducation"
+                  placeholder="Choisir le type d'education"
+                >
+                </p-dropdown>
               </div>
 
-<!--              Date recrutement -->
+              <!--              Date recrutement -->
               <div class="field col-12 md:col-6">
                 <label for="dterecrutemnt" class="font-medium text-900">Date recrutement <span class="text-red-500">*</span></label>
                 <p-calendar
@@ -442,15 +448,15 @@
                   styleClass="mb-1"
                   appendTo="body"
                   [showTime]="false"
-                  formControlName="dteRecrutemnt"
+                  formControlName="dteRecrutement"
                 />
                 <mrt-form-validators
-                  [entityField]="'dteRecrutemnt'"
+                  [entityField]="'dteRecrutement'"
                   [formGroup]="personnelForm"
                 />
               </div>
 
-<!--              Date titularisation   -->
+              <!--              Date titularisation   -->
               <div class="field col-12 md:col-6">
                 <label for="dtetitularisation" class="font-medium text-900">Date titularisation</label>
                 <p-calendar
@@ -465,7 +471,7 @@
               </div>
 
 
-<!--            Date debut contract  -->
+              <!--            Date debut contract  -->
               <div class="field col-12 md:col-6">
                 <label for="debutcntrat" class="font-medium text-900">Date debut contract</label>
                 <p-calendar
@@ -479,7 +485,7 @@
                 />
               </div>
 
-<!--              Date fin contract-->
+              <!--              Date fin contract-->
               <div class="field col-12 md:col-6">
                 <label for="fincntrat" class="font-medium text-900">Date fin contract</label>
                 <p-calendar
@@ -493,29 +499,43 @@
                 />
               </div>
 
-<!--              Date de depart-->
+<!--              &lt;!&ndash;              Date de depart&ndash;&gt;-->
+<!--              <div class="field col-12 md:col-6">-->
+<!--                <label for="dtedepart" class="font-medium text-900">Date de depart</label>-->
+<!--                <p-calendar-->
+<!--                  id="dtedepart"-->
+<!--                  [dateFormat]="'yy-mm-dd'"-->
+<!--                  placeholder="Entre la date(yyyy-mm-dd)"-->
+<!--                  styleClass="mb-1"-->
+<!--                  appendTo="body"-->
+<!--                  [showTime]="false"-->
+<!--                  formControlName="dteDepart"-->
+<!--                />-->
+<!--              </div>-->
+
+              <!--              Date sortie-->
               <div class="field col-12 md:col-6">
-                <label for="dtedepart" class="font-medium text-900">Date de depart</label>
+                <label for="dteSortie" class="font-medium text-900">Date sortie</label>
                 <p-calendar
-                  id="dtedepart"
+                  id="dteSortie"
                   [dateFormat]="'yy-mm-dd'"
                   placeholder="Entre la date(yyyy-mm-dd)"
                   styleClass="mb-1"
                   appendTo="body"
                   [showTime]="false"
-                  formControlName="dteDepart"
+                  formControlName="dteSortie"
                 />
               </div>
 
-<!--              Avatar -->
+              <!--              Avatar -->
               <div class="field col-12">
                 <label for="avatar" class="font-medium text-900">Avatar</label>
                 <p-fileUpload
                   mode="basic"
                   id="avatar"
-                  url="./upload.php"
-                  accept="image/*"
+                  accept=".jpg,.jpeg,.png"
                   [maxFileSize]="1000000"
+                  (onSelect)="onSelectedFiles($event)"
                   styleClass="p-button-outlined p-button-plain w-full"
                   chooseLabel="Choisir une Image"></p-fileUpload>
               </div>
@@ -532,7 +552,6 @@
             class="p-button-primary flex-1"
             label="Enregistrer"
             icon="pi pi-fw pi-check"
-            [disabled]="personnelForm.invalid"
             (click)="savePersonnel()"
     >
     </button>

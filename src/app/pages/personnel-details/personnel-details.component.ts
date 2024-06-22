@@ -31,21 +31,24 @@ import {Personnel} from "../../core/data/personals/personnel.model";
 export class PersonnelDetailsComponent implements OnInit{
 
   personalService = inject(PersonnelService)
-  router = inject(ActivatedRoute);
-  personnel!: Personnel;
+  private route = inject(ActivatedRoute);
+  personnel: Personnel = {} as Personnel;
   messageService = inject(MessageService);
+  id = 0;
 
   ngOnInit(): void {
-    let id  = this.router.snapshot.paramMap.get('id');
-
-    if(id != null){
-      this.getPersonnel(id);
+    this.route.params.subscribe(params => {
+      this.id = +params["id"];
+    });
+    if(this.id != null){
+      this.getPersonnel(this.id);
     }
   }
 
-  getPersonnel(id:string){
-    this.personalService.getPersonnelById(id).subscribe((response) => {
+  getPersonnel(id:number){
+    this.personalService.findPersonnelById(id).subscribe((response) => {
       this.personnel = response;
+      console.log(this.personnel);
       },error => {
         this.messageService.add({severity:'error', summary: 'Erreur', detail: 'Une erreur est survenue lors de la récupération des données'})
       }

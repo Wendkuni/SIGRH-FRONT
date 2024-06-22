@@ -1,6 +1,7 @@
 import {inject, Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Mobilite} from "./mobilite.model";
+import {environment} from "../../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -8,20 +9,26 @@ import {Mobilite} from "./mobilite.model";
 export class MobiliteService {
 
   // url du server Json
-  url = 'http://localhost:3000/mobilites';
+  url = environment.apiURL
 
   // Inject HttpClient
   http = inject(HttpClient);
 
+  httpOptions = {
+    headers: new HttpHeaders( { 'Access-Control-Allow-Origin': '*' })
+  };
+
   // get all mobilites
   getAllMobilites(){
-    return this.http.get<Mobilite[]>(this.url);
+    return this.http.get<Mobilite[]>(`${this.url}/affectations`,this.httpOptions);
   }
 
   // get mobilite by id
   getMobiliteById(id: string){
     return this.http.get<Mobilite>(`${this.url}/${id}`);
   }
+
+
 
   // create mobilite
   addMobilite(mobilite: Mobilite){

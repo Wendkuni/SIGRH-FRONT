@@ -1,54 +1,54 @@
 import {inject, Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Avancement} from "./fonction.model";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {environment} from "../../../../environments/environment";
+import {Fonction, Fonctions} from "./fonction.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AvancementService {
 
-  // url du server Json
-  url = 'http://localhost:3000/avancements';
+ // Backend api url
+  url =  environment.apiURL;
 
   // Inject HttpClient
   http = inject(HttpClient);
+
+  httpOptions = {
+    headers: new HttpHeaders( { 'Access-Control-Allow-Origin': '*' })
+  };
+
   // get all avancement
   getAllAvancements(){
-    return this.http.get<Avancement[]>(`${this.url}`);
+    return this.http.get<Fonctions>(`${this.url}/fonctionAgent/All`, this.httpOptions);
   }
 
   // create avancement
-  addAvancement(avancement:Avancement){
-    return this.http.post(this.url, avancement);
+  createAvancement(fonction: Fonction){
+    return this.http.post(`${this.url}/fonctionAgent/create`, fonction, this.httpOptions);
   }
 
   // update avancement
-  updateAvancement(id:string, avancement:Avancement){
-    return this.http.put(`${this.url}/${id}`, avancement);
+  updateAvancement(fonction: Fonction){
+    let options = {
+      headers: new HttpHeaders( { 'Access-Control-Allow-Origin': '*' }),
+      params: new HttpParams().set('id', fonction.idFonction)
+    }
+    return this.http.put(`${this.url}/fonctionAgent/Update/${fonction.idFonction}`, fonction, options);
   }
 
 
   // get all avancement by personnel
-  getAvancementsByPersonnel(idPersonnel:string){
-    let avancementByPersonnel!: Avancement[];
-    let avancements!: Avancement[];
-    let listAvancement = this.http.get<Avancement[]>(`${this.url}`);
-    listAvancement.subscribe((response) => {
-      avancements= response
-    })
-    let item;
-    // @ts-ignore
-    for (const item of avancements) {
-      if(item.idPersonnel == idPersonnel){
-        avancementByPersonnel.push(item);
-      }
-    }
-    console.log(avancementByPersonnel)
-    return avancementByPersonnel
+  findAvancementByAgent(id: number){
+    return this.http.get<Fonctions>(`${this.url}/fonctionAgent/ByAgent/${id}`);
+  }
+
+  findAvancementById(id: number){
+    return this.http.get<Fonction>(`${this.url}/fonctionAgent/ById/${id}`, this.httpOptions);
   }
 
 //   delete avancement
-  delateAvancement(avancement: Avancement){
-    return this.http.delete(`${this.url}/${avancement.id}`);
+  delateAvancement(id: number){
+    return this.http.delete(`${this.url}/fonctionAgent/delete/${id}`, this.httpOptions);
   }
 }

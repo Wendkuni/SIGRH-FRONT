@@ -5,7 +5,6 @@
   [hideTransitionOptions]="'1000ms'"
   [showTransformOptions]="'translateX(100%)'" />
 
-
 <p-card styleClass="mb-5">
   <p-toolbar styleClass="mb-1 gap-2">
     <ng-template pTemplate="right">
@@ -18,14 +17,6 @@
           icon="pi pi-plus"
           class="p-element p-ripple p-button-outlined p-button-primary p-button p-component mr-2"
           (click)="showForm()"
-        ></button>
-
-        <button
-          pButton
-          pRipple
-          label="Etats"
-          icon="pi pi-chart-bar"
-          class="p-element p-ripple p-button-outlined p-button-info p-button p-component mr-2"
         ></button>
       </div>
     </ng-template>
@@ -51,7 +42,7 @@
     dataKey="id"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [showCurrentPageReport]="true"
-    [globalFilterFields]="['matricule','nometprenom','raison','autorisation','motif','signataire']"
+    [globalFilterFields]="['matricule','nomPrenom','libelle','raison','autorisation','motif','signataire']"
   >
     <ng-template pTemplate="caption">
       <div class="flex justify-content-between flex-column sm:flex-row">
@@ -81,24 +72,17 @@
     </ng-template>
     <ng-template pTemplate="body" let-dmd>
       <tr>
-        <td> {{ dmd.matricule }}</td>
-        <td>{{ dmd.nomPrenom }}</td>
+        <td> {{ dmd.personnel.matricule }}</td>
+        <td>{{ dmd.personnel.nomPrenom }}</td>
+        <td>{{ dmd.libelle}}</td>
         <td> {{ dmd.raison }}</td>
         <td> {{dmd.dateEffet }} </td>
-        <td> {{ dmd.intervalleConge }}</td>
+        <td> {{ dmd.nbJour }}</td>
         <td>
-          <p-tag
-            [value]="dmd.autorisation"
-            [severity]="getStatusSeverity(dmd.autorisation)"
-          >
-          </p-tag>
+          {{dmd.autorisation}}
         </td>
         <td>
-          @if(dmd.motif){
-            {{dmd.motif}}
-          } @else {
-            <div class="flex justify-content-center">-</div>
-          }
+          {{dmd.motif}}
         </td>
         <td>
           {{dmd.signataire}}
@@ -177,18 +161,15 @@
     </ng-template>
     <ng-template pTemplate="emptymessage">
       <tr>
-        <td colspan="8">Aucun élement trouvé(e).</td>
+        <td colspan="8">Aucun élement trouvé</td>
       </tr>
     </ng-template>
   </p-table>
 </p-card>
 
-
-
 <!--  Formulaire ajout ou modification -->
-
 <p-dialog
-  [(visible)]="showFormVisibility"
+  [(visible)]="showFormDialog"
   [style]="{ width: '50vw', height: 'auto'}"
   header="Conge Formulaire"
   (onHide)="cancel()"
@@ -199,75 +180,87 @@
   styleClass="p-fluid"
 >
   <ng-template pTemplate="content">
+    <div class="text-sm p-4">
+      Champs obligatoires:
+      <span class="text-red-500">*</span>
+    </div>
     <form [formGroup]="formDemande">
-        <div class="grid">
-          <div class="field col-12">
-            <label for="matricule">Matricule</label>
-            <input
-              type="text"
-              pInputText
-              id="matricule"
-              placeholder="Matricule"
-              formControlName="matricule"
-              required/>
-            <mrt-form-validators [entityField]="'matricule'" [formGroup]="formDemande"></mrt-form-validators>
-          </div>
-          <div class="field col-12">
-            <label for="nomPrenom">Nom Prenom</label>
-            <input
-              type="text"
-              pInputText
-              id="nomPrenom"
-              placeholder="nom et prenom"
-              formControlName="nomPrenom"
-              required/>
-            <mrt-form-validators [entityField]="'nomPrenom'" [formGroup]="formDemande"></mrt-form-validators>
-          </div>
-          <div class="field col-12">
-            <label for="raison">Raison</label>
-            <p-dropdown
-              [options]="raison"
-              id="raison"
-              formControlName="raison"
-              [filter]="true"
-              [showClear]="true"
-              appendTo="body"
-              placeholder="Selectionner la raison"
-            >
-              <mrt-form-validators [entityField]="'raison'" [formGroup]="formDemande"></mrt-form-validators>
-            </p-dropdown>
-          </div>
+      <div class="grid">
+        <div class="field col-12">
+          <label for="agent">Matricule  <span class="text-red-500">*</span></label>
+          <p-dropdown
+            [options]="listeAgent"
+            optionLabel="nonPrenom"
+            id="agent"
+            formControlName="raison"
+            [filter]="true"
+            [showClear]="true"
+            appendTo="body"
+            placeholder="Selectionner la raison"
+          ></p-dropdown>
+          <mrt-form-validators [entityField]="'matricule'" [formGroup]="formDemande"></mrt-form-validators>
 
-          <div class="field col-12 md:col-6">
-            <label for="dateEffet">Date Effet</label>
-            <p-calendar
-              id="dateEffet"
-              appendTo="body"
-              dateFormat="yy-mm-dd"
-              [showTime]="false"
-              inputId="start"
-              placeholder="Date Effet"
-              styleClass="mb-1"
-              formControlName="dateEffet"
-            />
-            <mrt-form-validators [entityField]="'dateEffet'" [formGroup]="formDemande"></mrt-form-validators>
-          </div>
-
-          <div class="field col-12 md:col-6">
-            <label for="nombre_jr">Nombre de jours</label>
-            <p-inputNumber
-              mode="decimal"
-              id="nombre_jr"
-              [showButtons]="true"
-              inputId="min-buttons"
-              [min]="1"
-              formControlName="nombreJr"
-              [useGrouping]="false"/>
-            <mrt-form-validators [entityField]="'nombreJr'" [formGroup]="formDemande"></mrt-form-validators>
-          </div>
         </div>
-    </form>
+        <div class="field">
+          <label for="libelle">Libelle <span class="text-red-500">*</span></label>
+          <input
+            type="text"
+            pInputText
+            id="libelle"
+            required
+            formControlName="libelle"
+            autofocus />
+          <mrt-form-validators [entityField]="'libelle'" [formGroup]="formDemandeProcessing"></mrt-form-validators>
+        </div>
+        <div class="field col-12">
+          <label for="raison">Raison  <span class="text-red-500">*</span></label>
+          <p-dropdown
+            [options]="raison"
+            id="raison"
+            formControlName="raison"
+            [filter]="true"
+            [showClear]="true"
+            appendTo="body"
+            placeholder="Selectionner la raison"
+          >
+          </p-dropdown>
+          <mrt-form-validators [entityField]="'raison'" [formGroup]="formDemande"></mrt-form-validators>
+        </div>
 
+        <div class="field col-12 md:col-6">
+          <label for="dateEffet">Date Effet  <span class="text-red-500">*</span></label>
+          <p-calendar
+            id="dateEffet"
+            appendTo="body"
+            dateFormat="yy-mm-dd"
+            [showTime]="false"
+            inputId="start"
+            placeholder="Date Effet"
+            styleClass="mb-1"
+            formControlName="dateeffet"
+          />
+          <mrt-form-validators [entityField]="'dateEffet'" [formGroup]="formDemande"></mrt-form-validators>
+        </div>
+
+        <div class="field col-12 md:col-6">
+          <label for="nombre_jr">Nombre de jours  <span class="text-red-500">*</span></label>
+          <p-inputNumber
+            mode="decimal"
+            id="nombre_jr"
+            [showButtons]="true"
+            inputId="min-buttons"
+            [min]="1"
+            formControlName="nbJour"
+            [useGrouping]="false"/>
+          <mrt-form-validators [entityField]="'nbJour'" [formGroup]="formDemande"></mrt-form-validators>
+        </div>
+
+        <div class="field col-12">
+          <label for="motif">Motif</label>
+          <textarea id="motif" rows="5" cols="30" placeholder="Motif" pInputTextarea formControlName="motif"></textarea>
+        </div>
+      </div>
+    </form>
   </ng-template>
 
   <ng-template pTemplate="footer">
@@ -287,9 +280,13 @@
   cdk-scrollable
   styleClass="p-fluid"
 >
+  <div class="text-sm p-4">
+    Champs obligatoires:
+    <span class="text-red-500">*</span>
+  </div>
   <form [formGroup]="formDemandeProcessing">
     <div class="field">
-      <label for="signataire">Signataire</label>
+      <label for="signataire">Signataire <span class="text-red-500">*</span></label>
       <input
         type="text"
         pInputText
@@ -300,7 +297,7 @@
       <mrt-form-validators [entityField]="'signataire'" [formGroup]="formDemandeProcessing"></mrt-form-validators>
     </div>
     <div class="field">
-      <label for="autorisation">Autorisation</label>
+      <label for="autorisation">Autorisation <span class="text-red-500">*</span></label>
       <p-dropdown
         [options]="autorisation"
         id="autorisation"
@@ -308,10 +305,6 @@
         placeholder="Selectionner la reponse"
       />
       <mrt-form-validators [entityField]="'autorisation'" [formGroup]="formDemandeProcessing"></mrt-form-validators>
-    </div>
-    <div class="field">
-      <label for="motif">Motif</label>
-      <textarea id="motif" rows="5" cols="30" placeholder="Motif" pInputTextarea formControlName="motif"></textarea>
     </div>
   </form>
   <ng-template pTemplate="footer">

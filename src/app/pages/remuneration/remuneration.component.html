@@ -19,14 +19,7 @@
           label="Ajouter"
           icon="pi pi-plus"
           class="p-element p-ripple p-button-outlined p-button-primary p-button p-component mr-2"
-          (click)="showFormDialog()"
-        ></button>
-        <button
-          pButton
-          pRipple
-          label="Etats"
-          icon="pi pi-chart-bar"
-          class="p-element p-ripple p-button-outlined p-button-info p-button p-component mr-2"
+          (click)="openNew()"
         ></button>
       </div>
     </ng-template>
@@ -55,7 +48,7 @@
         [rowHover]="true"
         [rowsPerPageOptions]="[5,10, 20, 50]"
         tableStyleClass="p-datatable-gridlines"
-        [globalFilterFields]="['fonction','matricule','nometprenom','corps','grade','echelon','echelle']"
+        [globalFilterFields]="['fonction','matricule','nomPrenom','corps','grade','echelon','echelle']"
       >
         <ng-template pTemplate="caption">
           <div class="flex justify-content-between flex-column sm:flex-row">
@@ -84,17 +77,17 @@
         </ng-template>
         <ng-template pTemplate="body" let-remu>
           <tr class="align-items-center">
-            <td> {{remu.nomPrenom}} </td>
-            <td> {{remu.matricule}} </td>
-            <td> {{remu.fonction}} </td>
-            <td> {{remu.netapayer}} </td>
-            <td> {{remu.banquecompte}} </td>
-            <td> {{remu.date}} </td>
-            <td> {{remu.corps}} </td>
-            <td> {{remu.grade}} </td>
-            <td> {{remu.echelon}} </td>
-            <td> {{remu.echelle}} </td>
-            <td> {{remu.indice}} </td>
+            <td> {{remu.personnel.nomPrenom}} </td>
+            <td> {{remu.personnel.matricule}} </td>
+            <td> {{remu.personnel.fonction}} </td>
+            <td> {{remu.valeurMontant}} </td>
+            <td> {{remu.libelleBank}}/{{remu.codeBank}} </td>
+            <td> {{remu.dateEffet}} </td>
+            <td> {{remu.personnel.corps}} </td>
+            <td> {{remu.personnel.grade}} </td>
+            <td> {{remu.personnel.echelon}} </td>
+            <td> {{remu.personnel.echelle}} </td>
+            <td> {{remu.personnel.indice}} </td>
             <td>
               <!--          Bouton qui fait l'ouverture du formulaire de modification -->
               <button
@@ -106,7 +99,7 @@
                 icon="pi pi-pencil"
                 class="p-button-rounded p-button-primary mx-2"
                 iconPos="left"
-                (click)="showEditFormDialog(remu)"
+                (click)="openEdit(remu)"
               ></button>
             </td>
             <td>
@@ -120,6 +113,7 @@
                 icon="pi pi-trash"
                 class="p-button-rounded p-button-danger mx-2"
                 iconPos="left"
+                (click)="deleteRemuneration(remu.idRemuneration)"
               ></button>
             </td>
           </tr>
@@ -127,12 +121,14 @@
         </ng-template>
         <ng-template pTemplate="emptymessage">
           <tr>
-            <td colspan="8">Aucun remuneration trouvé(e).</td>
+            <td colspan="8">Aucune remuneration .</td>
           </tr>
         </ng-template>
       </p-table>
     </p-card>
-  </p-tabPanel>
+
+
+</p-tabPanel>
   <p-tabPanel header="Indemnite">
     <p-tabView>
       <p-tabPanel header="Fonction">
@@ -335,7 +331,7 @@
 
 
 <p-dialog
-  header="Formulaire du personnel"
+  header="Formulaire du remuneration"
   [(visible)]="formVisible"
   (onHide)="close()"
   [style]="{ width: '50vw' }"
@@ -365,8 +361,8 @@
             id="netapayer"
             [min]="0"
             mode="decimal"
-            formControlName="netapayer" />
-          <mrt-form-validators [entityField]="'netapayer'" [formGroup]="remunerationForm" />
+            formControlName="valeurMontant" />
+          <mrt-form-validators [entityField]="'valeurMontant'" [formGroup]="remunerationForm" />
         </div>
         <div class="field">
           <label for="banque">Libelle Bank</label>
@@ -374,19 +370,31 @@
             type="text"
             pInputText
             id="banque"
-            formControlName="banquecompte"
-            required
-            autofocus />
-          <mrt-form-validators [entityField]="'banquecompte'" [formGroup]="remunerationForm" />
+            formControlName="libelleBank"
+            required/>
+          <mrt-form-validators [entityField]="'libelleBank'" [formGroup]="remunerationForm" />
         </div>
         <div class="field">
           <label for="numCompte">Numero Compte</label>
-          <p-inputNumber
+          <input
+            type="text"
+            pInputText
             id="numCompte"
-            [min]="0"
-            mode="decimal"
-            formControlName="numCompte" />
+            formControlName="numCompte"
+            required
+          />
           <mrt-form-validators [entityField]="'numCompte'" [formGroup]="remunerationForm" />
+        </div>
+        <div class="field">
+          <label for="codeBank">Code Banque</label>
+          <input
+            type="text"
+            pInputText
+            id="codeBank"
+            formControlName="codeBank"
+            required
+          />
+          <mrt-form-validators [entityField]="'codeBank'" [formGroup]="remunerationForm" />
         </div>
         <div class="field">
           <label for="dateEffet">Date Effet</label>
@@ -399,9 +407,9 @@
             inputId="start"
             placeholder="Date Effet"
             styleClass="mb-1"
-            formControlName="date"
+            formControlName="dateEffet"
           />
-          <mrt-form-validators [entityField]="'date'" [formGroup]="remunerationForm" />
+          <mrt-form-validators [entityField]="'dateEffet'" [formGroup]="remunerationForm" />
         </div>
       </form>
     </div>
@@ -412,10 +420,11 @@
             class="p-button-primary flex-1"
             label="Enregistrer"
             icon="pi pi-fw pi-check"
+            [disabled]="remunerationForm.invalid"
+            (click)="saveRemuneration()"
     >
-
     </button>
     <button pButton pRipple class="p-button-danger flex-1 p-button-outlined" label="Annuler"
-            icon="pi pi-fw pi-times" ></button>
+            icon="pi pi-fw pi-times" (click)="close()"></button>
   </ng-template>
 </p-dialog>

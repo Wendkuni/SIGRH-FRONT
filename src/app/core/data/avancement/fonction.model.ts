@@ -1,63 +1,47 @@
+import {Personnel} from "../personals/personnel.model";
+import {Cols} from "../primeng/primeng.model";
+
 export interface Fonction {
     // Identifiant unique de la fonction
-    id: number;
-    // Fonction de l'agent
-  fonction: string;
-    // Fonction de l'agent en arabe
-  fonctionArabe: string;
-    // Corps de l'agent
-  corps: string;
-    // Grade de l'agent
-  grade: string;
-    // Catégorie de l'agent
-  categorie: string;
-    // Echelon de l'agent
-  echelon: string;
-    // Indice de l'agent
+  idFonction: number;
+  // PersonnelModel
+  personnel: Personnel;
+  // Libellé de la fonction
+  libelleFonction: string;
+  // Echelle de la fonction
   echelle: string;
-    // Salaire de base de l'agent
+  // Echelon de la fonction
+  echelon: string;
+  // Catégorie de la fonction
+  categorie: string;
+  // Groupe de la fonction
+  groupe: string;
+  // Corps de la fonction
+  corps: string;
+//   Grade de la fonction
+  grade: string;
+  // Date Debut de la fonction
+  dateDebFonction: Date;
+  // Corps Arab de la fonction
+  corpsArab: string;
+  // Libellé de la fonction en arabe
+  libelleFonctionArab: string;
+  // Indice de la fonction
   indice: string;
-    // Salaire de base de l'agent
-  salaireBase: string;
 }
 
-export interface Avancement{
-  id:string,
-    nature:string,
-    corps: string;
-    fonction: string,
-    grade: string,
-    echelle: string,
-    echellon: string,
-    dateEffet: Date
-    idPersonnel: string
-}
+export type Fonctions = Fonction[];
 
-// Interface fonction agent on database
-export interface Fonctionagent{
-    IdFonctionAgent: bigint;
-    IdAgent:bigint;
-    fonctionLib: string;
-    dateFonction: Date;
-    echelle: string;
-    echelon: string;
-    groupeA: string;
-    categoriA: string;
-    corpsA: string;
-    grade:string;
-    indixe:string;
-    corpsAarab: string;
-    fonctionLiArab:string;
-}
-
-//  Interface fonction list
-export interface fonctionliste{
-    IdFonctionList: bigint;
-    libFonctn:string;
-    libFonctnArab:string;
-    grade: string;
-    echelle: string;
-    salBase: GLfloat;
-    indixe: string;
-    echelon :string;
-}
+export let fonctionColonneTable: Cols[] = [
+  { field: 'libelleFonction', header: 'Fonction' },
+  {field: 'libelleFonctionArab',header: 'Fonction Arab'},
+  { field: 'dateDebFonction', header: 'Date Effect' },
+  { field: 'categorie', header: 'Categorie'},
+  { field: 'corps', header: 'Corps' },
+  { field: 'corpsArab', header: 'Corps Arab'},
+  { field: 'grade', header: 'Grade' },
+  { field: 'groupe', header: 'Groupe'},
+  { field: 'echelle', header: "Echelle"},
+  { field: 'echelon', header: "Echelon"},
+  { field: 'indice', header: "Indice"}
+];

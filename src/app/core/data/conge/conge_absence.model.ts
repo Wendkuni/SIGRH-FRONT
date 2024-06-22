@@ -1,16 +1,22 @@
+import {Personnel} from "../personals/personnel.model";
+
 export interface Raison {
   nom: string;
 }
 
-export interface CongeAbsenceResponse {
-  IdAbsenceA: number;
-  libelleAb: string;
-  dateEffet: Date;
-  duree: number;
+export interface AbsenceEtConge{
+  idAbsence: number;
+  libelle: string;
+  dateeffet: Date;
   raison: Raison;
+  nbJour: number;
+  motif: string;
   signataire: string;
   autorisation: string;
+  personnel: Personnel;
 }
+
+export type AbsenceEtCongeList = AbsenceEtConge[];
 
 export interface DemandeConge {
     // Identifiant unique de la demande de congé
@@ -39,7 +45,7 @@ export enum DemandeAutorisation {
   Refusee = "Demande refusée"
 }
 
-enum DemandeRaison {
+export enum DemandeRaison {
   Absence = "Absence",
   Conge = "Congé",
   CongeViduite = "Congé Viduité",

@@ -39,21 +39,43 @@ import {PersonnelService} from "../../core/data/personals/personnel.service";
 })
 export class DossierComponent implements OnInit{
 
+  //visibilite dialog
   showDialog = false;
-  lisDossiers$!: Dossiers; //liste des dossiers
+
+  //liste des dossiers
+  lisDossiers$!: Dossiers;
+
+  //service dossier
   dossierService = inject(DossierService);
+
+  //formBuilder
   fb = inject(FormBuilder);
+
+  //service message
   messageService = inject(MessageService);
+
+  // personnel requis pour le dossier
   @Input({ required: true }) personnel!: Personnel;
+
+  //action pour les methodes
   action = 'Add';
+
+  //dossier selectionner
   selectedDossier: Dossier = {} as Dossier;
+
+  //service personnel
   personnelService = inject(PersonnelService);
+
+  // fichier dossier
   imageFold!: File[];
+
+  //form groupe
   dossierForm: FormGroup = this.fb.group({
     libelDossier: this.fb.control('',[Validators.required]),
     dateUpload:this.fb.control('',[Validators.required]),
     observation: this.fb.control('',[Validators.required]),
   });
+
 // colonne du tableau
   cols: Cols[] = [
     { field: 'nom', header: 'Nom Dossier' },
@@ -62,14 +84,16 @@ export class DossierComponent implements OnInit{
     { field: 'images', header: 'Images' }
   ]
 
+  // lancer au demarrage
   ngOnInit(): void {
     this.getAllDossiers();
   }
-
+  // Methode pour afficher le formulaire d'ajout
   showForm() {
     this.showDialog = true;
   }
 
+  // Methode pour afficher le formulaire d'edition
   showEditFormDialog(dossier:Dossier){
     this.showDialog = true;
     this.action = 'Edit'
@@ -78,6 +102,7 @@ export class DossierComponent implements OnInit{
 
   saveDossier(){
     const data = this.getData();
+    data.imageFold = this.imageFold;
     if(this.action === 'Add'){
       this.createDossier(data);
     }
@@ -131,9 +156,6 @@ export class DossierComponent implements OnInit{
 
   onUpload(event: FileUploadEvent) {
     this.imageFold = event.files;
-   this.imageFold.forEach( i => {
-      console.log(i.name)
-    });
   }
 
 }

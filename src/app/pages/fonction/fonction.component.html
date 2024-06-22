@@ -1,13 +1,20 @@
+<!-- message service -->
 <p-toast
   [showTransformOptions]="'translateY(100%)'"
   [showTransitionOptions]="'1000ms'"
   [hideTransitionOptions]="'1000ms'"
   [showTransformOptions]="'translateX(100%)'" />
+
+<!-- confirmation service -->
 <p-confirmDialog />
+
+
 <div class="flex justify-content-between border-bottom-1 surface-border p-3">
   <span class="block text-900 font-bold text-xl mb-4">Carrières</span>
 </div>
 <div class="grid">
+
+<!--  Formulaire -->
   <div class="col-12 lg:col-5">
     <span class="text-sm m-3">
                 Champs obligatoires:
@@ -17,6 +24,7 @@
       <div class="border-1 surface-border border-round p-fluid mb-4">
         <span class="text-900 font-bold block border-bottom-1 surface-border p-3">Fonction Agent</span>
         <div class="p-3">
+
 <!--          Matricule -->
           <div class="field">
             <label for="matricule">Matricule</label>
@@ -76,6 +84,8 @@
         <div class="border-1 surface-border border-round p-fluid m-2">
           <span class="text-900 font-bold block  border-bottom-1 surface-border p-3">INCIDENCE, GRADE, ECHELLE ET ECHELLON</span>
           <div class="p-3">
+
+<!--            Corps -->
             <div class="field">
               <label for="corps" class="font-medium text-900">CORPS <span class="text-red-500">*</span></label>
               <p-dropdown
@@ -87,6 +97,8 @@
               <mrt-form-validators [entityField]="'corps'"
                                    [formGroup]="fonctionAgentForm"></mrt-form-validators>
             </div>
+
+<!--            Fonction -->
             <div class="field">
               <label for="fonction" class="font-medium text-900">Fonction <span class="text-red-500">*</span></label>
               <p-dropdown
@@ -98,6 +110,8 @@
               <mrt-form-validators [entityField]="'libelleFonction'"
                                    [formGroup]="fonctionAgentForm"></mrt-form-validators>
             </div>
+
+<!--            grade -->
             <div class="field">
               <label for="grade" class="font-medium text-900">Grade <span class="text-red-500">*</span></label>
               <p-dropdown
@@ -109,6 +123,8 @@
               <mrt-form-validators [entityField]="'grade'"
                                    [formGroup]="fonctionAgentForm"></mrt-form-validators>
             </div>
+
+<!--            Echelle -->
             <div class="field " >
               <label for="echelle" class="font-medium text-900">Echelle <span class="text-red-500">*</span></label>
               <p-dropdown
@@ -120,6 +136,8 @@
               <mrt-form-validators [entityField]="'echelle'"
                                    [formGroup]="fonctionAgentForm"></mrt-form-validators>
             </div>
+
+<!--            Echelon-->
             <div class="field ">
               <label for="echelon" class="font-medium text-900">Echelon <span class="text-red-500">*</span></label>
               <p-dropdown
@@ -147,6 +165,8 @@
       </div>
     </form>
   </div>
+
+<!--  Tableau -->
   <div class="col-12 lg:col-7">
     <p-table
       [columns]="cols"
@@ -193,6 +213,7 @@
           <td>{{ avancement.echelon }}</td>
           <td>{{ avancement.indice }}</td>
           <td>
+
             <!--          Bouton qui fait l'ouverture du formulaire de modification -->
             <button
               pButton
@@ -207,6 +228,7 @@
             ></button>
           </td>
           <td>
+
             <!--          Bouton qui fait la validation de l'avancement  -->
             <button
               pButton
@@ -223,7 +245,7 @@
       </ng-template>
       <ng-template pTemplate="emptymessage">
         <tr>
-          <td colspan="8">Aucun élement trouvé(e).</td>
+          <td colspan="8">Aucun élement.</td>
         </tr>
       </ng-template>
     </p-table>

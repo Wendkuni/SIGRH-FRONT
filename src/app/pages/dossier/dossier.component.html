@@ -70,6 +70,8 @@
                 <span class="text-red-500">*</span>
               </span>
     <form [formGroup]="dossierForm">
+
+<!--      matricule-->
     <div class="field mt-4">
       <label class="font-medium text-900">Matricule</label>
       <input
@@ -79,6 +81,8 @@
         required
         disabled/>
     </div>
+
+<!--    Nom Prenom-->
     <div class="field">
       <label class="font-medium text-900">Nom Prenom</label>
       <input
@@ -88,6 +92,8 @@
         required
         disabled/>
     </div>
+
+<!--    NNI-->
     <div class="field">
       <label class="font-medium text-900">NNI</label>
       <input
@@ -98,6 +104,7 @@
         disabled
       />
     </div>
+
 <!--    Libelle Dossier-->
     <div class="field">
       <label for="libelDossier" class="font-medium text-900">Libelle Dossier <span class="text-red-500">*</span></label>
@@ -108,6 +115,7 @@
         [formGroup]="dossierForm"
       />
     </div>
+
 <!--    Date upload -->
     <div class="field">
       <label for="dateUpload" class="font-medium text-900">Date <span class="text-red-500">*</span></label>
@@ -124,6 +132,7 @@
         [entityField]="'dateUpload'"
         [formGroup]="dossierForm"/>
     </div>
+
 <!--    Observation-->
     <div class="field ">
       <label for="observation" class="font-medium text-900">Observation <span class="text-red-500">*</span></label>
@@ -134,18 +143,20 @@
         [formGroup]="dossierForm"
       />
     </div>
-<!--    Image-->
+<!--    Image upload-->
     <div class="field">
-      <label class="font-medium text-900" for="dossierScan">Dossier <span class="text-red-500">*</span></label>
+      <label class="font-medium text-900" for="dossierScan">Dossier <span class="text-red-500">*(pdf,image => (.pdf, .jpg, .jpeg, .png),word)</span></label>
       <p-fileUpload
         id="dossierScan"
         mode="basic"
-        accept="image/*"
+        accept=".pdf, .jpg, .jpeg, .png"
         [maxFileSize]="1000000"
         styleClass="p-button-outlined p-button-plain w-full"
         (onUpload)="onUpload($event)"
         chooseLabel="Choisir un fichier"></p-fileUpload>
     </div>
+
+
     </form>
   </ng-template>
 

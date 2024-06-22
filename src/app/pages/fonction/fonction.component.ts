@@ -5,7 +5,6 @@ import { Fonction,
 } from "../../core/data/avancement/fonction.model";
 import {AvancementService} from "../../core/data/avancement/avancement.service";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
 import {InputTextModule} from "primeng/inputtext";
 import {DropdownModule} from "primeng/dropdown";
 import {FormValidatorsComponent} from "../../shared/form-validators/form-validators.component";
@@ -18,7 +17,6 @@ import {ConfirmationService, MessageService} from "primeng/api";
 import {Personnel} from "../../core/data/personals/personnel.model";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {ToastModule} from "primeng/toast";
-import {PersonnelService} from "../../core/data/personals/personnel.service";
 
 @Component({
   selector: 'mrt-fonction',
@@ -44,20 +42,34 @@ import {PersonnelService} from "../../core/data/personals/personnel.service";
 })
 export class FonctionComponent implements OnInit{
 
-  listeFonctionByAgent!: Fonctions; //liste des dossiers
+  //liste des dossiers
+  listeFonctionByAgent!: Fonctions;
+
+  //service avancement
   avancementService = inject(AvancementService);
+
+  //personnel requis pour la fonction
   @Input({ required: true }) personnel!: Personnel;
+
+  //formulaire fonction
   fonctionAgentForm!: FormGroup;
+
+  //formBuilder
   fb = inject(FormBuilder);
-  router = inject(ActivatedRoute);
-  fonctionService = inject(AvancementService);
-  action = 'Add';
+
+  //action pour les methodes
+  action = 'Add'
+
+  //fonction selectionner
   selectFonction :Fonction = {} as Fonction;
+
+  //service message
   messageService = inject(MessageService);
+
   // colonne du tableau
   cols = fonctionColonneTable;
-  personnelService = inject(PersonnelService);
-  // Nature de la fonction
+
+  // categorie de la fonction
   categorie = [
     'Integration' ,
     'Titularisation' ,
@@ -74,6 +86,7 @@ export class FonctionComponent implements OnInit{
 
 
   ngOnInit(): void {
+    // Initialisation du formulaire
     this.fonctionAgentForm = this.fb.group({
       libelleFonction: this.fb.control('',[Validators.required]),
       corps: this.fb.control('',[Validators.required]),
@@ -162,6 +175,7 @@ export class FonctionComponent implements OnInit{
     })
   }
 
+  // Methode pour supprimer un avancement
   private deleteAvancement(id: number){
     this.avancementService.delateAvancement(id).subscribe(() => {
         this.getAvancements();

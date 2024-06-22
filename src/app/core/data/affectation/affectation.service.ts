@@ -44,7 +44,7 @@ export class AffectationService {
       headers: new HttpHeaders().set("Content-Type", "application/x-www-form-urlencoded"),
       params: new HttpParams().set('id', mobilite.idAffectation)
     }
-    return this.http.patch(`${this.apiUrl}/affectation/${mobilite.idAffectation}`, mobilite, options);
+    return this.http.patch(`${this.apiUrl}/affectation/${mobilite.idAffectation}`, mobilite);
   }
 
   // delete mobilite

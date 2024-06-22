@@ -70,7 +70,12 @@ export class PersonnelService {
 
   // create personnel
   createPersonnel(personnel: Personnel){
-    return this.http.post(`${this.apiUrl}/personnel/create`, personnel, this.httpOptions);
+    return this.http.post(`${this.apiUrl}/personnel/create`, personnel);
+  }
+
+  createPersonnelWithImage(imagePers: File,personnel: Personnel){
+    personnel.imagPers = imagePers;
+    return this.http.post(`${this.apiUrl}/personnel/createWithImage`,personnel);
   }
 
   // update personnel

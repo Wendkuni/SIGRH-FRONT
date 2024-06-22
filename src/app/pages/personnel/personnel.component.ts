@@ -164,16 +164,32 @@ export class PersonnelComponent implements OnInit{
 
   // Methode pour creer un personnel
   createPersonnel(personnel:Personnel){
-    this.personalService.createPersonnel(personnel).subscribe(() => {
+    if(personnel.imagPers){
+      console.log(" avec image");
+      this.personalService.createPersonnelWithImage(personnel.imagPers,personnel).subscribe(() => {
         this.getAllPersonnel();
         this.formDialog = false;
         this.personnelForm.reset();
-        this.messageService.add({severity: 'success', summary: 'Successful', detail: 'Personnel ajouter', life: 3000});
+        this.messageService.add({severity: 'success', summary: 'Successful', detail: 'Personnel Ajouter', life: 3000});
       },
-      error => {
-        this.messageService.add({severity: 'error', summary: 'Error', detail: 'Personnel non ajouter', life: 3000});
+        error => {
+          this.messageService.add({severity: 'error', summary: 'Error', detail: 'Personnel non Ajouter', life: 3000});
 
-      });
+        });
+    }
+    else {
+      console.log(" avec image");
+      this.personalService.createPersonnel(personnel).subscribe(() => {
+          this.getAllPersonnel();
+          this.formDialog = false;
+          this.personnelForm.reset();
+          this.messageService.add({severity: 'success', summary: 'Successful', detail: 'Personnel ajouter', life: 3000});
+        },
+        error => {
+          this.messageService.add({severity: 'error', summary: 'Error', detail: 'Personnel non ajouter', life: 3000});
+
+        });
+    }
   }
 
   // Methode pour mettre a jour un personnel
@@ -282,5 +298,6 @@ export class PersonnelComponent implements OnInit{
 
   onSelectedFiles(event:any) {
    this.userFile = event.currentFiles;
+   console.log(this.userFile);
   }
 }

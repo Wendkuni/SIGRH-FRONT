@@ -1,3 +1,5 @@
+import {Personnel} from "../personals/personnel.model";
+
 export interface Mobilite {
   // Identifiant unique de la mobilité
   idAffectation: number;
@@ -12,7 +14,13 @@ export interface Mobilite {
   // Localite de la mobilité
   notePedagogiq: string;
   // // Moughataa de la mobilité
-  // moughataa: string;
+   moughataa: string;
+
+   // personnel
+   personnel: Personnel;
+
+   //nature
+  nature: string;
 
 }
 

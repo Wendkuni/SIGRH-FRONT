@@ -11,7 +11,7 @@ import {DropdownModule} from "primeng/dropdown";
 import {FormValidatorsComponent} from "../../shared/form-validators/form-validators.component";
 import {CalendarModule} from "primeng/calendar";
 import {TableModule} from "primeng/table";
-import {KeyValuePipe, UpperCasePipe} from "@angular/common";
+import {DatePipe, KeyValuePipe, UpperCasePipe} from "@angular/common";
 import {TooltipModule} from "primeng/tooltip";
 import {RippleModule} from "primeng/ripple";
 import {ConfirmationService, MessageService} from "primeng/api";
@@ -35,7 +35,8 @@ import {PersonnelService} from "../../core/data/personals/personnel.service";
     RippleModule,
     KeyValuePipe,
     ConfirmDialogModule,
-    ToastModule
+    ToastModule,
+    DatePipe
   ],
   templateUrl: './fonction.component.html',
   styleUrl: './fonction.component.scss',
@@ -45,7 +46,7 @@ export class FonctionComponent implements OnInit{
 
   listeFonctionByAgent!: Fonctions; //liste des dossiers
   avancementService = inject(AvancementService);
-  @Input({ required: true }) id!: number ;
+  @Input({ required: true }) personnel!: Personnel;
   fonctionAgentForm!: FormGroup;
   fb = inject(FormBuilder);
   router = inject(ActivatedRoute);
@@ -56,7 +57,6 @@ export class FonctionComponent implements OnInit{
   // colonne du tableau
   cols = fonctionColonneTable;
   personnelService = inject(PersonnelService);
-  personnel: Personnel = {} as Personnel;
   // Nature de la fonction
   categorie = [
     'Integration' ,
@@ -88,24 +88,13 @@ export class FonctionComponent implements OnInit{
       indice: this.fb.control('', [Validators.required])
     })
     this.getAvancements();
-    this.getPersonnel(this.id);
   }
 
   // Recuperer la liste des avancements du personnel selectionner
   private getAvancements() {
-    this.avancementService.findAvancementByAgent(this.id).subscribe((response) => {
+    this.avancementService.findAvancementByAgent(this.personnel.idAgent).subscribe((response) => {
       this.listeFonctionByAgent = response;
     });
-  }
-
-  getPersonnel(id:number){
-    this.personnelService.findPersonnelById(id).subscribe((response) => {
-        this.personnel = response;
-        console.log(this.personnel);
-      },error => {
-        this.messageService.add({severity:'error', summary: 'Erreur', detail: 'Une erreur est survenue lors de la récupération des données'})
-      }
-    )
   }
 
   // Rempli le formulaire pour modification
@@ -153,7 +142,7 @@ export class FonctionComponent implements OnInit{
       grade: formData.grade,
       echelle: formData.echelle,
       echelon: formData.echelon,
-      dateDebFonction: formData.dateEffet,
+      dateDebFonction: formData.dateDebFonction,
       categorie: formData.categorie,
       groupe: formData.groupe,
       corpsArab: formData.corpsArab,

@@ -17,6 +17,7 @@
       <div class="border-1 surface-border border-round p-fluid mb-4">
         <span class="text-900 font-bold block border-bottom-1 surface-border p-3">Fonction Agent</span>
         <div class="p-3">
+<!--          Matricule -->
           <div class="field">
             <label for="matricule">Matricule</label>
             <input
@@ -27,6 +28,8 @@
               required
               disabled/>
           </div>
+
+<!--          Nom prenom -->
           <div class="field">
             <label for="fullName">Nom Prenom</label>
             <input
@@ -37,11 +40,13 @@
               required
               disabled/>
           </div>
+
+<!--          Categorie -->
           <div class="field">
             <label for="nature" class="font-medium text-900">Nature <span class="text-red-500">*</span></label>
             <p-dropdown
               id="nature"
-              formControlName="nature"
+              formControlName="categorie"
               [options]="categorie"
               placeholder="Selectionner la categorie"
             >
@@ -49,6 +54,8 @@
             <mrt-form-validators [entityField]="'categorie'"
                                  [formGroup]="fonctionAgentForm"></mrt-form-validators>
           </div>
+
+<!--          Date debut function -->
           <div class="field">
             <label for="dateDebFonction" class="font-medium text-900"> Date Effet <span class="text-red-500">*</span></label>
             <p-calendar
@@ -64,6 +71,8 @@
                                  [formGroup]="fonctionAgentForm"></mrt-form-validators>
           </div>
         </div>
+
+
         <div class="border-1 surface-border border-round p-fluid m-2">
           <span class="text-900 font-bold block  border-bottom-1 surface-border p-3">INCIDENCE, GRADE, ECHELLE ET ECHELLON</span>
           <div class="p-3">
@@ -128,6 +137,7 @@
       <div class="flex justify-content-between gap-3">
         <button pButton pRipple class="p-button-primary flex-1" label="Enregistrer"
                 [disabled]="fonctionAgentForm.invalid"
+                (click)="saveFonctionAgent()"
                 icon="pi pi-fw pi-check"></button>
         <button pButton pRipple
                 class="p-button-danger flex-1 p-button-outlined"
@@ -141,7 +151,7 @@
     <p-table
       [columns]="cols"
       [value]="listeFonctionByAgent"
-      #dt1
+      #fonctionAgentTable
       dataKey="id"
       [rows]="5"
       [showCurrentPageReport]="true"
@@ -173,7 +183,7 @@
         <tr>
           <td>{{ avancement.libelleFonction }}</td>
           <td>{{ avancement.libelleFonctionArab }}</td>
-          <td>{{ avancement.dateDebutFonction  | uppercase }}</td>
+          <td>{{ avancement.dateDebutFonction  | date: 'dd/MM/yyyy' }}</td>
           <td>{{ avancement.categorie }}</td>
           <td>{{ avancement.corps }}</td>
           <td>{{ avancement.corpsArab }}</td>

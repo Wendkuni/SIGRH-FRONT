@@ -35,7 +35,7 @@
   <p-table
     [columns]="cols"
     [value]="store.personnel()"
-    #dt1
+    #personnelTable
     dataKey="id"
     [rows]="5"
     [loading]="store.loading()"
@@ -47,17 +47,18 @@
     [rowHover]="true"
     [rowsPerPageOptions]="[5,10, 20, 50]"
     tableStyleClass="p-datatable-gridlines"
-    [globalFilterFields]="['nni','matricule','nomPrenom','nomPrenomArab','tlphone','ministereOrigine','typeEducation']"
+    [globalFilterFields]="['nni','matricule','nomPrenom','nomPrenomArab','nni','dteRecrutement','dteTitularisation','lieuNaiss','bank','codeBank','ministereOrigine','typeeducation']"
   >
     <ng-template pTemplate="caption">
       <div class="flex justify-content-between flex-column sm:flex-row">
               <span class="p-input-icon-left mb-2">
 							<i class="pi pi-search"></i>
-							<input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)"
+							<input pInputText type="text" #filter (input)="onGlobalFilter(personnelTable, $event)"
                      placeholder="Recherche..." class="w-full"/>
 						</span>
       </div>
     </ng-template>
+
     <ng-template let-columns pTemplate="header">
       <tr>
         @for (col of columns; track col.field) {
@@ -116,10 +117,10 @@
         </td>
         <td
           style="min-width: 15rem">
-          {{ personnel.dteNaiss | date: 'dd/MM/yyyy' }}
+          {{ personnel.dateNaiss | date: 'dd/MM/yyyy' }}
         </td>
         <td style="min-width: 15rem">
-          {{ personnel.dteRecrutemnt | date: 'dd/MM/yyyy' }}
+          {{ personnel.dteRecrutement | date: 'dd/MM/yyyy' }}
         </td>
         <td
           style="min-width: 15rem">
@@ -150,7 +151,11 @@
         </td>
         <td
           style="min-width: 15rem">
-          {{ personnel.dteDepart | date: 'dd/MM/yyyy' }}
+          {{ personnel.cleRib }}
+        </td>
+        <td
+          style="min-width: 15rem">
+          {{ personnel.dteSortie | date: 'dd/MM/yyyy' }}
         </td>
         <td
           style="min-width: 15rem">
@@ -166,13 +171,7 @@
         </td>
         <td
           style="min-width: 15rem">
-          @if(personnel.actifOrNot) {
-            <p-tag
-              [value]="personnel.actifOrNot"
-              [severity]="getStatusSeverity(personnel.actifOrNot)"
-            >
-            </p-tag>
-          }
+          {{personnel.actifOrNot}}
         </td>
         <td
           style="min-width: 15rem">
@@ -296,13 +295,13 @@
                   id="dtenaiss"
                   [dateFormat]="'yy-mm-dd'"
                   placeholder="Entre la date(yyyy-mm-dd)"
-                  formControlName="dteNaiss"
+                  formControlName="dateNaiss"
                   styleClass="mb-1"
                   appendTo="body"
                   [showTime]="false"
                 />
                 <mrt-form-validators
-                  [entityField]="'dteNaiss'"
+                  [entityField]="'dateNaiss'"
                   [formGroup]="personnelForm"/>
               </div>
 
@@ -500,23 +499,23 @@
                 />
               </div>
 
-              <!--              Date de depart-->
-              <div class="field col-12 md:col-6">
-                <label for="dtedepart" class="font-medium text-900">Date de depart</label>
-                <p-calendar
-                  id="dtedepart"
-                  [dateFormat]="'yy-mm-dd'"
-                  placeholder="Entre la date(yyyy-mm-dd)"
-                  styleClass="mb-1"
-                  appendTo="body"
-                  [showTime]="false"
-                  formControlName="dteDepart"
-                />
-              </div>
+<!--              &lt;!&ndash;              Date de depart&ndash;&gt;-->
+<!--              <div class="field col-12 md:col-6">-->
+<!--                <label for="dtedepart" class="font-medium text-900">Date de depart</label>-->
+<!--                <p-calendar-->
+<!--                  id="dtedepart"-->
+<!--                  [dateFormat]="'yy-mm-dd'"-->
+<!--                  placeholder="Entre la date(yyyy-mm-dd)"-->
+<!--                  styleClass="mb-1"-->
+<!--                  appendTo="body"-->
+<!--                  [showTime]="false"-->
+<!--                  formControlName="dteDepart"-->
+<!--                />-->
+<!--              </div>-->
 
               <!--              Date sortie-->
               <div class="field col-12 md:col-6">
-                <label for="dteSortie" class="font-medium text-900">Date dde sortie</label>
+                <label for="dteSortie" class="font-medium text-900">Date sortie</label>
                 <p-calendar
                   id="dteSortie"
                   [dateFormat]="'yy-mm-dd'"
@@ -529,7 +528,7 @@
               </div>
 
               <!--              Avatar -->
-              <div class="field col-12 md:col-6">
+              <div class="field col-12">
                 <label for="avatar" class="font-medium text-900">Avatar</label>
                 <p-fileUpload
                   mode="basic"

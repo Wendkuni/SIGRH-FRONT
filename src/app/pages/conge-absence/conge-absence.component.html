@@ -42,7 +42,7 @@
     dataKey="id"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [showCurrentPageReport]="true"
-    [globalFilterFields]="['matricule','nomPrenom','raison','autorisation','motif','signataire']"
+    [globalFilterFields]="['matricule','nomPrenom','libelle','raison','autorisation','motif','signataire']"
   >
     <ng-template pTemplate="caption">
       <div class="flex justify-content-between flex-column sm:flex-row">
@@ -72,8 +72,9 @@
     </ng-template>
     <ng-template pTemplate="body" let-dmd>
       <tr>
-        <td> {{ dmd.matricule }}</td>
-        <td>{{ dmd.nomPrenom }}</td>
+        <td> {{ dmd.personnel.matricule }}</td>
+        <td>{{ dmd.personnel.nomPrenom }}</td>
+        <td>{{ dmd.libelle}}</td>
         <td> {{ dmd.raison }}</td>
         <td> {{dmd.dateEffet }} </td>
         <td> {{ dmd.nbJour }}</td>
@@ -160,7 +161,7 @@
     </ng-template>
     <ng-template pTemplate="emptymessage">
       <tr>
-        <td colspan="8">Aucun élement trouvé(e).</td>
+        <td colspan="8">Aucun élement trouvé</td>
       </tr>
     </ng-template>
   </p-table>
@@ -186,15 +187,30 @@
     <form [formGroup]="formDemande">
       <div class="grid">
         <div class="field col-12">
-          <label for="matricule">Matricule  <span class="text-red-500">*</span></label>
+          <label for="agent">Matricule  <span class="text-red-500">*</span></label>
+          <p-dropdown
+            [options]="listeAgent"
+            optionLabel="nonPrenom"
+            id="agent"
+            formControlName="raison"
+            [filter]="true"
+            [showClear]="true"
+            appendTo="body"
+            placeholder="Selectionner la raison"
+          ></p-dropdown>
+          <mrt-form-validators [entityField]="'matricule'" [formGroup]="formDemande"></mrt-form-validators>
+
+        </div>
+        <div class="field">
+          <label for="libelle">Libelle <span class="text-red-500">*</span></label>
           <input
             type="text"
             pInputText
-            id="matricule"
-            placeholder="Matricule"
-            formControlName="matricule"
-            required/>
-          <mrt-form-validators [entityField]="'matricule'" [formGroup]="formDemande"></mrt-form-validators>
+            id="libelle"
+            required
+            formControlName="libelle"
+            autofocus />
+          <mrt-form-validators [entityField]="'libelle'" [formGroup]="formDemandeProcessing"></mrt-form-validators>
         </div>
         <div class="field col-12">
           <label for="raison">Raison  <span class="text-red-500">*</span></label>
@@ -221,7 +237,7 @@
             inputId="start"
             placeholder="Date Effet"
             styleClass="mb-1"
-            formControlName="dateEffet"
+            formControlName="dateeffet"
           />
           <mrt-form-validators [entityField]="'dateEffet'" [formGroup]="formDemande"></mrt-form-validators>
         </div>

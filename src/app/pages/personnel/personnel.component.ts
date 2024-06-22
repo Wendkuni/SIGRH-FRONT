@@ -110,7 +110,7 @@ export class PersonnelComponent implements OnInit{
       tlphone: this.fb.control('',[Validators.required]),
 
       finCntrat: this.fb.control(''),
-      dteNaiss: this.fb.control('',[Validators.required]),
+      dateNaiss: this.fb.control('',[Validators.required]),
       lieuNaiss: this.fb.control('',[Validators.required]),
       bank: this.fb.control('',[Validators.required]),
 
@@ -200,7 +200,7 @@ export class PersonnelComponent implements OnInit{
       nni: formData.nni,
       nomPrenom: formData.nomPrenom,
       nomPrenomArab: formData.nomPrenomArab,
-      dateNaiss: formData.dteNaiss,
+      dateNaiss: formData.dateNaiss,
       tlphone: formData.tlphone,
       adressEmp: formData.adressEmp,
       lieuNaiss: formData.lieuNaiss,

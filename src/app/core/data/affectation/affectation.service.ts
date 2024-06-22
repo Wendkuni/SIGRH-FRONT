@@ -14,9 +14,18 @@ export class AffectationService {
   // Inject HttpClient
   http = inject(HttpClient);
 
+
+  httpOptions = {
+    headers: new HttpHeaders( { 'Access-Control-Allow-Origin': '*' })
+  };
+
   // get all mobilites
   getAllMobilites(){
     return this.http.get<Mobilites>(`${this.apiUrl}/affectations`);
+  }
+
+  findMobiliteByAgent(id: number){
+    return this.http.get<Mobilite[]>(`${this.apiUrl}/affectationsByAgent/${id}`, this.httpOptions);
   }
 
   // get mobilite by id

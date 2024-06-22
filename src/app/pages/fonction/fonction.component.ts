@@ -18,6 +18,7 @@ import {ConfirmationService, MessageService} from "primeng/api";
 import {Personnel} from "../../core/data/personals/personnel.model";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {ToastModule} from "primeng/toast";
+import {PersonnelService} from "../../core/data/personals/personnel.service";
 
 @Component({
   selector: 'mrt-fonction',
@@ -44,7 +45,7 @@ export class FonctionComponent implements OnInit{
 
   listeFonctionByAgent!: Fonctions; //liste des dossiers
   avancementService = inject(AvancementService);
-  @Input() personnel: Personnel = {} as Personnel;
+  @Input({ required: true }) id!: number ;
   fonctionAgentForm!: FormGroup;
   fb = inject(FormBuilder);
   router = inject(ActivatedRoute);
@@ -54,6 +55,8 @@ export class FonctionComponent implements OnInit{
   messageService = inject(MessageService);
   // colonne du tableau
   cols = fonctionColonneTable;
+  personnelService = inject(PersonnelService);
+  personnel: Personnel = {} as Personnel;
   // Nature de la fonction
   categorie = [
     'Integration' ,
@@ -85,13 +88,24 @@ export class FonctionComponent implements OnInit{
       indice: this.fb.control('', [Validators.required])
     })
     this.getAvancements();
+    this.getPersonnel(this.id);
   }
 
   // Recuperer la liste des avancements du personnel selectionner
   private getAvancements() {
-    this.avancementService.findAvancementByAgent(this.personnel.idAgent).subscribe((response) => {
+    this.avancementService.findAvancementByAgent(this.id).subscribe((response) => {
       this.listeFonctionByAgent = response;
     });
+  }
+
+  getPersonnel(id:number){
+    this.personnelService.findPersonnelById(id).subscribe((response) => {
+        this.personnel = response;
+        console.log(this.personnel);
+      },error => {
+        this.messageService.add({severity:'error', summary: 'Erreur', detail: 'Une erreur est survenue lors de la récupération des données'})
+      }
+    )
   }
 
   // Rempli le formulaire pour modification

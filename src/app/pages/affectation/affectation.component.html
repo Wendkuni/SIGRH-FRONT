@@ -40,14 +40,14 @@
       </ng-template>
       <ng-template pTemplate="body" let-mobilite>
         <tr>
-          <td>{{mobilite.matricule}}</td>
-          <td>{{mobilite.nomPrenom}}</td>
+          <td>{{mobilite.personnel.matricule}}</td>
+          <td>{{mobilite.personnel.nomPrenom}}</td>
           <td>{{mobilite.nature}}</td>
           <td>{{mobilite.dren}}</td>
           <td>{{mobilite.localite}}</td>
           <td>{{mobilite.moughataa}}</td>
-          <td>{{mobilite.ecole}}</td>
-          <td>{{mobilite.notePedagogique}}</td>
+          <td>{{mobilite.serviceEcole}}</td>
+          <td>{{mobilite.notePedagogiq}}</td>
           <td>{{mobilite.dateEffet |date}}</td>
           <td>
             <!--          Bouton qui fait la validation de l'avancement  -->

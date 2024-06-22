@@ -6,8 +6,8 @@ export interface Raison {
 
 export interface AbsenceEtConge{
   idAbsence: number;
-  libelleAb: string;
-  dateEffet: Date;
+  libelle: string;
+  dateeffet: Date;
   raison: Raison;
   nbJour: number;
   motif: string;

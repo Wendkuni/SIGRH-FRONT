@@ -15,6 +15,7 @@ import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} fr
 import {Courier} from "../../core/data/couriel/couriel.model";
 import {FormValidatorsComponent} from "../../shared/form-validators/form-validators.component";
 import {CalendarModule} from "primeng/calendar";
+import {PersonnelService} from "../../core/data/personals/personnel.service";
 
 @Component({
   selector: 'mrt-dossier',
@@ -43,9 +44,10 @@ export class DossierComponent implements OnInit{
   dossierService = inject(DossierService);
   fb = inject(FormBuilder);
   messageService = inject(MessageService);
-  @Input() personnel!: Personnel;
+  @Input({ required: true }) personnel!: Personnel;
   action = 'Add';
   selectedDossier: Dossier = {} as Dossier;
+  personnelService = inject(PersonnelService);
   imageFold!: File[];
   dossierForm: FormGroup = this.fb.group({
     libelDossier: this.fb.control('',[Validators.required]),

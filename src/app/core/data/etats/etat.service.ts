@@ -2,34 +2,18 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Personnels} from "../personals/personnel.model";
 import {Observable} from "rxjs";
+import {AbsenceEtConge, AbsenceEtCongeList} from "../conge/conge_absence.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class EtatService {
 
-  url = 'http://localhost:3000/personnels';
+  urlConge = 'http://localhost:3000/conges';
   http = inject(HttpClient);
 
-  getPersonnelActif(){
-    let personnelList!: Personnels
-    let listPersonnelActif:Personnels = [];
-    this.http.get<Personnels>(this.url).subscribe( (response) =>{
-      personnelList = response;
-      personnelList.forEach(perso => {
-        if(perso.actifOrNot === 'Actif'){
-          listPersonnelActif.push(perso);
-        }
-      })
-    });
-    return listPersonnelActif;
+  getAllConge(){
+    return this.http.get<AbsenceEtCongeList>(`${this.urlConge}`);
   }
 
-  getPersonnelNoActif(){
-    let personnelList!: Observable<Personnels>
-    let listPersonnelActif:Personnels = [];
-    personnelList = this.http.get<Personnels>(this.url);
-    console.log(personnelList);
-    return listPersonnelActif;
-  }
 }

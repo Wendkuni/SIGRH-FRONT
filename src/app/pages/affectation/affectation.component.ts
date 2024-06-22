@@ -75,7 +75,7 @@ export class AffectationComponent implements OnInit{
   ];
 
   ngOnInit(): void {
-    this.getAllAffections();
+    this.getAffectationByIdAgent();
   }
 
   //Methode pour afficher le formulaire d'ajout
@@ -86,6 +86,12 @@ export class AffectationComponent implements OnInit{
 
   private getAllAffections() {
     this.mobiliteService.getAllMobilites().subscribe((response:Mobilite[]) => {
+      this.listAffections$ = response;
+    });
+  }
+
+  private getAffectationByIdAgent() {
+    this.mobiliteService.findMobiliteByAgent(this.personnel.idAgent).subscribe((response) => {
       this.listAffections$ = response;
     });
   }

@@ -35,19 +35,31 @@
 
   <p-tabView>
     <p-tabPanel   header="Carrières">
-      <mrt-fonction
-        [personnel]="personnel"
-      ></mrt-fonction>
+      @if (personnel) {
+        <mrt-fonction
+          [id]="id"
+        ></mrt-fonction>
+      } @else {
+        loading...
+      }
     </p-tabPanel>
-<!--    <p-tabPanel header="Dossier">-->
-<!--      <mrt-dossier-->
-<!--        [personnel]="personnel"-->
-<!--      ></mrt-dossier>-->
-<!--    </p-tabPanel>-->
-<!--    <p-tabPanel header="Mobilite">-->
-<!--      <mrt-affectation-->
-<!--        [personnel]="personnel"-->
-<!--      ></mrt-affectation>-->
-<!--    </p-tabPanel>-->
+    <p-tabPanel header="Dossier">
+      @if(personnel){
+        <mrt-dossier
+          [personnel]="personnel"
+        ></mrt-dossier>
+      } @else {
+        loading...
+      }
+    </p-tabPanel>
+    <p-tabPanel header="Mobilite">
+      @if(personnel){
+        <mrt-affectation
+          [personnel]="personnel"
+        ></mrt-affectation>
+      } @else {
+        loading...
+      }
+    </p-tabPanel>
   </p-tabView>
 </p-card>

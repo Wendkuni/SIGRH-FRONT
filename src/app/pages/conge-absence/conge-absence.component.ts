@@ -64,8 +64,9 @@ export class CongeAbsenceComponent implements OnInit {
   colNT: Cols[] = [
     {field: 'matricule', header: 'Matricule'},
     {field: 'nomPrenom', header: 'Nom et prénom'},
+    {field: 'libelle', header: 'Libellé'},
     {field: 'raison', header: 'Type'},
-    {field: 'dateEffet', header: 'Date Effet'},
+    {field: 'dateeffet', header: 'Date Effet'},
     {field: 'nbJour', header: 'Nombre de jours'},
     {field: 'autorisation', header: 'Autorisation'},
     {field: 'motif', header: 'Motif'},
@@ -104,9 +105,9 @@ export class CongeAbsenceComponent implements OnInit {
   ngOnInit(): void {
     this.formDemande = this.fb.group({
       matricule: this.fb.control('', [Validators.required]),
-      libelleAb: this.fb.control(''),
+      libelle: this.fb.control(''),
       raison: this.fb.control('',[Validators.required]),
-      dateEffet: this.fb.control('', [Validators.required]),
+      dateeffet: this.fb.control('', [Validators.required]),
       nbJour: this.fb.control('', [Validators.required]),
       motif: this.fb.control('')
     });
@@ -131,13 +132,17 @@ export class CongeAbsenceComponent implements OnInit {
 
   getAllPersonnel() {
     this.personnalService.getAllPersonnels().subscribe((response) => {
-      this.listeAgent = response;
+      if(response){
+        this.listeAgent = response;
+      }
     });
   }
 
   getAllDemandeConge() {
     this.congeService.getAll().subscribe((response) => {
-      this.listDemande$ = response;
+      if(response){
+        this.listDemande$ = response;
+      }
     });
   }
 
@@ -222,8 +227,8 @@ export class CongeAbsenceComponent implements OnInit {
   private getFromData(): AbsenceEtConge {
     const formData = this.formDemande.value;
     return <AbsenceEtConge>{
-      libelleAb: formData.libelleAb,
-      dateEffet: formData.dateEffet,
+      libelle: formData.libelle,
+      dateeffet: formData.dateeffet,
       nbJour: formData.nombreJr,
       autorisation: 'Demande en cours',
       motif: formData.motif,

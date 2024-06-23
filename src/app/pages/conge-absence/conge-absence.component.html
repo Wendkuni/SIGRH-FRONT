@@ -1,0 +1,314 @@
+<!-- Toast notification part start-->
+<p-toast
+  [showTransformOptions]="'translateY(100%)'"
+  [showTransitionOptions]="'1000ms'"
+  [hideTransitionOptions]="'1000ms'"
+  [showTransformOptions]="'translateX(100%)'" />
+
+<p-card styleClass="mb-5">
+  <p-toolbar styleClass="mb-1 gap-2">
+    <ng-template pTemplate="right">
+      <div class="my-2">
+        <!--        Button d'ajout d'une demande de conge ou d'absence -->
+        <button
+          pButton
+          pRipple
+          label="Ajouter"
+          icon="pi pi-plus"
+          class="p-element p-ripple p-button-outlined p-button-primary p-button p-component mr-2"
+          (click)="showForm()"
+        ></button>
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="left">
+      <div class="my-2">
+        <h4>Gestion des congés et des absences </h4>
+      </div>
+    </ng-template>
+  </p-toolbar>
+</p-card>
+
+<p-card>
+  <p-table
+    #dt
+    [rows]="10"
+    [value]="listDemande$"
+    [columns]="colNT"
+    [paginator]="true"
+    [tableStyle]="{ 'min-width': '75rem' }"
+    styleClass="p-datatable-gridlines p-datatable-striped"
+    [rowHover]="true"
+    dataKey="id"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [showCurrentPageReport]="true"
+    [globalFilterFields]="['matricule','nomPrenom','libelle','raison','autorisation','motif','signataire']"
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex justify-content-between flex-column sm:flex-row">
+              <span class="p-input-icon-left mb-2">
+							<i class="pi pi-search"></i>
+							<input pInputText type="text" #filter (input)="onGlobalFilter(dt, $event)" placeholder="Recherche..." class="w-full"/>
+						</span>
+      </div>
+    </ng-template>
+    <ng-template let-columns pTemplate="header">
+      <tr>
+        @for (col of columns; track col.field) {
+          <th
+            style="min-width: 15rem"
+            [pSortableColumn]="col.field"
+            class="font-weight-bold"
+          >
+            {{ col.header }}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+        }
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-dmd>
+      <tr>
+        <td> {{ dmd.personnel.matricule }}</td>
+        <td>{{ dmd.personnel.nomPrenom }}</td>
+        <td>{{ dmd.libelle}}</td>
+        <td> {{ dmd.raison }}</td>
+        <td> {{dmd.dateEffet }} </td>
+        <td> {{ dmd.nbJour }}</td>
+        <td>
+          {{dmd.autorisation}}
+        </td>
+        <td>
+          {{dmd.motif}}
+        </td>
+        <td>
+          {{dmd.signataire}}
+        </td>
+        @if(dmd.autorisation === 'Demande en cours'){
+          <td>
+            <button
+              pButton
+              pRipple
+              type="button"
+              pTooltip="Modifier"
+              icon="pi pi-pencil"
+              tooltipPosition="top"
+              (click)="editDemande(dmd)"
+              class="p-button-rounded p-button-outlined p-button-secondary mr-3"></button>
+          </td>
+          <td >
+            <button
+              pButton
+              pTooltip="Accorder"
+              tooltipPosition="top"
+              pRipple
+              icon="pi pi-check-circle"
+              class="p-button-rounded p-button-primary mx-2"
+              iconPos="left"
+              (click)="acceptDemande(dmd)"
+            ></button>
+
+          </td>
+          <td>
+            <button
+              pButton
+              pRipple
+              tooltipPosition="top"
+              icon="pi pi-times"
+              pTooltip="Refuser"
+              class="p-button-rounded p-button-danger mx-2"
+              (click)="rejectDemande(dmd)"
+            ></button>
+          </td>
+          <td>
+            <button
+              pButton
+              pRipple
+              type="button"
+              pTooltip="Annuler"
+              icon="pi pi-times"
+              tooltipPosition="left"
+              class="p-button-rounded p-button-outlined p-button-secondary mr-3"
+              (click)="cancelDemande(dmd)"
+            ></button>
+          </td>
+        } @else if(dmd.autorisation === 'Demande acceptée'){
+          <td>
+            <button
+              pButton
+              pRipple
+              type="button"
+              pTooltip="Annuler"
+              icon="pi pi-times"
+              tooltipPosition="left"
+              class="p-button-rounded p-button-outlined p-button-secondary mr-3"
+              (click)="cancelDemande(dmd)"
+            ></button>
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
+        } @else {
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        }
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="8">Aucun élement trouvé</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-card>
+
+<!--  Formulaire ajout ou modification -->
+<p-dialog
+  [(visible)]="showFormDialog"
+  [style]="{ width: '50vw', height: 'auto'}"
+  header="Conge Formulaire"
+  (onHide)="cancel()"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  cdk-scrollable
+  styleClass="p-fluid"
+>
+  <ng-template pTemplate="content">
+    <div class="text-sm p-4">
+      Champs obligatoires:
+      <span class="text-red-500">*</span>
+    </div>
+    <form [formGroup]="formDemande">
+      <div class="grid">
+        <div class="field col-12">
+          <label for="agent">Matricule  <span class="text-red-500">*</span></label>
+          <p-dropdown
+            [options]="listeAgent"
+            optionLabel="nonPrenom"
+            id="agent"
+            formControlName="raison"
+            [filter]="true"
+            [showClear]="true"
+            appendTo="body"
+            placeholder="Selectionner la raison"
+          ></p-dropdown>
+          <mrt-form-validators [entityField]="'matricule'" [formGroup]="formDemande"></mrt-form-validators>
+
+        </div>
+        <div class="field">
+          <label for="libelle">Libelle <span class="text-red-500">*</span></label>
+          <input
+            type="text"
+            pInputText
+            id="libelle"
+            required
+            formControlName="libelle"
+            autofocus />
+          <mrt-form-validators [entityField]="'libelle'" [formGroup]="formDemandeProcessing"></mrt-form-validators>
+        </div>
+        <div class="field col-12">
+          <label for="raison">Raison  <span class="text-red-500">*</span></label>
+          <p-dropdown
+            [options]="raison"
+            id="raison"
+            formControlName="raison"
+            [filter]="true"
+            [showClear]="true"
+            appendTo="body"
+            placeholder="Selectionner la raison"
+          >
+          </p-dropdown>
+          <mrt-form-validators [entityField]="'raison'" [formGroup]="formDemande"></mrt-form-validators>
+        </div>
+
+        <div class="field col-12 md:col-6">
+          <label for="dateEffet">Date Effet  <span class="text-red-500">*</span></label>
+          <p-calendar
+            id="dateEffet"
+            appendTo="body"
+            dateFormat="yy-mm-dd"
+            [showTime]="false"
+            inputId="start"
+            placeholder="Date Effet"
+            styleClass="mb-1"
+            formControlName="dateeffet"
+          />
+          <mrt-form-validators [entityField]="'dateEffet'" [formGroup]="formDemande"></mrt-form-validators>
+        </div>
+
+        <div class="field col-12 md:col-6">
+          <label for="nombre_jr">Nombre de jours  <span class="text-red-500">*</span></label>
+          <p-inputNumber
+            mode="decimal"
+            id="nombre_jr"
+            [showButtons]="true"
+            inputId="min-buttons"
+            [min]="1"
+            formControlName="nbJour"
+            [useGrouping]="false"/>
+          <mrt-form-validators [entityField]="'nbJour'" [formGroup]="formDemande"></mrt-form-validators>
+        </div>
+
+        <div class="field col-12">
+          <label for="motif">Motif</label>
+          <textarea id="motif" rows="5" cols="30" placeholder="Motif" pInputTextarea formControlName="motif"></textarea>
+        </div>
+      </div>
+    </form>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button pButton pRipple class="p-button-primary flex-1" label="Enregistrer" icon="pi pi-fw pi-check" [disabled]="formDemande.invalid" (click)="onSubmit()"></button>
+    <button pButton pRipple class="p-button-danger flex-1 p-button-outlined" label="Annuler" icon="pi pi-fw pi-times" (click)="cancel()"></button>
+  </ng-template>
+</p-dialog>
+
+<p-dialog
+  [(visible)]="showFormActionDialog"
+  [style]="{ width: '50vw', height: 'auto'}"
+  header="Conge Formulaire"
+  (onHide)="cancel()"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  cdk-scrollable
+  styleClass="p-fluid"
+>
+  <div class="text-sm p-4">
+    Champs obligatoires:
+    <span class="text-red-500">*</span>
+  </div>
+  <form [formGroup]="formDemandeProcessing">
+    <div class="field">
+      <label for="signataire">Signataire <span class="text-red-500">*</span></label>
+      <input
+        type="text"
+        pInputText
+        id="signataire"
+        required
+        formControlName="signataire"
+        autofocus />
+      <mrt-form-validators [entityField]="'signataire'" [formGroup]="formDemandeProcessing"></mrt-form-validators>
+    </div>
+    <div class="field">
+      <label for="autorisation">Autorisation <span class="text-red-500">*</span></label>
+      <p-dropdown
+        [options]="autorisation"
+        id="autorisation"
+        formControlName="autorisation"
+        placeholder="Selectionner la reponse"
+      />
+      <mrt-form-validators [entityField]="'autorisation'" [formGroup]="formDemandeProcessing"></mrt-form-validators>
+    </div>
+  </form>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple class="p-button-primary flex-1" label="Enregistrer" icon="pi pi-fw pi-check" [disabled]="formDemandeProcessing.invalid" (click)="onSubmit()"></button>
+    <button pButton pRipple class="p-button-danger flex-1 p-button-outlined" label="Annuler" icon="pi pi-fw pi-times" (click)="cancel()"></button>
+  </ng-template>
+</p-dialog>

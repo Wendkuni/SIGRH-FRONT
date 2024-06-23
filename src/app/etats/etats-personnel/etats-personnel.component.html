@@ -1,0 +1,408 @@
+<p-card>
+  <h2 class="text-center underline mb-5">ETATS PERSONNELS</h2>
+
+  <p-tabView >
+    <p-tabPanel header="Actif">
+      <mrt-etat-actif></mrt-etat-actif>
+    </p-tabPanel>
+    <p-tabPanel header="Annee Recrutement">
+      <mrt-etat-annee-recrutement></mrt-etat-annee-recrutement>
+    </p-tabPanel>
+    <p-tabPanel header="Direction">
+      <p-table
+        [columns]="colDren"
+        [value]="list"
+        #dt
+        dataKey="id"
+        [rows]="5"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="Page {currentPage} sur {totalPages}"
+        [paginator]="true"
+        styleClass="p-datatable-gridlines p-datatable-striped"
+        responsiveLayout="scroll"
+        [rowHover]="true"
+        [rowsPerPageOptions]="[5,10, 20, 50]"
+        tableStyleClass="p-datatable-gridlines"
+        [globalFilterFields]="['direction']"
+      >
+        <ng-template pTemplate="caption">
+          <div class="flex justify-content-start flex-column sm:flex-row">
+            <button type="button"
+                    pButton pRipple
+                    icon="pi pi-file-excel"
+                    class="p-button-success mr-2"
+                    label="Excel"
+            ></button>
+            <button type="button"
+                    pButton pRipple
+                    icon="pi pi-file-pdf"
+                    label="Pdf"
+                    class="p-button-warning mr-2"
+                    (click)="exportPdf(dt)">
+            </button>
+          </div>
+
+          <div class="flex justify-content-end flex-column sm:flex-row">
+              <span class="p-input-icon-left mb-2">
+							<i class="pi pi-search"></i>
+							<input pInputText type="text" #filter (input)="onGlobalFilter($event)"
+                     placeholder="Recherche per direction..." class="w-full"/>
+						</span>
+          </div>
+        </ng-template>
+        <ng-template let-columns pTemplate="header">
+          <tr>
+            @for (col of columns; track col.field) {
+              <th
+                [pSortableColumn]="col.field"
+                class="font-weight-bold "
+              >
+                {{ col.header }}
+                @if (col.header != 'Photo') {
+                  <p-sortIcon [field]="col.field"></p-sortIcon>
+                }
+              </th>
+            }
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-personnel>
+          <tr class="align-items-center align-content-center">
+            <td
+              style="min-width: 15rem">
+              {{ personnel.matricule }}
+            </td>
+            <td
+              style="min-width: 15rem">
+              {{ personnel.nomPrenom  | uppercase }}
+            </td>
+            <td
+              style="min-width: 15rem">
+              {{ personnel.nomPrenomArab }}
+            </td>
+            <td
+              style="min-width: 15rem">
+              {{ personnel.nni }}
+            </td>
+            <td
+              style="min-width: 15rem">
+              {{ personnel.direction }}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-tabPanel>
+    <p-tabPanel header="Disponible">
+      <p-accordion>
+        <p-accordionTab header="Liste du personnel disponible" [selected]="false" class="line-height-3 m-0">
+          <p-table
+            [columns]="colDispo"
+            [value]="list"
+            #dt
+            dataKey="id"
+            [rows]="5"
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate="Page {currentPage} sur {totalPages}"
+            [paginator]="true"
+            styleClass="p-datatable-gridlines p-datatable-striped"
+            responsiveLayout="scroll"
+            [rowHover]="true"
+            [rowsPerPageOptions]="[5,10, 20, 50]"
+            tableStyleClass="p-datatable-gridlines"
+          >
+            <ng-template pTemplate="caption">
+              <div class="flex justify-content-start flex-column sm:flex-row">
+                <button type="button"
+                        pButton pRipple
+                        icon="pi pi-file-excel"
+                        class="p-button-success mr-2"
+                        label="Excel"
+                ></button>
+                <button type="button"
+                        pButton pRipple
+                        icon="pi pi-file-pdf"
+                        label="Pdf"
+                        class="p-button-warning mr-2"
+                        (click)="exportPdf(dt)">
+                </button>
+              </div>
+
+            </ng-template>
+            <ng-template let-columns pTemplate="header">
+              <tr>
+                @for (col of columns; track col.field) {
+                  <th
+                    [pSortableColumn]="col.field"
+                    class="font-weight-bold "
+                  >
+                    {{ col.header }}
+                    @if (col.header != 'Photo') {
+                      <p-sortIcon [field]="col.field"></p-sortIcon>
+                    }
+                  </th>
+                }
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-personnel>
+              <tr class="align-items-center align-content-center">
+                <td
+                  style="min-width: 15rem">
+                  {{ personnel.matricule }}
+                </td>
+                <td
+                  style="min-width: 15rem">
+                  {{ personnel.nomPrenom  | uppercase }}
+                </td>
+                <td
+                  style="min-width: 15rem">
+                  {{ personnel.nomPrenomArab }}
+                </td>
+                <td
+                  style="min-width: 15rem">
+                  {{ personnel.nni }}
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </p-accordionTab>
+        <p-accordionTab header="Liste du personnel non disponible" [selected]="false" class="line-height-3 m-0">
+          <p-table
+            [columns]="colDispo"
+            [value]="list"
+            #dt
+            dataKey="id"
+            [rows]="5"
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate="Page {currentPage} sur {totalPages}"
+            [paginator]="true"
+            styleClass="p-datatable-gridlines p-datatable-striped"
+            responsiveLayout="scroll"
+            [rowHover]="true"
+            [rowsPerPageOptions]="[5,10, 20, 50]"
+            tableStyleClass="p-datatable-gridlines"
+          >
+            <ng-template pTemplate="caption">
+              <div class="flex justify-content-start flex-column sm:flex-row">
+                <button type="button"
+                        pButton pRipple
+                        icon="pi pi-file-excel"
+                        class="p-button-success mr-2"
+                        label="Excel"
+                ></button>
+                <button type="button"
+                        pButton pRipple
+                        icon="pi pi-file-pdf"
+                        label="Pdf"
+                        class="p-button-warning mr-2"
+                        (click)="exportPdf(dt)">
+                </button>
+              </div>
+            </ng-template>
+            <ng-template let-columns pTemplate="header">
+              <tr>
+                @for (col of columns; track col.field) {
+                  <th
+                    [pSortableColumn]="col.field"
+                    class="font-weight-bold "
+                  >
+                    {{ col.header }}
+                    @if (col.header != 'Photo') {
+                      <p-sortIcon [field]="col.field"></p-sortIcon>
+                    }
+                  </th>
+                }
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-personnel>
+              <tr class="align-items-center align-content-center">
+                <td
+                  style="min-width: 15rem">
+                  {{ personnel.matricule }}
+                </td>
+                <td
+                  style="min-width: 15rem">
+                  {{ personnel.nomPrenom  | uppercase }}
+                </td>
+                <td
+                  style="min-width: 15rem">
+                  {{ personnel.nomPrenomArab }}
+                </td>
+                <td
+                  style="min-width: 15rem">
+                  {{ personnel.nni }}
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </p-accordionTab>
+      </p-accordion>
+    </p-tabPanel>
+    <p-tabPanel header="Lieu Affectation">
+      <p-table
+        [columns]="colLieu"
+        [value]="listDispo"
+        #dt1
+        dataKey="id"
+        [rows]="5"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="Page {currentPage} sur {totalPages}"
+        [paginator]="true"
+        styleClass="p-datatable-gridlines p-datatable-striped"
+        responsiveLayout="scroll"
+        [rowHover]="true"
+        [rowsPerPageOptions]="[5,10, 20, 50]"
+        tableStyleClass="p-datatable-gridlines"
+        [globalFilterFields]="['lieu']"
+      >
+        <ng-template pTemplate="caption">
+          <div class="flex justify-content-start flex-column sm:flex-row">
+            <button type="button"
+                    pButton pRipple
+                    icon="pi pi-file-excel"
+                    class="p-button-success mr-2"
+                    label="Excel"
+                    tooltipPosition="bottom"
+            ></button>
+            <button type="button"
+                    pButton pRipple
+                    icon="pi pi-file-pdf"
+                    label="Pdf"
+                    class="p-button-warning mr-2"
+                    tooltipPosition="bottom">
+
+            </button>
+          </div>
+
+          <div class="flex justify-content-end flex-column sm:flex-row">
+              <span class="p-input-icon-left mb-2">
+							<i class="pi pi-search"></i>
+							<input pInputText type="text" #filter (input)="onGlobalFilterDispo(dt1, $event)"
+                     placeholder="Recherche par le lieu..." class="w-full"/>
+						</span>
+          </div>
+        </ng-template>
+        <ng-template let-columns pTemplate="header">
+          <tr>
+            @for (col of columns; track col.field) {
+              <th
+                [pSortableColumn]="col.field"
+                class="font-weight-bold "
+              >
+                {{ col.header }}
+                @if (col.header != 'Photo') {
+                  <p-sortIcon [field]="col.field"></p-sortIcon>
+                }
+              </th>
+            }
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-person>
+          <tr class="align-items-center align-content-center">
+            <td
+              style="min-width: 15rem">
+              {{ person.matricule }}
+            </td>
+            <td
+              style="min-width: 15rem">
+              {{ person.nomPrenom  | uppercase }}
+            </td>
+            <td
+              style="min-width: 15rem">
+              {{ person.nomPrenomArab }}
+            </td>
+            <td
+              style="min-width: 15rem">
+              {{ person.nni }}
+            </td>
+            <td
+              style="min-width: 15rem">
+              Lieu
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-tabPanel>
+    <p-tabPanel header="Region">
+      <p-table
+        [columns]="colRegion"
+        [value]="list"
+        #dt
+        dataKey="id"
+        [rows]="5"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="Page {currentPage} sur {totalPages}"
+        [paginator]="true"
+        styleClass="p-datatable-gridlines p-datatable-striped"
+        responsiveLayout="scroll"
+        [rowHover]="true"
+        [rowsPerPageOptions]="[5,10, 20, 50]"
+        tableStyleClass="p-datatable-gridlines"
+        [globalFilterFields]="['region']"
+      >
+        <ng-template pTemplate="caption">
+          <div class="flex justify-content-start flex-column sm:flex-row">
+            <button type="button"
+                    pButton pRipple
+                    icon="pi pi-file-excel"
+                    class="p-button-success mr-2"
+                    label="Excel"
+            ></button>
+            <button type="button"
+                    pButton pRipple
+                    icon="pi pi-file-pdf"
+                    label="Pdf"
+                    class="p-button-warning mr-2"
+                    (click)="exportPdf(dt)">
+            </button>
+          </div>
+
+          <div class="flex justify-content-end flex-column sm:flex-row">
+              <span class="p-input-icon-left mb-2">
+							<i class="pi pi-search"></i>
+							<input pInputText type="text" #filter (input)="onGlobalFilter($event)"
+                     placeholder="Recherche par region..." class="w-full"/>
+						</span>
+          </div>
+        </ng-template>
+        <ng-template let-columns pTemplate="header">
+          <tr>
+            @for (col of columns; track col.field) {
+              <th
+                [pSortableColumn]="col.field"
+                class="font-weight-bold "
+              >
+                {{ col.header }}
+                @if (col.header != 'Photo') {
+                  <p-sortIcon [field]="col.field"></p-sortIcon>
+                }
+              </th>
+            }
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-personnel>
+          <tr class="align-items-center align-content-center">
+            <td
+              style="min-width: 15rem">
+              {{ personnel.matricule }}
+            </td>
+            <td
+              style="min-width: 15rem">
+              {{ personnel.nomPrenom  | uppercase }}
+            </td>
+            <td
+              style="min-width: 15rem">
+              {{ personnel.nomPrenomArab }}
+            </td>
+            <td
+              style="min-width: 15rem">
+              {{ personnel.nni }}
+            </td>
+            <td
+              style="min-width: 15rem">
+              {{ personnel.region }}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-tabPanel>
+  </p-tabView>
+</p-card>

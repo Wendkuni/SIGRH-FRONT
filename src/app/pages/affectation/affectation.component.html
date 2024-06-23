@@ -1,0 +1,207 @@
+<div>
+  <button pButton=""
+          pRipple=""
+          label="Affectation"
+          icon="pi pi-plus"
+          class="p-element p-ripple p-button-outlined p-button-primary p-button p-component m-3"
+          (click)="showForm()"
+  >
+  </button>
+  <p-card>
+    <p-table
+      [columns]="cols"
+      [value]="listAffections$"
+      #dt1
+      dataKey="id"
+      [rows]="5"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Page {currentPage} sur {totalPages}"
+      [paginator]="true"
+      styleClass="p-datatable-gridlines p-datatable-striped"
+      responsiveLayout="scroll"
+      [rowHover]="true"
+      [rowsPerPageOptions]="[5,10]"
+      tableStyleClass="p-datatable-gridlines"
+    >
+      <ng-template let-columns pTemplate="header">
+        <tr>
+          @for (col of columns; track col.field) {
+            <th
+              style="min-width: 15rem"
+              [pSortableColumn]="col.field"
+              class="font-weight-bold"
+            >
+              {{ col.header }}
+              <p-sortIcon [field]="col.field"></p-sortIcon>
+            </th>
+          }
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-mobilite>
+        <tr>
+          <td>{{mobilite.personnel.matricule}}</td>
+          <td>{{mobilite.personnel.nomPrenom}}</td>
+          <td>{{mobilite.nature}}</td>
+          <td>{{mobilite.dren}}</td>
+          <td>{{mobilite.localite}}</td>
+          <td>{{mobilite.moughataa}}</td>
+          <td>{{mobilite.serviceEcole}}</td>
+          <td>{{mobilite.notePedagogiq}}</td>
+          <td>{{mobilite.dateEffet |date}}</td>
+          <td>
+            <!--          Bouton qui fait la validation de l'avancement  -->
+            <button
+              pButton
+              type="button"
+              pTooltip="Valider"
+              tooltipPosition="top"
+              pRipple
+              icon="pi pi-check-circle"
+              class="p-button-rounded p-button-warning mx-2"
+              iconPos="left"
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="8">Aucun élement trouvé(e).</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-card>
+</div>
+
+<!--  Formulaire Affectation -->
+<p-dialog
+  [(visible)]="showDialog"
+  [style]="{ width: '40vw'}"
+  header="Affectation Formulaire"
+  (onHide)="cancel()"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  styleClass="p-fluid"
+>
+  <ng-template pTemplate="content">
+
+    <div class="container py-5">
+      <form [formGroup]="affectionForm" >
+             <span class="text-sm">
+                Champs obligatoires:
+                <span class="text-red-500">*</span>
+              </span>
+<!--Matricule-->
+        <div class="field mt-4">
+          <label for="matricule">Matricule</label>
+          <input
+            type="text"
+            pInputText
+            id="matricule"
+            [value]="personnel.matricule"
+            required
+            disabled/>
+        </div>
+
+<!--Nom Prenom-->
+        <div class="field">
+          <label for="fullName">Nom Prenom</label>
+          <input
+            type="text"
+            pInputText
+            id="fullName"
+            [value]="personnel.nomPrenom"
+            required
+            disabled/>
+        </div>
+
+<!--        Localite-->
+        <div class="field">
+          <label for="localite">Localite <span class="text-red-500">*</span></label>
+          <p-dropdown
+            id="localite"
+            formControlName="localite"
+            placeholder="Selectionner la localite"
+          >
+          </p-dropdown>
+        </div>
+
+<!--        Service ecole -->
+        <div class="field">
+          <label for="ecole">Ecole <span class="text-red-500">*</span></label>
+          <p-dropdown
+            id="ecole"
+            formControlName="serviceEcole"
+            placeholder="Selectionner l'ecole"
+          >
+          </p-dropdown>
+        </div>
+
+<!--        nature -->
+        <div class="field">
+          <label for="raison">Nature <span class="text-red-500">*</span></label>
+          <p-dropdown
+            [options]="nature"
+            id="raison"
+            formControlName="nature"
+            placeholder="Selectionner la raison"
+          >
+          </p-dropdown>
+        </div>
+
+<!--        dren -->
+        <div class="field">
+          <label for="dren">DREN <span class="text-red-500">*</span></label>
+          <p-dropdown
+            id="dren"
+            formControlName="dren"
+            placeholder="Selectionner le dren"
+          >
+          </p-dropdown>
+        </div>
+
+<!--        moughataa -->
+        <div class="field">
+          <label for="moughataa">Moughataa <span class="text-red-500">*</span></label>
+          <input
+            type="text"
+            pInputText
+            formControlName="moughataa"
+            id="moughataa"
+            required
+          />
+        </div>
+
+<!--        note pedagogique -->
+        <div class="field">
+          <label for="notePedagogiq">Note pedagogique <span class="text-red-500">*</span></label>
+          <input
+            type="number"
+            pInputText
+            formControlName="notePedagogiq"
+            id="notePedagogiq"
+            required
+          />
+        </div>
+
+<!--        date effet -->
+        <div class="field">
+          <label for="dateeffet"> Date Effet <span class="text-red-500">*</span></label>
+          <p-calendar
+            [dateFormat]="'yy-mm-dd'"
+            id="dateeffet"
+            [readonlyInput]="true"
+            styleClass="mb-1"
+          />
+        </div>
+      </form>
+    </div>
+
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button pButton pRipple class="p-button-primary flex-1" label="Enregistrer" (click)="save()" icon="pi pi-fw pi-check"></button>
+    <button pButton pRipple class="p-button-danger flex-1 p-button-outlined" label="Annuler" (click)="cancel()" icon="pi pi-fw pi-times"></button>
+  </ng-template>
+</p-dialog>

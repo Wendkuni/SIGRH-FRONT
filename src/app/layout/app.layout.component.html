@@ -1,0 +1,20 @@
+<div class="layout-container" [ngClass]="containerClass">
+
+    <mrt-topbar></mrt-topbar>
+    <mrt-rightmenu></mrt-rightmenu>
+    <mrt-sidebar></mrt-sidebar>
+
+    <div class="layout-content-wrapper">
+
+        <div class="layout-content">
+            <router-outlet></router-outlet>
+        </div>
+
+      <mrt-footer />
+
+    </div>
+
+  @if(layoutService.state.staticMenuMobileActive){
+    <div class="layout-mask"></div>
+  }
+</div>

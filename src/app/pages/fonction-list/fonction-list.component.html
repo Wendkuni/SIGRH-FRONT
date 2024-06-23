@@ -1,0 +1,216 @@
+<p-card styleClass="mb-5">
+  <p-toolbar >
+    <ng-template pTemplate="right">
+      <div class="my-2">
+        <!--        Button d'ajout d'un fonction-->
+        <button
+          pButton
+          pRipple
+          label="Ajouter"
+          icon="pi pi-plus"
+          class="p-element p-ripple p-button-outlined p-button-primary p-button p-component mr-2"
+          (click)="showDialog()"
+        ></button>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="left">
+      <div class="my-2">
+        <h4>Gestion Fonction agent</h4>
+      </div>
+    </ng-template>
+  </p-toolbar>
+</p-card>
+
+
+<p-card>
+  <p-table
+    [columns]="cols"
+    [value]="(listFonctionAgent$ | async)!"
+    #dt1
+    dataKey="id"
+    [rows]="5"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Page {currentPage} sur {totalPages}"
+    [paginator]="true"
+    styleClass="p-datatable-gridlines p-datatable-striped"
+    responsiveLayout="scroll"
+    [rowHover]="true"
+    [rowsPerPageOptions]="[5,10]"
+    tableStyleClass="p-datatable-gridlines"
+    [globalFilterFields]="['fonction','fonctionenarabe','corps','grade','categorie','echelon','echelle','salairedebase']"
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex justify-content-between flex-column sm:flex-row">
+              <span class="p-input-icon-left mb-2">
+							<i class="pi pi-search"></i>
+							<input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Recherche..." class="w-full"/>
+						</span>
+      </div>
+    </ng-template>
+    <ng-template let-columns pTemplate="header">
+      <tr>
+        @for (col of columns; track col.field) {
+          <th
+            style="min-width: 15rem"
+            [pSortableColumn]="col.field"
+            class="font-weight-bold"
+          >
+            {{ col.header }}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+        }
+        <th></th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-fonction>
+      <tr>
+        <td>{{fonction.fonction}}</td>
+        <td>{{fonction.fonctionenarabe}}</td>
+        <td>{{fonction.corps}}</td>
+        <td>{{fonction.grade}}</td>
+        <td>{{fonction.categorie}}</td>
+        <td>{{fonction.echelon}}</td>
+        <td>{{fonction.echelle}}</td>
+        <td>{{fonction.indice}}</td>
+        <td>{{fonction.salairedebase}}</td>
+        <td>
+          <!--          Bouton qui fait l'ouverture du formulaire de modification -->
+          <button
+            pButton
+            type="button"
+            pTooltip="Modifier"
+            tooltipPosition="top"
+            pRipple
+            icon="pi pi-pencil"
+            class="p-button-rounded p-button-primary mx-2"
+            iconPos="left"
+          ></button>
+        </td>
+        <td>
+          <!--          Button qui supprime la fonction A verifier si la possibilite doit etre donner -->
+          <button
+            pButton
+            type="button"
+            pTooltip="Supprimer"
+            tooltipPosition="top"
+            pRipple
+            icon="pi pi-trash"
+            class="p-button-rounded p-button-danger mx-2"
+            iconPos="left"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-card>
+
+
+<p-dialog
+  [(visible)]="fonctionListDialogVisible"
+  [style]="{ width: '50vw'}"
+  header="Formulaire Fonction"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  styleClass="p-fluid"
+>
+  <ng-template pTemplate="content">
+    <div class ="p-fluid p-formgrid grid" >
+      <div class="field col-12 md:col-6">
+        <label for="fonction" class="font-medium text-900">Fonction</label>
+        <input
+          id="fonction"
+          type="text"
+          pInputText
+          required
+           >
+      </div>
+      <div class="field col-12 md:col-6">
+        <label >Fonction en Arab</label>
+        <input
+          type="text"
+          pInputText
+          required
+        />
+      </div>
+      <div class="field col-12 md:col-6">
+        <label for="corps" >Corps</label>
+        <input
+          id="corps"
+          type="text"
+          pInputText
+          required
+           />
+      </div>
+
+      <div class="field col-12 md:col-6">
+        <label for="grade" class="font-medium text-900">Grade</label>
+        <p-dropdown
+          id="grade"
+          placeholder="Selectionner le grade"
+        >
+        </p-dropdown>
+      </div>
+      <div class="field col-12 md:col-6">
+        <label for="category" class="font-medium text-900" >Categorie</label>
+        <p-dropdown
+          id="category"
+          placeholder="Selectionner la categorie"
+        >
+        </p-dropdown>
+      </div>
+      <div class="field col-12 md:col-3">
+        <label for="echelle" class="font-medium text-900" >Echelle</label>
+        <p-dropdown
+          id="echelle"
+          placeholder="Selectionner l'echelle"
+        >
+        </p-dropdown>
+      </div>
+      <div class="field col-12 md:col-3">
+        <label for="echelon" class="font-medium text-900">Echelon</label>
+        <p-dropdown
+          id="echelon"
+          placeholder="Selectionner l'echelon"
+        >
+        </p-dropdown>
+      </div>
+
+      <div class="field col-12 md:col-6">
+        <label for="salBase" class="font-medium text-900">Salaire de base</label>
+        <input
+          id="salBase"
+          type="text"
+          pInputText
+          required
+        />
+      </div>
+
+      <div class="field col-12 md:col-6">
+        <label for="indice" class="font-medium text-900">Indice</label>
+        <input
+          id="indice"
+          type="text"
+          pInputText
+          required
+        />
+      </div>
+    </div>
+
+
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button pButton pRipple
+            class="p-button-primary flex-1"
+            label="Enregistrer"
+            icon="pi pi-fw pi-check"
+    >
+
+    </button>
+    <button pButton pRipple class="p-button-danger flex-1 p-button-outlined" label="Annuler"
+            icon="pi pi-fw pi-times" ></button>
+  </ng-template>
+</p-dialog>
+

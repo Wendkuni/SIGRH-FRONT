@@ -1,0 +1,572 @@
+<!-- Toast notification part start-->
+<p-toast
+  [showTransformOptions]="'translateY(100%)'"
+  [showTransitionOptions]="'1000ms'"
+  [hideTransitionOptions]="'1000ms'"
+  [showTransformOptions]="'translateX(100%)'" />
+<p-confirmDialog />
+
+<!-- Toolbar start pour afficher les boutons des differentes actions realisable dans la gestion du personnels-->
+<p-card styleClass="mb-5">
+  <p-toolbar>
+    <ng-template pTemplate="right">
+      <div class="my-2">
+        <!--        Button d'ajout d'un personnel-->
+        <button
+          pButton
+          pRipple
+          label="Ajouter"
+          icon="pi pi-plus"
+          class="p-element p-ripple p-button-outlined p-button-primary p-button p-component mr-2"
+          (click)="openNew()"
+        ></button>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="left">
+      <div class="my-2">
+        <h4>Fiche personnel</h4>
+      </div>
+    </ng-template>
+  </p-toolbar>
+</p-card>
+
+<!-- Tableau d'affichage de la liste du personnel-->
+<p-card>
+  <p-table
+    [columns]="cols"
+    [value]="store.personnel()"
+    #personnelTable
+    dataKey="id"
+    [rows]="5"
+    [loading]="store.loading()"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Page {currentPage} sur {totalPages}"
+    [paginator]="true"
+    styleClass="p-datatable-gridlines p-datatable-striped"
+    responsiveLayout="scroll"
+    [rowHover]="true"
+    [rowsPerPageOptions]="[5,10, 20, 50]"
+    tableStyleClass="p-datatable-gridlines"
+    [globalFilterFields]="['nni','matricule','nomPrenom','nomPrenomArab','nni','dteRecrutement','dteTitularisation','lieuNaiss','bank','codeBank','ministereOrigine','typeeducation']"
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex justify-content-between flex-column sm:flex-row">
+              <span class="p-input-icon-left mb-2">
+							<i class="pi pi-search"></i>
+							<input pInputText type="text" #filter (input)="onGlobalFilter(personnelTable, $event)"
+                     placeholder="Recherche..." class="w-full"/>
+						</span>
+      </div>
+    </ng-template>
+
+    <ng-template let-columns pTemplate="header">
+      <tr>
+        @for (col of columns; track col.field) {
+          <th
+            [pSortableColumn]="col.field"
+            class="font-weight-bold "
+          >
+            {{ col.header }}
+            @if(col.header != 'Photo'){
+              <p-sortIcon [field]="col.field"></p-sortIcon>
+            }
+          </th>
+        }
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-personnel>
+      <tr class="align-items-center align-content-center">
+        <td style=" min-width: 6rem;">
+          @if (personnel.imagPers) {
+            <img src="{{personnel.imagPers}}" alt="{{personnel.nomPrenom}}"
+                 class="w-4rem h-4rem border-circle shadow-4">
+          } @else {
+            <img src="assets/demo/images/avatar/user-avatar.png" alt="user.name"
+                 class="w-4rem h-4rem border-circle shadow-4">
+          }
+        </td>
+        <td style="min-width: 15rem;">
+          {{ personnel.nni }}
+        </td>
+        <td
+          style="min-width: 15rem">
+          {{ personnel.matricule }}
+        </td>
+        <td
+          style="min-width: 15rem">
+          {{ personnel.nomPrenom  | uppercase }}
+        </td>
+        <td
+          style="min-width: 15rem">
+          {{ personnel.nomPrenomArab  | uppercase }}
+        </td>
+        <td
+          style="min-width: 15rem">
+          {{ personnel.tlphone }}
+        </td>
+        <td
+          style="min-width: 15rem">
+          {{ personnel.adressEmp  | uppercase }}
+        </td>
+        <td
+          style="min-width: 15rem">
+          {{ personnel.lieuNaiss  | uppercase }}
+        </td>
+        <td
+          style="min-width: 15rem">
+          {{ personnel.dateNaiss | date: 'dd/MM/yyyy' }}
+        </td>
+        <td style="min-width: 15rem">
+          {{ personnel.dteRecrutement | date: 'dd/MM/yyyy' }}
+        </td>
+        <td
+          style="min-width: 15rem">
+          {{ personnel.dteTitularisation | date: 'dd/MM/yyyy' }}
+        </td>
+        <td style="min-width: 15rem">
+          {{ personnel.dteSortie | date: 'dd/MM/yyyy'}}
+        </td>
+        <td
+          style="min-width: 15rem">
+          {{ personnel.debutCntrat | date: 'dd/MM/yyyy' }}
+        </td>
+        <td
+          style="min-width: 15rem">
+          {{ personnel.finCntrat | date: 'dd/MM/yyyy' }}
+        </td>
+        <td
+          style="min-width: 15rem">
+          {{ personnel.bank }}
+        </td>
+        <td
+          style="min-width: 15rem">
+          {{ personnel.codeBank }}
+        </td>
+        <td
+          style="min-width: 15rem">
+          {{ personnel.numroCpte }}
+        </td>
+        <td
+          style="min-width: 15rem">
+          {{ personnel.cleRib }}
+        </td>
+        <td
+          style="min-width: 15rem">
+          {{ personnel.dteSortie | date: 'dd/MM/yyyy' }}
+        </td>
+        <td
+          style="min-width: 15rem">
+          {{ personnel.detacher }}
+        </td>
+        <td
+          style="min-width: 15rem">
+          {{ personnel.ministerOrigine }}
+        </td>
+        <td
+          style="min-width: 15rem">
+          {{ personnel.typeeducation  | uppercase }}
+        </td>
+        <td
+          style="min-width: 15rem">
+          {{ personnel.statusEmp }}
+        </td>
+        <td
+          style="min-width: 15rem">
+          @if(personnel.actifOrNot == true) {
+            <span class="text-success">Actif</span>
+          } @else {
+            <span class="text-danger">Inactif</span>
+          }
+        </td>
+        <td>
+          <!--          Bouton qui fait l'ouverture du formulaire de modification -->
+          <button
+            pButton
+            type="button"
+            pTooltip="Modifier"
+            tooltipPosition="top"
+            pRipple
+            icon="pi pi-pencil"
+            class="p-button-rounded p-button-primary mx-2"
+            iconPos="left"
+            (click)="openEdit(personnel)"
+          ></button>
+        </td>
+        <td>
+          <!--          Bouton qui affiche la vue details du personnel -->
+          <button
+            pButton
+            type="button"
+            pTooltip="Dossier"
+            tooltipPosition="top"
+            pRipple
+            icon="pi pi-info"
+            class="p-button-rounded p-button-warning mx-2"
+            iconPos="left"
+            [routerLink]="['/personnel-details',  personnel.idAgent]"
+          ></button>
+        </td>
+        <td>
+          <!--          Button qui supprime un personnel A verifier si la possibilite doit etre donner-->
+          <button
+            pButton
+            type="button"
+            pTooltip="Supprimer"
+            tooltipPosition="top"
+            pRipple
+            icon="pi pi-trash"
+            class="p-button-rounded p-button-danger mx-2"
+            iconPos="left"
+            (click)="confirm(personnel)"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="8">Aucun personnel trouvé(e).</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-card>
+
+<!-- Formulaire d'ajout et de modification d'un personnel-->
+<p-dialog
+  header="Formulaire du personnel"
+  [(visible)]="formDialog"
+  (onHide)="close()"
+  [style]="{ width: '60vw' }"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  class="p-fluid"
+>
+  <ng-template pTemplate="content">
+    <div class="container py-5">
+      <form [formGroup]="personnelForm" #personalFormRef="ngForm" enctype="multipart/form-data">
+        <div class="col-12">
+          <div class="card">
+            <!--          Informations personnels de l'agent-->
+
+            <div class="flex justify-content-between border-bottom-1 surface-border p-3">
+              <span class="font-semibold text-color-secondary text-xl">Informations personnels</span>
+              <span class="text-sm">
+                Champs obligatoires:
+                <span class="text-red-500">*</span>
+              </span>
+            </div>
+
+            <div class="p-fluid p-formgrid grid mt-2">
+
+              <!--              Nom Prenom-->
+              <div class="field col-12 md:col-6">
+                <label for="nometprenom" class="font-medium text-900">Nom et Prenom <span class="text-red-500">*</span></label>
+                <input id="nometprenom" pInputText class="w-full p-component p-element form-control mb-1" type="text"
+                       formControlName="nomPrenom"/>
+                <mrt-form-validators
+                  [entityField]="'nomPrenom'"
+                  [formGroup]="personnelForm"
+                />
+              </div>
+
+              <!--              Nom Prenom Arab-->
+              <div class="field col-12 md:col-6">
+                <label for="nometprenomarab" class="font-medium text-900">Nom et Prenom Arab <span class="text-red-500">*</span></label>
+                <input id="nometprenomarab" pInputText class="w-full p-component p-element form-control mb-1" type="text"
+                       formControlName="nomPrenomArab"/>
+                <mrt-form-validators
+                  [entityField]="'nomPrenomArab'"
+                  [formGroup]="personnelForm"
+                />
+              </div>
+
+              <!--              Numero de telephone-->
+              <div class="field col-12 md:col-4">
+                <label for="tlphone"  class="font-medium text-900">Numero de telephone <span class="text-red-500">*</span></label>
+                <input id="tlphone" pInputText class="w-full p-component p-element form-control mb-1" type="text"
+                       formControlName="tlphone"/>
+                <mrt-form-validators
+                  [entityField]="'tlphone'"
+                  [formGroup]="personnelForm"/>
+              </div>
+
+              <!--            Date de naissance  -->
+              <div class="field col-12 md:col-4">
+                <label for="dtenaiss" class="font-medium text-900">Date de naissance <span class="text-red-500">*</span></label>
+                <p-calendar
+                  id="dtenaiss"
+                  [dateFormat]="'yy-mm-dd'"
+                  placeholder="Entre la date(yyyy-mm-dd)"
+                  formControlName="dateNaiss"
+                  styleClass="mb-1"
+                  appendTo="body"
+                  [showTime]="false"
+                />
+                <mrt-form-validators
+                  [entityField]="'dateNaiss'"
+                  [formGroup]="personnelForm"/>
+              </div>
+
+              <!--              Lieu de naissance-->
+              <div class="field col-12 md:col-4">
+                <label for="lieunaiss" class="font-medium text-900">Lieu de naissance <span class="text-red-500">*</span></label>
+                <input id="lieunaiss" pInputText class="w-full p-component p-element form-control mb-1" type="text"
+                       formControlName="lieuNaiss"/>
+                <mrt-form-validators
+                  [entityField]="'lieuNaiss'"
+                  [formGroup]="personnelForm"/>
+              </div>
+
+              <!--          Adresse de l'agent    -->
+              <div class="field col-12 md:col-12">
+                <label for="adressemp" class="font-medium text-900">Adresse de l'agent</label>
+                <input id="adressemp" pInputText class="w-full p-component p-element form-control mb-1" type="text"
+                       formControlName="adressEmp"/>
+              </div>
+
+
+            </div>
+            <p-divider></p-divider>
+            <!--          Information relatif a l'emploi-->
+            <h5>Informations relatif au metier</h5>
+            <div class="p-fluid p-formgrid grid">
+
+              <!--              Matricule-->
+              <div class="field col-12 md:col-6">
+                <label for="matricule" class="font-medium text-900">Matricule <span class="text-red-500">*</span></label>
+                <input pInputText id="matricule"
+                       class="w-full p-component p-element form-control mb-1" type="text"
+                       formControlName="matricule"/>
+                <mrt-form-validators
+                  [entityField]="'matricule'"
+                  [formGroup]="personnelForm"
+                />
+              </div>
+
+              <!--              NNI-->
+              <div class="field col-12 md:col-6">
+                <label for="nni" class="font-medium text-900">NNI <span class="text-red-500">*</span></label>
+                <input pInputText id="nni" class="w-full p-component p-element form-control mb-1"
+                       type="text"
+                       formControlName="nni"/>
+                <mrt-form-validators
+                  [entityField]="'nni'"
+                  [formGroup]="personnelForm"
+                />
+              </div>
+
+              <!--              Bank-->
+              <div class="field col-12 md:col-4">
+                <label for="bank"  class="font-medium text-900">Bank <span class="text-red-500">*</span></label>
+                <input id="bank" pInputText class="w-full p-component p-element form-control mb-1" type="text"
+                       formControlName="bank"/>
+                <mrt-form-validators
+                  [entityField]="'bank'"
+                  [formGroup]="personnelForm"/>
+              </div>
+
+              <!--              Code Bank-->
+              <div class="field col-12 md:col-3">
+                <label for="codebank" class="font-medium text-900">Code Bank <span class="text-red-500">*</span></label>
+                <input id="codebank" pInputText class="w-full p-component p-element form-control mb-1" type="text"
+                       formControlName="codeBank"/>
+                <mrt-form-validators
+                  [entityField]="'codeBank'"
+                  [formGroup]="personnelForm"/>
+              </div>
+
+              <!--              Numero Compte-->
+              <div class="field col-12 md:col-5">
+                <label for="numeroCompte" class="font-medium text-900">Numero Compte <span class="text-red-500">*</span></label>
+                <input id="numeroCompte" pInputText class="w-full p-component p-element form-control mb-1" type="text"
+                       formControlName="numroCpte"/>
+                <mrt-form-validators
+                  [entityField]="'numroCpte'"
+                  [formGroup]="personnelForm"/>
+              </div>
+
+              <!--              Cle Rib-->
+              <div class="field col-12 md:col-6">
+                <label for="cleRib"  class="font-medium text-900">Cle Rib <span class="text-red-500">*</span></label>
+                <input id="cleRib" pInputText class="w-full p-component p-element form-control mb-1" type="text"
+                       formControlName="cleRib"/>
+                <mrt-form-validators
+                  [entityField]="'cleRib'"
+                  [formGroup]="personnelForm"/>
+              </div>
+
+              <!--              Status Employe-->
+              <div class="field col-12 md:col-5">
+                <label for="statusEmp" class="font-medium text-900">Status Employe </label>
+                <input id="statusEmp" pInputText class="w-full p-component p-element form-control mb-1" type="text"
+                       formControlName="statusEmp"/>
+              </div>
+
+
+              <!--              Detacher    -->
+              <div class="field col-12 md:col-6">
+                <label for="detacher" class="font-medium text-900">Detacher <span class="text-red-500">*</span></label>
+                <input id="detacher" pInputText class="w-full p-component p-element form-control mb-1" type="text"
+                       formControlName="detacher"/>
+                <mrt-form-validators
+                  [entityField]="'detacher'"
+                  [formGroup]="personnelForm"/>
+              </div>
+
+              <!--              Ministere d'origine-->
+              <div class="field col-12 md:col-6">
+                <label for="ministereOrigine" class="font-medium text-900">Ministere d'origine </label>
+                <input pInputText id="ministereOrigine"
+                       class="w-full p-component p-element form-control mb-1" type="text"
+                       formControlName="ministerOrigine"/>
+              </div>
+
+              <!--              Type Education -->
+              <div class="field col-12 md:col-6">
+                <label for="typeEducation" class="font-medium text-900">Type Education </label>
+                <p-dropdown
+                  id="typeEducation"
+                  [options]="typeEducation"
+                  formControlName="typeeducation"
+                  placeholder="Choisir le type d'education"
+                >
+                </p-dropdown>
+              </div>
+
+              <!--              Date recrutement -->
+              <div class="field col-12 md:col-6">
+                <label for="dterecrutemnt" class="font-medium text-900">Date recrutement <span class="text-red-500">*</span></label>
+                <p-calendar
+                  id="dterecrutemnt"
+                  [dateFormat]="'yy-mm-dd'"
+                  placeholder="Entre la date(yyyy-mm-dd)"
+                  styleClass="mb-1"
+                  appendTo="body"
+                  [showTime]="false"
+                  formControlName="dteRecrutement"
+                />
+                <mrt-form-validators
+                  [entityField]="'dteRecrutement'"
+                  [formGroup]="personnelForm"
+                />
+              </div>
+
+              <!--              Date titularisation   -->
+              <div class="field col-12 md:col-6">
+                <label for="dtetitularisation" class="font-medium text-900">Date titularisation</label>
+                <p-calendar
+                  id="dtetitularisation"
+                  [dateFormat]="'yy-mm-dd'"
+                  placeholder="Entre la date(yyyy-mm-dd)"
+                  styleClass="mb-1"
+                  appendTo="body"
+                  [showTime]="false"
+                  formControlName="dteTitularisation"
+                />
+              </div>
+
+
+              <!--            Date debut contract  -->
+              <div class="field col-12 md:col-6">
+                <label for="debutcntrat" class="font-medium text-900">Date debut contract</label>
+                <p-calendar
+                  id="debutcntrat"
+                  [dateFormat]="'yy-mm-dd'"
+                  placeholder="Entre la date(yyyy-mm-dd)"
+                  styleClass="mb-1"
+                  appendTo="body"
+                  [showTime]="false"
+                  formControlName="debutCntrat"
+                />
+              </div>
+
+              <!--              Date fin contract-->
+              <div class="field col-12 md:col-6">
+                <label for="fincntrat" class="font-medium text-900">Date fin contract</label>
+                <p-calendar
+                  id="fincntrat"
+                  [dateFormat]="'yy-mm-dd'"
+                  placeholder="Entre la date(yyyy-mm-dd)"
+                  styleClass="mb-1"
+                  appendTo="body"
+                  [showTime]="false"
+                  formControlName="finCntrat"
+                />
+              </div>
+
+<!--              &lt;!&ndash;              Date de depart&ndash;&gt;-->
+<!--              <div class="field col-12 md:col-6">-->
+<!--                <label for="dtedepart" class="font-medium text-900">Date de depart</label>-->
+<!--                <p-calendar-->
+<!--                  id="dtedepart"-->
+<!--                  [dateFormat]="'yy-mm-dd'"-->
+<!--                  placeholder="Entre la date(yyyy-mm-dd)"-->
+<!--                  styleClass="mb-1"-->
+<!--                  appendTo="body"-->
+<!--                  [showTime]="false"-->
+<!--                  formControlName="dteDepart"-->
+<!--                />-->
+<!--              </div>-->
+
+              <!--              Date sortie-->
+              <div class="field col-12 md:col-6">
+                <label for="dteSortie" class="font-medium text-900">Date sortie</label>
+                <p-calendar
+                  id="dteSortie"
+                  [dateFormat]="'yy-mm-dd'"
+                  placeholder="Entre la date(yyyy-mm-dd)"
+                  styleClass="mb-1"
+                  appendTo="body"
+                  [showTime]="false"
+                  formControlName="dteSortie"
+                />
+              </div>
+
+              <!--              Activation-->
+              <div class="col-12 md:col-2 field mb-4">
+                <p-checkbox
+                  name="actif"
+                  formControlName="actifOrNot"
+                  [binary]="true"
+                  label="Actif ou non"
+                  class="text-900"
+                  inputId="id"
+                ></p-checkbox>
+              </div>
+
+              <!--              Avatar -->
+              <div class="field col-12">
+                <label class="font-medium text-900">Avatar</label>
+                <p-fileUpload
+                  mode="basic"
+                  id="avatar"
+                  accept=".jpg,.jpeg,.png"
+                  [maxFileSize]="1000000"
+                  (onSelect)="onSelectedFiles($event)"
+                  styleClass="p-button-outlined p-button-plain w-full"
+                  chooseLabel="Choisir une Image"></p-fileUpload>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </form>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button pButton pRipple
+            class="p-button-primary flex-1"
+            label="Enregistrer"
+            icon="pi pi-fw pi-check"
+            (click)="savePersonnel()"
+    >
+    </button>
+    <button pButton pRipple class="p-button-danger flex-1 p-button-outlined" label="Annuler"
+            icon="pi pi-fw pi-times" (click)="cancel()"></button>
+  </ng-template>
+</p-dialog>

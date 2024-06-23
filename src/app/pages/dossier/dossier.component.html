@@ -1,0 +1,167 @@
+<div>
+  <!--        Bouton ajout dossier -->
+  <button pButton=""
+          pRipple=""
+          label="Dossier"
+          icon="pi pi-plus"
+          class="p-element p-ripple p-button-outlined p-button-primary p-button p-component m-3"
+          (click)="showForm()"
+  >
+  </button>
+
+
+  <p-table
+    [columns]="cols"
+    [value]="lisDossiers$"
+    #dt1
+    dataKey="id"
+    [rows]="5"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Page {currentPage} sur {totalPages}"
+    [paginator]="true"
+    styleClass="p-datatable-gridlines p-datatable-striped"
+    responsiveLayout="scroll"
+    [rowHover]="true"
+    [rowsPerPageOptions]="[5,10]"
+    tableStyleClass="p-datatable-gridlines"
+  >
+    <ng-template let-columns pTemplate="header">
+      <tr>
+        @for (col of columns; track col.field) {
+          <th
+            style="min-width: 15rem"
+            [pSortableColumn]="col.field"
+            class="font-weight-bold"
+          >
+            {{ col.header }}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+        }
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-dossier>
+      <tr>
+        <td>{{ dossier.nom }}</td>
+        <td>{{ dossier.date  | date }}</td>
+        <td>{{ dossier.observation }}</td>
+        <td>Image</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="8">Aucun élement trouvé(e).</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+<!-- Formulaire d'ajout de dossier au personnel -->
+<p-dialog
+  [(visible)]="showDialog"
+  [style]="{ width: '40vw'}"
+  header="Dossier Formulaire"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  styleClass="p-fluid"
+>
+  <ng-template pTemplate="content">
+      <span class="text-sm">
+                Champs obligatoires:
+                <span class="text-red-500">*</span>
+              </span>
+    <form [formGroup]="dossierForm">
+
+<!--      matricule-->
+    <div class="field mt-4">
+      <label class="font-medium text-900">Matricule</label>
+      <input
+        type="text"
+        pInputText
+        [value]="personnel.matricule"
+        required
+        disabled/>
+    </div>
+
+<!--    Nom Prenom-->
+    <div class="field">
+      <label class="font-medium text-900">Nom Prenom</label>
+      <input
+        type="text"
+        pInputText
+        [value]="personnel.nomPrenom"
+        required
+        disabled/>
+    </div>
+
+<!--    NNI-->
+    <div class="field">
+      <label class="font-medium text-900">NNI</label>
+      <input
+        type="text"
+        pInputText
+        [value]="personnel.nni"
+        required
+        disabled
+      />
+    </div>
+
+<!--    Libelle Dossier-->
+    <div class="field">
+      <label for="libelDossier" class="font-medium text-900">Libelle Dossier <span class="text-red-500">*</span></label>
+      <input id="libelDossier" pInputText class="w-full p-component p-element form-control mb-1" type="text"
+             formControlName="libelDossier"/>
+      <mrt-form-validators
+        [entityField]="'libelDossier'"
+        [formGroup]="dossierForm"
+      />
+    </div>
+
+<!--    Date upload -->
+    <div class="field">
+      <label for="dateUpload" class="font-medium text-900">Date <span class="text-red-500">*</span></label>
+      <p-calendar
+        id="dateUpload"
+        [dateFormat]="'yy-mm-dd'"
+        placeholder="Entre la date(yyyy-mm-dd)"
+        formControlName="dateUpload"
+        styleClass="mb-1"
+        appendTo="body"
+        [showTime]="false"
+      />
+      <mrt-form-validators
+        [entityField]="'dateUpload'"
+        [formGroup]="dossierForm"/>
+    </div>
+
+<!--    Observation-->
+    <div class="field ">
+      <label for="observation" class="font-medium text-900">Observation <span class="text-red-500">*</span></label>
+      <input id="observation" pInputText class="w-full p-component p-element form-control mb-1" type="text"
+             formControlName="observation"/>
+      <mrt-form-validators
+        [entityField]="'observation'"
+        [formGroup]="dossierForm"
+      />
+    </div>
+<!--    Image upload-->
+    <div class="field">
+      <label class="font-medium text-900" for="dossierScan">Dossier <span class="text-red-500">*(pdf,image => (.pdf, .jpg, .jpeg, .png),word)</span></label>
+      <p-fileUpload
+        id="dossierScan"
+        mode="basic"
+        accept=".pdf, .jpg, .jpeg, .png"
+        [maxFileSize]="1000000"
+        styleClass="p-button-outlined p-button-plain w-full"
+        (onUpload)="onUpload($event)"
+        chooseLabel="Choisir un fichier"></p-fileUpload>
+    </div>
+
+
+    </form>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button pButton pRipple class="p-button-primary flex-1" label="Enregistrer" (click)="saveDossier()" icon="pi pi-fw pi-check"></button>
+    <button pButton pRipple class="p-button-danger flex-1 p-button-outlined" label="Annuler" icon="pi pi-fw pi-times"></button>
+  </ng-template>
+</p-dialog>

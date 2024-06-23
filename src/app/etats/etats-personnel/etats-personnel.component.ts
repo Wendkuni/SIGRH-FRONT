@@ -20,6 +20,10 @@ import {Personnels} from "../../core/data/personals/personnel.model";
 import {EtatService} from "../../core/data/etats/etat.service";
 import {EtatActifComponent} from "./etat-actif/etat-actif.component";
 import {EtatAnneeRecrutementComponent} from "./etat-annee-recrutement/etat-annee-recrutement.component";
+import {EtatDirectionComponent} from "./etat-direction/etat-direction.component";
+import {AffectationComponent} from "../../pages/affectation/affectation.component";
+import {EtatLieuAffectationComponent} from "./etat-lieu-affectation/etat-lieu-affectation.component";
+import {EtatRegionComponent} from "./etat-region/etat-region.component";
 
 @Component({
   selector: 'mrt-etats-personnel',
@@ -38,21 +42,184 @@ import {EtatAnneeRecrutementComponent} from "./etat-annee-recrutement/etat-annee
     DataViewModule,
     AccordionModule,
     EtatActifComponent,
-    EtatAnneeRecrutementComponent
+    EtatAnneeRecrutementComponent,
+    EtatDirectionComponent,
+    AffectationComponent,
+    EtatLieuAffectationComponent,
+    EtatRegionComponent
   ],
-  templateUrl: './etats-personnel.component.html',
-  styleUrl: './etats-personnel.component.scss'
+  template:`
+    <p-card>
+      <h2 class="text-center underline mb-5">ETATS PERSONNELS</h2>
+
+      <p-tabView >
+        <p-tabPanel header="Actif">
+          <mrt-etat-actif></mrt-etat-actif>
+        </p-tabPanel>
+        <p-tabPanel header="Annee Recrutement">
+          <mrt-etat-annee-recrutement></mrt-etat-annee-recrutement>
+        </p-tabPanel>
+        <p-tabPanel header="Direction">
+          <mrt-etat-direction></mrt-etat-direction>
+        </p-tabPanel>
+        <p-tabPanel header="Disponible">
+          <p-accordion>
+            <p-accordionTab header="Liste du personnel disponible" [selected]="false" class="line-height-3 m-0">
+              <p-table
+                [columns]="colDispo"
+                [value]="list"
+                #dt
+                dataKey="id"
+                [rows]="5"
+                [showCurrentPageReport]="true"
+                currentPageReportTemplate="Page {currentPage} sur {totalPages}"
+                [paginator]="true"
+                styleClass="p-datatable-gridlines p-datatable-striped"
+                responsiveLayout="scroll"
+                [rowHover]="true"
+                [rowsPerPageOptions]="[5,10, 20, 50]"
+                tableStyleClass="p-datatable-gridlines"
+              >
+                <ng-template pTemplate="caption">
+                  <div class="flex justify-content-start flex-column sm:flex-row">
+                    <button type="button"
+                            pButton pRipple
+                            icon="pi pi-file-excel"
+                            class="p-button-success mr-2"
+                            label="Excel"
+                    ></button>
+                    <button type="button"
+                            pButton pRipple
+                            icon="pi pi-file-pdf"
+                            label="Pdf"
+                            class="p-button-warning mr-2"
+                            (click)="exportPdf(dt)">
+                    </button>
+                  </div>
+
+                </ng-template>
+                <ng-template let-columns pTemplate="header">
+                  <tr>
+                    @for (col of columns; track col.field) {
+                      <th
+                        [pSortableColumn]="col.field"
+                        class="font-weight-bold "
+                      >
+                        {{ col.header }}
+                        @if (col.header != 'Photo') {
+                          <p-sortIcon [field]="col.field"></p-sortIcon>
+                        }
+                      </th>
+                    }
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-personnel>
+                  <tr class="align-items-center align-content-center">
+                    <td
+                      style="min-width: 15rem">
+                      {{ personnel.matricule }}
+                    </td>
+                    <td
+                      style="min-width: 15rem">
+                      {{ personnel.nomPrenom  | uppercase }}
+                    </td>
+                    <td
+                      style="min-width: 15rem">
+                      {{ personnel.nomPrenomArab }}
+                    </td>
+                    <td
+                      style="min-width: 15rem">
+                      {{ personnel.nni }}
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </p-accordionTab>
+            <p-accordionTab header="Liste du personnel non disponible" [selected]="false" class="line-height-3 m-0">
+              <p-table
+                [columns]="colDispo"
+                [value]="list"
+                #dt
+                dataKey="id"
+                [rows]="5"
+                [showCurrentPageReport]="true"
+                currentPageReportTemplate="Page {currentPage} sur {totalPages}"
+                [paginator]="true"
+                styleClass="p-datatable-gridlines p-datatable-striped"
+                responsiveLayout="scroll"
+                [rowHover]="true"
+                [rowsPerPageOptions]="[5,10, 20, 50]"
+                tableStyleClass="p-datatable-gridlines"
+              >
+                <ng-template pTemplate="caption">
+                  <div class="flex justify-content-start flex-column sm:flex-row">
+                    <button type="button"
+                            pButton pRipple
+                            icon="pi pi-file-excel"
+                            class="p-button-success mr-2"
+                            label="Excel"
+                    ></button>
+                    <button type="button"
+                            pButton pRipple
+                            icon="pi pi-file-pdf"
+                            label="Pdf"
+                            class="p-button-warning mr-2"
+                            (click)="exportPdf(dt)">
+                    </button>
+                  </div>
+                </ng-template>
+                <ng-template let-columns pTemplate="header">
+                  <tr>
+                    @for (col of columns; track col.field) {
+                      <th
+                        [pSortableColumn]="col.field"
+                        class="font-weight-bold "
+                      >
+                        {{ col.header }}
+                        @if (col.header != 'Photo') {
+                          <p-sortIcon [field]="col.field"></p-sortIcon>
+                        }
+                      </th>
+                    }
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-personnel>
+                  <tr class="align-items-center align-content-center">
+                    <td
+                      style="min-width: 15rem">
+                      {{ personnel.matricule }}
+                    </td>
+                    <td
+                      style="min-width: 15rem">
+                      {{ personnel.nomPrenom  | uppercase }}
+                    </td>
+                    <td
+                      style="min-width: 15rem">
+                      {{ personnel.nomPrenomArab }}
+                    </td>
+                    <td
+                      style="min-width: 15rem">
+                      {{ personnel.nni }}
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </p-accordionTab>
+          </p-accordion>
+        </p-tabPanel>
+        <p-tabPanel header="Lieu Affectation">
+          <mrt-etat-lieu-affectation></mrt-etat-lieu-affectation>
+        </p-tabPanel>
+        <p-tabPanel header="Region">
+          <mrt-etat-region></mrt-etat-region>
+        </p-tabPanel>
+      </p-tabView>
+    </p-card>
+
+  `
 })
 export class EtatsPersonnelComponent implements OnInit{
 
-
-  colDren: Cols[] = [
-    {field: 'matricule', header: 'Matricule'},
-    {field: 'nomPrenom', header: 'Nom Prenom'},
-    {field: 'nomPrenomArab', header: 'Nom Prenom Arab'},
-    {field: 'nni', header: 'Nni'},
-    {field: 'direction', header: 'Direction'}
-  ];
 
   colLieu: Cols[] = [
     {field: 'matricule', header: 'Matricule'},
@@ -101,11 +268,6 @@ this.getPersonnelActif();
       this.list = response;
     });
 
-    this.personalService.getPersonnelDisponible().subscribe((response) => {
-      this.listDispo = response;
-    });
-
-    this.exportColumns = this.colDren.map(col => ({title: col.header, dataKey: col.field}));
   }
 
   onGlobalFilter(event: Event) {

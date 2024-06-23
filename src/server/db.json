@@ -1122,6 +1122,8 @@
     {
       "matricule": "123456",
       "nomPrenom": "Dupont Jean",
+      "nomPrenomArab": "دوبون جان",
+      "nni": "123ABC",
       "region": "Île-de-France",
       "direction": "Marketing",
       "affectation": "Paris"
@@ -1129,6 +1131,8 @@
     {
       "matricule": "654321",
       "nomPrenom": "Durand Léa",
+      "nomPrenomArab": "دوراند ليا",
+      "nni": "456DEF",
       "region": "Provence-Alpes-Côte d'Azur",
       "direction": "Ressources Humaines",
       "affectation": "Marseille"
@@ -1136,6 +1140,8 @@
     {
       "matricule": "789012",
       "nomPrenom": "Rossi Alessandro",
+      "nomPrenomArab": "روسي أليساندرو",
+      "nni": "789GHI",
       "region": "Lombardie (Italie)",
       "direction": "Vente",
       "affectation": "Milan"
@@ -1143,6 +1149,8 @@
     {
       "matricule": "345678",
       "nomPrenom": "Schmidt Anna",
+      "nomPrenomArab": "شميت آنا",
+      "nni": "345JKL",
       "region": "Rhénanie-Palatinat (Allemagne)",
       "direction": "Recherche et Développement",
       "affectation": "Francfort-sur-le-Main"
@@ -1150,6 +1158,8 @@
     {
       "matricule": "901234",
       "nomPrenom": "Suzuki Taro",
+      "nomPrenomArab": "سوزوكي تارو",
+      "nni": "901MNO",
       "region": "Kantō (Japon)",
       "direction": "Production",
       "affectation": "Tokyo"
@@ -1157,6 +1167,8 @@
     {
       "matricule": "567890",
       "nomPrenom": "Khan Priya",
+      "nomPrenomArab": "خان بريا",
+      "nni": "567PQR",
       "region": "Delhi (Inde)",
       "direction": "Finance",
       "affectation": "New Delhi"
@@ -1164,6 +1176,8 @@
     {
       "matricule": "135792",
       "nomPrenom": "Cohen David",
+      "nomPrenomArab": "كوهين ديفيد",
+      "nni": "135STU",
       "region": "Tel Aviv (Israël)",
       "direction": "Juridique",
       "affectation": "Tel Aviv"
@@ -1171,12 +1185,17 @@
     {
       "matricule": "246803",
       "nomPrenom": "Fernandez Maria",
+      "nomPrenomArab": "فيرنانديز ماريا",
+      "nni": "246VWX",
+      "region": "Espagne",
       "direction": "Direction Générale",
-      "affectation": "Paris"
+      "affectation": "Madrid"
     },
     {
       "matricule": "802467",
       "nomPrenom": "Wang Li",
+      "nomPrenomArab": "وانغ لي",
+      "nni": "802YZA",
       "region": "Shanghai (Chine)",
       "direction": "Marketing",
       "affectation": "Shanghai"
@@ -1184,6 +1203,8 @@
     {
       "matricule": "479135",
       "nomPrenom": "Garcia Miguel",
+      "nomPrenomArab": "غارسيا ميغيل",
+      "nni": "479BCD",
       "region": "Andalousie (Espagne)",
       "direction": "Commercial",
       "affectation": "Séville"

@@ -34,11 +34,10 @@
 <p-card>
   <p-table
     [columns]="cols"
-    [value]="store.personnel()"
+    [value]="listPersonnel$"
     #personnelTable
     dataKey="id"
     [rows]="5"
-    [loading]="store.loading()"
     [showCurrentPageReport]="true"
     currentPageReportTemplate="Page {currentPage} sur {totalPages}"
     [paginator]="true"

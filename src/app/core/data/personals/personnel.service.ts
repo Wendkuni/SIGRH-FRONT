@@ -84,7 +84,10 @@ export class PersonnelService {
       'Content-Type': 'multipart/form-data'
     });
 
-    return this.http.post(`${this.apiUrl}/personnel/create`,formData,{ headers });
+    return this.http.post(`${this.apiUrl}/personnel/create`,formData,{
+      reportProgress: true,
+      responseType: 'text'
+    });
   }
 
   // update personnel

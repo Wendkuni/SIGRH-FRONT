@@ -135,11 +135,11 @@ export class PersonnelComponent implements OnInit{
 
   // Methode pour recuperer la liste du personnel
   async getAllPersonnel() {
-    this.store.getAllPersonnel();
-    // this.personalService.getAllPersonnels().subscribe((response) => {
-    //   this.listPersonnel$ = response;
-    //   this.loading = false;
-    // });
+    // this.store.getAllPersonnel();
+    this.personalService.getAllPersonnels().subscribe((response) => {
+      this.listPersonnel$ = response;
+      console.table(this.listPersonnel$);
+    });
   }
 
   //Methode pour afficher le formulaire d'ajout
@@ -159,7 +159,7 @@ export class PersonnelComponent implements OnInit{
 
   savePersonnel() {
     const data = this.getFormData();
-    data.imagPers = this.userFile;
+    //data.imagPers = this.userFile;
     if (this.action === 'Add') {
       this.createPersonnel(data);
     } else {
@@ -169,9 +169,9 @@ export class PersonnelComponent implements OnInit{
 
   // Methode pour creer un personnel
   createPersonnel(personnel:Personnel){
-    if(personnel.imagPers != null){
+    if(this.userFile != null){
       console.log(" avec image");
-      this.personalService.createPersonnelWithImage(personnel.imagPers,personnel).subscribe(() => {
+      this.personalService.createPersonnelWithImage(this.userFile,personnel).subscribe(() => {
         this.getAllPersonnel();
         this.formDialog = false;
         this.personnelForm.reset();
@@ -303,7 +303,6 @@ export class PersonnelComponent implements OnInit{
 
 
   onSelectedFiles(event:any) {
-   this.userFile = event.currentFiles;
-   console.log(event.currentFiles);
+   this.userFile = event.currentFiles[0];
   }
 }

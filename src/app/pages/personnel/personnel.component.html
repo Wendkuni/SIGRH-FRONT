@@ -171,11 +171,15 @@
         </td>
         <td
           style="min-width: 15rem">
-          {{personnel.actifOrNot}}
+          {{ personnel.statusEmp }}
         </td>
         <td
           style="min-width: 15rem">
-          {{ personnel.statusEmp }}
+          @if(personnel.actifOrNot == true) {
+            <span class="text-success">Actif</span>
+          } @else {
+            <span class="text-danger">Inactif</span>
+          }
         </td>
         <td>
           <!--          Bouton qui fait l'ouverture du formulaire de modification -->
@@ -242,7 +246,7 @@
 >
   <ng-template pTemplate="content">
     <div class="container py-5">
-      <form [formGroup]="personnelForm" #personalFormRef="ngForm">
+      <form [formGroup]="personnelForm" #personalFormRef="ngForm" enctype="multipart/form-data">
         <div class="col-12">
           <div class="card">
             <!--          Informations personnels de l'agent-->
@@ -256,6 +260,7 @@
             </div>
 
             <div class="p-fluid p-formgrid grid mt-2">
+
               <!--              Nom Prenom-->
               <div class="field col-12 md:col-6">
                 <label for="nometprenom" class="font-medium text-900">Nom et Prenom <span class="text-red-500">*</span></label>
@@ -384,7 +389,7 @@
               </div>
 
               <!--              Cle Rib-->
-              <div class="field col-12 md:col-4">
+              <div class="field col-12 md:col-6">
                 <label for="cleRib"  class="font-medium text-900">Cle Rib <span class="text-red-500">*</span></label>
                 <input id="cleRib" pInputText class="w-full p-component p-element form-control mb-1" type="text"
                        formControlName="cleRib"/>
@@ -394,19 +399,12 @@
               </div>
 
               <!--              Status Employe-->
-              <div class="field col-12 md:col-3">
+              <div class="field col-12 md:col-5">
                 <label for="statusEmp" class="font-medium text-900">Status Employe </label>
                 <input id="statusEmp" pInputText class="w-full p-component p-element form-control mb-1" type="text"
                        formControlName="statusEmp"/>
               </div>
 
-              <!--              Activation-->
-              <div class="field col-12 md:col-5">
-                <label for="actifOrNot" class="font-medium text-900">Activation</label>
-                <input pInputText id="actifOrNot"
-                       class="w-full p-component p-element form-control mb-1" type="text"
-                       formControlName="actifOrNot"/>
-              </div>
 
               <!--              Detacher    -->
               <div class="field col-12 md:col-6">
@@ -527,9 +525,21 @@
                 />
               </div>
 
+              <!--              Activation-->
+              <div class="col-12 md:col-2 field mb-4">
+                <p-checkbox
+                  name="actif"
+                  formControlName="actifOrNot"
+                  [binary]="true"
+                  label="Actif ou non"
+                  class="text-900"
+                  inputId="id"
+                ></p-checkbox>
+              </div>
+
               <!--              Avatar -->
               <div class="field col-12">
-                <label for="avatar" class="font-medium text-900">Avatar</label>
+                <label class="font-medium text-900">Avatar</label>
                 <p-fileUpload
                   mode="basic"
                   id="avatar"
@@ -538,6 +548,7 @@
                   (onSelect)="onSelectedFiles($event)"
                   styleClass="p-button-outlined p-button-plain w-full"
                   chooseLabel="Choisir une Image"></p-fileUpload>
+
               </div>
             </div>
 

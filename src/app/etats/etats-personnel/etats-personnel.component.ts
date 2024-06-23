@@ -18,6 +18,8 @@ import {DataViewModule} from "primeng/dataview";
 import {AccordionModule} from "primeng/accordion";
 import {Personnels} from "../../core/data/personals/personnel.model";
 import {EtatService} from "../../core/data/etats/etat.service";
+import {EtatActifComponent} from "./etat-actif/etat-actif.component";
+import {EtatAnneeRecrutementComponent} from "./etat-annee-recrutement/etat-annee-recrutement.component";
 
 @Component({
   selector: 'mrt-etats-personnel',
@@ -34,7 +36,9 @@ import {EtatService} from "../../core/data/etats/etat.service";
     DropdownModule,
     FormsModule,
     DataViewModule,
-    AccordionModule
+    AccordionModule,
+    EtatActifComponent,
+    EtatAnneeRecrutementComponent
   ],
   templateUrl: './etats-personnel.component.html',
   styleUrl: './etats-personnel.component.scss'
@@ -65,20 +69,6 @@ export class EtatsPersonnelComponent implements OnInit{
     {field: 'nni', header: 'Nni'}
   ];
 
-  colActif: Cols [] = [
-    {field: 'matricule', header: 'Matricule'},
-    {field: 'nomPrenom', header: 'Nom et Prenom'},
-    {field: 'nomPrenomArab', header: 'Nom Prenom Arab'},
-    {field: 'nni', header: 'Nni'}
-  ];
-
-  colRecrutement: Cols [] = [
-    {field: 'matricule', header: 'Matricule'},
-    {field: 'nomPrenom', header: 'Nom et Prenom'},
-    {field: 'nomPrenomArab', header: 'Nom Prenom Arab'},
-    {field: 'nni', header: 'Nni'},
-    {field: 'dteRecrutement', header: 'Date recrutement'}
-  ];
 
   colRegion: Cols[] = [
     {field: 'matricule', header: 'Matricule'},

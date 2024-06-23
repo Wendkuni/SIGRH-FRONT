@@ -33,12 +33,14 @@ export class PersonnelService {
   http = inject(HttpClient);
 
   httpOptions = {
-    headers: new HttpHeaders( { 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({
+      'Access-Control-Allow-Origin':'*'
+    })
   };
 
   // get all personnels
   getAllPersonnels(){
-    return this.http.get<Personnels>(this.apiUrl + '/personnel/All', this.httpOptions);
+    return this.http.get<Personnels>(`${this.apiUrl}/personnel/All`, this.httpOptions);
   }
 
   getTypeEducations(){
@@ -74,8 +76,15 @@ export class PersonnelService {
   }
 
   createPersonnelWithImage(imagePers: File,personnel: Personnel){
-    personnel.imagPers = imagePers;
-    return this.http.post(`${this.apiUrl}/personnel/createWithImage`,personnel);
+    const formData = new FormData();
+    formData.append('image',imagePers);
+    formData.append('personnel',JSON.stringify(personnel));
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'multipart/form-data'
+    });
+
+    return this.http.post(`${this.apiUrl}/personnel/create`,formData,{ headers });
   }
 
   // update personnel

@@ -25,7 +25,7 @@ export let personnelColonneTable : Cols[] = [
   {field: 'ministerOrigine', header: 'Ministère origine'},
   {field: 'typeeducation', header: 'Type éducation'},
   {field: 'statusEmp', header: 'Statut employé'},
-  {field: 'actifOrNot', header: 'Situation'}
+  {field: 'actifOrNot', header: 'Actif ou non'}
 ];
 
 /*
@@ -47,7 +47,7 @@ export interface Personnel{
   finCntrat: Date;
   dateNaiss: Date;
   lieuNaiss: string;
-  actifOrNot: string;
+  actifOrNot: boolean;
   bank: string;
   codeBank: string;
   numroCpte: number;
@@ -55,7 +55,7 @@ export interface Personnel{
   detacher: string;
   ministerOrigine: string;
   typeeducation: TypeEducation;
-  imagPers: File;
+  imagPers: any;
 }
 
 export type Personnels = Personnel[];

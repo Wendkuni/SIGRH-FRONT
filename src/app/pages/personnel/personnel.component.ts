@@ -29,6 +29,8 @@ import {DropdownModule} from "primeng/dropdown";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {PersonnelStore} from "../../core/state/personals/personal.store";
 import {SkeletonModule} from "primeng/skeleton";
+import {CheckboxModule} from "primeng/checkbox";
+import {InputSwitchModule} from "primeng/inputswitch";
 
 @Component({
   selector: 'mrt-personnel',
@@ -58,7 +60,9 @@ import {SkeletonModule} from "primeng/skeleton";
     NgStyle,
     NgForOf,
     FormsModule,
-    KeyValuePipe
+    KeyValuePipe,
+    CheckboxModule,
+    InputSwitchModule
   ],
   templateUrl: './personnel.component.html',
   providers: [MessageService, ConfirmationService]
@@ -91,6 +95,7 @@ export class PersonnelComponent implements OnInit{
     'FORMATION',
     'PROFESSIONNEL'
   ];
+  actif: boolean = true;
 
   ngOnInit(): void {
     this.personnelForm = this.fb.group({
@@ -164,7 +169,7 @@ export class PersonnelComponent implements OnInit{
 
   // Methode pour creer un personnel
   createPersonnel(personnel:Personnel){
-    if(personnel.imagPers){
+    if(personnel.imagPers != null){
       console.log(" avec image");
       this.personalService.createPersonnelWithImage(personnel.imagPers,personnel).subscribe(() => {
         this.getAllPersonnel();
@@ -178,7 +183,7 @@ export class PersonnelComponent implements OnInit{
         });
     }
     else {
-      console.log(" avec image");
+      console.log("sans image");
       this.personalService.createPersonnel(personnel).subscribe(() => {
           this.getAllPersonnel();
           this.formDialog = false;
@@ -296,8 +301,9 @@ export class PersonnelComponent implements OnInit{
       });
   }
 
+
   onSelectedFiles(event:any) {
    this.userFile = event.currentFiles;
-   console.log(this.userFile);
+   console.log(event.currentFiles);
   }
 }

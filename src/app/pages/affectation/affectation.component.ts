@@ -73,6 +73,7 @@ export class AffectationComponent implements OnInit{
   // Nature de l'affectation
   nature = [
     'Convenance Personnelle',
+
     'Necessite de Service',
     'Nominative',
     'Permutation'

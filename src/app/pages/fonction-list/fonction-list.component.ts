@@ -14,6 +14,7 @@ import {TooltipModule} from "primeng/tooltip";
 import {DialogModule} from "primeng/dialog";
 import {DropdownModule} from "primeng/dropdown";
 import {InputNumberModule} from "primeng/inputnumber";
+import {FonctionLists} from "../../core/data/fonction-list/fonctionList";
 
 @Component({
   selector: 'mrt-fonction-list',
@@ -50,7 +51,7 @@ export class FonctionListComponent implements OnInit{
   ];
 
   fonctionListDialogVisible = false;
-  listFonctionAgent$!: Observable<Fonction[]>;
+  listFonctionAgent$!: FonctionLists;
   fonctionService = inject(FonctionListService);
 
   ngOnInit(): void {
@@ -63,7 +64,9 @@ export class FonctionListComponent implements OnInit{
   }
 
   getAllFonctionAgent() {
-    this.listFonctionAgent$ = this.fonctionService.getAllFonctions();
+    this.fonctionService.getAllFonctions().subscribe(data => {
+      this.listFonctionAgent$ = data;
+    });
   }
 
   showDialog() {

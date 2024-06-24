@@ -47,22 +47,11 @@ export class PersonnelService {
     return this.http.get(`${this.apiUrl}/personnel/TypeEducations`, this.httpOptions);
   }
 
-  // find personnel by locality
-  findPersonnelByLocalite(id: number){
-    return this.http.get<Personnels>(`${this.apiUrl}/personnel/ByLocalite/${id}`);
-  }
-
-  findPersonnelByAffectation(id: number){
-    return this.http.get<Personnels>(`${this.apiUrl}/personnel/ByAffectation/${id}`);
-  }
 
   getStatPersonnel(){
     return this.http.get<statPersonnel[]>('http://localhost:3000/statePersonnel');
   }
 
-  getPersonnelDisponible(){
-    return this.http.get<statePersonnelDisponible[]>('http://localhost:3000/statePersonnelDisponible');
-  }
 
   // find personnel by id
   findPersonnelById(id: number){
@@ -79,11 +68,9 @@ export class PersonnelService {
     const formData = new FormData();
     formData.append('image',imagePers);
     formData.append('personnel',JSON.stringify(personnel));
-
     const headers = new HttpHeaders({
       'Content-Type': 'multipart/form-data'
     });
-
     return this.http.post(`${this.apiUrl}/personnel/create`,formData,{
       reportProgress: true,
       responseType: 'text'
@@ -92,11 +79,9 @@ export class PersonnelService {
 
   // update personnel
   updatePersonnel(personnel: Personnel){
-
    let options = {
       params: new HttpParams().set('id', personnel.idAgent)
     }
-
     return this.http.put(`${this.apiUrl}/personnel/updade/${personnel.idAgent}`,personnel ,options);
   }
 

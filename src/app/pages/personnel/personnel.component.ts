@@ -31,6 +31,7 @@ import {PersonnelStore} from "../../core/state/personals/personal.store";
 import {SkeletonModule} from "primeng/skeleton";
 import {CheckboxModule} from "primeng/checkbox";
 import {InputSwitchModule} from "primeng/inputswitch";
+import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 
 @Component({
   selector: 'mrt-personnel',
@@ -96,6 +97,7 @@ export class PersonnelComponent implements OnInit{
     'PROFESSIONNEL'
   ];
   actif: boolean = true;
+  sanitizer = inject(DomSanitizer);
 
   ngOnInit(): void {
     this.personnelForm = this.fb.group({
@@ -128,9 +130,7 @@ export class PersonnelComponent implements OnInit{
       typeeducation: this.fb.control(''),
       dteSortie: this.fb.control('')
     });
-    this.getAllPersonnel().then(
-      () => console.log("personnel recuperer")
-    );
+    this.getAllPersonnel();
   }
 
   // Methode pour recuperer la liste du personnel
@@ -138,9 +138,15 @@ export class PersonnelComponent implements OnInit{
     // this.store.getAllPersonnel();
     this.personalService.getAllPersonnels().subscribe((response) => {
       this.listPersonnel$ = response;
-      console.table(this.listPersonnel$);
     });
   }
+
+  // getTypeEducation(){
+  //   this.personalService.getTypeEducations().subscribe((response) => {
+  //     this.typeEducation = response;
+  //     console.log(this.typeEducation);
+  //   });
+  // }
 
   //Methode pour afficher le formulaire d'ajout
   openNew() {
@@ -304,5 +310,10 @@ export class PersonnelComponent implements OnInit{
 
   onSelectedFiles(event:any) {
    this.userFile = event.currentFiles[0];
+  }
+
+  convertirBase64EnUrlSecurisee(fichierBase64: string){
+    const url = 'data:image/png;base64,' + fichierBase64;
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 }

@@ -10,13 +10,15 @@ import {DropdownModule} from "primeng/dropdown";
 import {FormValidatorsComponent} from "../../shared/form-validators/form-validators.component";
 import {CalendarModule} from "primeng/calendar";
 import {TableModule} from "primeng/table";
-import {DatePipe, KeyValuePipe, UpperCasePipe} from "@angular/common";
+import {AsyncPipe, DatePipe, KeyValuePipe, UpperCasePipe} from "@angular/common";
 import {TooltipModule} from "primeng/tooltip";
 import {RippleModule} from "primeng/ripple";
 import {ConfirmationService, MessageService} from "primeng/api";
 import {Personnel} from "../../core/data/personals/personnel.model";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {ToastModule} from "primeng/toast";
+import {FonctionListService} from "../../core/data/fonction-list/fonction-list.service";
+import {FonctionLists} from "../../core/data/fonction-list/fonctionList";
 
 @Component({
   selector: 'mrt-fonction',
@@ -34,7 +36,8 @@ import {ToastModule} from "primeng/toast";
     KeyValuePipe,
     ConfirmDialogModule,
     ToastModule,
-    DatePipe
+    DatePipe,
+    AsyncPipe
   ],
   templateUrl: './fonction.component.html',
   styleUrl: './fonction.component.scss',
@@ -66,6 +69,8 @@ export class FonctionComponent implements OnInit{
   //service message
   messageService = inject(MessageService);
 
+  fonctionListService = inject(FonctionListService);
+
   // colonne du tableau
   cols = fonctionColonneTable;
 
@@ -84,6 +89,9 @@ export class FonctionComponent implements OnInit{
     'Deces'
   ];
 
+  listFonctions: FonctionLists = [] as FonctionLists;
+
+
 
   ngOnInit(): void {
     // Initialisation du formulaire
@@ -101,6 +109,7 @@ export class FonctionComponent implements OnInit{
       indice: this.fb.control('', [Validators.required])
     })
     this.getAvancements();
+    this.getFonctions();
   }
 
   // Recuperer la liste des avancements du personnel selectionner
@@ -109,6 +118,16 @@ export class FonctionComponent implements OnInit{
       this.listeFonctionByAgent = response;
     });
   }
+
+  // Methode pour recuperrer la liste des fonctions
+  private getFonctions() {
+    this.fonctionListService.getAllFonctions().subscribe((response) => {
+      this.listFonctions = response;
+      console.log(this.listFonctions);
+    });
+  }
+
+
 
   // Rempli le formulaire pour modification
   patchForm(fonction: Fonction) {

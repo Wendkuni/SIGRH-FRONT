@@ -5,9 +5,9 @@
   [showTransformOptions]="'translateX(100%)'" />
 
 <p-table
-  [columns]="colRecrutement"
-  [value]="personnelsFiltrer"
-  #etatAnneeRecrutement
+  [columns]="colDren"
+  [value]="listDispo"
+  #personnelListAffectation
   dataKey="id"
   [rows]="5"
   [showCurrentPageReport]="true"
@@ -18,7 +18,7 @@
   [rowHover]="true"
   [rowsPerPageOptions]="[5,10, 20, 50]"
   tableStyleClass="p-datatable-gridlines"
-  [globalFilterFields]="['dteRecrutement']"
+  [globalFilterFields]="['affectation']"
 >
   <ng-template pTemplate="caption">
     <div class="flex justify-content-start flex-column sm:flex-row">
@@ -27,30 +27,23 @@
               icon="pi pi-file-excel"
               class="p-button-success mr-2"
               label="Excel"
-              (click)="exportExcel(etatAnneeRecrutement)"
+              (click)="exportExcel(personnelListAffectation)"
       ></button>
       <button type="button"
               pButton pRipple
               icon="pi pi-file-pdf"
               label="Pdf"
-              (click)="exportPdf(etatAnneeRecrutement)"
               class="p-button-warning mr-2"
-              >
+              (click)="exportPdf(personnelListAffectation)"
+      >
       </button>
     </div>
 
     <div class="flex justify-content-end flex-column sm:flex-row">
               <span class="p-input-icon-left mb-2">
 							<i class="pi pi-search"></i>
-							<input pInputText type="text" #filter (input)="onGlobalFilter(etatAnneeRecrutement,$event)"
-                     placeholder="Recherche per date..." class="w-full"/>
-<!--                <p-calendar-->
-<!--                  #dteRecrutement-->
-<!--                  [(ngModel)]="date"-->
-<!--                  (ngModelChange)="filterTable()"-->
-<!--                  placeholder="Choisir une date"-->
-<!--                  view="year"-->
-<!--                  dateFormat="yy" />-->
+							<input pInputText type="text" #filter (input)="onGlobalFilter(personnelListAffectation, $event)"
+                     placeholder="Recherche per direction..." class="w-full"/>
 						</span>
     </div>
   </ng-template>
@@ -89,13 +82,8 @@
       </td>
       <td
         style="min-width: 15rem">
-        {{ personnel.dteRecrutement }}
+        {{ personnel.affectation }}
       </td>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="emptymessage">
-    <tr>
-      <td colspan="8">Aucun personnel trouvé(e).</td>
     </tr>
   </ng-template>
 </p-table>

@@ -31,6 +31,7 @@ import {PersonnelStore} from "../../core/state/personals/personal.store";
 import {SkeletonModule} from "primeng/skeleton";
 import {CheckboxModule} from "primeng/checkbox";
 import {InputSwitchModule} from "primeng/inputswitch";
+import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 
 @Component({
   selector: 'mrt-personnel',
@@ -96,6 +97,7 @@ export class PersonnelComponent implements OnInit{
     'PROFESSIONNEL'
   ];
   actif: boolean = true;
+  sanitizer = inject(DomSanitizer);
 
   ngOnInit(): void {
     this.personnelForm = this.fb.group({
@@ -128,19 +130,23 @@ export class PersonnelComponent implements OnInit{
       typeeducation: this.fb.control(''),
       dteSortie: this.fb.control('')
     });
-    this.getAllPersonnel().then(
-      () => console.log("personnel recuperer")
-    );
+    this.getAllPersonnel();
   }
 
   // Methode pour recuperer la liste du personnel
   async getAllPersonnel() {
-    this.store.getAllPersonnel();
-    // this.personalService.getAllPersonnels().subscribe((response) => {
-    //   this.listPersonnel$ = response;
-    //   this.loading = false;
-    // });
+    // this.store.getAllPersonnel();
+    this.personalService.getAllPersonnels().subscribe((response) => {
+      this.listPersonnel$ = response;
+    });
   }
+
+  // getTypeEducation(){
+  //   this.personalService.getTypeEducations().subscribe((response) => {
+  //     this.typeEducation = response;
+  //     console.log(this.typeEducation);
+  //   });
+  // }
 
   //Methode pour afficher le formulaire d'ajout
   openNew() {
@@ -159,7 +165,7 @@ export class PersonnelComponent implements OnInit{
 
   savePersonnel() {
     const data = this.getFormData();
-    data.imagPers = this.userFile;
+    //data.imagPers = this.userFile;
     if (this.action === 'Add') {
       this.createPersonnel(data);
     } else {
@@ -169,9 +175,9 @@ export class PersonnelComponent implements OnInit{
 
   // Methode pour creer un personnel
   createPersonnel(personnel:Personnel){
-    if(personnel.imagPers != null){
+    if(this.userFile != null){
       console.log(" avec image");
-      this.personalService.createPersonnelWithImage(personnel.imagPers,personnel).subscribe(() => {
+      this.personalService.createPersonnelWithImage(this.userFile,personnel).subscribe(() => {
         this.getAllPersonnel();
         this.formDialog = false;
         this.personnelForm.reset();
@@ -303,7 +309,11 @@ export class PersonnelComponent implements OnInit{
 
 
   onSelectedFiles(event:any) {
-   this.userFile = event.currentFiles;
-   console.log(event.currentFiles);
+   this.userFile = event.currentFiles[0];
+  }
+
+  convertirBase64EnUrlSecurisee(fichierBase64: string){
+    const url = 'data:image/png;base64,' + fichierBase64;
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 }

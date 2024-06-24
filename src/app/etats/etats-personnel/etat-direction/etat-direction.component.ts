@@ -2,106 +2,57 @@ import {Component, inject, OnInit} from '@angular/core';
 import {Table, TableModule} from "primeng/table";
 import {Cols} from "../../../core/data/primeng/primeng.model";
 import {PersonnelService} from "../../../core/data/personals/personnel.service";
-import {Personnels} from "../../../core/data/personals/personnel.model";
-import {FilterService, MessageService} from "primeng/api";
 import {UpperCasePipe} from "@angular/common";
-import {RippleModule} from "primeng/ripple";
 import {ButtonModule} from "primeng/button";
+import {RippleModule} from "primeng/ripple";
 import {InputTextModule} from "primeng/inputtext";
-import {Calendar, CalendarModule, CalendarYearChangeEvent} from "primeng/calendar";
-import {FormsModule} from "@angular/forms";
-import autoTable from "jspdf-autotable";
 import {jsPDF} from "jspdf";
+import autoTable from "jspdf-autotable";
 import {ToastModule} from "primeng/toast";
+import {MessageService} from "primeng/api";
 import * as FileSaver from "file-saver";
 
 @Component({
-  selector: 'mrt-etat-annee-recrutement',
+  selector: 'mrt-etat-direction',
   standalone: true,
-  imports: [
-    TableModule,
-    UpperCasePipe,
-    RippleModule,
-    ButtonModule,
-    InputTextModule,
-    CalendarModule,
-    FormsModule,
-    ToastModule
-  ],
-  templateUrl: './etat-annee-recrutement.component.html',
+    imports: [
+        TableModule,
+        UpperCasePipe,
+        ButtonModule,
+        RippleModule,
+        InputTextModule,
+        ToastModule
+    ],
+  templateUrl: './etat-direction.component.html',
   providers: [MessageService]
 })
-export class EtatAnneeRecrutementComponent implements OnInit {
+export class EtatDirectionComponent implements OnInit{
 
-  // colonne du tableau
-  colRecrutement: Cols [] = [
+  colDren: Cols[] = [
     {field: 'matricule', header: 'Matricule'},
-    {field: 'nomPrenom', header: 'Nom et Prenom'},
+    {field: 'nomPrenom', header: 'Nom Prenom'},
     {field: 'nomPrenomArab', header: 'Nom Prenom Arab'},
     {field: 'nni', header: 'Nni'},
-    {field: 'dteRecrutement', header: 'Date recrutement'}
+    {field: 'direction', header: 'Direction'}
   ];
 
-  date: Date = new Date();
+  listDispo!: any[];
 
-//   service personnel
-  personnelService = inject(PersonnelService);
-
-//   liste personnel
-  personnelsList!: Personnels;
-
-//   liste personnel filtrer
-  personnelsFiltrer!: Personnels;
-
-  // filter service
-  filterService = inject(FilterService);
-
-  // collonne d'export pdf
   exportColumns!: any;
 
-  // systeme de notification
+  personnelService = inject(PersonnelService);
+
   notificationService = inject(MessageService);
 
   ngOnInit(): void {
-    this.getPersonnelsList();
-    this.exportColumns = this.colRecrutement.map(col => ({title: col.header, dataKey: col.field}));
-  }
-
-  // fonction pour recuperer la liste du personnel
-  getPersonnelsList(): void {
-    this.personnelService.getAllPersonnels().subscribe((data: Personnels) => {
-      this.personnelsList = data;
-      this.personnelsFiltrer = data;
+    this.personnelService.getStatPersonnel().subscribe((response) => {
+      this.listDispo = response;
     });
+    this.exportColumns = this.colDren.map(col => ({title: col.header, dataKey: col.field}));
   }
 
   onGlobalFilter(table: Table, event: Event) {
     table.filterGlobal((event.target as HTMLInputElement).value, 'contains')
-  }
-
-  filterYear(etatAnneeRecrutement: Table, $event: CalendarYearChangeEvent) {
-    etatAnneeRecrutement.filter($event.year, 'dteRecrutement', 'contains');
-  }
-
-onYearChangeEvent(event:any){
-    // if(event){
-    //   this.date = (event as Date).getFullYear();
-    //   this.filterTable();
-    // } else{
-    //   this.date = null;
-    //   this.filterTable();
-    // }
-}
-
-
-
-  filterTable() {
-   if(this.date != null){
-     for(let personnel of this.personnelsList){
-       console.log(this.date)
-       console.log(personnel.dteRecrutement)
-     }
-   }
   }
 
   exportPdf(table: Table) {
@@ -111,7 +62,7 @@ onYearChangeEvent(event:any){
         body: [
           [
             {
-              content: 'Liste du personnel recruter en ' + this.date,
+              content: 'Liste du personnel par Direction',
               colSpan: 5,
               styles: {halign: 'center', fontStyle: 'bold', fontSize: 15, textColor: '#ffffff'},
             }
@@ -197,6 +148,5 @@ onYearChangeEvent(event:any){
       })
     )
   }
-
 
 }

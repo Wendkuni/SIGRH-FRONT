@@ -1,3 +1,9 @@
+<p-toast
+  [showTransformOptions]="'translateY(100%)'"
+  [showTransitionOptions]="'1000ms'"
+  [hideTransitionOptions]="'1000ms'"
+  [showTransformOptions]="'translateX(100%)'" />
+
 <p-accordion>
   <p-accordionTab header="Liste du personnel actif" [selected]="false" class="line-height-3 m-0">
     <p-table
@@ -22,6 +28,7 @@
                   icon="pi pi-file-excel"
                   class="p-button-success mr-2"
                   label="Excel"
+                  (click)="exportExcel(personnelActifList)"
           ></button>
           <button type="button"
                   pButton pRipple
@@ -94,6 +101,7 @@
                   icon="pi pi-file-excel"
                   class="p-button-success mr-2"
                   label="Excel"
+                  (click)="exportExcel(personnelInactifList)"
           ></button>
           <button type="button"
                   pButton pRipple

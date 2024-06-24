@@ -34,11 +34,10 @@
 <p-card>
   <p-table
     [columns]="cols"
-    [value]="store.personnel()"
+    [value]="listPersonnel$"
     #personnelTable
     dataKey="id"
     [rows]="5"
-    [loading]="store.loading()"
     [showCurrentPageReport]="true"
     currentPageReportTemplate="Page {currentPage} sur {totalPages}"
     [paginator]="true"
@@ -81,7 +80,7 @@
       <tr class="align-items-center align-content-center">
         <td style=" min-width: 6rem;">
           @if (personnel.imagPers) {
-            <img src="{{personnel.imagPers}}" alt="{{personnel.nomPrenom}}"
+            <img src="data:image/png;base64,{{personnel.imagPers}}" alt="{{personnel.nomPrenom}}"
                  class="w-4rem h-4rem border-circle shadow-4">
           } @else {
             <img src="assets/demo/images/avatar/user-avatar.png" alt="user.name"
@@ -399,7 +398,7 @@
               </div>
 
               <!--              Status Employe-->
-              <div class="field col-12 md:col-5">
+              <div class="field col-12 md:col-6">
                 <label for="statusEmp" class="font-medium text-900">Status Employe </label>
                 <input id="statusEmp" pInputText class="w-full p-component p-element form-control mb-1" type="text"
                        formControlName="statusEmp"/>

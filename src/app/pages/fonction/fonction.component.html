@@ -103,9 +103,18 @@
               <label for="fonction" class="font-medium text-900">Fonction <span class="text-red-500">*</span></label>
               <p-dropdown
                 id="fonction"
+                [options]="listFonctions"
+                [filter]="true"
+                filterBy="libelleFonction"
                 placeholder="Selectionner la fonction"
                 formControlName="libelleFonction"
+                [group]="true"
               >
+                <ng-template let-group pTemplate="group">
+                  <div class="p-d-flex p-ai-center">
+                    <span>{{ group.libelleFonction }}</span>
+                  </div>
+                </ng-template>
               </p-dropdown>
               <mrt-form-validators [entityField]="'libelleFonction'"
                                    [formGroup]="fonctionAgentForm"></mrt-form-validators>

@@ -17,7 +17,7 @@ export class FonctionListService {
 
   // get all fonctions
   getAllFonctions(){
-    return this.http.get<FonctionLists>(`${this.apiUrl}/listeFonctions`);
+    return this.http.get<any>(`${this.apiUrl}/listeFonctions`);
   }
 
   // get fonction by id

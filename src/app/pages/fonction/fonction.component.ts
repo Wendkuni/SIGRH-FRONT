@@ -123,7 +123,6 @@ export class FonctionComponent implements OnInit{
   private getFonctions() {
     this.fonctionListService.getAllFonctions().subscribe((response) => {
       this.listFonctions = response;
-      console.log(this.listFonctions);
     });
   }
 
@@ -171,15 +170,11 @@ export class FonctionComponent implements OnInit{
     return<Fonction>{
       libelleFonction: formData.libelleFonction,
       corps: formData.corps,
-      grade: formData.grade,
       echelle: formData.echelle,
       echelon: formData.echelon,
       dateDebFonction: formData.dateDebFonction,
       categorie: formData.categorie,
-      groupe: formData.groupe,
-      corpsArab: formData.corpsArab,
-      libelleFonctionArab: formData.libelleFonctionArab,
-      indice: formData.indice
+      indixe: formData.indixe
     }
   }
 

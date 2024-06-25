@@ -79,30 +79,6 @@ export class EtatAnneeRecrutementComponent implements OnInit {
     table.filterGlobal((event.target as HTMLInputElement).value, 'contains')
   }
 
-  filterYear(etatAnneeRecrutement: Table, $event: CalendarYearChangeEvent) {
-    etatAnneeRecrutement.filter($event.year, 'dteRecrutement', 'contains');
-  }
-
-onYearChangeEvent(event:any){
-    // if(event){
-    //   this.date = (event as Date).getFullYear();
-    //   this.filterTable();
-    // } else{
-    //   this.date = null;
-    //   this.filterTable();
-    // }
-}
-
-
-
-  filterTable() {
-   if(this.date != null){
-     for(let personnel of this.personnelsList){
-       console.log(this.date)
-       console.log(personnel.dteRecrutement)
-     }
-   }
-  }
 
   exportPdf(table: Table) {
     if(table.value.length > 0){

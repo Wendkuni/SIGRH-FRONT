@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {Personnel, Personnels} from "./personnel.model";
+import {Personnel, Personnels, TypeEducation} from "./personnel.model";
 import {environment} from "../../../../environments/environment";
 import {Observable} from "rxjs";
 
@@ -44,7 +44,7 @@ export class PersonnelService {
   }
 
   getTypeEducations(){
-    return this.http.get(`${this.apiUrl}/personnel/TypeEducations`, this.httpOptions);
+    return this.http.get<any>(`${this.apiUrl}/personnel/TypeEducations`, this.httpOptions);
   }
 
 
@@ -78,11 +78,16 @@ export class PersonnelService {
   }
 
   // update personnel
-  updatePersonnel(personnel: Personnel){
-   let options = {
-      params: new HttpParams().set('id', personnel.idAgent)
-    }
-    return this.http.put(`${this.apiUrl}/personnel/updade/${personnel.idAgent}`,personnel ,options);
+  updatePersonnel(imagePers: File,personnel: Personnel){
+    const deleteImage = false;
+    const formData = new FormData();
+    formData.append('image',imagePers);
+    formData.append('personnel',JSON.stringify(personnel));
+    formData.append('deleteImage',JSON.stringify(deleteImage));
+    return this.http.put(`${this.apiUrl}/personnel/updade/${personnel.idAgent}`,formData,{
+      reportProgress: true,
+      responseType: 'text'
+    });
   }
 
   // delete personnel

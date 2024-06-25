@@ -154,10 +154,6 @@
         </td>
         <td
           style="min-width: 15rem">
-          {{ personnel.dteSortie | date: 'dd/MM/yyyy' }}
-        </td>
-        <td
-          style="min-width: 15rem">
           {{ personnel.detacher }}
         </td>
         <td
@@ -428,7 +424,7 @@
                 <label for="typeEducation" class="font-medium text-900">Type Education </label>
                 <p-dropdown
                   id="typeEducation"
-                  [options]="typeEducation"
+                  [options]="educationTypes"
                   formControlName="typeeducation"
                   placeholder="Choisir le type d'education"
                 >
@@ -530,7 +526,7 @@
                   name="actif"
                   formControlName="actifOrNot"
                   [binary]="true"
-                  label="Actif ou non"
+                  label="Actif"
                   class="text-900"
                   inputId="id"
                 ></p-checkbox>

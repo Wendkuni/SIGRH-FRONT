@@ -5,7 +5,7 @@ export interface Dossier {
   libelDossier: string; // Attribute name: nom
   dateUpload: Date; // Attribute name: date
   observation: string; // Attribute name: observation
-  personnel: Personnel;
+  idAgent: number; // Attribute name: idAgent
   imageFold: File[];
 }
 

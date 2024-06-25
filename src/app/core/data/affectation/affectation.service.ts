@@ -51,4 +51,8 @@ export class AffectationService {
   deleteMobilite(mobilite: Mobilite){
     return this.http.delete(`${this.apiUrl}/affectation/delete/${mobilite.idAffectation}`);
   }
+
+  getLocalite() {
+    return this.http.get<any>(`${this.apiUrl}/localites`);
+  }
 }

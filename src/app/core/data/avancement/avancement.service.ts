@@ -20,7 +20,7 @@ export class AvancementService {
 
   // get all avancement
   getAllAvancements(){
-    return this.http.get<Fonctions>(`${this.url}/fonctionAgent/All`, this.httpOptions);
+    return this.http.get<any>(`${this.url}/fonctionAgent/All`, this.httpOptions);
   }
 
   // create avancement
@@ -40,7 +40,7 @@ export class AvancementService {
 
   // get all avancement by personnel
   findAvancementByAgent(id: number){
-    return this.http.get<Fonctions>(`${this.url}/fonctionAgent/ByAgent/${id}`);
+    return this.http.get<any>(`${this.url}/fonctionAgent/agent/${id}`, this.httpOptions);
   }
 
   findAvancementById(id: number){

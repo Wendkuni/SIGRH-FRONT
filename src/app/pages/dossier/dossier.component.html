@@ -49,7 +49,7 @@
     </ng-template>
     <ng-template pTemplate="emptymessage">
       <tr>
-        <td colspan="8">Aucun élement trouvé(e).</td>
+        <td colspan="8">Aucun élement.</td>
       </tr>
     </ng-template>
   </p-table>
@@ -147,13 +147,13 @@
     <div class="field">
       <label class="font-medium text-900" for="dossierScan">Dossier <span class="text-red-500">*(pdf,image => (.pdf, .jpg, .jpeg, .png),word)</span></label>
       <p-fileUpload
-        id="dossierScan"
         mode="basic"
-        accept=".pdf, .jpg, .jpeg, .png"
-        [maxFileSize]="1000000"
+        id="dossierScan"
+        accept=".pdf,.jpg,.jpeg,.png"
+        [maxFileSize]="100000"
+        (onSelect)="onSelectedFiles($event)"
         styleClass="p-button-outlined p-button-plain w-full"
-        (onUpload)="onUpload($event)"
-        chooseLabel="Choisir un fichier"></p-fileUpload>
+        chooseLabel="Choisir une Image"></p-fileUpload>
     </div>
 
 

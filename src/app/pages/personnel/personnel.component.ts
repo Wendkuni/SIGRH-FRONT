@@ -90,13 +90,7 @@ export class PersonnelComponent implements OnInit{
   loading: boolean = true;
   userFile: any;
   confirService = inject(ConfirmationService);
-  typeEducation = [
-    'AUCUN',
-    'SCOLAIRE',
-    'FORMATION',
-    'PROFESSIONNEL'
-  ];
-  actif: boolean = true;
+  educationTypes!: any;
   sanitizer = inject(DomSanitizer);
 
   ngOnInit(): void {
@@ -131,6 +125,7 @@ export class PersonnelComponent implements OnInit{
       dteSortie: this.fb.control('')
     });
     this.getAllPersonnel();
+    this.getTypeEducation();
   }
 
   // Methode pour recuperer la liste du personnel
@@ -141,12 +136,11 @@ export class PersonnelComponent implements OnInit{
     });
   }
 
-  // getTypeEducation(){
-  //   this.personalService.getTypeEducations().subscribe((response) => {
-  //     this.typeEducation = response;
-  //     console.log(this.typeEducation);
-  //   });
-  // }
+  getTypeEducation(){
+    this.personalService.getTypeEducations().subscribe((response) => {
+      this.educationTypes = response.result;
+    });
+  }
 
   //Methode pour afficher le formulaire d'ajout
   openNew() {
@@ -160,6 +154,9 @@ export class PersonnelComponent implements OnInit{
     this.action = 'Update';
     this.selectedPersonnel = personal;
     this.personnelForm.patchValue(personal);
+    if (personal.imagPers) {
+      this.userFile = this.dataURLtoFile(personal.imagPers);
+    }
   }
 
 
@@ -176,7 +173,6 @@ export class PersonnelComponent implements OnInit{
   // Methode pour creer un personnel
   createPersonnel(personnel:Personnel){
     if(this.userFile != null){
-      console.log(" avec image");
       this.personalService.createPersonnelWithImage(this.userFile,personnel).subscribe(() => {
         this.getAllPersonnel();
         this.formDialog = false;
@@ -189,7 +185,6 @@ export class PersonnelComponent implements OnInit{
         });
     }
     else {
-      console.log("sans image");
       this.personalService.createPersonnel(personnel).subscribe(() => {
           this.getAllPersonnel();
           this.formDialog = false;
@@ -206,8 +201,7 @@ export class PersonnelComponent implements OnInit{
   // Methode pour mettre a jour un personnel
   updatePersonnel(personnel:Personnel){
     personnel.idAgent = this.selectedPersonnel.idAgent;
-    console.log(personnel);
-    this.personalService.updatePersonnel(personnel).subscribe(() => {
+    this.personalService.updatePersonnel(this.userFile,personnel).subscribe(() => {
       this.getAllPersonnel();
       this.formDialog = false;
       this.personnelForm.reset();
@@ -215,7 +209,6 @@ export class PersonnelComponent implements OnInit{
     },
       error => {
         this.messageService.add({severity: 'error', summary: 'Error', detail: 'Personnel non Modifier', life: 3000});
-
       });
   }
 
@@ -244,7 +237,7 @@ export class PersonnelComponent implements OnInit{
       typeeducation: formData.typeeducation,
       statusEmp: formData.statusEmp,
       actifOrNot: formData.actifOrNot,
-      dteSortie: formData.dteDepart
+      dteSortie: formData.dteSortie
     }
   }
 
@@ -310,6 +303,16 @@ export class PersonnelComponent implements OnInit{
 
   onSelectedFiles(event:any) {
    this.userFile = event.currentFiles[0];
+  }
+
+  dataURLtoFile(base64: string) {
+      const data = atob(base64);
+      let n = data.length;
+      const u8arr = new Uint8Array(n);
+      while(n--) {
+        u8arr[n] = data.charCodeAt(n);
+      }
+      return new File([u8arr], "image.jpeg", {type: "image/jpeg"});
   }
 
   convertirBase64EnUrlSecurisee(fichierBase64: string){

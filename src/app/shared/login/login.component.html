@@ -24,7 +24,7 @@
               <input
                 id="email"
                 type="text"
-                placeholder="Email address"
+                placeholder="Addresse email"
                 pInputText
                 class="w-full md:w-23rem mb-2"
                 style="padding:1rem"
@@ -41,7 +41,7 @@
             </label>
             <p-password
               id="password"
-              placeholder="Password"
+              placeholder="Mot de passe"
               [toggleMask]="true"
               styleClass="mb-2"
               inputStyleClass="w-full p-3 md:w-23rem sm:w-23rem"
@@ -50,8 +50,8 @@
             <mrt-form-validators [entityField]="'password'" [formGroup]="loginForm" />
 
             <div class="flex align-items-center justify-content-between mt-6 gap-3">
-              <button pButton type="button" label="Login" class="w-10rem" (click)="handleLogin()"></button>
-              <a (click)="showForgotPassForm()" class="secondary-button cursor-pointer">Mot de passe Oublie?</a>
+              <button pButton type="button" label="Login" class="w-full" (click)="handleLogin()"></button>
+<!--              <a (click)="showForgotPassForm()" class="secondary-button cursor-pointer">Mot de passe Oublie?</a>-->
             </div>
           </div>
         </form>

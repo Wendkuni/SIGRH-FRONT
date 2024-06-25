@@ -6,12 +6,14 @@
   [showTransformOptions]="'translateX(100%)'" />
 
 <p-card  styleClass="mb-5">
+
   <!-- Entete presentation personnel-->
   <div class="flex align-items-center border-bottom-1 surface-border p-3 lg:p-4 ">
     <!--      Image du personnel et son nom -->
     <div class="relative flex align-items-center mr-3">
       @if (personnel.imagPers) {
-        <img src="{{personnel.imagPers}}" alt="Profile" class="w-4rem h-4rem border-circle shadow-4">
+        <img src="data:image/png;base64,{{personnel.imagPers}}" alt="{{personnel.nomPrenom}}"
+             class="w-4rem h-4rem border-circle shadow-4">
       } @else {
         <img src="assets/demo/images/avatar/user-avatar.png" alt="user.name"
              class="w-4rem h-4rem border-circle shadow-4">
@@ -21,45 +23,688 @@
     <div class="mr-2">
       <span class="font-semibold block">{{ personnel.nomPrenom }}</span>
     </div>
-
-<!--    <div class="flex align-items-center ml-auto">-->
-<!--      &lt;!&ndash;      Bouton de téléchargement &ndash;&gt;-->
-<!--      <button pButton=""-->
-<!--              pRipple=""-->
-<!--              label="Télécharger"-->
-<!--              icon="pi pi-print"-->
-<!--              class="p-element p-ripple p-button-outlined p-button-primary p-button p-component mx-1">-->
-<!--      </button>-->
-<!--    </div>-->
   </div>
 
   <p-tabView>
+
+
+
+
+<!-- Fonction agent part -->
+
     <p-tabPanel   header="Carrières">
-      @if (personnel) {
-        <mrt-fonction
-          [personnel]="personnel"
-        ></mrt-fonction>
-      } @else {
-        loading...
-      }
+
+      <div class="flex justify-content-between border-bottom-1 surface-border p-3">
+        <span class="block text-900 font-bold text-xl mb-4">Carrières</span>
+      </div>
+      <div class="grid">
+
+        <!--  Formulaire -->
+        <div class="col-12 lg:col-5">
+    <span class="text-sm m-3">
+                Champs obligatoires:
+                <span class="text-red-500">*</span>
+              </span>
+          <form [formGroup]="fonctionAgentForm">
+            <div class="border-1 surface-border border-round p-fluid mb-4">
+              <span class="text-900 font-bold block border-bottom-1 surface-border p-3">Fonction Agent</span>
+              <div class="p-3">
+
+                <!--          Matricule -->
+                <div class="field">
+                  <label for="matricule">Matricule</label>
+                  <input
+                    type="text"
+                    pInputText
+                    id="matricule"
+                    [value]="personnel.matricule"
+                    required
+                    disabled/>
+                </div>
+
+                <!--          Nom prenom -->
+                <div class="field">
+                  <label for="fullName">Nom Prenom</label>
+                  <input
+                    type="text"
+                    pInputText
+                    id="fullName"
+                    [value]="personnel.nomPrenom"
+                    required
+                    disabled/>
+                </div>
+
+                <!--          Categorie -->
+                <div class="field">
+                  <label for="nature" class="font-medium text-900">Nature <span class="text-red-500">*</span></label>
+                  <p-dropdown
+                    id="nature"
+                    formControlName="categorie"
+                    [options]="categorie"
+                    placeholder="Selectionner la categorie"
+                  >
+                  </p-dropdown>
+                  <mrt-form-validators [entityField]="'categorie'"
+                                       [formGroup]="fonctionAgentForm"></mrt-form-validators>
+                </div>
+
+                <!--          Date debut function -->
+                <div class="field">
+                  <label for="dateDebFonction" class="font-medium text-900"> Date Effet <span class="text-red-500">*</span></label>
+                  <p-calendar
+                    id="dateDebFonction"
+                    formControlName="dateDebFonction"
+                    [dateFormat]="'yy-mm-dd'"
+                    [showButtonBar]="true"
+                    [firstDayOfWeek]="1"
+                    [readonlyInput]="true"
+                    styleClass="mb-1"
+                  />
+                  <mrt-form-validators [entityField]="'dateDebFonction'"
+                                       [formGroup]="fonctionAgentForm"></mrt-form-validators>
+                </div>
+
+              </div>
+
+
+              <div class="border-1 surface-border border-round p-fluid m-2">
+                <span class="text-900 font-bold block  border-bottom-1 surface-border p-3">INCIDENCE, GRADE, ECHELLE ET ECHELLON</span>
+                <div class="p-3">
+
+                  <!--            Indice -->
+<!--                  <div class="field">-->
+<!--                    <label for="indice" class="font-medium text-900">Indice <span class="text-red-500">*</span></label>-->
+<!--                    <p-dropdown-->
+<!--                      id="indice"-->
+<!--                      [options]="listFonctions"-->
+<!--                      optionLabel="indixe"-->
+<!--                      [filter]="true"-->
+<!--                      filterBy="indixe"-->
+<!--                      placeholder="Selectionner la indice"-->
+<!--                      formControlName="indixe"-->
+<!--                    >-->
+<!--                      <ng-template let-group pTemplate="group">-->
+<!--                        <div class="p-d-flex p-ai-center">-->
+<!--                          <span>{{ group.indixe }}</span>-->
+<!--                        </div>-->
+<!--                      </ng-template>-->
+<!--                    </p-dropdown>-->
+<!--                    <mrt-form-validators [entityField]="'indixe'"-->
+<!--                                         [formGroup]="fonctionAgentForm"></mrt-form-validators>-->
+<!--                  </div>-->
+
+                  <!--            Fonction -->
+                  <div class="field">
+                    <label for="fonction" class="font-medium text-900">Fonction <span class="text-red-500">*</span></label>
+                    <p-dropdown
+                      id="fonction"
+                      [options]="listFonctions"
+                      optionLabel="libelleFonction"
+                      [filter]="true"
+                      optionValue="libelleFonction"
+                      filterBy="libelleFonction"
+                      placeholder="Selectionner la fonction"
+                      formControlName="libelleFonction"
+                    >
+                    </p-dropdown>
+                    <mrt-form-validators [entityField]="'libelleFonction'"
+                                         [formGroup]="fonctionAgentForm"></mrt-form-validators>
+                  </div>
+
+                  <!--            grade -->
+                  <div class="field">
+                    <label for="grade" class="font-medium text-900">Grade <span class="text-red-500">*</span></label>
+                    <p-dropdown
+                      id="grade"
+                      [options]="listFonctions "
+                      optionLabel="grade"
+                      [filter]="true"
+                      filterBy="grade"
+                      optionValue="grade"
+                      placeholder="Selectionner la grade"
+                      formControlName="grade"
+                    >
+                    </p-dropdown>
+                    <mrt-form-validators [entityField]="'grade'"
+                                         [formGroup]="fonctionAgentForm"></mrt-form-validators>
+                  </div>
+
+                  <!--            Echelle -->
+                  <div class="field " >
+                    <label for="echelle" class="font-medium text-900">Echelle <span class="text-red-500">*</span></label>
+                    <p-dropdown
+                      id="echelle"
+                      [options]="listFonctions "
+                      optionLabel="echelle"
+                      [filter]="true"
+                      filterBy="echelle"
+                      optionValue="echelle"
+                      placeholder="Selectionner l' echelle"
+                      formControlName="echelle"
+                    >
+                    </p-dropdown>
+                    <mrt-form-validators [entityField]="'echelle'"
+                                         [formGroup]="fonctionAgentForm"></mrt-form-validators>
+                  </div>
+
+                  <!--            Echelon-->
+                  <div class="field ">
+                    <label for="echelon" class="font-medium text-900">Echelon <span class="text-red-500">*</span></label>
+                    <p-dropdown
+                      id="echelon"
+                      [options]="listFonctions "
+                      optionLabel="echelon"
+                      [filter]="true"
+                      filterBy="echelon"
+                      optionValue="echelon"
+                      placeholder="Selectionner l' echelon"
+                      formControlName="echelon"
+                    >
+                    </p-dropdown>
+                    <mrt-form-validators [entityField]="'echelon'"
+                                         [formGroup]="fonctionAgentForm"></mrt-form-validators>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="flex justify-content-between gap-3">
+              <button pButton pRipple class="p-button-primary flex-1" label="Enregistrer"
+                      [disabled]="fonctionAgentForm.invalid"
+                      (click)="saveFonctionAgent()"
+                      icon="pi pi-fw pi-check"></button>
+              <button pButton pRipple
+                      class="p-button-danger flex-1 p-button-outlined"
+                      label="Annuler" icon="pi pi-fw pi-times"
+                      (click)="cancelAvancement()"
+              ></button>
+            </div>
+          </form>
+        </div>
+
+        <!--  Tableau -->
+        <div class="col-12 lg:col-7">
+          <p-table
+            [columns]="colsAvancement"
+            [value]="listeFonctionByAgent"
+            #fonctionAgentTable
+            dataKey="id"
+            [rows]="5"
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate="Page {currentPage} sur {totalPages}"
+            [paginator]="true"
+            styleClass="p-datatable-gridlines p-datatable-striped"
+            responsiveLayout="scroll"
+            [rowHover]="true"
+            [rowsPerPageOptions]="[5,10]"
+            tableStyleClass="p-datatable-gridlines"
+          >
+            <ng-template let-columns pTemplate="header">
+              <tr>
+                @for (col of columns; track col.field) {
+                  <th
+                    style="min-width: 15rem"
+                    [pSortableColumn]="col.field"
+                    class="font-weight-bold"
+                  >
+                    {{ col.header }}
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                  </th>
+                }
+                <th></th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-avancement>
+              <tr>
+                <td>{{ avancement.libelleFonction }}</td>
+                <td>{{ avancement.dateDebFonction  | date: 'dd/MM/yyyy' }}</td>
+                <td>{{ avancement.categorie }}</td>
+                <td>{{ avancement.grade }}</td>
+                <td>{{ avancement.echelle }}</td>
+                <td>{{ avancement.echelon }}</td>
+<!--                <td>-->
+<!--                  &lt;!&ndash;          Bouton qui fait l'ouverture du formulaire de modification &ndash;&gt;-->
+<!--                  <button-->
+<!--                    pButton-->
+<!--                    type="button"-->
+<!--                    pTooltip="Modifier"-->
+<!--                    tooltipPosition="top"-->
+<!--                    pRipple-->
+<!--                    icon="pi pi-pencil"-->
+<!--                    class="p-button-rounded p-button-primary mx-2"-->
+<!--                    iconPos="left"-->
+<!--                    (click)="patchFormAvancement(avancement)"-->
+<!--                  ></button>-->
+<!--                </td>-->
+<!--                <td>-->
+<!--                  &lt;!&ndash;          Bouton qui fait la validation de l'avancement  &ndash;&gt;-->
+<!--                  <button-->
+<!--                    pButton-->
+<!--                    type="button"-->
+<!--                    pTooltip="Valider"-->
+<!--                    tooltipPosition="top"-->
+<!--                    pRipple-->
+<!--                    icon="pi pi-check-circle"-->
+<!--                    class="p-button-rounded p-button-warning mx-2"-->
+<!--                    iconPos="left"-->
+<!--                  ></button>-->
+<!--                </td>-->
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+              <tr>
+                <td colspan="8">Aucun élement.</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+
     </p-tabPanel>
+
+
+
+<!-- Dossier part-->
     <p-tabPanel header="Dossier">
-      @if(personnel){
-        <mrt-dossier
-          [personnel]="personnel"
-        ></mrt-dossier>
-      } @else {
-        loading...
-      }
+      <div>
+        <!--        Bouton ajout dossier -->
+        <button pButton=""
+                pRipple=""
+                label="Dossier"
+                icon="pi pi-plus"
+                class="p-element p-ripple p-button-outlined p-button-primary p-button p-component m-3"
+                (click)="showDossierForm()"
+        >
+        </button>
+
+
+        <p-table
+          [columns]="colsDossier"
+          [value]="lisDossiers$"
+          #dt1
+          dataKey="id"
+          [rows]="5"
+          [showCurrentPageReport]="true"
+          currentPageReportTemplate="Page {currentPage} sur {totalPages}"
+          [paginator]="true"
+          styleClass="p-datatable-gridlines p-datatable-striped"
+          responsiveLayout="scroll"
+          [rowHover]="true"
+          [rowsPerPageOptions]="[5,10]"
+          tableStyleClass="p-datatable-gridlines"
+        >
+          <ng-template let-columns pTemplate="header">
+            <tr>
+              @for (col of columns; track col.field) {
+                <th
+                  style="min-width: 15rem"
+                  [pSortableColumn]="col.field"
+                  class="font-weight-bold"
+                >
+                  {{ col.header }}
+                  <p-sortIcon [field]="col.field"></p-sortIcon>
+                </th>
+              }
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-dossier>
+            <tr>
+              <td>{{ dossier.libelDossier }}</td>
+              <td>{{ dossier.dateUpload  | date }}</td>
+              <td>{{ dossier.observation }}</td>
+              <td>
+                <img src="data:image/png;base64,{{dossier.imagFold}}" alt="{{dossier.imagFold}}"
+                     class="w-4rem h-4rem border-circle shadow-4">
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="8">Aucun élement.</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+      <!-- Formulaire d'ajout de dossier au personnel -->
+      <p-dialog
+        [(visible)]="showDossierDialog"
+        [style]="{ width: '40vw'}"
+        header="Dossier Formulaire"
+        (onHide)="cancelDossier()"
+        [modal]="true"
+        [draggable]="false"
+        [resizable]="false"
+        styleClass="p-fluid"
+      >
+        <ng-template pTemplate="content">
+      <span class="text-sm">
+                Champs obligatoires:
+                <span class="text-red-500">*</span>
+              </span>
+          <form [formGroup]="dossierForm">
+
+            <!--      matricule-->
+            <div class="field mt-4">
+              <label class="font-medium text-900">Matricule</label>
+              <input
+                type="text"
+                pInputText
+                [value]="personnel.matricule"
+                required
+                disabled/>
+            </div>
+
+            <!--    Nom Prenom-->
+            <div class="field">
+              <label class="font-medium text-900">Nom Prenom</label>
+              <input
+                type="text"
+                pInputText
+                [value]="personnel.nomPrenom"
+                required
+                disabled/>
+            </div>
+
+            <!--    NNI-->
+            <div class="field">
+              <label class="font-medium text-900">NNI</label>
+              <input
+                type="text"
+                pInputText
+                [value]="personnel.nni"
+                required
+                disabled
+              />
+            </div>
+
+            <!--    Libelle Dossier-->
+            <div class="field">
+              <label for="libelDossier" class="font-medium text-900">Libelle Dossier <span class="text-red-500">*</span></label>
+              <input id="libelDossier" pInputText class="w-full p-component p-element form-control mb-1" type="text"
+                     formControlName="libelDossier"/>
+              <mrt-form-validators
+                [entityField]="'libelDossier'"
+                [formGroup]="dossierForm"
+              />
+            </div>
+
+            <!--    Date upload -->
+            <div class="field">
+              <label for="dateUpload" class="font-medium text-900">Date <span class="text-red-500">*</span></label>
+              <p-calendar
+                id="dateUpload"
+                [dateFormat]="'yy-mm-dd'"
+                placeholder="Entre la date(yyyy-mm-dd)"
+                formControlName="dateUpload"
+                styleClass="mb-1"
+                appendTo="body"
+                [showTime]="false"
+              />
+              <mrt-form-validators
+                [entityField]="'dateUpload'"
+                [formGroup]="dossierForm"/>
+            </div>
+
+            <!--    Observation-->
+            <div class="field ">
+              <label for="observation" class="font-medium text-900">Observation <span class="text-red-500">*</span></label>
+              <input id="observation" pInputText class="w-full p-component p-element form-control mb-1" type="text"
+                     formControlName="observation"/>
+              <mrt-form-validators
+                [entityField]="'observation'"
+                [formGroup]="dossierForm"
+              />
+            </div>
+            <!--    Image upload-->
+            <div class="field">
+              <label class="font-medium text-900" for="dossierScan">Dossier <span class="text-red-500">*(.pdf, .jpg, .jpeg, .png)</span></label>
+              <p-fileUpload
+                mode="basic"
+                id="dossierScan"
+                accept=".pdf,.jpg,.jpeg,.png"
+                [maxFileSize]="1000000"
+                (onSelect)="onSelectedFiles($event)"
+                styleClass="p-button-outlined p-button-plain w-full"
+                chooseLabel="Choisir une Image"></p-fileUpload>
+            </div>
+
+
+          </form>
+        </ng-template>
+
+        <ng-template pTemplate="footer">
+          <button pButton pRipple class="p-button-primary flex-1" label="Enregistrer" (click)="saveDossier()" icon="pi pi-fw pi-check"></button>
+          <button pButton pRipple class="p-button-danger flex-1 p-button-outlined" label="Annuler" (click)="cancelDossier()" icon="pi pi-fw pi-times"></button>
+        </ng-template>
+      </p-dialog>
+
     </p-tabPanel>
+
+
+
+<!-- Mobilite -->
     <p-tabPanel header="Mobilite">
-      @if(personnel){
-        <mrt-affectation
-          [personnel]="personnel"
-        ></mrt-affectation>
-      } @else {
-        loading...
-      }
+      <div>
+        <button pButton=""
+                pRipple=""
+                label="Affectation"
+                icon="pi pi-plus"
+                class="p-element p-ripple p-button-outlined p-button-primary p-button p-component m-3"
+                (click)="showMobiliteForm()"
+        >
+        </button>
+        <p-card>
+          <p-table
+            [columns]="colsMobilite"
+            [value]="listAffections$"
+            #dt1
+            dataKey="id"
+            [rows]="5"
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate="Page {currentPage} sur {totalPages}"
+            [paginator]="true"
+            styleClass="p-datatable-gridlines p-datatable-striped"
+            responsiveLayout="scroll"
+            [rowHover]="true"
+            [rowsPerPageOptions]="[5,10]"
+            tableStyleClass="p-datatable-gridlines"
+          >
+            <ng-template let-columns pTemplate="header">
+              <tr>
+                @for (col of columns; track col.field) {
+                  <th
+                    style="min-width: 15rem"
+                    [pSortableColumn]="col.field"
+                    class="font-weight-bold"
+                  >
+                    {{ col.header }}
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                  </th>
+                }
+                <th></th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-mobilite>
+              <tr>
+                <td>{{mobilite.personnel.matricule}}</td>
+                <td>{{mobilite.personnel.nomPrenom}}</td>
+                <td>{{mobilite.nature}}</td>
+                <td>{{mobilite.dren}}</td>
+                <td>{{mobilite.localite}}</td>
+                <td>{{mobilite.moughataa}}</td>
+                <td>{{mobilite.serviceEcole}}</td>
+                <td>{{mobilite.notePedagogiq}}</td>
+                <td>{{mobilite.dateEffet |date}}</td>
+                <td>
+                  <!--          Bouton qui fait la validation de l'avancement  -->
+                  <button
+                    pButton
+                    type="button"
+                    pTooltip="Valider"
+                    tooltipPosition="top"
+                    pRipple
+                    icon="pi pi-check-circle"
+                    class="p-button-rounded p-button-warning mx-2"
+                    iconPos="left"
+                  ></button>
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+              <tr>
+                <td colspan="8">Aucun élement .</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </p-card>
+      </div>
+
+      <!--  Formulaire Affectation -->
+      <p-dialog
+        [(visible)]="showMobiliteDialog"
+        [style]="{ width: '40vw'}"
+        header="Affectation Formulaire"
+        (onHide)="cancelMobilite()"
+        [modal]="true"
+        [draggable]="false"
+        [resizable]="false"
+        styleClass="p-fluid"
+      >
+        <ng-template pTemplate="content">
+
+          <div class="container py-5">
+            <form [formGroup]="affectionForm" >
+             <span class="text-sm">
+                Champs obligatoires:
+                <span class="text-red-500">*</span>
+              </span>
+              <!--Matricule-->
+              <div class="field mt-4">
+                <label for="matriculeMobilite">Matricule</label>
+                <input
+                  type="text"
+                  pInputText
+                  id="matriculeMobilite"
+                  [value]="personnel.matricule"
+                  required
+                  disabled/>
+              </div>
+
+              <!--Nom Prenom-->
+              <div class="field">
+                <label for="fullNameMobilite">Nom Prenom</label>
+                <input
+                  type="text"
+                  pInputText
+                  id="fullNameMobilite"
+                  [value]="personnel.nomPrenom"
+                  required
+                  disabled/>
+              </div>
+
+              <!--        Localite-->
+              <div class="field">
+                <label for="localite">Localite <span class="text-red-500">*</span></label>
+                <p-dropdown
+                  id="localite"
+                  [options]="listLocalite$"
+                  optionLabel="libLocalite"
+                  [filter]="true"
+                  optionValue="libLocalite"
+                  filterBy="libLocalite"
+                  formControlName="localite"
+                  placeholder="Selectionner la localite"
+                >
+                </p-dropdown>
+              </div>
+
+              <!--        Service ecole -->
+<!--              <div class="field">-->
+<!--                <label for="ecole">Ecole <span class="text-red-500">*</span></label>-->
+<!--                <p-dropdown-->
+<!--                  id="ecole"-->
+<!--                  formControlName="serviceEcole"-->
+<!--                  placeholder="Selectionner l'ecole"-->
+<!--                >-->
+<!--                </p-dropdown>-->
+<!--              </div>-->
+
+              <!--        nature -->
+              <div class="field">
+                <label for="raison">Nature <span class="text-red-500">*</span></label>
+                <p-dropdown
+                  [options]="nature"
+                  id="raison"
+                  formControlName="nature"
+                  placeholder="Selectionner la raison"
+                >
+                </p-dropdown>
+              </div>
+
+              <!--        dren -->
+              <div class="field">
+                <label for="dren">DREN <span class="text-red-500">*</span></label>
+                <p-dropdown
+                  id="dren"
+                  [options]="listLocalite$"
+                  optionLabel="ddren"
+                  [filter]="true"
+                  optionValue="ddren"
+                  filterBy="ddren"
+                  formControlName="dren"
+                  placeholder="Selectionner le dren"
+                >
+                </p-dropdown>
+              </div>
+
+              <!--        moughataa -->
+<!--              <div class="field">-->
+<!--                <label for="moughataa">Moughataa </label>-->
+<!--                <input-->
+<!--                  type="text"-->
+<!--                  pInputText-->
+<!--                  formControlName="moughataa"-->
+<!--                  id="moughataa"-->
+<!--                  required-->
+<!--                />-->
+<!--              </div>-->
+
+              <!--        note pedagogique -->
+              <div class="field">
+                <label for="notePedagogiq">Note pedagogique </label>
+                <input
+                  type="number"
+                  pInputText
+                  formControlName="notePedagogiq"
+                  id="notePedagogiq"
+                  required
+                />
+              </div>
+
+              <!--        date effet -->
+              <div class="field">
+                <label for="dateeffet"> Date Effet </label>
+                <p-calendar
+                  [dateFormat]="'yy-mm-dd'"
+                  id="dateeffet"
+                  [readonlyInput]="true"
+                  styleClass="mb-1"
+                />
+              </div>
+            </form>
+          </div>
+
+        </ng-template>
+
+        <ng-template pTemplate="footer">
+          <button pButton pRipple class="p-button-primary flex-1" label="Enregistrer" (click)="save()" icon="pi pi-fw pi-check"></button>
+          <button pButton pRipple class="p-button-danger flex-1 p-button-outlined" label="Annuler" (click)="cancelMobilite()" icon="pi pi-fw pi-times"></button>
+        </ng-template>
+      </p-dialog>
+
     </p-tabPanel>
+
+
   </p-tabView>
 </p-card>

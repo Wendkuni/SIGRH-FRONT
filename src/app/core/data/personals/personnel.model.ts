@@ -20,7 +20,6 @@ export let personnelColonneTable : Cols[] = [
   {field: 'codeBank', header: 'Code banque'},
   {field: 'numroCpte', header: 'Numéro compte'},
   {field: 'cleRib', header: 'Clé rib'},
-  {field: 'dteSortie', header: 'Date Sortie'},
   {field: 'detacher', header: 'Détacher'},
   {field: 'ministerOrigine', header: 'Ministère origine'},
   {field: 'typeeducation', header: 'Type éducation'},
@@ -60,8 +59,11 @@ export interface Personnel{
 
 export type Personnels = Personnel[];
 
-export interface TypeEducation{
-  label: string;
+export enum TypeEducation {
+  AUCUN = "AUCUN",
+  SCOLAIRE = "SCOLAIRE",
+  FORMATION = "FORMATION",
+  PROFESSIONNEL = "PROFESSIONNEL"
 }
 
 export interface UploadEvent {

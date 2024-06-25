@@ -33,7 +33,7 @@ export class AppMenuComponent implements OnInit {
                 label: 'Pages de Gestion',
                 items: [
                     {
-                        label: 'Recrutement-Mobilité-Carrière',
+                        label: 'Récrutement-Mobilité-Carrière',
                         icon: 'pi pi-fw pi-user',
                         items: [
                           {
@@ -61,7 +61,7 @@ export class AppMenuComponent implements OnInit {
                       ]
                     },
                     {
-                        label: 'Sanctions-Recompenses',
+                        label: 'Sanctions-Récompenses',
                         icon: 'pi pi-fw pi-wallet',
                       items: [
                         {
@@ -86,7 +86,7 @@ export class AppMenuComponent implements OnInit {
                       ]
                     },
                     {
-                        label: 'Remuneration',
+                        label: 'Rémuneration',
                         icon: 'pi pi-fw pi-dollar',
                       items: [
                         {
@@ -100,7 +100,7 @@ export class AppMenuComponent implements OnInit {
                       ]
                     },
                     {
-                        label: 'Affaires Sociales-Assurances',
+                        label: 'Affaires Sociales et Assurances',
                         icon: 'pi pi-fw pi-shield',
                       items: [
                         {
@@ -134,7 +134,7 @@ export class AppMenuComponent implements OnInit {
               icon: 'pi pi-fw pi-users'
             },
             {
-              label: 'Fonction-list',
+              label: 'Liste Fonctions',
               icon: 'pi pi-fw pi-user',
               routerLink: ['fonction-list']
             }

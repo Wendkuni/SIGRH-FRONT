@@ -17,16 +17,26 @@ export class DossierService {
 
   // get all dossiers
   getAllDossiers(){
-    return this.http.get<Dossiers>(`${this.apiUrl}/dossiers`);
+    return this.http.get<any>(`${this.apiUrl}/dossiers`);
   }
 
   //add dossier
-  addDossier(dossier: Dossier){
-    return this.http.post(`${this.apiUrl}/dossier`, dossier);
+  addDossier(imagePers: File,dossier: Dossier){
+    const formData = new FormData();
+    formData.append('image', imagePers);
+    formData.append('dossier', JSON.stringify(dossier));
+    return this.http.post(`${this.apiUrl}/dossier/create`, formData, {
+      reportProgress: true,
+      responseType: 'text'
+    });
   }
 
-  findPersonnelById(id: number){
+  findDossierById(id: number){
     return this.http.get(`${this.apiUrl}/dossiersBy/${id}`)
+  }
+
+  findDossierByAgent(id: number){
+    return this.http.get<Dossiers>(`${this.apiUrl}/dossier/ByAgent/${id}`);
   }
 
   //update dossier

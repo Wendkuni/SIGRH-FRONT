@@ -27,21 +27,16 @@ export interface Fonction {
   // Libellé de la fonction en arabe
   libelleFonctionArab: string;
   // Indice de la fonction
-  indice: string;
+  indixe: string;
 }
 
 export type Fonctions = Fonction[];
 
 export let fonctionColonneTable: Cols[] = [
-  { field: 'libelleFonction', header: 'Fonction' },
-  {field: 'libelleFonctionArab',header: 'Fonction Arab'},
-  { field: 'dateDebFonction', header: 'Date Effect' },
+  { field: 'libelleFonction', header: 'Fonction'},
+  { field: 'dateDebFonction', header: 'Date debut Fonction' },
   { field: 'categorie', header: 'Categorie'},
-  { field: 'corps', header: 'Corps' },
-  { field: 'corpsArab', header: 'Corps Arab'},
   { field: 'grade', header: 'Grade' },
-  { field: 'groupe', header: 'Groupe'},
   { field: 'echelle', header: "Echelle"},
-  { field: 'echelon', header: "Echelon"},
-  { field: 'indice', header: "Indice"}
+  { field: 'echelon', header: "Echelon"}
 ];

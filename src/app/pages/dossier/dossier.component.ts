@@ -67,7 +67,7 @@ export class DossierComponent implements OnInit{
   personnelService = inject(PersonnelService);
 
   // fichier dossier
-  imageFold!: File[];
+  imageFold!: any;
 
   //form groupe
   dossierForm: FormGroup = this.fb.group({
@@ -102,7 +102,7 @@ export class DossierComponent implements OnInit{
 
   saveDossier(){
     const data = this.getData();
-    data.imageFold = this.imageFold;
+    data.idAgent = this.personnel.idAgent;
     if(this.action === 'Add'){
       this.createDossier(data);
     }
@@ -121,13 +121,14 @@ export class DossierComponent implements OnInit{
   }
 
   private getAllDossiers() {
-    this.dossierService.getAllDossiers().subscribe((response:Dossier[]) => {
+    this.dossierService.findDossierByAgent(this.personnel.idAgent).subscribe((response:Dossier[]) => {
       return this.lisDossiers$ = response;
     });
   }
 
   private createDossier(dossier: Dossier) {
-    this.dossierService.addDossier(dossier).subscribe(() =>{
+    dossier.idDossierScan = this.personnel.idAgent + 1;
+    this.dossierService.addDossier(this.imageFold,dossier).subscribe(() =>{
       this.getAllDossiers();
       this.showDialog = false;
       this.dossierForm.reset();
@@ -141,7 +142,7 @@ export class DossierComponent implements OnInit{
 
   updateDossier(dossier: Dossier){
     dossier.idDossierScan = this.selectedDossier.idDossierScan;
-    dossier.personnel = this.personnel;
+    dossier.idAgent = this.personnel.idAgent;
     this.dossierService.updateDossier(dossier).subscribe(() => {
         this.getAllDossiers();
         this.showDialog = false;
@@ -154,8 +155,8 @@ export class DossierComponent implements OnInit{
       });
   }
 
-  onUpload(event: FileUploadEvent) {
-    this.imageFold = event.files;
+  onSelectedFiles(event:any) {
+    this.imageFold = event.currentFiles[0];
   }
 
 }

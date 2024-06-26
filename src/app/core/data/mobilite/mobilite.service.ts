@@ -45,4 +45,9 @@ export class MobiliteService {
     return this.http.delete(`${this.url}/${mobilite.id}`);
   }
 
+
+  getAllDren(){
+    return this.http.get<any>(`${this.url}/AllDdren`, this.httpOptions)
+  }
+
 }

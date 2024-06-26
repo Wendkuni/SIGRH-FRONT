@@ -87,12 +87,12 @@ export class PersonnelDetailsComponent implements OnInit {
 
     // Initialisation du formulaire
     this.fonctionAgentForm = this.fb.group({
-      libelleFonction: this.fb.control('', [Validators.required]),
+      libelleFonction: this.fb.control('', ),
       // corps: this.fb.control('', [Validators.required]),
-      grade: this.fb.control('', [Validators.required]),
-      echelle: this.fb.control('', [Validators.required]),
-      echelon: this.fb.control('', [Validators.required]),
-      dateDebFonction: this.fb.control('', [Validators.required]),
+      grade: this.fb.control('', ),
+      echelle: this.fb.control('', ),
+      echelon: this.fb.control('', ),
+      dateDebFonction: this.fb.control('', ),
       categorie: this.fb.control('', [Validators.required]),
       // groupe: this.fb.control('', [Validators.required]),
       // corpsArab: this.fb.control('', [Validators.required]),
@@ -103,6 +103,12 @@ export class PersonnelDetailsComponent implements OnInit {
 
     this.getFonctions();
     this.getLocalite();
+    this.getAllLibFonction();
+    this.getAllEchelle();
+    this.getAllEchelon();
+    this.getAllGrade();
+    this.getAllDren();
+    this.getAllAffectationNature();
   }
 
   // Methode pour afficher le formulaire d'ajout
@@ -195,7 +201,7 @@ export class PersonnelDetailsComponent implements OnInit {
   }
 
   private createDossier(dossier: Dossier) {
-    dossier.idDossierScan = this.personnel.idAgent + 1;
+    dossier.idDossierScan = Math.floor(Math.random() * 6) + 1;
     this.dossierService.addDossier(this.imageFold, dossier).subscribe(() => {
         this.getAllDossiers(this.id);
         this.showDossierDialog = false;
@@ -223,6 +229,7 @@ export class PersonnelDetailsComponent implements OnInit {
 
   onSelectedFiles(event:any) {
     this.imageFold = event.currentFiles[0];
+    console.log(this.imageFold);
   }
 
   cancelDossier(){
@@ -257,20 +264,28 @@ export class PersonnelDetailsComponent implements OnInit {
 
   // categorie de la fonction
   categorie = [
-    'Integration',
+    'Intégration',
     'Titularisation',
-    'Nominative',
+    'Nomination',
     'Avancement',
     'Bonification',
     'Reclassement',
     'Sanction',
-    'Decoration',
+    'Décoration',
     'Demission',
     'Retraite',
-    'Deces'
+    'Deces',
+    'Mettre à disposition',
+    'Évaluer',
+    'Mettre en position de détachement',
+    'Mettre en position de stage'
   ];
 
   listFonctions: FonctionLists = [] as FonctionLists;
+  listLibFonction!: any;
+  listEchelle!: any;
+  listEchellon!:any;
+  listGrade!:any;
 
 
   // Recuperer la liste des avancements du personnel selectionner
@@ -360,7 +375,29 @@ export class PersonnelDetailsComponent implements OnInit {
       });
   }
 
+  private getAllLibFonction(){
+    this.avancementService.getLibFonction().subscribe(response => {
+      this.listLibFonction = response.result
+    })
+  }
 
+  private getAllEchelle(){
+    this.avancementService.getListEchelle().subscribe(response => {
+      this.listEchelle = response.result
+    })
+  }
+
+  private getAllEchelon(){
+    this.avancementService.getListEchelon().subscribe(response => {
+      this.listEchellon = response.result
+    })
+  }
+
+  private getAllGrade(){
+    this.avancementService.getListGrade().subscribe(response => {
+      this.listGrade = response.result
+    })
+  }
 
 
 
@@ -394,10 +431,8 @@ export class PersonnelDetailsComponent implements OnInit {
     { field: 'notepedagogique', header: 'Note Pedagogique' },
     {field: 'dateEffet', header: 'Date Effet'}
   ];
-  nature = [
-    'PERSONNEL', 'NECESSITE',' NOMINATION',' PERMUTATION'
-  ];
-  listLocalite: any;
+  listNatureAffectation!:any;
+  listDren!:any;
   listLocalite$!: any;
   listMobiliteByAgent!: any;
 
@@ -426,6 +461,8 @@ export class PersonnelDetailsComponent implements OnInit {
   }
 
   private addAffection(mobilite: Mobilite) {
+    mobilite.idAffectation = Math.floor(Math.random() * 6) + 1;
+    console.log(mobilite.idAffectation)
     this.mobiliteService.addMobilite(mobilite).subscribe(() => {
       this.getAllAffections();
       this.showMobiliteDialog = false;
@@ -440,6 +477,12 @@ export class PersonnelDetailsComponent implements OnInit {
     this.mobiliteService.getLocalite().subscribe((response) => {
       this.listLocalite$ = response;
     });
+  }
+
+  private getAllDren(){
+    this.mobiliteService.getAllDren().subscribe(response => {
+      this.listDren = response.result
+    })
   }
 
   getDataMobilite(): Mobilite {
@@ -464,7 +507,6 @@ export class PersonnelDetailsComponent implements OnInit {
   private getAffectationByIdAgent(id:number) {
     this.mobiliteService.findMobiliteByAgent(id).subscribe((response) => {
       this.listMobiliteByAgent = response;
-      console.log(this.listMobiliteByAgent);
     });
   }
 
@@ -479,6 +521,12 @@ export class PersonnelDetailsComponent implements OnInit {
       this.messageService.add({severity: 'error', summary: 'Error', detail: 'Affectation du personnel non Modifier', life: 3000});
     });
   }
+
+ private getAllAffectationNature(){
+    this.mobiliteService.getAllAffectationNature().subscribe(response => {
+      this.listNatureAffectation = response.result
+    })
+ }
 
   // Methode pour fermer la vue du formulaire
   cancelMobilite() {

@@ -1,0 +1,38 @@
+.profile {
+  padding: 0px 0px 0px 0px;
+}
+.profile-ancien {
+  background: linear-gradient(to right, rgba(94, 172, 95, 0.92), #ffffff);
+}
+.profile-name {
+  line-height: 24px;
+  padding: 20px;
+}
+.profile-image {
+  margin-top: -18px;
+  clip-path: polygon(0 9%, 100% 0, 100% 94%, 0% 100%);
+  background-color: #fff;
+  height: 360px;
+}
+figure {
+  overflow: hidden;
+  margin-bottom: 0;
+  margin: 0 0 1rem;
+}
+.circle-image {
+  text-align: center;
+  margin: 0 auto;
+  top: 14%;
+  position: relative;
+  padding: 0px 28px;
+}
+
+
+.news .article .news-img-wrap {
+  float: left;
+  margin: 0px 0px 0px 0px;
+  background: #fff;
+}
+
+
+

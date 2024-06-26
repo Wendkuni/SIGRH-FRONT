@@ -55,4 +55,12 @@ export class AffectationService {
   getLocalite() {
     return this.http.get<any>(`${this.apiUrl}/localites`);
   }
+
+  getAllDren(){
+    return this.http.get<any>(`${this.apiUrl}/AllDdren`, this.httpOptions)
+  }
+
+  getAllAffectationNature(){
+    return this.http.get<any>(`${this.apiUrl}/TypeNature`, this.httpOptions)
+  }
 }

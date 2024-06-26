@@ -68,6 +68,7 @@ export class PersonnelService {
     const formData = new FormData();
     formData.append('image',imagePers);
     formData.append('personnel',JSON.stringify(personnel));
+    console.log(formData)
     const headers = new HttpHeaders({
       'Content-Type': 'multipart/form-data'
     });
@@ -94,5 +95,7 @@ export class PersonnelService {
   deletePersonnel(personnel: Personnel){
     return this.http.delete(`${this.apiUrl}/personnel/delete/${personnel.idAgent}`,this.httpOptions);
   }
+
+
 
 }

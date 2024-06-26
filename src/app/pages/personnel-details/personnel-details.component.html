@@ -5,6 +5,10 @@
   [hideTransitionOptions]="'1000ms'"
   [showTransformOptions]="'translateX(100%)'" />
 
+<div class="text-700 text-center">
+  <div class="text-900 font-bold text-4xl mb-3">Carrière-Mobilité-Dossier</div>
+</div>
+
 <p-card  styleClass="mb-5">
 
   <!-- Entete presentation personnel-->
@@ -76,7 +80,7 @@
 
                 <!--          Categorie -->
                 <div class="field">
-                  <label for="nature" class="font-medium text-900">Nature <span class="text-red-500">*</span></label>
+                  <label for="nature" class="font-medium text-900">Categorie <span class="text-red-500">*</span></label>
                   <p-dropdown
                     id="nature"
                     formControlName="categorie"
@@ -90,7 +94,7 @@
 
                 <!--          Date debut function -->
                 <div class="field">
-                  <label for="dateDebFonction" class="font-medium text-900"> Date Effet <span class="text-red-500">*</span></label>
+                  <label for="dateDebFonction" class="font-medium text-900"> Date <span class="text-red-500">*</span></label>
                   <p-calendar
                     id="dateDebFonction"
                     formControlName="dateDebFonction"
@@ -108,7 +112,7 @@
 
 
               <div class="border-1 surface-border border-round p-fluid m-2">
-                <span class="text-900 font-bold block  border-bottom-1 surface-border p-3">INCIDENCE, GRADE, ECHELLE ET ECHELLON</span>
+                <span class="text-900 font-bold block  border-bottom-1 surface-border p-3"> GRADE, ECHELLE ET ECHELLON</span>
                 <div class="p-3">
 
                   <!--            Indice -->
@@ -133,76 +137,62 @@
 <!--                                         [formGroup]="fonctionAgentForm"></mrt-form-validators>-->
 <!--                  </div>-->
 
-                  <!--            Fonction -->
-                  <div class="field">
-                    <label for="fonction" class="font-medium text-900">Fonction <span class="text-red-500">*</span></label>
-                    <p-dropdown
-                      id="fonction"
-                      [options]="listFonctions"
-                      optionLabel="libelleFonction"
-                      [filter]="true"
-                      optionValue="libelleFonction"
-                      filterBy="libelleFonction"
-                      placeholder="Selectionner la fonction"
-                      formControlName="libelleFonction"
-                    >
-                    </p-dropdown>
-                    <mrt-form-validators [entityField]="'libelleFonction'"
-                                         [formGroup]="fonctionAgentForm"></mrt-form-validators>
-                  </div>
-
                   <!--            grade -->
                   <div class="field">
-                    <label for="grade" class="font-medium text-900">Grade <span class="text-red-500">*</span></label>
+                    <label for="grade" class="font-medium text-900">Grade </label>
                     <p-dropdown
                       id="grade"
-                      [options]="listFonctions "
-                      optionLabel="grade"
-                      [filter]="true"
-                      filterBy="grade"
-                      optionValue="grade"
+                      [options]="listGrade "
                       placeholder="Selectionner la grade"
                       formControlName="grade"
                     >
                     </p-dropdown>
-                    <mrt-form-validators [entityField]="'grade'"
-                                         [formGroup]="fonctionAgentForm"></mrt-form-validators>
+<!--                    <mrt-form-validators [entityField]="'grade'"-->
+<!--                                         [formGroup]="fonctionAgentForm"></mrt-form-validators>-->
                   </div>
+
+                  <!--            Fonction -->
+                  <div class="field">
+                    <label for="fonction" class="font-medium text-900">Fonction </label>
+                    <p-dropdown
+                      id="fonction"
+                      [options]="listLibFonction"
+                      placeholder="Selectionner la fonction"
+                      formControlName="libelleFonction"
+                    >
+                    </p-dropdown>
+<!--                    <mrt-form-validators [entityField]="'libelleFonction'"-->
+<!--                                         [formGroup]="fonctionAgentForm"></mrt-form-validators>-->
+                  </div>
+
+
 
                   <!--            Echelle -->
                   <div class="field " >
-                    <label for="echelle" class="font-medium text-900">Echelle <span class="text-red-500">*</span></label>
+                    <label for="echelle" class="font-medium text-900">Echelle </label>
                     <p-dropdown
                       id="echelle"
-                      [options]="listFonctions "
-                      optionLabel="echelle"
-                      [filter]="true"
-                      filterBy="echelle"
-                      optionValue="echelle"
-                      placeholder="Selectionner l' echelle"
+                      [options]="listEchelle "
+                      placeholder="Selectionner l' échelle"
                       formControlName="echelle"
                     >
                     </p-dropdown>
-                    <mrt-form-validators [entityField]="'echelle'"
-                                         [formGroup]="fonctionAgentForm"></mrt-form-validators>
+<!--                    <mrt-form-validators [entityField]="'echelle'"-->
+<!--                                         [formGroup]="fonctionAgentForm"></mrt-form-validators>-->
                   </div>
 
                   <!--            Echelon-->
                   <div class="field ">
-                    <label for="echelon" class="font-medium text-900">Echelon <span class="text-red-500">*</span></label>
+                    <label for="echelon" class="font-medium text-900">Echelon </label>
                     <p-dropdown
                       id="echelon"
-                      [options]="listFonctions "
-                      optionLabel="echelon"
-                      [filter]="true"
-                      filterBy="echelon"
-                      optionValue="echelon"
-                      placeholder="Selectionner l' echelon"
+                      [options]="listEchellon "
+                      placeholder="Selectionner l' échelon"
                       formControlName="echelon"
                     >
                     </p-dropdown>
-                    <mrt-form-validators [entityField]="'echelon'"
-                                         [formGroup]="fonctionAgentForm"></mrt-form-validators>
+<!--                    <mrt-form-validators [entityField]="'echelon'"-->
+<!--                                         [formGroup]="fonctionAgentForm"></mrt-form-validators>-->
                   </div>
                 </div>
               </div>
@@ -253,6 +243,7 @@
                   </th>
                 }
                 <th></th>
+                <th></th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-avancement>
@@ -290,6 +281,32 @@
 <!--                    iconPos="left"-->
 <!--                  ></button>-->
 <!--                </td>-->
+                <td>
+                  <!--          Bouton qui fait la validation de l'avancement  -->
+                  <button
+                    pButton
+                    type="button"
+                    pTooltip="Valider"
+                    tooltipPosition="top"
+                    pRipple
+                    icon="pi pi-check"
+                    class="p-button-rounded p-button-success mx-2"
+                    iconPos="left"
+                  ></button>
+                </td>
+                <td>
+                  <!--                  Rejeter un avancement -->
+                  <button
+                    pButton
+                    type="button"
+                    pTooltip="Rejeter"
+                    tooltipPosition="top"
+                    pRipple
+                    icon="pi pi-times"
+                    class="p-button-rounded p-button-danger mx-2"
+                    iconPos="left"
+                  ></button>
+                </td>
               </tr>
             </ng-template>
             <ng-template pTemplate="emptymessage">
@@ -354,8 +371,9 @@
               <td>{{ dossier.dateUpload  | date }}</td>
               <td>{{ dossier.observation }}</td>
               <td>
+                <div class="flex flex-column w-2 justify-content-between" style="row-gap: 1rem;"></div>
                 <img src="data:image/png;base64,{{dossier.imagFold}}" alt="{{dossier.imagFold}}"
-                     class="w-4rem h-4rem border-circle shadow-4">
+                     class="w-10rem  shadow-4">
               </td>
             </tr>
           </ng-template>
@@ -458,7 +476,7 @@
             </div>
             <!--    Image upload-->
             <div class="field">
-              <label class="font-medium text-900" for="dossierScan">Dossier <span class="text-red-500">*(.pdf, .jpg, .jpeg, .png)</span></label>
+              <label class="font-medium text-900" for="dossierScan">Dossier <span class="text-red-500">* (.jpg, .png)</span></label>
               <p-fileUpload
                 mode="basic"
                 id="dossierScan"
@@ -484,7 +502,7 @@
 
 
 <!-- Mobilite -->
-    <p-tabPanel header="Mobilite">
+    <p-tabPanel header="Mobilité">
       <div>
         <button pButton=""
                 pRipple=""
@@ -497,7 +515,7 @@
         <p-card>
           <p-table
             [columns]="colsMobilite"
-            [value]="listAffections$"
+            [value]="listMobiliteByAgent"
             #dt1
             dataKey="id"
             [rows]="5"
@@ -523,6 +541,7 @@
                   </th>
                 }
                 <th></th>
+                <th></th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-mobilite>
@@ -544,8 +563,21 @@
                     pTooltip="Valider"
                     tooltipPosition="top"
                     pRipple
-                    icon="pi pi-check-circle"
-                    class="p-button-rounded p-button-warning mx-2"
+                    icon="pi pi-check"
+                    class="p-button-rounded p-button-success mx-2"
+                    iconPos="left"
+                  ></button>
+                </td>
+                <td>
+<!--                  Rejeter un avancement -->
+                  <button
+                    pButton
+                    type="button"
+                    pTooltip="Rejeter"
+                    tooltipPosition="top"
+                    pRipple
+                    icon="pi pi-times"
+                    class="p-button-rounded p-button-danger mx-2"
                     iconPos="left"
                   ></button>
                 </td>
@@ -634,7 +666,7 @@
               <div class="field">
                 <label for="raison">Nature <span class="text-red-500">*</span></label>
                 <p-dropdown
-                  [options]="nature"
+                  [options]="listNatureAffectation"
                   id="raison"
                   formControlName="nature"
                   placeholder="Selectionner la raison"
@@ -647,11 +679,7 @@
                 <label for="dren">DREN <span class="text-red-500">*</span></label>
                 <p-dropdown
                   id="dren"
-                  [options]="listLocalite$"
-                  optionLabel="ddren"
-                  [filter]="true"
-                  optionValue="ddren"
-                  filterBy="ddren"
+                  [options]="listDren"
                   formControlName="dren"
                   placeholder="Selectionner le dren"
                 >
@@ -688,6 +716,7 @@
                 <p-calendar
                   [dateFormat]="'yy-mm-dd'"
                   id="dateeffet"
+                  formControlName="dateEffet"
                   [readonlyInput]="true"
                   styleClass="mb-1"
                 />

@@ -41,6 +41,9 @@ export class AppMenuComponent implements OnInit {
                             routerLink: ['/personnel']
                           },
                           {
+                            label: 'Traitement en attente',
+                          },
+                          {
                             label: 'Etats',
                             routerLink: ['/etats-personnel']
                           }
@@ -55,6 +58,9 @@ export class AppMenuComponent implements OnInit {
                           routerLink: ['/conge-absence']
                         },
                         {
+                          label: 'Traitement en attente',
+                        },
+                        {
                           label: 'Etats',
                           routerLink: ['/etats-absence']
                         }
@@ -66,7 +72,9 @@ export class AppMenuComponent implements OnInit {
                       items: [
                         {
                           label: 'Enregistrements',
-                          routerLink: ['/personnel']
+                        },
+                        {
+                          label: 'Traitement en attente',
                         },
                         {
                           label: 'Etats'

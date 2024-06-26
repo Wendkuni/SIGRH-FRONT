@@ -40,7 +40,7 @@ export class AvancementService {
 
   // get all avancement by personnel
   findAvancementByAgent(id: number){
-    return this.http.get<any>(`${this.url}/fonctionAgent/agent/${id}`, this.httpOptions);
+    return this.http.get<any>(`${this.url}/fonctionAgent/ByAgent/${id}`, this.httpOptions);
   }
 
   findAvancementById(id: number){
@@ -51,4 +51,24 @@ export class AvancementService {
   delateAvancement(id: number){
     return this.http.delete(`${this.url}/fonctionAgent/delete/${id}`, this.httpOptions);
   }
+
+  //liste fonction
+  getLibFonction(){
+    return this.http.get<any>( `${this.url}/AllLibFonction`,this.httpOptions)
+  }
+
+  getListGrade(){
+    return this.http.get<any>(`${this.url}/ListeGrade`, this.httpOptions)
+  }
+
+  getListEchelon(){
+    return this.http.get<any>(`${this.url}/ListeEchelon`,this.httpOptions)
+  }
+
+  getListEchelle(){
+    return this.http.get<any>(`${this.url}/ListeEchelle`,this.httpOptions)
+  }
+
+
+
 }

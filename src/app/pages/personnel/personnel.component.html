@@ -6,27 +6,32 @@
   [showTransformOptions]="'translateX(100%)'" />
 <p-confirmDialog />
 
+
+  <div class="text-700 text-center">
+    <div class="text-900 font-bold text-4xl mb-3">Récrutement-Mobilité-Carrière</div>
+  </div>
+
+
 <!-- Toolbar start pour afficher les boutons des differentes actions realisable dans la gestion du personnels-->
 <p-card styleClass="mb-5">
   <p-toolbar>
-    <ng-template pTemplate="right">
-      <div class="my-2">
+    <div class="flex align-items-start col">
+      <div class="m-3">
+        <h4>Fiche personnelle</h4>
+      </div>
+      <div class="m-2">
         <!--        Button d'ajout d'un personnel-->
         <button
           pButton
           pRipple
-          label="Ajouter"
+          label="Ajouter Agent"
           icon="pi pi-plus"
           class="p-element p-ripple p-button-outlined p-button-primary p-button p-component mr-2"
           (click)="openNew()"
         ></button>
       </div>
-    </ng-template>
-    <ng-template pTemplate="left">
-      <div class="my-2">
-        <h4>Fiche personnel</h4>
-      </div>
-    </ng-template>
+    </div>
+
   </p-toolbar>
 </p-card>
 
@@ -64,6 +69,7 @@
           <th
             [pSortableColumn]="col.field"
             class="font-weight-bold "
+            style="min-width: 13rem;"
           >
             {{ col.header }}
             @if(col.header != 'Photo'){
@@ -78,7 +84,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-personnel>
       <tr class="align-items-center align-content-center">
-        <td style=" min-width: 6rem;">
+        <td style=" width: 6rem;">
           @if (personnel.imagPers) {
             <img src="data:image/png;base64,{{personnel.imagPers}}" alt="{{personnel.nomPrenom}}"
                  class="w-4rem h-4rem border-circle shadow-4">
@@ -87,89 +93,93 @@
                  class="w-4rem h-4rem border-circle shadow-4">
           }
         </td>
-        <td style="min-width: 15rem;">
+        <td style="max-width: 20rem;">
           {{ personnel.nni }}
         </td>
         <td
-          style="min-width: 15rem">
+          style="max-width: 20rem;">
           {{ personnel.matricule }}
         </td>
         <td
-          style="min-width: 15rem">
+          style="max-width: 20rem;">
           {{ personnel.nomPrenom  | uppercase }}
         </td>
+<!--        <td-->
+<!--          style="min-width: 15rem">-->
+<!--          {{ personnel.nomPrenomArab  | uppercase }}-->
+<!--        </td>-->
         <td
-          style="min-width: 15rem">
-          {{ personnel.nomPrenomArab  | uppercase }}
-        </td>
-        <td
-          style="min-width: 15rem">
+          style="max-width: 20rem;">
           {{ personnel.tlphone }}
         </td>
         <td
-          style="min-width: 15rem">
+          style="max-width: 20rem;">
           {{ personnel.adressEmp  | uppercase }}
         </td>
-        <td
-          style="min-width: 15rem">
-          {{ personnel.lieuNaiss  | uppercase }}
-        </td>
-        <td
-          style="min-width: 15rem">
-          {{ personnel.dateNaiss | date: 'dd/MM/yyyy' }}
-        </td>
-        <td style="min-width: 15rem">
+<!--        <td-->
+<!--          style="min-width: 15rem">-->
+<!--          {{ personnel.lieuNaiss  | uppercase }}-->
+<!--        </td>-->
+<!--        <td-->
+<!--          style="min-width: 15rem">-->
+<!--          {{ personnel.dateNaiss | date: 'dd/MM/yyyy' }}-->
+<!--        </td>-->
+        <td style="max-width: 15rem">
           {{ personnel.dteRecrutement | date: 'dd/MM/yyyy' }}
         </td>
         <td
-          style="min-width: 15rem">
+          style="max-width: 15rem">
           {{ personnel.dteTitularisation | date: 'dd/MM/yyyy' }}
         </td>
-        <td style="min-width: 15rem">
-          {{ personnel.dteSortie | date: 'dd/MM/yyyy'}}
+<!--        <td style="min-width: 15rem">-->
+<!--          {{ personnel.dteSortie | date: 'dd/MM/yyyy'}}-->
+<!--        </td>-->
+<!--        <td-->
+<!--          style="min-width: 15rem">-->
+<!--          {{ personnel.debutCntrat | date: 'dd/MM/yyyy' }}-->
+<!--        </td>-->
+<!--        <td-->
+<!--          style="min-width: 15rem">-->
+<!--          {{ personnel.finCntrat | date: 'dd/MM/yyyy' }}-->
+<!--        </td>-->
+<!--        <td-->
+<!--          style="min-width: 15rem">-->
+<!--          {{ personnel.bank }}-->
+<!--        </td>-->
+<!--        <td-->
+<!--          style="min-width: 15rem">-->
+<!--          {{ personnel.codeBank }}-->
+<!--        </td>-->
+<!--        <td-->
+<!--          style="min-width: 15rem">-->
+<!--          {{ personnel.numroCpte }}-->
+<!--        </td>-->
+<!--        <td-->
+<!--          style="min-width: 15rem">-->
+<!--          {{ personnel.cleRib }}-->
+<!--        </td>-->
+        <td
+          style="max-width: 10rem">
+          Sexe
         </td>
         <td
-          style="min-width: 15rem">
-          {{ personnel.debutCntrat | date: 'dd/MM/yyyy' }}
-        </td>
-        <td
-          style="min-width: 15rem">
-          {{ personnel.finCntrat | date: 'dd/MM/yyyy' }}
-        </td>
-        <td
-          style="min-width: 15rem">
-          {{ personnel.bank }}
-        </td>
-        <td
-          style="min-width: 15rem">
-          {{ personnel.codeBank }}
-        </td>
-        <td
-          style="min-width: 15rem">
-          {{ personnel.numroCpte }}
-        </td>
-        <td
-          style="min-width: 15rem">
-          {{ personnel.cleRib }}
-        </td>
-        <td
-          style="min-width: 15rem">
+          style="max-width: 15rem">
           {{ personnel.detacher }}
         </td>
+<!--        <td-->
+<!--          style="min-width: 15rem">-->
+<!--          {{ personnel.ministerOrigine }}-->
+<!--        </td>-->
         <td
-          style="min-width: 15rem">
-          {{ personnel.ministerOrigine }}
-        </td>
-        <td
-          style="min-width: 15rem">
+          style="max-width: 15rem">
           {{ personnel.typeeducation  | uppercase }}
         </td>
         <td
-          style="min-width: 15rem">
+          style="max-width: 15rem">
           {{ personnel.statusEmp }}
         </td>
         <td
-          style="min-width: 15rem">
+          style="max-width: 1rem">
           @if(personnel.actifOrNot == true) {
             <span class="text-success">Actif</span>
           } @else {
@@ -222,7 +232,7 @@
     </ng-template>
     <ng-template pTemplate="emptymessage">
       <tr>
-        <td colspan="8">Aucun personnel trouvé(e).</td>
+        <td colspan="8">Aucun personnel trouvé.</td>
       </tr>
     </ng-template>
   </p-table>
@@ -247,7 +257,7 @@
             <!--          Informations personnels de l'agent-->
 
             <div class="flex justify-content-between border-bottom-1 surface-border p-3">
-              <span class="font-semibold text-color-secondary text-xl">Informations personnels</span>
+              <span class="font-semibold text-color-secondary text-xl">Informations personnelles</span>
               <span class="text-sm">
                 Champs obligatoires:
                 <span class="text-red-500">*</span>
@@ -258,7 +268,7 @@
 
               <!--              Nom Prenom-->
               <div class="field col-12 md:col-6">
-                <label for="nometprenom" class="font-medium text-900">Nom et Prenom <span class="text-red-500">*</span></label>
+                <label for="nometprenom" class="font-medium text-900">Nom et Prénom <span class="text-red-500">*</span></label>
                 <input id="nometprenom" pInputText class="w-full p-component p-element form-control mb-1" type="text"
                        formControlName="nomPrenom"/>
                 <mrt-form-validators
@@ -269,7 +279,7 @@
 
               <!--              Nom Prenom Arab-->
               <div class="field col-12 md:col-6">
-                <label for="nometprenomarab" class="font-medium text-900">Nom et Prenom Arab <span class="text-red-500">*</span></label>
+                <label for="nometprenomarab" class="font-medium text-900">Nom et Prénom Arab <span class="text-red-500">*</span></label>
                 <input id="nometprenomarab" pInputText class="w-full p-component p-element form-control mb-1" type="text"
                        formControlName="nomPrenomArab"/>
                 <mrt-form-validators
@@ -385,7 +395,7 @@
 
               <!--              Cle Rib-->
               <div class="field col-12 md:col-6">
-                <label for="cleRib"  class="font-medium text-900">Cle Rib <span class="text-red-500">*</span></label>
+                <label for="cleRib"  class="font-medium text-900">Clé rib <span class="text-red-500">*</span></label>
                 <input id="cleRib" pInputText class="w-full p-component p-element form-control mb-1" type="text"
                        formControlName="cleRib"/>
                 <mrt-form-validators
@@ -395,15 +405,20 @@
 
               <!--              Status Employe-->
               <div class="field col-12 md:col-6">
-                <label for="statusEmp" class="font-medium text-900">Status Employe </label>
-                <input id="statusEmp" pInputText class="w-full p-component p-element form-control mb-1" type="text"
-                       formControlName="statusEmp"/>
+                <label for="statusEmp" class="font-medium text-900">Statut employé</label>
+                <p-dropdown
+                  id="statusEmp"
+                  [options]="statut"
+                  placeholder="Selectionner le status"
+                  formControlName="statusEmp"
+                >
+                </p-dropdown>
               </div>
 
 
               <!--              Detacher    -->
               <div class="field col-12 md:col-6">
-                <label for="detacher" class="font-medium text-900">Detacher <span class="text-red-500">*</span></label>
+                <label for="detacher" class="font-medium text-900">Service <span class="text-red-500">*</span></label>
                 <input id="detacher" pInputText class="w-full p-component p-element form-control mb-1" type="text"
                        formControlName="detacher"/>
                 <mrt-form-validators
@@ -413,7 +428,7 @@
 
               <!--              Ministere d'origine-->
               <div class="field col-12 md:col-6">
-                <label for="ministereOrigine" class="font-medium text-900">Ministere d'origine </label>
+                <label for="ministereOrigine" class="font-medium text-900">Ministère d'origine </label>
                 <input pInputText id="ministereOrigine"
                        class="w-full p-component p-element form-control mb-1" type="text"
                        formControlName="ministerOrigine"/>
@@ -421,7 +436,7 @@
 
               <!--              Type Education -->
               <div class="field col-12 md:col-6">
-                <label for="typeEducation" class="font-medium text-900">Type Education </label>
+                <label for="typeEducation" class="font-medium text-900">Type éducation <span class="text-red-500">*</span></label>
                 <p-dropdown
                   id="typeEducation"
                   [options]="educationTypes"
@@ -429,11 +444,15 @@
                   placeholder="Choisir le type d'education"
                 >
                 </p-dropdown>
+                <mrt-form-validators
+                  [entityField]="'typeeducation'"
+                  [formGroup]="personnelForm"
+                />
               </div>
 
               <!--              Date recrutement -->
               <div class="field col-12 md:col-6">
-                <label for="dterecrutemnt" class="font-medium text-900">Date recrutement <span class="text-red-500">*</span></label>
+                <label for="dterecrutemnt" class="font-medium text-900">Date récrutement <span class="text-red-500">*</span></label>
                 <p-calendar
                   id="dterecrutemnt"
                   [dateFormat]="'yy-mm-dd'"
@@ -534,7 +553,7 @@
 
               <!--              Avatar -->
               <div class="field col-12">
-                <label class="font-medium text-900">Avatar</label>
+                <label class="font-medium text-900">Photo</label>
                 <p-fileUpload
                   mode="basic"
                   id="avatar"
@@ -542,7 +561,7 @@
                   [maxFileSize]="1000000"
                   (onSelect)="onSelectedFiles($event)"
                   styleClass="p-button-outlined p-button-plain w-full"
-                  chooseLabel="Choisir une Image"></p-fileUpload>
+                  chooseLabel="Choisir une image"></p-fileUpload>
 
               </div>
             </div>

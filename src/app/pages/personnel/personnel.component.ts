@@ -92,6 +92,11 @@ export class PersonnelComponent implements OnInit{
   confirService = inject(ConfirmationService);
   educationTypes!: any;
   sanitizer = inject(DomSanitizer);
+  protected readonly statut =[
+    'Fonctionnaire',
+    'Contractuel',
+    'Prestataire'
+  ]
 
   ngOnInit(): void {
     this.personnelForm = this.fb.group({
@@ -121,7 +126,7 @@ export class PersonnelComponent implements OnInit{
       detacher: this.fb.control('',[Validators.required]),
 
       ministerOrigine: this.fb.control(''),
-      typeeducation: this.fb.control(''),
+      typeeducation: this.fb.control('',[Validators.required]),
       dteSortie: this.fb.control('')
     });
     this.getAllPersonnel();
@@ -177,6 +182,7 @@ export class PersonnelComponent implements OnInit{
         this.getAllPersonnel();
         this.formDialog = false;
         this.personnelForm.reset();
+        this.userFile = null;
         this.messageService.add({severity: 'success', summary: 'Successful', detail: 'Personnel Ajouter', life: 3000});
       },
         error => {
@@ -205,6 +211,7 @@ export class PersonnelComponent implements OnInit{
       this.getAllPersonnel();
       this.formDialog = false;
       this.personnelForm.reset();
+      this.userFile = null;
       this.messageService.add({severity: 'success', summary: 'Successful', detail: 'Personnel Modifier', life: 3000});
     },
       error => {
@@ -319,4 +326,6 @@ export class PersonnelComponent implements OnInit{
     const url = 'data:image/png;base64,' + fichierBase64;
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
+
+
 }

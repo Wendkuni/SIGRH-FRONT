@@ -15,10 +15,12 @@
                 <span class="text-red-500">*</span>
               </span>
 
-      <div class="p-fluid p-formgrid grid mt-2">
+      <div class="border-1 surface-border border-round p-fluid mb-4">
+        <span class="text-900 font-bold block border-bottom-1 surface-border p-3">Information relative à l'agent</span>
 
+      <div class="p-fluid p-formgrid grid m-2">
         <!--Matricule-->
-        <div class="field col-12 md:col-4">
+        <div class="field col-12 md:col-3">
           <label for="matriculeMobilite">Matricule</label>
           <input
             type="text"
@@ -29,7 +31,7 @@
         </div>
 
         <!-- Statuts d'employe -->
-        <div class="field col-12 md:col-4">
+        <div class="field col-12 md:col-3">
           <label for="statutsEmploye">Statuts d'employe</label>
           <input
             type="text"
@@ -40,7 +42,7 @@
         </div>
 
         <!-- Duree au poste -->
-        <div class="field col-12 md:col-4">
+        <div class="field col-12 md:col-3">
           <label for="dureePoste">Durée au poste</label>
           <input
             type="text"
@@ -51,7 +53,7 @@
         </div>
 
         <!--Nom Prenom-->
-        <div class="field col-12 md:col-4">
+        <div class="field col-12 md:col-3">
           <label for="fullNameMobilite">Nom Prénom</label>
           <input
             type="text"
@@ -60,7 +62,12 @@
             required
             disabled/>
         </div>
+        </div>
+      </div>
 
+      <div class="border-1 surface-border border-round p-fluid mb-4">
+        <span class="text-900 font-bold block border-bottom-1 surface-border p-3">Critères</span>
+        <div class="p-fluid p-formgrid grid m-2">
         <!--Sexe-->
         <div class="field col-12 md:col-4">
           <label for="sexe">Sexe</label>
@@ -71,7 +78,6 @@
           >
           </p-dropdown>
         </div>
-
         <!-- Nombre d'enfant -->
         <div class="field col-12 md:col-4">
           <label for="nbrEnfants">Nombre d'enfants</label>
@@ -82,7 +88,6 @@
             required
           />
         </div>
-
         <!-- Ancienneté générale -->
         <div class="field col-12 md:col-4">
           <label for="AnciennetéGenerale">Ancienneté générale</label>
@@ -93,7 +98,6 @@
             required
           />
         </div>
-
         <!-- Ancienneté poste -->
         <div class="field col-12 md:col-4">
           <label for="ancienetePost">Ancienneté poste</label>
@@ -104,7 +108,6 @@
             required
           />
         </div>
-
         <!-- Situation matrimoniale -->
         <div class="field col-12 md:col-4">
           <label for="situationMatrimonial">Situation matrimoniale</label>
@@ -115,7 +118,6 @@
             onLabel="Marié(e)"
             offLabel="Célibataire" />
         </div>
-
         <!-- Note administrative ou pédagogique -->
         <div class="field col-12 md:col-4">
           <label for="notePedagogiq">Note administrative ou pédagogique</label>
@@ -126,7 +128,6 @@
             required
           />
         </div>
-
         <!-- Situation sanitaire -->
         <div class="field col-12 md:col-4">
           <label for="situationSanitaire">Situation sanitaire</label>
@@ -137,7 +138,6 @@
             required
           />
         </div>
-
         <!-- Moughataa -->
         <div class="field col-12 md:col-4">
           <label for="moughataa">Moughataa </label>
@@ -148,7 +148,16 @@
             required
           />
         </div>
-
+          <!--        date effet -->
+          <div class="field col-12 md:col-4">
+            <label for="dateeffet"> Date Effet </label>
+            <p-calendar
+              [dateFormat]="'yy-mm-dd'"
+              id="dateeffet"
+              [readonlyInput]="true"
+              styleClass="mb-1"
+            />
+          </div>
         <!--        Localite-->
         <div class="field col-12 md:col-6">
           <label for="localite">Localite </label>
@@ -163,9 +172,8 @@
             display="chip"
             [showClear]="true" />
         </div>
-
         <!--        dren -->
-        <div class="field col-12 md:col-3">
+        <div class="field col-12 md:col-6">
           <label for="dren">DREN </label>
           <p-dropdown
             id="dren"
@@ -173,19 +181,12 @@
           >
           </p-dropdown>
         </div>
+      </div>
+      </div>
 
-
-        <!--        date effet -->
-        <div class="field col-12 md:col-3">
-          <label for="dateeffet"> Date Effet </label>
-          <p-calendar
-            [dateFormat]="'yy-mm-dd'"
-            id="dateeffet"
-            [readonlyInput]="true"
-            styleClass="mb-1"
-          />
-        </div>
-
+      <div class="border-1 surface-border border-round p-fluid mb-4">
+        <span class="text-900 font-bold block border-bottom-1 surface-border p-3">Pièces justificatives</span>
+      <div class="p-fluid p-formgrid grid m-2">
         <!--              Certificat de prise de service  -->
         <div class="field col-12 md:col-4">
           <label class="font-medium text-900">Certificat de prise de service</label>
@@ -211,7 +212,7 @@
 
         <!--              Demande  -->
         <div class="field col-12 md:col-4">
-          <label class="font-medium text-900">Demande</label>
+          <label class="font-medium text-900">Demande d'affectation</label>
           <p-fileUpload #fileUploader (onUpload)="onUploadDemande($event)" [customUpload]="true" (onSelect)="onUploadDemande($event)" accept=".png,.jpg"  [showUploadButton]="false" [showCancelButton]="false" [auto]="true" styleClass="border-1 surface-border surface-card p-0 border-round mb-4">
             <ng-template pTemplate="content">
               <div class="h-20rem m-1 border-round">
@@ -224,7 +225,7 @@
                 @if(imageDemande){
                   <div class="w-full h-full relative border-round p-0">
                     <img [src]="imageDemande.objectURL" class="w-full h-full border-round" alt="blog cover">
-                    <button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-primary text-sm absolute justify-content-center align-items-center" style="top: -10px; right: -10px;" (click)="$event.stopPropagation(); removeImageCertificatPriseService()"></button>
+                    <button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-primary text-sm absolute justify-content-center align-items-center" style="top: -10px; right: -10px;" (click)="$event.stopPropagation(); removeImageDemande()"></button>
                   </div>
                 }
               </div>
@@ -234,7 +235,7 @@
 
         <!--              Document d'integration ou recrutement  -->
         <div class="field col-12 md:col-4">
-          <label class="font-medium text-900">Document d'intégration ou de recrutement</label>
+          <label class="font-medium text-900">Intégration ou de recrutement</label>
           <p-fileUpload #fileUploaderDocumentIntegrationRecrutement (onUpload)="onUploadDocumentIntegrationRecrutement($event)" [customUpload]="true" (onSelect)="onUploadDocumentIntegrationRecrutement($event)" accept=".png,.jpg"  [showUploadButton]="false" [showCancelButton]="false" [auto]="true" styleClass="border-1 surface-border surface-card p-0 border-round mb-4">
             <ng-template pTemplate="content">
               <div class="h-20rem m-1 border-round">
@@ -257,7 +258,7 @@
 
 <!--        Pièces justificatives de la situation matrimoniale  -->
         <div class="field col-12 md:col-4">
-          <label class="font-medium text-900">Document sur la situation matrimoniale</label>
+          <label class="font-medium text-900">Situation matrimoniale</label>
           <p-fileUpload #fileUploaderSituationMatrimonial (onUpload)="onUploaderSituationMatrimonial($event)" [customUpload]="true" (onSelect)="onUploaderSituationMatrimonial($event)" accept=".png,.jpg"  [showUploadButton]="false" [showCancelButton]="false" [auto]="true" styleClass="border-1 surface-border surface-card p-0 border-round mb-4">
             <ng-template pTemplate="content">
               <div class="h-20rem m-1 border-round">
@@ -279,9 +280,8 @@
         </div>
 
         <!--        Pièces justificatives de la situation  sanitaire   -->
-
         <div class="field col-12 md:col-4">
-          <label class="font-medium text-900">Document sur la situation sanitaire</label>
+          <label class="font-medium text-900">Situation sanitaire</label>
           <p-fileUpload #fileUploaderSituationSanitaire (onUpload)="onUploaderSituationSanitaire($event)" [customUpload]="true" (onSelect)="onUploaderSituationSanitaire($event)" accept=".png,.jpg"  [showUploadButton]="false" [showCancelButton]="false" [auto]="true" styleClass="border-1 surface-border surface-card p-0 border-round mb-4">
             <ng-template pTemplate="content">
               <div class="h-20rem m-1 border-round">
@@ -301,7 +301,7 @@
             </ng-template>
           </p-fileUpload>
         </div>
-
+      </div>
       </div>
     </form>
   </div>

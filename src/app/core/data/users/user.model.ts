@@ -15,11 +15,14 @@ export interface Utilisateur {
     // Adresse e-mail de l'utilisateur
     email: string;
 
+    // Matricule
+  matricule: string;
+
     // Mot de passe de l'utilisateur
     password: string;
 
     // Rôle de l'utilisateur
-    role: string[];
+  roles: string[];
 }
 
 

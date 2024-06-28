@@ -32,106 +32,238 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Pages de Gestion',
                 items: [
-                    {
-                        label: 'Récrutement-Mobilité-Carrière',
-                        icon: 'pi pi-fw pi-user',
-                        items: [
-                          {
-                            label: 'Enregistrements',
-                            routerLink: ['/personnel']
-                          },
-                          {
-                            label: 'Traitement en attente',
-                          },
-                          {
-                            label: 'Etats',
-                            routerLink: ['/etats-personnel']
-                          }
-                        ]
-                    },
-                    {
-                        label: 'Congés et Absences',
-                        icon: 'pi pi-fw pi-calendar',
-                      items: [
-                        {
-                          label: 'Enregistrements',
-                          routerLink: ['/conge-absence']
-                        },
-                        {
-                          label: 'Traitement en attente',
-                        },
-                        {
-                          label: 'Etats',
-                          routerLink: ['/etats-absence']
-                        }
-                      ]
-                    },
-                    {
-                        label: 'Sanctions-Récompenses',
-                        icon: 'pi pi-fw pi-wallet',
-                      items: [
-                        {
-                          label: 'Enregistrements',
-                        },
-                        {
-                          label: 'Traitement en attente',
-                        },
-                        {
-                          label: 'Etats'
-                        }
-                      ]
-                    },
-                    {
-                        label: 'Formations',
-                        icon: 'pi pi-fw pi-briefcase',
-                      items: [
-                        {
-                          label: 'Enregistrements'
-                        },
-                        {
-                          label: 'Etats'
-                        }
-                      ]
-                    },
-                    {
-                        label: 'Rémuneration',
-                        icon: 'pi pi-fw pi-dollar',
-                      items: [
-                        {
-                          label: 'Enregistrements',
-                          routerLink: ['/remuneration']
-                        },
-                        {
-                          label: 'Etats',
-                          routerLink: ['/etats-remuneration']
-                        }
-                      ]
-                    },
-                    {
-                        label: 'Affaires Sociales et Assurances',
-                        icon: 'pi pi-fw pi-shield',
-                      items: [
-                        {
-                          label: 'Enregistrements',
-                          routerLink: ['/social-assurance']
-                        },
-                        {
-                          label: 'Etats'
-                        }
-                      ]
-                    },
-                    {
-                        label: 'Courriels',
-                        icon: 'pi pi-fw pi-at',
-                      items: [
-                        {
-                          label: 'Enregistrements'
-                        },
-                        {
-                          label: 'Etats'
-                        }
-                      ]
-                    },
+                  // Mobilite
+                  {
+                    label: 'MODULE 1: Gestion de Mobilité',
+                    icon: 'pi pi-fw pi-user',
+                    roles: ['Utilisateur','Administrateur','Dren','Grh'],
+                    items: [
+                      {
+                        label: 'Enregistrements',
+                        routerLink: ['/mobilite']
+                      },
+                      {
+                        label: 'Appréciations',
+                        roles: ['Utilisateur','Administrateur','Dren','Grh']
+                      },
+                      {
+                        label: 'Etats',
+                        roles: ['Administrateur','Grh']
+                      }
+                    ]
+                  },
+
+                  // Carriere
+                  {
+                    label: 'MODULE 2: Gestion de Carrière',
+                    icon: 'pi pi-fw pi-user',
+                    items: [
+                      {
+                        label: 'Enregistrements'
+                      },
+                      {
+                        label: 'Etats'
+                      }
+                    ]
+                  },
+
+                  // Recrutement
+                  {
+                    label: 'MODULE 3: Gestion de Récrutement',
+                    icon: 'pi pi-fw pi-user',
+                    items: [
+                      {
+                        label: 'Enregistrements'
+                      },
+                      {
+                        label: 'Etats'
+                      }
+                    ]
+                  },
+
+                  // Formation
+                  {
+                      label: 'MODULE 4: Gestion de Formations',
+                      icon: 'pi pi-fw pi-briefcase',
+                    items: [
+                      {
+                        label: 'Enregistrements'
+                      },
+                      {
+                        label: 'Etats'
+                      }
+                    ]
+                  },
+
+                    // Courriels
+                  {
+                    label: 'MODULE 5: Gestion de Courriels',
+                    icon: 'pi pi-fw pi-briefcase',
+                    items: [
+                      {
+                        label: 'Enregistrements'
+                      },
+                      {
+                        label: 'Etats'
+                      }
+                    ]
+                  },
+
+                    // Rémuneration
+                  {
+                    label: 'MODULE 6: Gestion de Rémuneration',
+                    icon: 'pi pi-fw pi-briefcase',
+                    items: [
+                      {
+                        label: 'Enregistrements'
+                      },
+                      {
+                        label: 'Etats'
+                      }
+                    ]
+                  },
+                  // Congés et Absences
+                  {
+                      label: 'MODULE 7: Gestion de Congés et Absences',
+                      icon: 'pi pi-fw pi-calendar',
+                    items: [
+                      {
+                        label: 'Enregistrements'
+                      },
+                      {
+                        label: 'Etats',
+                      }
+                    ]
+                  },
+
+                    // Affaires Sociales et Assurances
+                  {
+                      label: 'MODULE 8: Gestion de Affaires Sociales et Assurances',
+                      icon: 'pi pi-fw pi-shield',
+                    items: [
+                      {
+                        label: 'Enregistrements'
+                      },
+                      {
+                        label: 'Etats'
+                      }
+                    ]
+                  },
+
+                    // Sanctions-Récompenses
+                  {
+                      label: 'MODULE 9: Gestion de Sanctions-Récompenses',
+                      icon: 'pi pi-fw pi-wallet',
+                    items: [
+                      {
+                        label: 'Enregistrements',
+                      },
+                      {
+                        label: 'Etats'
+                      }
+                    ]
+                  },
+
+                    // {
+                    //     label: 'Récrutement-Mobilité-Carrière',
+                    //     icon: 'pi pi-fw pi-user',
+                    //     items: [
+                    //       {
+                    //         label: 'Enregistrements',
+                    //         routerLink: ['/personnel']
+                    //       },
+                    //       {
+                    //         label: 'Traitement en attente',
+                    //       },
+                    //       {
+                    //         label: 'Etats',
+                    //         routerLink: ['/etats-personnel']
+                    //       }
+                    //     ]
+                    // },
+                    // {
+                    //     label: 'Congés et Absences',
+                    //     icon: 'pi pi-fw pi-calendar',
+                    //   items: [
+                    //     {
+                    //       label: 'Enregistrements',
+                    //       routerLink: ['/conge-absence']
+                    //     },
+                    //     {
+                    //       label: 'Traitement en attente',
+                    //     },
+                    //     {
+                    //       label: 'Etats',
+                    //       routerLink: ['/etats-absence']
+                    //     }
+                    //   ]
+                    // },
+                    // {
+                    //     label: 'Sanctions-Récompenses',
+                    //     icon: 'pi pi-fw pi-wallet',
+                    //   items: [
+                    //     {
+                    //       label: 'Enregistrements',
+                    //     },
+                    //     {
+                    //       label: 'Traitement en attente',
+                    //     },
+                    //     {
+                    //       label: 'Etats'
+                    //     }
+                    //   ]
+                    // },
+                    // {
+                    //     label: 'Formations',
+                    //     icon: 'pi pi-fw pi-briefcase',
+                    //   items: [
+                    //     {
+                    //       label: 'Enregistrements'
+                    //     },
+                    //     {
+                    //       label: 'Etats'
+                    //     }
+                    //   ]
+                    // },
+                    // {
+                    //     label: 'Rémuneration',
+                    //     icon: 'pi pi-fw pi-dollar',
+                    //   items: [
+                    //     {
+                    //       label: 'Enregistrements',
+                    //       routerLink: ['/remuneration']
+                    //     },
+                    //     {
+                    //       label: 'Etats',
+                    //       routerLink: ['/etats-remuneration']
+                    //     }
+                    //   ]
+                    // },
+                    // {
+                    //     label: 'Affaires Sociales et Assurances',
+                    //     icon: 'pi pi-fw pi-shield',
+                    //   items: [
+                    //     {
+                    //       label: 'Enregistrements',
+                    //       routerLink: ['/social-assurance']
+                    //     },
+                    //     {
+                    //       label: 'Etats'
+                    //     }
+                    //   ]
+                    // },
+                    // {
+                    //     label: 'Courriels',
+                    //     icon: 'pi pi-fw pi-at',
+                    //   items: [
+                    //     {
+                    //       label: 'Enregistrements'
+                    //     },
+                    //     {
+                    //       label: 'Etats'
+                    //     }
+                    //   ]
+                    // },
                 ],
             },
         {

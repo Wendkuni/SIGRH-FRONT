@@ -10,6 +10,7 @@ import {DomHandler} from 'primeng/dom';
 import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {TooltipModule} from "primeng/tooltip";
 import {RippleModule} from "primeng/ripple";
+import {Utilisateur} from "../core/data/users/user.model";
 
 @Component({
   // eslint-disable-next-line
@@ -103,6 +104,12 @@ export class AppMenuitemComponent implements OnInit, OnDestroy {
 
     @ViewChild('submenu') submenu!: ElementRef;
 
+    activveItem!: any;
+
+  currentUser:Utilisateur= JSON.parse(localStorage.getItem('user') as string);
+
+  userRole!: string[];
+
     active = false;
 
     menuSourceSubscription: Subscription;
@@ -149,6 +156,9 @@ export class AppMenuitemComponent implements OnInit, OnDestroy {
         if (!(this.isSlimPlus || this.isSlim || this.isHorizontal) && this.item.routerLink) {
             this.updateActiveStateFromRoute();
         }
+        this.userRole = this.currentUser.roles;
+
+      this.getItemAuthFirstLevel();
     }
 
     ngAfterViewChecked() {
@@ -278,4 +288,9 @@ export class AppMenuitemComponent implements OnInit, OnDestroy {
             this.menuResetSubscription.unsubscribe();
         }
     }
+
+   getItemAuthFirstLevel() {
+
+   }
+
 }

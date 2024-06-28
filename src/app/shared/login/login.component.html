@@ -15,22 +15,22 @@
         <form  [formGroup]="loginForm" >
           <div class="mt-5 text-left">
             <label
-              for="email"
+              for="matricule"
               class="block text-900 text-xl  mb-2"
             >
-              Email
+              Matricule
             </label>
             <span>
               <input
-                id="email"
+                id="matricule"
                 type="text"
-                placeholder="Adresse email"
+                placeholder="Entrer votre matricule"
                 pInputText
                 class="w-full md:w-23rem mb-2"
                 style="padding:1rem"
-                formControlName="email"
+                formControlName="matricule"
               >
-            <mrt-form-validators [entityField]="'email'" [formGroup]="loginForm" />
+            <mrt-form-validators [entityField]="'matricule'" [formGroup]="loginForm" />
             </span>
 
             <label

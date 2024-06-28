@@ -43,7 +43,7 @@ export class LoginComponent {
   forgotPassFormVisible: boolean = false;
 
   loginForm =this.fb.group({
-    email: this.fb.control('',[Validators.required, Validators.email]),
+    matricule: this.fb.control('',[Validators.required]),
     password: this.fb.control('',[Validators.required]),
   });
 
@@ -56,12 +56,11 @@ export class LoginComponent {
   }
 
   handleLogin() {
-    const email:any = this.loginForm.value.email;
+    const matricule:any = this.loginForm.value.matricule;
     const passwd:any = this.loginForm.value.password;
     this.authService.getAllUsers().subscribe((users: Utilisateur[]) => {
-      const user = users.find((user) => user.email === email && user.password === passwd);
+      const user = users.find((user) => user.matricule === matricule && user.password === passwd);
       if(user != null){
-        console.log(user);
         localStorage.setItem('user', JSON.stringify(user));
         this.router.navigateByUrl("/home");
       }

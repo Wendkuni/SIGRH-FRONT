@@ -2,7 +2,7 @@ import {Component, inject} from '@angular/core';
 import { MessageService} from "primeng/api";
 import {LayoutService} from "../../layout/service/app.layout.service";
 import {AuthService} from "../../core/data/users/auth.service";
-import {FormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ToastModule} from "primeng/toast";
 import {FormValidatorsComponent} from "../form-validators/form-validators.component";
 import {InputTextModule} from "primeng/inputtext";
@@ -13,6 +13,9 @@ import {Router} from "@angular/router";
 import {PasswordModule} from "primeng/password";
 import {DialogModule} from "primeng/dialog";
 import {RippleModule} from "primeng/ripple";
+import {PersonnelService} from "../../core/data/personals/personnel.service";
+import {Personnel} from "../../core/data/personals/personnel.model";
+import {DropdownModule} from "primeng/dropdown";
 
 @Component({
   selector: 'mrt-login',
@@ -26,29 +29,35 @@ import {RippleModule} from "primeng/ripple";
     ButtonModule,
     PasswordModule,
     DialogModule,
-    RippleModule
+    RippleModule,
+    DropdownModule,
+    FormsModule
   ],
   templateUrl: './login.component.html',
   providers: [MessageService]
 })
 export class LoginComponent {
-  rememberMe: boolean = false;
+
   layoutService = inject(LayoutService);
-  authService = inject(AuthService);
   fb = inject(FormBuilder);
   // Inject Router
   router = inject(Router);
-  //Inject message service from primeng
+  //Inject message service de primeng
   messageService = inject(MessageService);
-  forgotPassFormVisible: boolean = false;
+  //Inject personnel service
+  personnelService = inject(PersonnelService);
+  espaces = [
+    'ESPACE AGENT',
+    'ESPACE DREN',
+    'ESPACE GHR',
+    'ESPACE ADMINISTRATEUR',
+  ]
+
+  selectSpace: string = '';
 
   loginForm =this.fb.group({
     matricule: this.fb.control('',[Validators.required]),
     password: this.fb.control('',[Validators.required]),
-  });
-
-  forgotPasswordForm = this.fb.group({
-    email: this.fb.control('',[Validators.required, Validators.email])
   });
 
   get dark(): boolean {
@@ -58,26 +67,16 @@ export class LoginComponent {
   handleLogin() {
     const matricule:any = this.loginForm.value.matricule;
     const passwd:any = this.loginForm.value.password;
-    this.authService.getAllUsers().subscribe((users: Utilisateur[]) => {
-      const user = users.find((user) => user.matricule === matricule && user.password === passwd);
-      if(user != null){
+    this.personnelService.findPersonnelByMatricule(matricule).subscribe((user: Personnel) => {
+      if(user != null && passwd == 'admin123'){
+        user.espace = this.selectSpace;
         localStorage.setItem('user', JSON.stringify(user));
         this.router.navigateByUrl("/home");
       }
       else {
-        this.messageService.add({severity:'error', summary:'Error', detail:'Email ou Mot de passe incorrect'});
+        this.messageService.add({severity:'error', summary:'Error', detail:'Matricule ou Mot de passe incorrect'});
       }
     });
   }
 
-
-
-  showForgotPassForm() {
-    this.forgotPassFormVisible = true;
-  }
-
-  close() {
-    this.forgotPassFormVisible = false;
-    this.forgotPasswordForm.reset();
-  }
 }

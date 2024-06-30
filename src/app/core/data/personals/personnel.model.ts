@@ -56,6 +56,7 @@ export interface Personnel{
   ministerOrigine: string;
   typeeducation: TypeEducation;
   imagPers: any;
+  espace: string;
 }
 
 export type Personnels = Personnel[];

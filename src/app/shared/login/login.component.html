@@ -34,6 +34,18 @@
             </span>
 
             <label
+              for="space"
+              class="block text-900 text-xl mt-4 mb-2"
+            >Choisir l'espace</label>
+            <p-dropdown
+              id="space"
+              [options]="espaces"
+              [(ngModel)]="selectSpace"
+              styleClass="w-full md:w-23rem mb-2"
+              [ngModelOptions]="{standalone: true}"
+              placeholder="Selectionner l'espace" />
+
+            <label
               for="password"
               class="block text-900 text-xl mt-4 mb-2"
             >
@@ -51,7 +63,6 @@
 
             <div class="flex align-items-center justify-content-between mt-6 gap-3">
               <button pButton type="button" label="Se connecter" class="w-full" (click)="handleLogin()"></button>
-<!--              <a (click)="showForgotPassForm()" class="secondary-button cursor-pointer">Mot de passe Oublie?</a>-->
             </div>
           </div>
         </form>
@@ -90,44 +101,3 @@
 
   </div>
 </div>
-
-<!-- Forgot password dialog -->
-<p-dialog header="Mot de passe oublié" [(visible)]="forgotPassFormVisible" [closable]="false" [modal]="true"
-          [style]="{ width: '35vw' }" [draggable]="false" [resizable]="false" (onHide)="close()">
-  <form [formGroup]="forgotPasswordForm">
-    <div class="flex justify-content-center align-items-center">
-      <div class=" surface-card border-round">
-        <div class="flex flex-column">
-          <span>
-            <input
-              type="text"
-              placeholder="Email address"
-              pInputText
-              class="w-full md:w-30rem mb-2"
-              style="padding:1rem"
-              formControlName="email"
-            >
-            <br>
-              <mrt-form-validators [entityField]="'email'" [formGroup]="forgotPasswordForm" />
-          </span>
-          <div class="flex flex-column sm:flex-row justify-content-between align-items-center gap-3 py-2">
-            <button pButton="" pRipple="" label="Envoyer" icon="pi pi-fw pi-check" [disabled]="forgotPasswordForm.invalid"
-                    class="p-element p-ripple p-button-primary flex-1 border-round p-button p-component">
-              <span class="p-button-icon p-button-icon-left pi pi-fw pi-check" aria-hidden="true"></span>
-              <span class="p-button-label">Enregistrer</span>
-              <span class="p-ink"></span>
-            </button>
-
-            <button pButton="" pRipple="" label="Annuler" icon="pi pi-times"
-                    class="p-element p-ripple p-button-danger flex-1 p-button-outlined p-button p-component"
-                    (click)="close()">
-              <span class="p-button-icon p-button-icon-left pi pi-times" aria-hidden="true"></span>
-              <span class="p-button-label">Annuler</span>
-              <span class="p-ink"></span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </form>
-</p-dialog>

@@ -96,6 +96,9 @@ export class PersonnelService {
     return this.http.delete(`${this.apiUrl}/personnel/delete/${personnel.idAgent}`,this.httpOptions);
   }
 
-
+//    Methode de recherche par le matricule
+  findPersonnelByMatricule(matricule: string){
+    return this.http.get<Personnel>(`${this.apiUrl}/personnel/ByMatricule/${matricule}`,this.httpOptions);
+  }
 
 }

@@ -9,6 +9,7 @@ import {ConfirmationService, MessageService} from "primeng/api";
 import {ConfirmPopupModule} from "primeng/confirmpopup";
 import {ButtonModule} from "primeng/button";
 import {ToastModule} from "primeng/toast";
+import { Personnel } from '../core/data/personals/personnel.model';
 
 @Component({
   selector: 'mrt-menu-profile',
@@ -48,7 +49,7 @@ export class AppMenuProfileComponent {
   public confirmationService = inject(ConfirmationService);
   public messageService = inject(MessageService);
   router = inject(Router);
-  currentUser:Utilisateur= JSON.parse(localStorage.getItem('user') as string);
+  currentUser:Personnel= JSON.parse(localStorage.getItem('user') as string);
 
     toggleMenu() {
         this.layoutService.onMenuProfileToggle();

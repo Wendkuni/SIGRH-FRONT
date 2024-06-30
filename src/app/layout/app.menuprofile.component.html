@@ -6,10 +6,17 @@
 
 <div class="layout-menu-profile">
     <button class="p-link border-noround" (click)="toggleMenu()" pTooltip="Profile" [tooltipDisabled]="isTooltipDisabled">
-        <img src="assets/layout/images/login/icon-login.svg" alt="avalon-ng" style="width: 52px; height: 52px;">
+      @if( currentUser.imagPers ){
+        <img src="data:image/png;base64,{{currentUser.imagPers}}" alt="{{currentUser.nomPrenom}}"
+                 class="w-4rem h-4rem border-circle shadow-4">
+      }
+      @else {
+        <img src="assets/demo/images/avatar/user-avatar.png" alt="user.name"
+             class="w-4rem h-4rem border-circle shadow-4">
+      }
         <span>
-            <strong>{{ currentUser.name }}</strong>
-            <small>{{  currentUser.email }}</small>
+            <strong>{{ currentUser.nomPrenom }}</strong>
+            <small>{{  currentUser.nomPrenomArab }}</small>
         </span>
         <i class="layout-menu-profile-toggler pi pi-fw" [ngClass]="{'pi-angle-down': menuProfilePosition === 'start' || isHorizontal, 'pi-angle-up': menuProfilePosition === 'end' && !isHorizontal}"></i>
     </button>

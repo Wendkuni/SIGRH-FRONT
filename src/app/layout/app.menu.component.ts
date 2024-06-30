@@ -29,7 +29,7 @@ export class AppMenuComponent implements OnInit {
               {
                 label: 'Acceuil',
                 icon: 'pi pi-home',
-                routerLink: ['/home'],
+                routerLink: ['/home-agent-space'],
               },
             ],
           },

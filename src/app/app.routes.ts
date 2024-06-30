@@ -23,6 +23,11 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/dashboard/dashboard.component').then(item => item.DashboardComponent),
       },
       {
+        path: 'home-agent-space',
+        loadComponent: () => import('./space/Agent_Space/agent-space-home/agent-space-home.component').then(item => item.AgentSpaceHomeComponent)
+      },
+  
+      {
         path: 'mobilite',
         loadComponent: () => import('./space/MODULE_1_Gestion_de_Mobilité/mobilite/mobilite.component').then(item => item.MobiliteComponent),
       },

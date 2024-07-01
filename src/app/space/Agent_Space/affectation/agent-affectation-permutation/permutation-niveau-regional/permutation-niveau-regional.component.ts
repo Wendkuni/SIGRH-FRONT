@@ -15,7 +15,7 @@ import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { TooltipModule } from 'primeng/tooltip';
-import { PieceJustificatif } from '../../../../../core/data/personals/personnel.model';
+import { Personnel, PieceJustificatif } from '../../../../../core/data/personals/personnel.model';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Cols } from '../../../../../core/data/primeng/primeng.model';
 
@@ -51,6 +51,8 @@ export class PermutationNiveauRegionalComponent {
   pieceLibelle: string = '';
 
   image!: any;
+
+  selectedPersonnel: Personnel = JSON.parse(localStorage.getItem('user') as string);
 
   listPieceJustificatifAgent1 = Array<PieceJustificatif>();
   listPieceJustificatifAgent2 = Array<PieceJustificatif>();

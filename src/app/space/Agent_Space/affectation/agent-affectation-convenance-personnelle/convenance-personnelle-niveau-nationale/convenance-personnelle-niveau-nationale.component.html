@@ -10,38 +10,126 @@
     <div class="col-12 lg:col-4">
       <!-- <span class="text-900 block mb-3 font-bold">Informations: </span> -->
       <ul class="list-none p-0 m-0 text-600 mb-2 text-600">
-          <li class="mb-3"><span class="font-semibold">Année scolaire:</span> 2024-2025</li>
-          <li class="mb-3"><span class="font-semibold">Nom Prenom:</span> {{selectedPersonnel.nomPrenom}}-{{selectedPersonnel.nomPrenomArab}}</li>
-          <li class="mb-3"><span class="font-semibold">Sexe:</span> Masculin</li>
-          <!-- <li class="mb-3"><span class="font-semibold">Corps/Grade:</span> valeur</li> -->
+          <li class="mb-3">
+            <span class="font-semibold">
+              Année scolaire :
+            </span>
+             2024-2025
+          </li>
+          <li class="mb-3">
+            <span class="font-semibold">
+              Nom et Prénoms :
+            </span> 
+            {{selectedPersonnel.nomPrenom}}-{{selectedPersonnel.nomPrenomArab}}
+          </li>
+          <li class="mb-3">
+            <span class="font-semibold">
+              NNI :
+            </span>
+             {{selectedPersonnel.nni}}
+          </li>
+          <li class="mb-3">
+            <span class="font-semibold">
+              Matricule :
+            </span> 
+            {{selectedPersonnel.matricule}}
+          </li>
+          <li class="mb-3">
+            <span class="font-semibold">
+              Date de naissance : {{selectedPersonnel.dateNaiss | date: 'dd/MM/yyyy'}}
+            </span> 
+          </li>
       </ul>
     </div>
   <div class="col-12 lg:col-4">
     <ul class="list-none p-0 m-0 text-600 mb-2 text-600">
-      <li class="mb-3"><span class="font-semibold">Nni:</span> {{selectedPersonnel.nni}}</li>
-      <li class="mb-3"><span class="font-semibold">Matricule:</span> {{selectedPersonnel.matricule}}</li>
-        <!-- <li class="mb-3"><span class="font-semibold">Diplôme académique le plus élevé:</span> diplôme...</li>
-        <li class="mb-3"><span class="font-semibold">Discipline d'origine:</span> discipline ...</li> -->
+      <li class="mb-3"><span class="font-semibold">Echelon :</span> </li>
+      <li class="mb-3"><span class="font-semibold">Sexe :</span> Masculin</li>
+      <li class="mb-3"><span class="font-semibold">Diplôme professionnel :</span> </li>
+        <li class="mb-3"><span class="font-semibold">Diplôme académique le plus élevé :</span> </li>
+        <li class="mb-3"><span class="font-semibold">Lieu de naissance : {{selectedPersonnel.lieuNaiss}}</span> </li>
     </ul>
   </div>
-  <!-- <div class="col-12 lg:col-4">
+  <div class="col-12 lg:col-4">
     <ul class="list-none p-0 m-0 text-600 mb-4 text-600">
-        <li class="mb-3"><span class="font-semibold">Discipline enseignée:</span> discipline ...</li>
-        <li class="mb-3"><span class="font-semibold">Telephone:</span> ...</li>
-        <li class="mb-3"><span class="font-semibold">Email:</span> ...</li>
-    </ul> -->
-  <!-- </div> -->
+        <li class="mb-3"><span class="font-semibold">Discipline enseignée :</span> </li>
+        <li class="mb-3"><span class="font-semibold">Téléphone :</span> </li>
+        <li class="mb-3"><span class="font-semibold">Email :</span> </li>
+        <li class="mb-3">
+          <span class="font-semibold">
+            Corps/Grade :
+          </span> 
+        </li>
+        <li class="mb-3"><span class="font-semibold">Discipline d'origine :</span> </li>
+    </ul> 
+  </div>
+</div>
 
 
+<div class="container">
+  <div class="p-fluid p-formgrid grid m-2">
+    <div class="flex align-items-center flex-wrap gap-2 m-3">
+      <label for="postActuel" class="w-9rem">Poste actuel</label>
+      <input id="postActuel" type="text" pInputText placeholder="Entrez le poste actuel">
+    </div>
+    <div class="flex align-items-center flex-wrap gap-2 m-3">
+      <label for="dren" class="w-9rem">Dren</label>
+      <input id="dren" type="text" pInputText placeholder="Entrez le dren">
+    </div>
+  </div>
+</div>
 
+<div class="container">
+  <div class="border-1 surface-border border-round p-fluid mb-4">
+    <span class="text-900 font-bold block border-bottom-1 surface-border p-3">Wilayas demandées (Par ordre de préférence)</span>
+    <div class="p-fluid p-formgrid grid m-2">
+      <!--        Zone géographique de destination 1   -->
+      <div class="field col-12 md:col-4">
+        <label for="localite">Zone géographique de destination </label>
+        <p-dropdown
+          id="localite"
+          [options]="listWilaya"
+          placeholder="Selectionner la zone de destination nº1" />
+      </div>
+      <!--        Zone géographique de destination 2   -->
+      <div class="field col-12 md:col-4">
+        <label for="localite2">Zone géographique de destination 2</label>
+        <p-dropdown
+          id="localite2"
+          [options]="listWilaya"
+          placeholder="Selectionner la zone de destination nº2" />
+      </div>
+      <!--        Zone géographique de destination 3   -->
+      <div class="field col-12 md:col-4">
+        <label for="localite3">Zone géographique de destination 3</label>
+        <p-dropdown
+          id="localite3"
+          [options]="listWilaya"
+          placeholder="Selectionner la zone de destination nº3" />
+      </div>
+      <!--        Zone géographique de destination 4   -->
+      <div class="field col-12 md:col-4">
+        <label for="localite4">Zone géographique de destination 4</label>
+        <p-dropdown
+          id="localite4"
+          [options]="listWilaya"
+          placeholder="Selectionner la zone de destination nº4" />
+      </div>
+      <!--        Zone géographique de destination 5   -->
+      <div class="field col-12 md:col-4">
+        <label for="localite5">Zone géographique de destination 5</label>
+        <p-dropdown
+          id="localite5"
+          [options]="listWilaya"
+          placeholder="Selectionner la zone de destination nº5" />
+      </div>
+    </div>
+   </div>
+</div>
 
 
     <div class="container py-5">
       <form [formGroup]="affectationForm">
-               <div class="text-sm mb-2">
-                  Champs obligatoires:
-                  <span class="text-red-500">*</span>
-               </div>
   
         <div class="border-1 surface-border border-round p-fluid mb-4">
           <span class="text-900 font-bold block border-bottom-1 surface-border p-3">Critères d’affectation pour convenances personnelles des enseignants</span>
@@ -83,13 +171,10 @@
             <!-- Ancienneté poste -->
             <div class="field col-12 md:col-4">
               <label for="ancienetePost">4- Ancienneté dans la wilaya</label>
-              <input
-                type="number"
-                pInputText
-                placeholder="Entrez l'ancienneté dans la wilaya"
+              <p-dropdown
                 id="ancienetePost"
-                required
-              />
+                [options]="ancieneteList"
+                placeholder="L’ancienneté dans la wilaya d’exercice" />
             </div>
             <!-- Distinction -->
             <div class="field col-12 md:col-4">
@@ -102,76 +187,33 @@
           <!-- Nombre d’enfants à charge -->
           <div class="field col-12 md:col-4">
             <label for="nbrEnfants">6- Nombre d’enfants à charge</label>
-            <input
-              type="number"
-              pInputText
-              id="nbrEnfants"
-              placeholder="Entrez le nombre d’enfants à charge"
-            />
+            <p-dropdown
+                id="nbrEnfants"
+                [options]="nbrEnfantsOptions"
+                placeholder="Nombre d’enfants à charge" />
           </div>
-          <!-- Poste actuel -->
-          <div class="field col-12 md:col-4">
-            <label for="postActuel">7- Poste actuel</label>
-            <input
-              type="text"
-              pInputText
-              id="postActuel"
-              placeholder="Entrez le poste actuel"
-            />
-          </div>
+          
             <!--        Zone géographique de destination 1   -->
             <div class="field col-12 md:col-4">
-              <label for="localite">8- Zone géographique de destination 1</label>
+              <label for="localite">8- Zone géographique de destination </label>
               <p-dropdown
                 id="localite"
                 [options]="listWilaya"
                 placeholder="Selectionner la zone de destination nº1" />
             </div>
-            <!--        Zone géographique de destination 2   -->
-            <div class="field col-12 md:col-4">
-              <label for="localite2">9- Zone géographique de destination 2</label>
-              <p-dropdown
-                id="localite2"
-                [options]="listWilaya"
-                placeholder="Selectionner la zone de destination nº2" />
-            </div>
-            <!--        Zone géographique de destination 3   -->
-            <div class="field col-12 md:col-4">
-              <label for="localite3">10- Zone géographique de destination 3</label>
-              <p-dropdown
-                id="localite3"
-                [options]="listWilaya"
-                placeholder="Selectionner la zone de destination nº3" />
-            </div>
-            <!--        Zone géographique de destination 4   -->
-            <div class="field col-12 md:col-4">
-              <label for="localite4">11- Zone géographique de destination 4</label>
-              <p-dropdown
-                id="localite4"
-                [options]="listWilaya"
-                placeholder="Selectionner la zone de destination nº4" />
-            </div>
-            <!--        Zone géographique de destination 5   -->
-            <div class="field col-12 md:col-4">
-              <label for="localite5">12- Zone géographique de destination 5</label>
-              <p-dropdown
-                id="localite5"
-                [options]="listWilaya"
-                placeholder="Selectionner la zone de destination nº5" />
-            </div>
+          
             <!-- Discrimination positive -->
             <div class="field col-12 md:col-4">
-              <label for="discrimination">13- Discrimination positive</label>
-              <input
-                type="text"
-                pInputText
-                placeholder="Entrez la discrimination positive"
-                id="discrimination"
+              <label for="discrimination">9- Discrimination positive</label>
+              <p-dropdown
+              id="discrimination"
+              [options]="sexeOptions"
+              placeholder="Genre"
               />
             </div>
           <!-- Situation sanitaire -->
           <div class="field col-12 md:col-4">
-            <label for="situationSanitaire">14- Situation sanitaire</label>
+            <label for="situationSanitaire">10- Situation sanitaire</label>
             <input
               type="text"
               pInputText
@@ -180,7 +222,7 @@
           </div>
             <!-- Regroupement de conjoints -->
             <div class="field col-12 md:col-4">
-              <label for="regroupement">15- Regroupement de conjoints</label>
+              <label for="regroupement">11- Regroupement de conjoints</label>
               <input
                 type="text"
                 pInputText
@@ -189,57 +231,13 @@
             </div>
   <!--          Autres situations sociales    -->
             <div class="field col-12 md:col-4">
-              <label for="autreSituationSociale">16- Autres situations sociales</label>
+              <label for="autreSituationSociale">12- Autres situations sociales</label>
               <input
                 type="text"
                 pInputText
                 id="autreSituationSociale"
               />
             </div>
-            <!--Sexe-->
-            <!-- <div class="field col-12 md:col-4">
-              <label for="sexe">14- Sexe</label>
-              <input
-                type="text"
-                pInputText
-                id="sexe"
-                [value]="selectedPersonnel.sexePers ? selectedPersonnel.sexePers : 'Neant'"
-                disabled
-                required
-              />
-            </div> -->
-            <!-- Situation matrimoniale -->
-            <!-- <div class="field col-12 md:col-4">
-              <label for="autreSituation">15- Autre situation</label>
-              <input
-                type="text"
-                pInputText
-                id="autreSituation"
-                placeholder="Entrez la situation"              
-              />
-            </div>. -->
-                     <!-- date effet -->
-           <!-- <div class="field col-12 md:col-4">
-             <label for="dateeffet"> Date Effet </label>
-             <p-calendar
-               [dateFormat]="'yy-mm-dd'"
-                    id="dateeffet"
-                    formControlName="dateEffet"
-                    [readonlyInput]="true"
-                    styleClass="mb-1"
-                  />
-                 </div> -->
-          <!-- Motif -->
-         <!-- <div class="field col-12 md:col-4">
-           <label for="motif">Motif </label>
-           <input
-             type="text"
-            pInputText
-            id="motif"
-              formControlName="motif"
-           required
-         />
-            </div> -->
         </div>
         </div>
   
@@ -360,4 +358,3 @@
     <button pButton pRipple class="p-button-primary flex-1" label="Enregistrer" icon="pi pi-fw pi-check" (click)="save()"></button>
     <button pButton pRipple class="p-button-danger flex-1 p-button-outlined" label="Annuler" (click)="cancelMobilite()" icon="pi pi-fw pi-times"></button>
     </div>
-  </div>

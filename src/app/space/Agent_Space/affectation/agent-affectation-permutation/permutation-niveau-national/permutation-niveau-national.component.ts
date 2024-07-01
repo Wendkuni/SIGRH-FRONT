@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { InputTextModule } from 'primeng/inputtext';
-import { PieceJustificatif } from '../../../../../core/data/personals/personnel.model';
+import { Personnel, PieceJustificatif } from '../../../../../core/data/personals/personnel.model';
 import { Cols } from '../../../../../core/data/primeng/primeng.model';
 import { DatePipe } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -57,6 +57,8 @@ export class PermutationNiveauNationalComponent {
   messageService = inject(MessageService);
 
   confirmationService = inject(ConfirmationService);
+
+  selectedPersonnel: Personnel = JSON.parse(localStorage.getItem('user') as string);
 
      // colonne du tableau
      colsDossier: Cols[] = [

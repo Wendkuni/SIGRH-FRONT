@@ -88,6 +88,24 @@ export class ConvenancePersonnelleNiveauRegionaleComponent {
     'Autre document'
   ];
 
+    // Sexe
+    sexeOptions = [
+      'Masculin',
+      'Féminin'
+    ]
+
+   // Nombre d'enfants
+   nbrEnfantsOptions =[
+    'Moins de 5 enfants',
+    '5 enfants et plus'
+  ];
+
+  // Ancienneté
+  ancieneteList = [
+    'Moins de 15 ans',
+    '15 ans et plus'
+  ];
+
   onUploadFile(event: any) {
     this.image = event.files[0];
   }

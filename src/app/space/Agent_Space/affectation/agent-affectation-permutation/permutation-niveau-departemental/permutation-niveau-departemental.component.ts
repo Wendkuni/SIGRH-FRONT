@@ -16,7 +16,7 @@ import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { TooltipModule } from 'primeng/tooltip';
-import { PieceJustificatif } from '../../../../../core/data/personals/personnel.model';
+import { Personnel, PieceJustificatif } from '../../../../../core/data/personals/personnel.model';
 import { Cols } from '../../../../../core/data/primeng/primeng.model';
 
 @Component({
@@ -54,6 +54,8 @@ export class PermutationNiveauDepartementalComponent {
 
   listPieceJustificatifAgent1 = Array<PieceJustificatif>();
   listPieceJustificatifAgent2 = Array<PieceJustificatif>();
+
+  selectedPersonnel: Personnel = JSON.parse(localStorage.getItem('user') as string);
 
   messageService = inject(MessageService);
 

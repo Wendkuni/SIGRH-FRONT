@@ -46,14 +46,7 @@ export class LoginComponent {
   messageService = inject(MessageService);
   //Inject personnel service
   personnelService = inject(PersonnelService);
-  espaces = [
-    'ESPACE AGENT',
-    'ESPACE DREN',
-    'ESPACE GHR',
-    'ESPACE ADMINISTRATEUR',
-  ]
 
-  selectSpace: string = '';
 
   loginForm =this.fb.group({
     matricule: this.fb.control('',[Validators.required]),
@@ -69,7 +62,7 @@ export class LoginComponent {
     const passwd:any = this.loginForm.value.password;
     this.personnelService.findPersonnelByMatricule(matricule).subscribe((user: Personnel) => {
       if(user != null && passwd == 'admin123'){
-        user.espace = this.selectSpace;
+        user.espace = 'ESPACE AGENT';
         localStorage.setItem('user', JSON.stringify(user));
         this.router.navigateByUrl("/home");
       }

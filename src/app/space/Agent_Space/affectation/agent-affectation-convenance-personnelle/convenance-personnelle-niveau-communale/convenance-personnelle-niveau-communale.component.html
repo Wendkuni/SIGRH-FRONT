@@ -7,23 +7,64 @@
 <p-confirmDialog />
 
 <div class="grid">
-    <div class="col-12 lg:col-4">
-      <!-- <span class="text-900 block mb-3 font-bold">Informations: </span> -->
-      <ul class="list-none p-0 m-0 text-600 mb-2 text-600">
-          <li class="mb-3"><span class="font-semibold">Année scolaire:</span> 2024-2025</li>
-          <li class="mb-3"><span class="font-semibold">Nom Prenom:</span> {{selectedPersonnel.nomPrenom}}-{{selectedPersonnel.nomPrenomArab}}</li>
-          <li class="mb-3"><span class="font-semibold">Sexe:</span> Masculin</li>
-          <!-- <li class="mb-3"><span class="font-semibold">Corps/Grade:</span> valeur</li> -->
-      </ul>
-    </div>
   <div class="col-12 lg:col-4">
+    <!-- <span class="text-900 block mb-3 font-bold">Informations: </span> -->
     <ul class="list-none p-0 m-0 text-600 mb-2 text-600">
-      <li class="mb-3"><span class="font-semibold">Nni:</span> {{selectedPersonnel.nni}}</li>
-      <li class="mb-3"><span class="font-semibold">Matricule:</span> {{selectedPersonnel.matricule}}</li>
-        <!-- <li class="mb-3"><span class="font-semibold">Diplôme académique le plus élevé:</span> diplôme...</li>
-        <li class="mb-3"><span class="font-semibold">Discipline d'origine:</span> discipline ...</li> -->
+        <li class="mb-3">
+          <span class="font-semibold">
+            Année scolaire :
+          </span>
+           2024-2025
+        </li>
+        <li class="mb-3">
+          <span class="font-semibold">
+            Nom et Prénoms :
+          </span> 
+          {{selectedPersonnel.nomPrenom}}-{{selectedPersonnel.nomPrenomArab}}
+        </li>
+        <li class="mb-3">
+          <span class="font-semibold">
+            NNI :
+          </span>
+           {{selectedPersonnel.nni}}
+        </li>
+        <li class="mb-3">
+          <span class="font-semibold">
+            Matricule :
+          </span> 
+          {{selectedPersonnel.matricule}}
+        </li>
+        <li class="mb-3">
+          <span class="font-semibold">
+            Date de naissance : {{selectedPersonnel.dateNaiss | date: 'dd/MM/yyyy'}}
+          </span> 
+        </li>
     </ul>
   </div>
+<div class="col-12 lg:col-4">
+  <ul class="list-none p-0 m-0 text-600 mb-2 text-600">
+    <li class="mb-3"><span class="font-semibold">Echelon :</span> </li>
+    <li class="mb-3"><span class="font-semibold">Sexe :</span> Masculin</li>
+    <li class="mb-3"><span class="font-semibold">Diplôme professionnel :</span> </li>
+      <li class="mb-3"><span class="font-semibold">Diplôme académique le plus élevé :</span> </li>
+      <li class="mb-3"><span class="font-semibold">Lieu de naissance : {{selectedPersonnel.lieuNaiss}}</span> </li>
+  </ul>
+</div>
+<div class="col-12 lg:col-4">
+  <ul class="list-none p-0 m-0 text-600 mb-4 text-600">
+      <li class="mb-3"><span class="font-semibold">Discipline enseignée :</span> </li>
+      <li class="mb-3"><span class="font-semibold">Téléphone :</span> </li>
+      <li class="mb-3"><span class="font-semibold">Email :</span> </li>
+      <li class="mb-3">
+        <span class="font-semibold">
+          Corps/Grade :
+        </span> 
+      </li>
+      <li class="mb-3"><span class="font-semibold">Discipline d'origine :</span> </li>
+  </ul> 
+</div>
+</div>
+  
   <div class="container py-5">
     <form>
         <div class="text-sm mb-2">
@@ -69,13 +110,10 @@
               <!-- Ancienneté poste -->
               <div class="field col-12 md:col-4">
                 <label for="ancienetePost">4- Ancienneté dans l'école</label>
-                <input
-                  type="number"
-                  pInputText
-                  placeholder="Entrez l'ancienneté dans l'école"
-                  id="ancienetePost"
-                  required
-                />
+                <p-dropdown
+                  id="distinction"
+                  [options]="ancieneteList"
+                  placeholder="Selectionner ancieneteList" />
               </div>
               <!-- Distinction -->
               <div class="field col-12 md:col-4">
@@ -88,12 +126,10 @@
             <!-- Nombre d’enfants à charge -->
             <div class="field col-12 md:col-4">
               <label for="nbrEnfants">6- Nombre d’enfants à charge</label>
-              <input
-                type="number"
-                pInputText
-                id="nbrEnfants"
-                placeholder="Entrez le nombre d’enfants à charge"
-              />
+              <p-dropdown
+                  id="nbrEnfants"
+                  [options]="nbrEnfantsOptions"
+                  placeholder="Selectionner la distinction" />
             </div>
             <!-- NMoughataa/enclavement de l’établissement secondaire -->
             <div class="field col-12 md:col-4">
@@ -108,12 +144,10 @@
                <!-- Discrimination positive -->
             <div class="field col-12 md:col-4">
                 <label for="discrimination">8- Discrimination positive</label>
-                <input
-                  type="text"
-                  pInputText
-                  placeholder="Entrez la discrimination positive"
+                <p-dropdown
                   id="discrimination"
-                />
+                  [options]="sexeOptions"
+                  placeholder="Selectionner la distinction" />
             </div>
                  <!-- Situation sanitaire -->
           <div class="field col-12 md:col-4">
@@ -262,4 +296,3 @@
     <button pButton pRipple class="p-button-primary flex-1" label="Enregistrer" icon="pi pi-fw pi-check"></button>
     <button pButton pRipple class="p-button-danger flex-1 p-button-outlined" label="Annuler" icon="pi pi-fw pi-times"></button>
     </div>
-</div>

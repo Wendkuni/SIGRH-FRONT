@@ -10,8 +10,11 @@ export const routes: Routes = [
   },
   {
     path: 'auth',
-    data: { breadcrumb: 'Auth' },
     loadComponent: () => import('./shared/login/login.component').then(item => item.LoginComponent),
+  },
+  {
+    path: 'auth-agent',
+    loadComponent: () => import('./shared/login-agent/login-agent.component').then(item => item.LoginAgentComponent),
   },
   {
     path: '',

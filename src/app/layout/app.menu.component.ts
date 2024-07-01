@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import {AppMenuitemComponent} from "./app.menuitem.component";
 import {NgForOf, NgIf} from "@angular/common";
 import {Personnel} from "../core/data/personals/personnel.model";
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'mrt-menu',
@@ -42,13 +43,17 @@ export class AppMenuComponent implements OnInit {
                 icon: 'pi pi-sort-alt',
                 items: [
                   {
-                    label: 'Convenance Personnelle'
+                    label: 'Convenances personnelles',
+                    routerLink: ['/agent-convenance-personnelle']
                   },
                   {
                     label: 'Nécessité de service'
                   },
                   {
                     label: 'Permutation de poste'
+                  },
+                  {
+                    label: 'Liste des affectations'
                   }
                 ]
               }

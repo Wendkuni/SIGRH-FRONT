@@ -1,7 +1,8 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {Mobilite, Mobilites} from "./mobilite.model";
+import {Affectation, Mobilite, Mobilites} from "./mobilite.model";
 import {environment} from "../../../../environments/environment";
+import { PieceJustificatif } from '../personals/personnel.model';
 
 @Injectable({
   providedIn: 'root'
@@ -62,5 +63,18 @@ export class AffectationService {
 
   getAllAffectationNature(){
     return this.http.get<any>(`${this.apiUrl}/TypeNature`, this.httpOptions)
+  }
+
+  createAffectationByConvenance(data: Affectation, listPieceJustificatif: PieceJustificatif[]) {
+    const formData = new FormData();
+    formData.append('affectation', JSON.stringify(data));
+    listPieceJustificatif.forEach((piece) => {
+      formData.append('files', piece.images, piece.libelle);
+    });
+    
+    return this.http.post(`${this.apiUrl}/affectation`, formData,{
+      reportProgress: true,
+      responseType: 'text'
+    });
   }
 }

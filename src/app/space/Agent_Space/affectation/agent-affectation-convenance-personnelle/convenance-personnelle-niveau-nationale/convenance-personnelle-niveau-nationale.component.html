@@ -1,0 +1,354 @@
+<p-toast
+  [showTransformOptions]="'translateY(100%)'"
+  [showTransitionOptions]="'1000ms'"
+  [hideTransitionOptions]="'1000ms'"
+  [showTransformOptions]="'translateX(100%)'" />
+
+<p-confirmDialog />
+
+<div class="grid">
+    <div class="container py-5">
+      <form [formGroup]="affectationForm">
+               <span class="text-sm">
+                  Champs obligatoires:
+                  <span class="text-red-500">*</span>
+                </span>
+  
+        <div class="border-1 surface-border border-round p-fluid mb-4">
+          <span class="text-900 font-bold block border-bottom-1 surface-border p-3">Information relative à l'agent</span>
+  
+        <div class="p-fluid p-formgrid grid m-2">
+          <!--Matricule-->
+          <div class="field col-12 md:col-4">
+            <label for="matriculeMobilite">Matricule</label>
+            <input
+              type="text"
+              pInputText
+              [value]="selectedPersonnel.matricule"
+              id="matriculeMobilite"
+              required
+              disabled/>
+          </div>
+          <!--Nom Prenom-->
+          <div class="field col-12 md:col-4">
+            <label for="fullNameMobilite">Nom Prénom</label>
+            <input
+              type="text"
+              pInputText
+              [value]="selectedPersonnel.nomPrenom"
+              id="fullNameMobilite"
+              required
+              disabled/>
+          </div>
+          <!-- Statuts d'employe -->
+          <div class="field col-12 md:col-4">
+            <label for="statutsEmploye">Statuts d'employe</label>
+            <input
+              type="text"
+              pInputText
+              [value]="selectedPersonnel.statusEmp"
+              id="statutsEmploye"
+              required
+              disabled/>
+          </div>
+          <!-- Duree au poste -->
+  <!--        <div class="field col-12 md:col-3">-->
+  <!--          <label for="dureePoste">Durée au poste</label>-->
+  <!--          <input-->
+  <!--            type="text"-->
+  <!--            pInputText-->
+  <!--            id="dureePoste"-->
+  <!--            required-->
+  <!--            disabled/>-->
+  <!--        </div>-->
+          </div>
+        </div>
+  
+        <div class="border-1 surface-border border-round p-fluid mb-4">
+          <span class="text-900 font-bold block border-bottom-1 surface-border p-3">Critères</span>
+          <div class="p-fluid p-formgrid grid m-2">
+  
+            <!-- Ancienneté générale -->
+            <div class="field col-12 md:col-4">
+              <label for="AnciennetéGenerale">1- Ancienneté générale dans la fonction publique</label>
+              <input
+                type="number"
+                pInputText
+                formControlName="ancieneteGen"
+                id="AnciennetéGenerale"
+                required
+              />
+            </div>
+            <!-- Note administrative ou pédagogique -->
+            <div class="field col-12 md:col-4">
+              <label for="notePedagogiq">2- Note d’inspection pédagogique</label>
+              <input
+                type="number"
+                pInputText
+                formControlName="notePedagogiq"
+                id="notePedagogiq"
+                required
+              />
+            </div>
+            <!-- Note administrative ou pédagogique -->
+            <div class="field col-12 md:col-4">
+              <label for="noteAdministrative">3- Note d’évaluation administrative</label>
+              <input
+                type="number"
+                pInputText
+                id="noteAdministrative"
+                required
+              />
+            </div>
+            <!-- Ancienneté poste -->
+            <div class="field col-12 md:col-4">
+              <label for="ancienetePost">4- Ancienneté dans la wilaya</label>
+              <input
+                type="number"
+                pInputText
+                formControlName="ancienetePoste"
+                id="ancienetePost"
+                required
+              />
+            </div>
+            <!-- Distinction -->
+            <div class="field col-12 md:col-4">
+              <label for="distinction">5- Distinction</label>
+              <input
+                type="text"
+                pInputText
+                id="distinction"
+              />
+            </div>
+          <!-- Nombre d’enfants à charge -->
+          <div class="field col-12 md:col-4">
+            <label for="nbrEnfants">6- Nombre d’enfants à charge</label>
+            <input
+              type="number"
+              formControlName="nombreFant"
+              pInputText
+              id="nbrEnfants"
+              required
+            />
+          </div>
+            <!--        Zone géographique de destination 1   -->
+            <div class="field col-12 md:col-4">
+              <label for="localite">7- Zone géographique de destination 1</label>
+              <p-dropdown
+                id="localite"
+                [options]="listLocalite$"
+                optionLabel="libLocalite"
+                formControlName="posteDestinat1"
+                [filter]="true"
+                optionValue="libLocalite"
+                filterBy="libLocalite"
+                placeholder="Selectionner la zone de destination nº1" />
+            </div>
+            <!--        Zone géographique de destination 2   -->
+            <div class="field col-12 md:col-4">
+              <label for="localite2">8- Zone géographique de destination 2</label>
+              <p-dropdown
+                id="localite2"
+                [options]="listLocalite$"
+                optionLabel="libLocalite"
+                formControlName="posteDestinat2"
+                [filter]="true"
+                optionValue="libLocalite"
+                filterBy="libLocalite"
+                placeholder="Selectionner la zone de destination nº2" />
+            </div>
+            <!--        Zone géographique de destination 3   -->
+            <div class="field col-12 md:col-4">
+              <label for="localite3">9- Zone géographique de destination 3</label>
+              <p-dropdown
+                id="localite3"
+                [options]="listLocalite$"
+                optionLabel="libLocalite"
+                formControlName="posteDestinat3"
+                [filter]="true"
+                optionValue="libLocalite"
+                filterBy="libLocalite"
+                placeholder="Selectionner la zone de destination nº3" />
+            </div>
+            <!-- Discrimination positive -->
+            <div class="field col-12 md:col-4">
+              <label for="discrimination">10- Discrimination positive</label>
+              <input
+                type="text"
+                pInputText
+                id="discrimination"
+              />
+            </div>
+          <!-- Situation sanitaire -->
+          <div class="field col-12 md:col-4">
+            <label for="situationSanitaire">11- Situation sanitaire</label>
+            <input
+              type="text"
+              pInputText
+              id="situationSanitaire"
+            />
+          </div>
+            <!-- Regroupement de conjoints -->
+            <div class="field col-12 md:col-4">
+              <label for="regroupement">12- Regroupement de conjoints</label>
+              <input
+                type="text"
+                pInputText
+                id="regroupement"
+              />
+            </div>
+  <!--          Autres situations sociales    -->
+            <div class="field col-12 md:col-4">
+              <label for="autreSituationSociale">13- Autres situations sociales</label>
+              <input
+                type="text"
+                pInputText
+                id="autreSituationSociale"
+              />
+            </div>
+            <!--Sexe-->
+            <div class="field col-12 md:col-4">
+              <label for="sexe">14- Sexe</label>
+              <input
+                type="text"
+                pInputText
+                id="sexe"
+                [value]="selectedPersonnel.sexePers ? selectedPersonnel.sexePers : 'Neant'"
+                disabled
+                required
+              />
+            </div>
+            <!-- Situation matrimoniale -->
+            <div class="field col-12 md:col-4">
+              <label for="situationMatrimonial">15- Situation matrimoniale</label>
+              <input
+                type="text"
+                pInputText
+                id="situationMatrimonial"
+                [value]="selectedPersonnel.situationMatri ? selectedPersonnel.situationMatri : 'Neant'"
+                disabled
+                required
+              />
+            </div>.
+                     <!-- date effet -->
+           <div class="field col-12 md:col-4">
+             <label for="dateeffet"> Date Effet </label>
+             <p-calendar
+               [dateFormat]="'yy-mm-dd'"
+                    id="dateeffet"
+                    formControlName="dateEffet"
+                    [readonlyInput]="true"
+                    styleClass="mb-1"
+                  />
+                 </div>
+          <!-- Motif -->
+         <div class="field col-12 md:col-4">
+           <label for="motif">Motif </label>
+           <input
+             type="text"
+            pInputText
+            id="motif"
+              formControlName="motif"
+           required
+         />
+            </div>
+        </div>
+        </div>
+  
+        <div class="border-1 surface-border border-round p-fluid mb-4">
+          <span class="text-900 font-bold block border-bottom-1 surface-border p-3">Pièces justificatives</span>
+              <div class="p-fluid p-formgrid grid m-2">
+                <div class="col-12 lg:col-5">
+                  <div class="field">
+                    <label class="font-medium text-900">Libellé de la Pièce</label>
+                    <input
+                      type="text"
+                      [(ngModel)]="pieceLibelle"
+                      [ngModelOptions]="{standalone: true}"
+                      pInputText
+                      id="libelle"
+                      />
+                    <p-fileUpload #fileUpload (onUpload)="onUploadFile($event)" [customUpload]="true" (onSelect)="onUploadFile($event)" accept=".png,.jpg"  [showUploadButton]="false" [showCancelButton]="false" [auto]="true" styleClass="border-1 surface-border surface-card p-0 border-round m-2">
+                      <ng-template pTemplate="content">
+                        <div class="h-20rem m-1 border-round">
+                          @if(!image){
+                            <div class="flex flex-column w-full h-full justify-content-center align-items-center cursor-pointer" (click)="fileUpload.advancedFileInput.nativeElement.click()">
+                              <i class="pi pi-fw pi-file text-4xl text-primary"></i>
+                              <span class="block font-semibold text-900 text-lg mt-3">Déposer ou sélectionner une image</span>
+                            </div>
+                          }
+                          @if(image){
+                            <div class="w-full h-full relative border-round p-0">
+                              <img [src]="image.objectURL" class="w-full h-full border-round" alt="blog cover">
+                              <button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-primary text-sm absolute justify-content-center align-items-center" style="top: -10px; right: -10px;" (click)="$event.stopPropagation(); removeFile()"></button>
+                            </div>
+                          }
+                        </div>
+                      </ng-template>
+                    </p-fileUpload>
+                  </div>
+                  <button pButton=""
+                          pRipple=""
+                          (click)="ajouter()"
+                          label="Ajouter"
+                          icon="pi pi-plus"
+                          class="p-element p-ripple p-button-outlined p-button-primary p-button p-component "
+                  >
+                  </button>
+                </div>
+                <div class="col-12 lg:col-7">
+                  <p-table
+                    [columns]="colsDossier"
+                    [value]="listPieceJustificatif"
+                    #dt1
+                    dataKey="id"
+                    [rows]="5"
+                    [showCurrentPageReport]="true"
+                    currentPageReportTemplate="Page {currentPage} sur {totalPages}"
+                    [paginator]="true"
+                    styleClass="p-datatable-gridlines p-datatable-striped"
+                    responsiveLayout="scroll"
+                    [rowHover]="true"
+                    [rowsPerPageOptions]="[5,10]"
+                    tableStyleClass="p-datatable-gridlines"
+                  >
+                    <ng-template let-columns pTemplate="header">
+                      <tr>
+                        @for (col of columns; track col.field) {
+                          <th
+                            style="min-width: 15rem"
+                            [pSortableColumn]="col.field"
+                            class="font-weight-bold"
+                          >
+                            {{ col.header }}
+                            <p-sortIcon [field]="col.field"></p-sortIcon>
+                          </th>
+                        }
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-piece>
+                      <tr>
+                        <td>{{ piece.libelle }}</td>
+                        <td>
+                          <div class="flex flex-column w-2 justify-content-between" style="row-gap: 1rem;"></div>
+                          <img  [src]="piece.images.objectURL" alt=""
+                               class="w-10rem  shadow-4">
+                        </td>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                      <tr>
+                        <td colspan="8">Aucun élement.</td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+                </div>
+              </div>
+        </div>
+      </form>
+    </div>
+    <div class="flex justify-content-between gap-3">
+    <button pButton pRipple class="p-button-primary flex-1" label="Enregistrer" icon="pi pi-fw pi-check" (click)="save()"></button>
+    <button pButton pRipple class="p-button-danger flex-1 p-button-outlined" label="Annuler" (click)="cancelMobilite()" icon="pi pi-fw pi-times"></button>
+    </div>
+  </div>

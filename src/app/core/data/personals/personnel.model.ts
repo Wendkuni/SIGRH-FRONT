@@ -56,6 +56,8 @@ export interface Personnel{
   ministerOrigine: string;
   typeeducation: TypeEducation;
   imagPers: any;
+  sexePers: string;
+  situationMatri: string;
   espace: string;
 }
 
@@ -71,4 +73,10 @@ export enum TypeEducation {
 export interface UploadEvent {
   originalEvent: Event;
   files: File[];
+}
+
+
+export interface PieceJustificatif {
+  libelle: string;
+  images: File;
 }

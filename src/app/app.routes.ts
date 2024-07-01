@@ -26,6 +26,10 @@ export const routes: Routes = [
         path: 'home-agent-space',
         loadComponent: () => import('./space/Agent_Space/agent-space-home/agent-space-home.component').then(item => item.AgentSpaceHomeComponent)
       },
+      {
+        path: 'agent-convenance-personnelle',
+        loadComponent: () => import('./space/Agent_Space/affectation/agent-affectation-convenance-personnelle/agent-affectation-convenance-personnelle.component').then(item => item.AgentAffectationConvenancePersonnelleComponent)
+      },
   
       {
         path: 'mobilite',

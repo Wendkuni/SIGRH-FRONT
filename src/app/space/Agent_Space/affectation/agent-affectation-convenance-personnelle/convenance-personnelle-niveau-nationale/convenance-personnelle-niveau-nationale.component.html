@@ -249,13 +249,19 @@
                 <div class="col-12 lg:col-5">
                   <div class="field">
                     <label class="font-medium text-900">Libellé de la Pièce</label>
-                    <input
+                    <p-dropdown
+                id="libelle"
+                [options]="listeLibellePiece"
+                [(ngModel)]="pieceLibelle"
+                      [ngModelOptions]="{standalone: true}"
+                placeholder="Selectionner le libelle de la piece" />
+                    <!-- <input
                       type="text"
                       [(ngModel)]="pieceLibelle"
                       [ngModelOptions]="{standalone: true}"
                       pInputText
                       id="libelle"
-                      />
+                      /> -->
                     <p-fileUpload #fileUpload (onUpload)="onUploadFile($event)" [customUpload]="true" (onSelect)="onUploadFile($event)" accept=".png,.jpg"  [showUploadButton]="false" [showCancelButton]="false" [auto]="true" styleClass="border-1 surface-border surface-card p-0 border-round m-2">
                       <ng-template pTemplate="content">
                         <div class="h-20rem m-1 border-round">

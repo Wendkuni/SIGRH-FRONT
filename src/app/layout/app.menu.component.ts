@@ -47,7 +47,8 @@ export class AppMenuComponent implements OnInit {
                     routerLink: ['/agent-convenance-personnelle']
                   },
                   {
-                    label: 'Permutation de poste'
+                    label: 'Permutation de poste',
+                    routerLink: ['/agent-permutation-poste']
                   },
                   {
                     label: 'Liste des affectations'

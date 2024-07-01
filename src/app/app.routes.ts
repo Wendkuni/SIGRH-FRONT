@@ -30,6 +30,10 @@ export const routes: Routes = [
         path: 'agent-convenance-personnelle',
         loadComponent: () => import('./space/Agent_Space/affectation/agent-affectation-convenance-personnelle/agent-affectation-convenance-personnelle.component').then(item => item.AgentAffectationConvenancePersonnelleComponent)
       },
+      {
+        path: 'agent-permutation-poste',
+        loadComponent: () => import('./space/Agent_Space/affectation/agent-affectation-permutation/agent-affectation-permutation.component').then(item => item.AgentAffectationPermutationComponent)
+      },
   
       {
         path: 'mobilite',

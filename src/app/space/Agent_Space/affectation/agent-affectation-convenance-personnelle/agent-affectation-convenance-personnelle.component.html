@@ -1,13 +1,27 @@
-<p-card>
-  <div class="text-900 font-bold text-3xl mb-4 mt-2">Formulaire d'affectation pour convenance personnelle</div>
-  <!-- <div class="text-900 font-bold text-3xl mb-4 mt-2">Délais de demande</div> -->
-<!-- <p class="line-height-3 text-600 p-0 mx-0 mt-0 mb-4">
-  Prévu pour afficher l'intervalle de réception des demandes d'affectation
-</p> -->
+<p-tabView>
 
-<div class="m-2">
-  <mrt-convenance-personnelle-niveau-nationale></mrt-convenance-personnelle-niveau-nationale>
-</div>
-
-</p-card>
-
+  <!--  Nationale -->
+    <p-tabPanel header="Nationale">
+      <div class="text-900 font-bold text-3xl mb-4 mt-2">Formulaire d'affectation pour convenance niveau nationale</div>
+      <div class="m-2">
+        <mrt-convenance-personnelle-niveau-nationale></mrt-convenance-personnelle-niveau-nationale>
+      </div>
+    </p-tabPanel>
+  
+  <!--  Régional -->
+    <p-tabPanel header="Régional">
+      <div class="text-900 font-bold text-3xl mb-4 mt-2">Formulaire d'affectation pour convenance niveau regionale</div>
+      <div class="m-2">
+      <mrt-convenance-personnelle-niveau-regionale></mrt-convenance-personnelle-niveau-regionale>
+      </div> 
+    </p-tabPanel>
+  
+  <!--  moughataa    -->
+    <p-tabPanel header="Départementale">
+      <div class="text-900 font-bold text-3xl mb-4 mt-2">Formulaire d'affectation pour convenance niveau départementale</div>
+      <div class="m-2">
+      <mrt-convenance-personnelle-niveau-communale></mrt-convenance-personnelle-niveau-communale>
+      </div>
+    </p-tabPanel>
+  
+  </p-tabView>

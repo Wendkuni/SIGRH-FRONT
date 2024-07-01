@@ -124,7 +124,20 @@ export class ConvenancePersonnelleNiveauNationaleComponent implements OnInit{
   ];
 
   // liste des pieces justificatives
-  listeLibellePiece = [];
+  listeLibellePiece = [
+    'Photocopie de l\'arrêter de recrutement',
+    'Note de service d\'affectation vers la Wilaya/attestation de travail signee par le Dren',
+    'Dernier rapport d\'inspection pédagogique',
+    'Trois dernières notes d\'évaluation administrative',
+    'Extrait de naissance des enfants à charge',
+    'Certificat de vie collective des enfants à charge',
+    'Acte de mariage',
+    'Attestation de travail du conjoint',
+    'Attestation médicale signée par un médecin spécialiste asermenté',
+    'Compte rendu sur rapport médical',
+    'Copie certifiée attestant la distinction',
+    'Autre document'
+  ];
 
   // Attribut de affection
   affectationForm!: FormGroup;

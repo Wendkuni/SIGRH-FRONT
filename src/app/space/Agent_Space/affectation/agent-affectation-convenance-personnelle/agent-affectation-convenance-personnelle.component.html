@@ -1,14 +1,13 @@
-<p-tabView>
+<p-card>
+  <div class="text-900 font-bold text-3xl mb-4 mt-2">Formulaire d'affectation pour convenance personnelle</div>
+  <!-- <div class="text-900 font-bold text-3xl mb-4 mt-2">Délais de demande</div> -->
+<!-- <p class="line-height-3 text-600 p-0 mx-0 mt-0 mb-4">
+  Prévu pour afficher l'intervalle de réception des demandes d'affectation
+</p> -->
 
-    <!--  Nationale -->
-      <p-tabPanel header="Nationale">
-        <mrt-convenance-personnelle-niveau-nationale></mrt-convenance-personnelle-niveau-nationale>
-      </p-tabPanel>
+<div class="m-2">
+  <mrt-convenance-personnelle-niveau-nationale></mrt-convenance-personnelle-niveau-nationale>
+</div>
 
-    <!-- Dren  -->
-    <p-tabPanel header="Dren"></p-tabPanel>
+</p-card>
 
-    <!-- Communale  -->
-    <p-tabPanel header="Communale"></p-tabPanel>
-
-</p-tabView>

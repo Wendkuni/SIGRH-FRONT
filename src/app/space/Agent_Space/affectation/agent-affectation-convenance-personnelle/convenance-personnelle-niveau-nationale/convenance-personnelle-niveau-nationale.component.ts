@@ -19,6 +19,8 @@ import { RippleModule } from 'primeng/ripple';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { ToggleButtonModule } from 'primeng/togglebutton';
+import { DividerModule } from 'primeng/divider';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'mrt-convenance-personnelle-niveau-nationale',
@@ -38,7 +40,9 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
     TableModule,
     ToastModule,
     DatePipe,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    DividerModule,
+    TooltipModule
   ],
   templateUrl: './convenance-personnelle-niveau-nationale.component.html',
   styleUrl: './convenance-personnelle-niveau-nationale.component.scss',
@@ -86,6 +90,13 @@ export class ConvenancePersonnelleNiveauNationaleComponent implements OnInit{
     'Féminin'
   ]
 
+  // Distinction
+  listeDistinction = [
+    'Nationale',
+    'Régionale',
+    'Départementale'
+  ]
+
   // Situation matrimoniale
   situationMatrimonialeOptions = [
     'Célibataire',
@@ -93,6 +104,27 @@ export class ConvenancePersonnelleNiveauNationaleComponent implements OnInit{
     'Divorcé',
     'Veuf'
   ]
+
+  // Liste de Wilaya
+  listWilaya = [
+    'Nouakchott Nord',
+    'Nouakchott Ouest',
+    'Nouakchott Sud',
+    'Trarza-Inchiri',
+    'Nouadhibou',
+    'Brakna',
+    'Adrar',
+    'Tiris Zemour',
+    'Gorgol',
+    'Assaba',
+    'Hodh Gharbi',
+    'H. Charghi',
+    'Guidimakha',
+    'Tagant'
+  ];
+
+  // liste des pieces justificatives
+  listeLibellePiece = [];
 
   // Attribut de affection
   affectationForm!: FormGroup;
@@ -153,6 +185,10 @@ export class ConvenancePersonnelleNiveauNationaleComponent implements OnInit{
     else {
       this.messageService.add({severity:'error', summary: 'Erreur', detail: 'Le libellé et l\'image sont obligatoires'});
     }
+  }
+
+  removePiece(index: number) {
+    this.listPieceJustificatif.splice(index, 1);
   }
 
   save(){

@@ -1,0 +1,248 @@
+<div class="justify-content-center">
+  <p-stepper [(activeStep)]="active" style="width: 75rem">
+    <p-stepperPanel>
+      <ng-template pTemplate="header" let-onClick="onClick" let-index="index">
+        <button
+          class="bg-transparent border-none inline-flex flex-column gap-2"
+          (click)="onClick.emit()"
+        >
+          <span
+            class="border-round border-2 w-3rem h-3rem inline-flex align-items-center justify-content-center"
+            [ngClass]="{
+              'bg-primary border-primary': index <= active,
+              'surface-border': index > active
+            }"
+          >
+            <i class="pi pi-user"></i>
+          </span>
+        </button>
+      </ng-template>
+
+      <ng-template pTemplate="content" let-nextCallback="nextCallback">
+        <div class="text-center mt-3 mb-3 text-xl font-semibold">
+          Vos Informations
+        </div>
+        <mrt-agent-form-details-view />
+
+        <div class="flex pt-4 justify-content-end">
+          <p-button
+            (onClick)="nextCallback.emit()"
+            label="Suivant"
+            icon="pi pi-arrow-right"
+            iconPos="right"
+          />
+        </div>
+      </ng-template>
+    </p-stepperPanel>
+
+    <p-stepperPanel>
+      <ng-template pTemplate="header" let-onClick="onClick" let-index="index">
+        <button
+          class="bg-transparent border-none inline-flex flex-column gap-2"
+          (click)="onClick.emit()"
+        >
+          <span
+            class="border-round border-2 w-3rem h-3rem inline-flex align-items-center justify-content-center"
+            [ngClass]="{
+              'bg-primary border-primary': index <= active,
+              'surface-border': index > active
+            }"
+          >
+            <i class="pi pi-star"></i>
+          </span>
+        </button>
+      </ng-template>
+      <ng-template
+        pTemplate="content"
+        let-prevCallback="prevCallback"
+        let-nextCallback="nextCallback"
+      >
+        <div class="text-center mt-3 mb-3 text-xl font-semibold">
+          Vos pieces jointes
+        </div>
+        <div class="p-fluid p-formgrid grid m-2">
+          <div class="col-12 lg:col-5">
+            <div class="field col-12">
+              <label class="font-medium text-900">Libellé de votre Pièce</label>
+              <p-dropdown
+                id="libelle"
+                [options]="listeLibellePiece"
+                [(ngModel)]="pieceLibelle"
+                [ngModelOptions]="{ standalone: true }"
+                placeholder="Selectionner le libelle de la piece"
+              />
+              <p-fileUpload
+                #fileUpload
+                (onUpload)="onUploadFile($event)"
+                [customUpload]="true"
+                (onSelect)="onUploadFile($event)"
+                accept=".png,.jpg"
+                [showUploadButton]="false"
+                [showCancelButton]="false"
+                [auto]="true"
+                styleClass="border-1 surface-border surface-card p-0 border-round m-2"
+              >
+                <ng-template pTemplate="content">
+                  <div class="h-20rem m-1 border-round">
+                    @if(!image){
+                    <div
+                      class="flex flex-column w-full h-full justify-content-center align-items-center cursor-pointer"
+                      (click)="
+                        fileUpload.advancedFileInput.nativeElement.click()
+                      "
+                    >
+                      <i class="pi pi-fw pi-file text-4xl text-primary"></i>
+                      <span class="block font-semibold text-900 text-lg mt-3"
+                        >Déposer ou sélectionner une image</span
+                      >
+                    </div>
+                    } @if(image){
+                    <div class="w-full h-full relative border-round p-0">
+                      <img
+                        [src]="image.objectURL"
+                        class="w-full h-full border-round"
+                        alt="blog cover"
+                      />
+                      <button
+                        pButton
+                        pRipple
+                        type="button"
+                        icon="pi pi-times"
+                        class="p-button-rounded p-button-primary text-sm absolute justify-content-center align-items-center"
+                        style="top: -10px; right: -10px"
+                        (click)="$event.stopPropagation(); removeFile()"
+                      ></button>
+                    </div>
+                    }
+                  </div>
+                </ng-template>
+              </p-fileUpload>
+            </div>
+            <button
+              pButton=""
+              pRipple=""
+              (click)="ajouterAgent1()"
+              label="Ajouter"
+              icon="pi pi-plus"
+              class="p-element p-ripple p-button-outlined p-button-primary p-button p-component"
+            ></button>
+          </div>
+          <div class="col-12 lg:col-7">
+            <p-table
+              [columns]="colsDossier"
+              [value]="listPieceJustificatifAgent1"
+              #dt1
+              dataKey="id"
+              [rows]="5"
+              [showCurrentPageReport]="true"
+              currentPageReportTemplate="Page {currentPage} sur {totalPages}"
+              [paginator]="true"
+              styleClass="p-datatable-gridlines p-datatable-striped"
+              responsiveLayout="scroll"
+              [rowHover]="true"
+              [rowsPerPageOptions]="[5, 10]"
+              tableStyleClass="p-datatable-gridlines"
+            >
+              <ng-template let-columns pTemplate="header">
+                <tr>
+                  @for (col of columns; track col.field) {
+                  <th
+                    style="min-width: 15rem"
+                    [pSortableColumn]="col.field"
+                    class="font-weight-bold"
+                  >
+                    {{ col.header }}
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                  </th>
+                  }
+                  <th>Actions</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-piece>
+                <tr>
+                  <td>{{ piece.libelle }}</td>
+                  <td>
+                    <div
+                      class="flex flex-column w-2 justify-content-between"
+                      style="row-gap: 1rem"
+                    ></div>
+                    <img
+                      [src]="piece.images.objectURL"
+                      alt=""
+                      class="w-10rem shadow-4"
+                    />
+                  </td>
+                  <td>
+                    <!--          Bouton pour supprimer un element de la liste -->
+                    <button
+                      pButton
+                      type="button"
+                      pTooltip="Retirer"
+                      tooltipPosition="top"
+                      pRipple
+                      icon="pi pi-trash"
+                      class="p-button-rounded p-button-danger mx-2"
+                      iconPos="left"
+                      (click)="removePieceAgent1(piece)"
+                    ></button>
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td colspan="8">Aucun élement.</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+        <div class="flex pt-4 justify-content-between">
+          <p-button
+            (onClick)="prevCallback.emit()"
+            label="Back"
+            severity="secondary"
+            icon="pi pi-arrow-left"
+          />
+          <p-button
+            (onClick)="nextCallback.emit()"
+            label="Next"
+            icon="pi pi-arrow-right"
+            iconPos="right"
+          />
+        </div>
+      </ng-template>
+    </p-stepperPanel>
+
+    <p-stepperPanel>
+      <ng-template pTemplate="content" let-prevCallback="prevCallback">
+        <div
+          class="flex flex-column gap-2 mx-auto"
+          style="min-height: 7rem; max-width: 24rem"
+        >
+          <div class="text-center mt-3 mb-3 text-xl font-semibold">
+            Information du copermutants
+          </div>
+          <div class="field col-12">
+            <label class="font-medium text-900 m-2"
+              >Matricule du copermutants</label
+            >
+            <input
+              type="text"
+              pInputText
+              placeholder="Matricule du copermutants"
+            />
+          </div>
+        </div>
+        <div class="flex pt-4 justify-content-between">
+          <p-button
+            (onClick)="prevCallback.emit()"
+            label="Back"
+            severity="secondary"
+            icon="pi pi-arrow-left"
+          />
+          <p-button label="Valider" icon="pi pi-arrow-right" iconPos="right" />
+        </div>
+      </ng-template>
+    </p-stepperPanel>
+  </p-stepper>
+</div>

@@ -1,5 +1,8 @@
 import { Component, inject } from '@angular/core';
-import { Personnel, PieceJustificatif } from '../../../../../core/data/personals/personnel.model';
+import {
+  Personnel,
+  PieceJustificatif,
+} from '../../../../../core/data/personals/personnel.model';
 import { DropdownModule } from 'primeng/dropdown';
 import { DatePipe } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -18,6 +21,7 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
 import { TooltipModule } from 'primeng/tooltip';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Cols } from '../../../../../core/data/primeng/primeng.model';
+import { AgentFormDetailsViewComponent } from '../../../agent-form-details-view/agent-form-details-view.component';
 
 @Component({
   selector: 'mrt-convenance-personnelle-niveau-regionale',
@@ -39,14 +43,37 @@ import { Cols } from '../../../../../core/data/primeng/primeng.model';
     DatePipe,
     ConfirmDialogModule,
     DividerModule,
-    TooltipModule
+    TooltipModule,
+    AgentFormDetailsViewComponent,
   ],
   templateUrl: './convenance-personnelle-niveau-regionale.component.html',
-  styleUrl: './convenance-personnelle-niveau-regionale.component.scss',
-  providers: [MessageService,ConfirmationService]
+  styles: `
+    :host ::ng-deep {
+    .p-fileupload {
+      padding: 0;
+  
+      .p-fileupload-buttonbar {
+        display: none;
+      }
+  
+      .p-fileupload-content {
+        border: 0 none;
+        padding: 0;
+      }
+  
+      .p-fileupload-row {
+        display: none;
+      }
+  
+      .p-progressbar {
+        display: none;
+      }
+    }
+  }
+  `,
+  providers: [MessageService, ConfirmationService],
 })
 export class ConvenancePersonnelleNiveauRegionaleComponent {
-
   pieceLibelle: string = '';
 
   image!: any;
@@ -57,27 +84,25 @@ export class ConvenancePersonnelleNiveauRegionaleComponent {
 
   confirmationService = inject(ConfirmationService);
 
-   // colonne du tableau
-   colsDossier: Cols[] = [
-    {field: 'libelle', header: 'Libellé de la pièce'},
-    {field: 'images', header: 'Images'}
-  ]
-
-  selectedPersonnel: Personnel = JSON.parse(localStorage.getItem('user') as string);
-
-   // Distinction
-   listeDistinction = [
-    'Nationale',
-    'Régionale',
-    'Départementale'
+  // colonne du tableau
+  colsDossier: Cols[] = [
+    { field: 'libelle', header: 'Libellé de la pièce' },
+    { field: 'images', header: 'Images' },
   ];
 
-   // liste des pieces justificatives
-   listeLibellePiece = [
-    'Photocopie de l\'arrêter de recrutement',
-    'Note de service d\'affectation vers la Wilaya/attestation de travail signee par le Dren',
-    'Dernier rapport d\'inspection pédagogique',
-    'Trois dernières notes d\'évaluation administrative',
+  selectedPersonnel: Personnel = JSON.parse(
+    localStorage.getItem('user') as string
+  );
+
+  // Distinction
+  listeDistinction = ['Nationale', 'Régionale', 'Départementale'];
+
+  // liste des pieces justificatives
+  listeLibellePiece = [
+    "Photocopie de l'arrêter de recrutement",
+    "Note de service d'affectation vers la Wilaya/attestation de travail signee par le Dren",
+    "Dernier rapport d'inspection pédagogique",
+    "Trois dernières notes d'évaluation administrative",
     'Extrait de naissance des enfants à charge',
     'Certificat de vie collective des enfants à charge',
     'Acte de mariage',
@@ -85,26 +110,17 @@ export class ConvenancePersonnelleNiveauRegionaleComponent {
     'Attestation médicale signée par un médecin spécialiste asermenté',
     'Compte rendu sur rapport médical',
     'Copie certifiée attestant la distinction',
-    'Autre document'
+    'Autre document',
   ];
 
-    // Sexe
-    sexeOptions = [
-      'Masculin',
-      'Féminin'
-    ]
+  // Sexe
+  sexeOptions = ['Masculin', 'Féminin'];
 
-   // Nombre d'enfants
-   nbrEnfantsOptions =[
-    'Moins de 5 enfants',
-    '5 enfants et plus'
-  ];
+  // Nombre d'enfants
+  nbrEnfantsOptions = ['Moins de 5 enfants', '5 enfants et plus'];
 
   // Ancienneté
-  ancieneteList = [
-    'Moins de 15 ans',
-    '15 ans et plus'
-  ];
+  ancieneteList = ['Moins de 15 ans', '15 ans et plus'];
 
   onUploadFile(event: any) {
     this.image = event.files[0];
@@ -115,18 +131,23 @@ export class ConvenancePersonnelleNiveauRegionaleComponent {
   }
 
   ajouter() {
-    if(this.image != null && this.pieceLibelle != ''){
-      this.listPieceJustificatif.push({libelle: this.pieceLibelle, images: this.image});
+    if (this.image != null && this.pieceLibelle != '') {
+      this.listPieceJustificatif.push({
+        libelle: this.pieceLibelle,
+        images: this.image,
+      });
       this.pieceLibelle = '';
       this.image = null;
-    }
-    else {
-      this.messageService.add({severity:'error', summary: 'Erreur', detail: 'Le libellé et l\'image sont obligatoires'});
+    } else {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Erreur',
+        detail: "Le libellé et l'image sont obligatoires",
+      });
     }
   }
 
   removePiece(index: number) {
     this.listPieceJustificatif.splice(index, 1);
   }
-
 }

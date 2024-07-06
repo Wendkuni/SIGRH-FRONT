@@ -1,0 +1,466 @@
+<p-toast
+  [showTransformOptions]="'translateY(100%)'"
+  [showTransitionOptions]="'1000ms'"
+  [hideTransitionOptions]="'1000ms'"
+  [showTransformOptions]="'translateX(100%)'"
+/>
+
+<p-confirmDialog #cd>
+  <ng-template pTemplate="headless" let-message>
+    <div
+      class="flex flex-column align-items-center p-5 surface-overlay border-round"
+    >
+      <div
+        class="border-circle bg-primary inline-flex justify-content-center align-items-center h-6rem w-6rem"
+      >
+        <i class="pi pi-question text-5xl"></i>
+      </div>
+      <span class="font-bold text-2xl block mb-2 mt-4">
+        {{ message.header }}
+      </span>
+      <p class="mb-0">{{ message.message }}</p>
+      <div class="flex align-items-center gap-2 mt-4">
+        <button
+          pButton
+          label="Oui"
+          (click)="cd.accept()"
+          class="w-8rem"
+        ></button>
+        <button
+          pButton
+          label="Non"
+          (click)="cd.reject()"
+          class="p-button-outlined p-button-danger w-8rem"
+        ></button>
+      </div>
+    </div>
+  </ng-template>
+</p-confirmDialog>
+
+<p-card>
+  <p-stepper>
+    <p-stepperPanel header="Poste(s) vaquants">
+      <ng-template
+        pTemplate="content"
+        let-nextCallback="nextCallback"
+        let-index="index"
+      >
+        <p-table
+          [value]="poste"
+          styleClass="p-datatable-gridlines"
+          [tableStyle]="{ 'min-width': '50rem' }"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Postes</th>
+              <th>Diplome requis</th>
+              <th>Nombre disponible</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-poste>
+            <tr>
+              <td>{{ poste.label }}</td>
+              <td>{{ poste.diplome }}</td>
+              <td>{{ poste.nombre }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+        <div class="flex pt-4 justify-content-end">
+          <p-button
+            label="Suivant"
+            icon="pi pi-arrow-right"
+            iconPos="right"
+            (onClick)="nextCallback.emit()"
+          />
+        </div>
+      </ng-template>
+    </p-stepperPanel>
+
+    <p-stepperPanel header="Formulaire de nomination">
+      <ng-template
+        pTemplate="content"
+        let-prevCallback="prevCallback"
+        let-nextCallback="nextCallback"
+        let-index="index"
+      >
+        <div class="p-fluid p-formgrid grid m-2">
+          <!-- Matricule -->
+          <div class="field col-12 md:col-3">
+            <label class="font-medium text-900">Matricule de l'agent</label>
+            <input
+              type="text"
+              [(ngModel)]="matricule"
+              pInputText
+              placeholder="Matricule"
+            />
+          </div>
+
+          <!-- Poste de nomination -->
+          <div class="field col-12 md:col-3">
+            <label for="poste" class="font-medium text-900"
+              >Poste de nomination</label
+            >
+            <p-dropdown
+              id="poste"
+              [options]="libellePoste"
+              [(ngModel)]="selectPoste"
+              [ngModelOptions]="{ standalone: true }"
+              placeholder="Selectionner le poste"
+            />
+          </div>
+
+          <!-- Ancienneté générale -->
+          <div class="field col-12 md:col-3">
+            <label for="AnciennetéGenerale"
+              >Ancienneté dans la Fonction publique</label
+            >
+            <input
+              type="number"
+              pInputText
+              id="AnciennetéGenerale"
+              placeholder="Entrez l'ancienneté dans la Fonction publique"
+              required
+            />
+          </div>
+
+          <!-- Note d'inspection pédagogique -->
+          <div class="field col-12 md:col-3">
+            <label for="notePedagogiq">Note d’inspection pédagogique</label>
+            <input
+              type="number"
+              pInputText
+              placeholder="Entrez la note d’inspection pédagogique"
+              id="notePedagogiq"
+              required
+            />
+          </div>
+
+          <!-- Note d'evaluation administrative -->
+          <div class="field col-12 md:col-3">
+            <label for="noteAdministrative"
+              >Note d’évaluation administrative</label
+            >
+            <input
+              type="number"
+              pInputText
+              placeholder="Entrez la note d’évaluation administrative"
+              id="noteAdministrative"
+              required
+            />
+          </div>
+
+          <!-- Ancienneté dans le poste de travail -->
+          <div class="field col-12 md:col-3">
+            <label for="ancienetePost"
+              >Ancienneté dans le poste de travail
+            </label>
+            <p-dropdown
+              id="ancienetePost"
+              [options]="ancieneteList"
+              placeholder="Choisir l'ancienneté dans le poste de travail "
+            />
+          </div>
+
+          <!-- Ancienneté dans l’administration scolaire -->
+          <div class="field col-12 md:col-3">
+            <label for="ancienetePost"
+              >Ancienneté dans l’administration scolaire</label
+            >
+            <input
+              type="number"
+              pInputText
+              placeholder="Entrez l'ancienneté dans l’administration scolaire"
+              id="noteAdministrative"
+              required
+            />
+          </div>
+
+          <!-- Autres diplômes ou certifications (préciser?) -->
+          <div class="field col-12 md:col-3">
+            <label for="autreDiplome">Autres diplômes ou certifications</label>
+            <p-dropdown
+              id="autreDiplome"
+              [options]="natureDiplome"
+              placeholder="Selectionner la nature du diplôme"
+            />
+          </div>
+
+          <!-- Distinction -->
+          <div class="field col-12 md:col-3">
+            <label for="distinction">Distinction</label>
+            <p-dropdown
+              id="distinction"
+              [options]="listeDistinction"
+              placeholder="Selectionner la distinction"
+            />
+          </div>
+
+          <!-- Discrimination positive -->
+          <div class="field col-12 md:col-3">
+            <label for="discrimination">Discrimination positive</label>
+            <p-dropdown
+              id="discrimination"
+              [options]="sexeOptions"
+              placeholder="Genre"
+            />
+          </div>
+        </div>
+
+        <div class="p-fluid p-formgrid grid m-2">
+          <div class="col-12 lg:col-5">
+            <div class="field">
+              <label class="font-medium text-900">Libellé de la Pièce</label>
+              <p-dropdown
+                id="libelle"
+                [options]="listeLibellePiece"
+                [(ngModel)]="pieceLibelle"
+                [ngModelOptions]="{ standalone: true }"
+                placeholder="Selectionner le libelle de la piece"
+              />
+              <p-fileUpload
+                #fileUpload
+                (onUpload)="onUploadFile($event)"
+                [customUpload]="true"
+                (onSelect)="onUploadFile($event)"
+                accept=".png,.jpg"
+                [showUploadButton]="false"
+                [showCancelButton]="false"
+                [auto]="true"
+                styleClass="border-1 surface-border surface-card p-0 border-round m-2"
+              >
+                <ng-template pTemplate="content">
+                  <div class="h-20rem m-1 border-round">
+                    @if(!image){
+                    <div
+                      class="flex flex-column w-full h-full justify-content-center align-items-center cursor-pointer"
+                      (click)="
+                        fileUpload.advancedFileInput.nativeElement.click()
+                      "
+                    >
+                      <i class="pi pi-fw pi-file text-4xl text-primary"></i>
+                      <span class="block font-semibold text-900 text-lg mt-3"
+                        >Déposer ou sélectionner une image</span
+                      >
+                    </div>
+                    } @if(image){
+                    <div class="w-full h-full relative border-round p-0">
+                      <img
+                        [src]="image.objectURL"
+                        class="w-full h-full border-round"
+                        alt="blog cover"
+                      />
+                      <button
+                        pButton
+                        pRipple
+                        type="button"
+                        icon="pi pi-times"
+                        class="p-button-rounded p-button-primary text-sm absolute justify-content-center align-items-center"
+                        style="top: -10px; right: -10px"
+                        (click)="$event.stopPropagation(); removeFile()"
+                      ></button>
+                    </div>
+                    }
+                  </div>
+                </ng-template>
+              </p-fileUpload>
+            </div>
+          </div>
+          <div class="col-12 lg:col-7">
+            <p-table
+              [columns]="colsDossier"
+              [value]="listPieceJustificatif"
+              #dt1
+              dataKey="id"
+              [rows]="5"
+              [showCurrentPageReport]="true"
+              currentPageReportTemplate="Page {currentPage} sur {totalPages}"
+              [paginator]="true"
+              styleClass="p-datatable-gridlines p-datatable-striped"
+              responsiveLayout="scroll"
+              [rowHover]="true"
+              [rowsPerPageOptions]="[5, 10]"
+              tableStyleClass="p-datatable-gridlines"
+            >
+              <ng-template let-columns pTemplate="header">
+                <tr>
+                  @for (col of columns; track col.field) {
+                  <th
+                    style="min-width: 15rem"
+                    [pSortableColumn]="col.field"
+                    class="font-weight-bold"
+                  >
+                    {{ col.header }}
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                  </th>
+                  }
+                  <th>Actions</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-piece>
+                <tr>
+                  <td>{{ piece.libelle }}</td>
+                  <td>
+                    <div
+                      class="flex flex-column w-2 justify-content-between"
+                      style="row-gap: 1rem"
+                    ></div>
+                    <img
+                      [src]="piece.images.objectURL"
+                      alt=""
+                      class="w-10rem shadow-4"
+                    />
+                  </td>
+                  <td>
+                    <!-- Bouton pour supprimer un element de la liste -->
+                    <button
+                      pButton
+                      type="button"
+                      label="Retirer"
+                      pRipple
+                      icon="pi pi-trash"
+                      (click)="supprimerPiece(piece)"
+                      class="p-button-rounded p-button-danger mx-2"
+                      iconPos="left"
+                    ></button>
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td colspan="8">Aucun élement.</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+
+        <div class="flex justify-content-between gap-3">
+          <button
+            pButton=""
+            pRipple=""
+            label="Ajouter la pièce"
+            (click)="ajouterPiece()"
+            icon="pi pi-plus"
+            class="p-element align-items-center flex-1 p-ripple p-button-outlined p-button-primary p-button p-component"
+          ></button>
+          <button
+            pButton
+            pRipple
+            (click)="ajouterNomination()"
+            class="p-button-primary flex-1"
+            label="Ajouter à la nomination"
+            icon="pi pi-fw pi-check"
+          ></button>
+        </div>
+
+        <div class="flex pt-4 justify-content-between">
+          <p-button
+            (onClick)="prevCallback.emit()"
+            label="Retour"
+            severity="secondary"
+            icon="pi pi-arrow-left"
+          />
+          <p-button
+            label="Suivant"
+            icon="pi pi-arrow-right"
+            iconPos="right"
+            (onClick)="nextCallback.emit()"
+          />
+        </div>
+      </ng-template>
+    </p-stepperPanel>
+
+    <p-stepperPanel header="Liste des nominés">
+      <ng-template
+        pTemplate="content"
+        let-prevCallback="prevCallback"
+        let-index="index"
+      >
+        <p-table
+          [columns]="colNomination"
+          [value]="listeNomination"
+          #dt
+          dataKey="id"
+          [rows]="5"
+          [showCurrentPageReport]="true"
+          currentPageReportTemplate="Page {currentPage} sur {totalPages}"
+          [paginator]="true"
+          styleClass="p-datatable-gridlines p-datatable-striped"
+          responsiveLayout="scroll"
+          [rowHover]="true"
+          [rowsPerPageOptions]="[5, 10]"
+          tableStyleClass="p-datatable-gridlines"
+        >
+          <ng-template let-columns pTemplate="header">
+            <tr>
+              @for (col of columns; track col.field) {
+              <th
+                style="min-width: 15rem"
+                [pSortableColumn]="col.field"
+                class="font-weight-bold"
+              >
+                {{ col.header }}
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+              </th>
+              }
+              <th></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-nomination>
+            <tr>
+              <td>{{ nomination.matricule }}</td>
+              <td>{{ nomination.poste }}</td>
+              <td>{{ nomination.listPiecesAgent.length }}</td>
+              <td>
+                <!--          Bouton pour supprimer un element de la liste -->
+                <button
+                  pButton
+                  type="button"
+                  label="Retirer"
+                  pRipple
+                  icon="pi pi-trash"
+                  (click)="supprimerNomination(nomination)"
+                  class="p-button-rounded p-button-danger mx-2"
+                  iconPos="left"
+                ></button>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="8">Aucun élement.</td>
+            </tr>
+          </ng-template>
+        </p-table>
+
+        <div class="flex justify-content-between gap-3 mt-2">
+          <button
+            pButton
+            pRipple
+            (click)="valider()"
+            class="p-button-primary flex-1"
+            label="Valider"
+            icon="pi pi-fw pi-check"
+          ></button>
+          <button
+            pButton
+            pRipple
+            (click)="annuler()"
+            class="p-button-danger flex-1 p-button-outlined"
+            label="Annuler"
+            icon="pi pi-fw pi-times"
+          ></button>
+        </div>
+
+        <div class="flex pt-4 justify-content-between">
+          <p-button
+            (onClick)="prevCallback.emit()"
+            label="Retour"
+            severity="secondary"
+            icon="pi pi-arrow-left"
+          />
+        </div>
+      </ng-template>
+    </p-stepperPanel>
+  </p-stepper>
+</p-card>

@@ -1,23 +1,6 @@
 <div class="justify-content-center">
-  <p-stepper [(activeStep)]="active" style="width: 75rem">
-    <p-stepperPanel>
-      <ng-template pTemplate="header" let-onClick="onClick" let-index="index">
-        <button
-          class="bg-transparent border-none inline-flex flex-column gap-2"
-          (click)="onClick.emit()"
-        >
-          <span
-            class="border-round border-2 w-3rem h-3rem inline-flex align-items-center justify-content-center"
-            [ngClass]="{
-              'bg-primary border-primary': index <= active,
-              'surface-border': index > active
-            }"
-          >
-            <i class="pi pi-user"></i>
-          </span>
-        </button>
-      </ng-template>
-
+  <p-stepper>
+    <p-stepperPanel header="Vos Informations">
       <ng-template pTemplate="content" let-nextCallback="nextCallback">
         <div class="text-center mt-3 mb-3 text-xl font-semibold">
           Vos Informations
@@ -35,31 +18,12 @@
       </ng-template>
     </p-stepperPanel>
 
-    <p-stepperPanel>
-      <ng-template pTemplate="header" let-onClick="onClick" let-index="index">
-        <button
-          class="bg-transparent border-none inline-flex flex-column gap-2"
-          (click)="onClick.emit()"
-        >
-          <span
-            class="border-round border-2 w-3rem h-3rem inline-flex align-items-center justify-content-center"
-            [ngClass]="{
-              'bg-primary border-primary': index <= active,
-              'surface-border': index > active
-            }"
-          >
-            <i class="pi pi-star"></i>
-          </span>
-        </button>
-      </ng-template>
+    <p-stepperPanel header="Pièces jointes">
       <ng-template
         pTemplate="content"
         let-prevCallback="prevCallback"
         let-nextCallback="nextCallback"
       >
-        <div class="text-center mt-3 mb-3 text-xl font-semibold">
-          Vos pieces jointes
-        </div>
         <div class="p-fluid p-formgrid grid m-2">
           <div class="col-12 lg:col-5">
             <div class="field col-12">
@@ -199,13 +163,13 @@
         <div class="flex pt-4 justify-content-between">
           <p-button
             (onClick)="prevCallback.emit()"
-            label="Back"
+            label="Retour"
             severity="secondary"
             icon="pi pi-arrow-left"
           />
           <p-button
             (onClick)="nextCallback.emit()"
-            label="Next"
+            label="Suivant"
             icon="pi pi-arrow-right"
             iconPos="right"
           />
@@ -213,34 +177,39 @@
       </ng-template>
     </p-stepperPanel>
 
-    <p-stepperPanel>
+    <p-stepperPanel header="Information du copermutant">
       <ng-template pTemplate="content" let-prevCallback="prevCallback">
-        <div
-          class="flex flex-column gap-2 mx-auto"
-          style="min-height: 7rem; max-width: 24rem"
-        >
-          <div class="text-center mt-3 mb-3 text-xl font-semibold">
-            Information du copermutants
-          </div>
-          <div class="field col-12">
-            <label class="font-medium text-900 m-2"
-              >Matricule du copermutants</label
-            >
-            <input
-              type="text"
-              pInputText
-              placeholder="Matricule du copermutants"
-            />
+        <div class="container">
+          <div class="p-fluid p-formgrid grid m-2">
+            <div class="flex align-items-center flex-wrap gap-2 m-3">
+              <label for="matricule">Matricule du copermutant</label>
+              <input
+                id="matricule"
+                type="text"
+                pInputText
+                placeholder="Matricule du copermutant"
+              />
+            </div>
+            <div class="flex align-items-center flex-wrap gap-2 m-3">
+              <label for="lieuPermutation">Lieu de permutation</label>
+              <input
+                id="lieuPermutation"
+                type="text"
+                pInputText
+                placeholder="Entrez le lieu de permutation"
+              />
+            </div>
           </div>
         </div>
+
         <div class="flex pt-4 justify-content-between">
           <p-button
             (onClick)="prevCallback.emit()"
-            label="Back"
+            label="Retour"
             severity="secondary"
             icon="pi pi-arrow-left"
           />
-          <p-button label="Valider" icon="pi pi-arrow-right" iconPos="right" />
+          <p-button label="Valider" icon="pi pi-check" iconPos="right" />
         </div>
       </ng-template>
     </p-stepperPanel>

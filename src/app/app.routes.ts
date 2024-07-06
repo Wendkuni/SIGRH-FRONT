@@ -55,6 +55,13 @@ export const routes: Routes = [
             './space/Agent_Space/affectation/agent-affectation-permutation/agent-affectation-permutation.component'
           ).then((item) => item.AgentAffectationPermutationComponent),
       },
+      {
+        path: 'agent-nomination',
+        loadComponent: () =>
+          import(
+            './space/Agent_Space/affectation/agent-nomination/agent-nomination.component'
+          ).then((item) => item.AgentNominationComponent),
+      },
     ],
   },
   {

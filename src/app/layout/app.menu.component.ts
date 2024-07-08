@@ -13,11 +13,16 @@ import { RouterLink } from '@angular/router';
 })
 export class AppMenuComponent implements OnInit {
   model: any[] = [];
+  role = '';
 
-  currentUser: Personnel = JSON.parse(localStorage.getItem('user') as string);
+  currentUser: any = JSON.parse(localStorage.getItem('user') as string);
 
   ngOnInit() {
-    if (this.currentUser.espace === 'ESPACE AGENT') {
+    for (let i = 0; i < this.currentUser.roles.length; i++) {
+      this.role = this.currentUser.roles[i];
+    }
+
+    if (this.role === 'ROLE_USER') {
       this.model = [
         {
           label: 'Page Accueil',
@@ -55,11 +60,13 @@ export class AppMenuComponent implements OnInit {
         },
       ];
     }
-    if (this.currentUser.espace === 'ESPACE DREN') {
+    if (this.role === 'ROLE_DREN') {
     }
-    if (this.currentUser.espace === 'ESPACE GHR') {
+    if (this.role === 'ROLE_COMMISSION') {
     }
-    if (this.currentUser.espace === 'ESPACE ADMINISTRATEUR') {
+    if (this.role === 'ROLE_GRH') {
+    }
+    if (this.role === 'ROLE_ADMIN') {
       this.model = [
         {
           label: 'Accueil',

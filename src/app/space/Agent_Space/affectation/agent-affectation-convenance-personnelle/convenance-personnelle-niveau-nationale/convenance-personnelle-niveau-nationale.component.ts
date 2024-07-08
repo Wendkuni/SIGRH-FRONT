@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, HostListener } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { PersonnelService } from '../../../../../core/data/personals/personnel.service';
 import {
@@ -90,10 +90,22 @@ export class ConvenancePersonnelleNiveauNationaleComponent implements OnInit {
   // injection du formBuilder
   fb = inject(FormBuilder);
 
+  // screenWidth = 0;
+
+  // phoneTable: boolean = true;
+
   // Service mobilite
   mobiliteService = inject(AffectationService);
 
   confirmationService = inject(ConfirmationService);
+
+  // @HostListener('window:resize', ['$event'])
+  // onResize(event: any) {
+  //   this.screenWidth = window.innerWidth;
+  //   if (this.screenWidth <= 500) {
+  //     this.phoneTable = false;
+  //   }
+  // }
 
   // list localite
   listLocalite$!: any;

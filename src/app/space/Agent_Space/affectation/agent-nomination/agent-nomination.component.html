@@ -86,7 +86,7 @@
         <div class="p-fluid p-formgrid grid m-2">
           <!-- Matricule -->
           <div class="field col-12 md:col-3">
-            <label class="font-medium text-900">Matricule de l'agent</label>
+            <label>Matricule de l'agent</label>
             <input
               type="text"
               [(ngModel)]="matricule"
@@ -97,9 +97,7 @@
 
           <!-- Poste de nomination -->
           <div class="field col-12 md:col-3">
-            <label for="poste" class="font-medium text-900"
-              >Poste de nomination</label
-            >
+            <label for="poste">Poste de nomination</label>
             <p-dropdown
               id="poste"
               [options]="libellePoste"

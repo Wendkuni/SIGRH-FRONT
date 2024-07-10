@@ -15,8 +15,9 @@ import { TableModule } from 'primeng/table';
 import { TabViewModule } from 'primeng/tabview';
 import { ToastModule } from 'primeng/toast';
 import { TooltipModule } from 'primeng/tooltip';
-import { Personnel } from '../../../../../core/data/personals/personnel.model';
-import { Cols } from '../../../../../core/data/primeng/primeng.model';
+import { Personnel } from '../../../../core/data/personals/personnel.model';
+import { Cols } from '../../../../core/data/primeng/primeng.model';
+import { DialogModule } from 'primeng/dialog';
 
 interface AffectSortant {
   NNI: any;
@@ -53,6 +54,8 @@ interface AffectSortant {
     FormsModule,
     RouterLink,
     CalendarModule,
+    CardModule,
+    DialogModule,
   ],
   templateUrl: './affectation-necessite-service.component.html',
   providers: [MessageService, ConfirmationService],
@@ -61,6 +64,7 @@ export class AffectationNecessiteServiceComponent {
   affectationsortant: AffectSortant = {} as AffectSortant;
 
   action = 'Add';
+  besoinDrenDialog: boolean = false;
 
   list = Array<AffectSortant>();
 
@@ -98,6 +102,15 @@ export class AffectationNecessiteServiceComponent {
 
   ListDren = ['Dren1', 'Dren2', 'Dren3', 'Dren4'];
   Sexe = ['Masculin', 'Feminin'];
+
+  // View poste actuel par dren ouvert
+  viewDialog() {
+    this.besoinDrenDialog = true;
+  }
+  // View poste actuel par dren fermer
+  closeDialog() {
+    this.besoinDrenDialog = false;
+  }
 
   ajouterForm() {
     if (this.action == 'Add') {

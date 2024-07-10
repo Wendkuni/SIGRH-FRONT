@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { TabViewModule } from 'primeng/tabview';
 import { AffectationNecessiteServiceTraitementComponent } from './affectation-necessite-service-traitement/affectation-necessite-service-traitement.component';
-import { AffectationNecessiteServiceComponent } from './affectation-necessite-service/affectation-necessite-service.component';
 import { AffectationNecessiteServiceFormulaireComponent } from './affectation-necessite-service-formulaire/affectation-necessite-service-formulaire.component';
 import { CardModule } from 'primeng/card';
 
@@ -13,7 +12,6 @@ import { CardModule } from 'primeng/card';
     TabViewModule,
     TableModule,
     AffectationNecessiteServiceTraitementComponent,
-    AffectationNecessiteServiceComponent,
     AffectationNecessiteServiceFormulaireComponent,
     CardModule,
   ],

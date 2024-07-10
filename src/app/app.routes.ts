@@ -59,7 +59,7 @@ export const routes: Routes = [
         path: 'agent-nomination',
         loadComponent: () =>
           import(
-            './space/Agent_Space/affectation/agent-nomination/agent-nomination.component'
+            './space/Grh-Space/Affectation/agent-nomination/agent-nomination.component'
           ).then((item) => item.AgentNominationComponent),
       },
       {
@@ -98,6 +98,20 @@ export const routes: Routes = [
           import(
             './space/Statistiques/Affectation/statistique-affectation-permutation/statistique-affectation-permutation.component'
           ).then((item) => item.StatistiqueAffectationPermutationComponent),
+      },
+      {
+        path: 'recapitulatif-nomination',
+        loadComponent: () =>
+          import(
+            './space/Statistiques/Affectation/statistique-affectation-nomination/statistique-affectation-nomination.component'
+          ).then((item) => item.StatistiqueAffectationNominationComponent),
+      },
+      {
+        path: 'necessite-service-sortant',
+        loadComponent: () =>
+          import(
+            './space/Grh-Space/Affectation/affectation-necessite-service/affectation-necessite-service.component'
+          ).then((item) => item.AffectationNecessiteServiceComponent),
       },
     ],
   },

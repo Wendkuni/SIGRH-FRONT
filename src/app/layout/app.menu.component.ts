@@ -21,7 +21,7 @@ export class AppMenuComponent implements OnInit {
     for (let i = 0; i < this.currentUser.roles.length; i++) {
       this.role = this.currentUser.roles[i];
     }
-
+    // Espace Agent
     if (this.role === 'ROLE_USER') {
       this.model = [
         {
@@ -56,6 +56,8 @@ export class AppMenuComponent implements OnInit {
         },
       ];
     }
+
+    // Espace DREN
     if (this.role === 'ROLE_DREN') {
       this.model = [
         {
@@ -104,10 +106,67 @@ export class AppMenuComponent implements OnInit {
         },
       ];
     }
+
+    // Espace commission
     if (this.role === 'ROLE_COMMISSION') {
     }
+
+    // Espace GRH
     if (this.role === 'ROLE_GRH') {
+      this.model = [
+        {
+          label: 'Page Accueil',
+          items: [
+            {
+              label: 'Acceuil',
+              icon: 'pi pi-home',
+              routerLink: ['/home'],
+            },
+          ],
+        },
+        {
+          label: 'Pages de Gestion',
+          items: [
+            {
+              label: 'Gestion de Mobilité',
+              icon: 'pi pi-sort-alt',
+              items: [
+                {
+                  label: 'Néccesité de service Sortant',
+                  routerLink: ['/necessite-service-sortant'],
+                },
+                {
+                  label: 'Nomination',
+                  routerLink: ['/agent-nomination'],
+                },
+                {
+                  label: 'Recapiulatif',
+                  items: [
+                    {
+                      label: 'Convenance Personnelle',
+                      icon: 'pi pi-list-check ',
+                      routerLink: ['/recapitulatif-convenance-personnelle'],
+                    },
+                    {
+                      label: 'Nomination',
+                      icon: 'pi pi-list-check ',
+                      routerLink: ['/recapitulatif-nomination'],
+                    },
+                    {
+                      label: 'Permutation',
+                      icon: 'pi pi-list-check ',
+                      routerLink: ['/recapitulatif-permutation'],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ];
     }
+
+    // Espace ADMIN
     if (this.role === 'ROLE_ADMIN') {
       this.model = [
         {

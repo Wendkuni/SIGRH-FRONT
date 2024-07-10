@@ -62,6 +62,27 @@ export const routes: Routes = [
             './space/Agent_Space/affectation/agent-nomination/agent-nomination.component'
           ).then((item) => item.AgentNominationComponent),
       },
+      {
+        path: 'dren-affectation-convenance-personnelle',
+        loadComponent: () =>
+          import(
+            './space/Dren_Space/dren-affectation/dren-affectation.component'
+          ).then((item) => item.DrenAffectationComponent),
+      },
+      {
+        path: 'dren-necessite-service',
+        loadComponent: () =>
+          import(
+            './space/Dren_Space/dren-affectation/dren-affectation-necessite-service/dren-affectation-necessite-service.component'
+          ).then((item) => item.DrenAffectationNecessiteServiceComponent),
+      },
+      {
+        path: 'dren-affectation-permutation',
+        loadComponent: () =>
+          import(
+            './space/Dren_Space/dren-affectation/dren-affectation-permutation/dren-affectation-permutation.component'
+          ).then((item) => item.DrenAffectationPermutationComponent),
+      },
     ],
   },
   {

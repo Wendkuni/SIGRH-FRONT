@@ -1,0 +1,166 @@
+<p-toast
+  [showTransformOptions]="'translateY(100%)'"
+  [showTransitionOptions]="'1000ms'"
+  [hideTransitionOptions]="'1000ms'"
+  [showTransformOptions]="'translateX(100%)'"
+/>
+
+<p-confirmDialog #cd>
+  <ng-template pTemplate="headless" let-message>
+    <div
+      class="flex flex-column align-items-center p-5 surface-overlay border-round"
+    >
+      <div
+        class="border-circle bg-primary inline-flex justify-content-center align-items-center h-6rem w-6rem"
+      >
+        <i class="pi pi-question text-5xl"></i>
+      </div>
+      <span class="font-bold text-2xl block mb-2 mt-4">
+        {{ message.header }}
+      </span>
+      <p class="mb-0">{{ message.message }}</p>
+      <div class="flex align-items-center gap-2 mt-4">
+        <button
+          pButton
+          label="Oui"
+          (click)="cd.accept()"
+          class="w-8rem"
+        ></button>
+        <button
+          pButton
+          label="Non"
+          (click)="cd.reject()"
+          class="p-button-outlined p-button-danger w-8rem"
+        ></button>
+      </div>
+    </div>
+  </ng-template>
+</p-confirmDialog>
+
+<div class="container">
+  <p-toolbar styleClass="mb-4">
+    <ng-template pTemplate="right">
+      <div class="my-2">
+        <button
+          pButton
+          pRipple
+          label="Favorable"
+          icon="pi pi-check"
+          class="p-button-success mr-2"
+          [disabled]="!selectedDossier || !selectedDossier.length"
+          (click)="validerFavorable()"
+        ></button>
+        <button
+          pButton
+          pRipple
+          label="Défavorable"
+          icon="pi pi-times"
+          class="p-button-danger"
+          [disabled]="!selectedDossier || !selectedDossier.length"
+          (click)="validerDefavorable()"
+        ></button>
+      </div>
+    </ng-template>
+  </p-toolbar>
+
+  <p-table
+    #dt
+    [value]="tableDataDossierSortant"
+    [columns]="colsDossierSortant"
+    responsiveLayout="scroll"
+    [rows]="10"
+    [globalFilterFields]="['nbrPoint', 'matricule', 'nomPrenom', 'nni']"
+    [rows]="10"
+    [paginator]="true"
+    [rowsPerPageOptions]="[10, 20, 30]"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [(selection)]="selectedDossier"
+    [rowHover]="true"
+    dataKey="n"
+  >
+    <ng-template pTemplate="caption">
+      <div
+        class="flex flex-column md:flex-row md:justify-content-between md:align-items-center"
+      >
+        <h5 class="m-0">Liste des demandes</h5>
+        <span class="block mt-2 md:mt-0 p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input
+            pInputText
+            type="text"
+            (input)="onGlobalFilter(dt, $event)"
+            placeholder="Search..."
+            class="w-full sm:w-auto"
+          />
+        </span>
+      </div>
+    </ng-template>
+    <ng-template let-columns pTemplate="header">
+      <tr>
+        <th style="width: 3rem">
+          <p-tableHeaderCheckbox />
+        </th>
+        @for (col of columns; track col.field) {
+        <th
+          style="min-width: 10rem"
+          [pSortableColumn]="col.field"
+          class="font-weight-bold"
+        >
+          {{ col.header }}
+          <p-sortIcon [field]="col.field"></p-sortIcon>
+        </th>
+        }
+        <th>Actions</th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-dossier>
+      <tr>
+        <td>
+          <p-tableCheckbox [value]="dossier" />
+        </td>
+        <td>{{ dossier.n }}</td>
+        <td>{{ dossier.nbrPoint }}</td>
+        <td>{{ dossier.Matricule }}</td>
+        <td>{{ dossier.nomPrenom }}</td>
+        <td>{{ dossier.nni }}</td>
+        <td>{{ dossier.grade }}</td>
+        <td>{{ dossier.option }}</td>
+        <td>{{ dossier.lieu }}</td>
+        <td>{{ dossier.position }}</td>
+        <td>{{ dossier.ancieneteGenerale }}</td>
+        <td>{{ dossier.anciennetePoste }}</td>
+        <td>{{ dossier.noteAdministrative }}</td>
+        <td>{{ dossier.notePedagogique }}</td>
+        <td>{{ dossier.situationFamiliale }}</td>
+        <td>{{ dossier.nbrEnfant }}</td>
+        <td>{{ dossier.situationSanitaire }}</td>
+        <td>{{ dossier.genre }}</td>
+        <td>{{ dossier.choix1 }}</td>
+        <td>{{ dossier.choix2 }}</td>
+        <td>{{ dossier.choix3 }}</td>
+        <td>{{ dossier.choix4 }}</td>
+        <td>{{ dossier.choix5 }}</td>
+        <td>
+          <button
+            pButton
+            pRipple
+            label="Favorable"
+            icon="pi pi-check"
+            class="p-button-success mr-2"
+          ></button>
+        </td>
+        <td>
+          <button
+            pButton
+            pRipple
+            label="Défavorable"
+            icon="pi pi-times"
+            class="p-button-danger"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

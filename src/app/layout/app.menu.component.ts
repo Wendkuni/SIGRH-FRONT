@@ -50,10 +50,6 @@ export class AppMenuComponent implements OnInit {
                   label: 'Permutation de poste',
                   routerLink: ['/agent-permutation-poste'],
                 },
-                {
-                  label: 'Nomination',
-                  routerLink: ['/agent-nomination'],
-                },
               ],
             },
           ],
@@ -61,6 +57,45 @@ export class AppMenuComponent implements OnInit {
       ];
     }
     if (this.role === 'ROLE_DREN') {
+      this.model = [
+        {
+          label: 'Page Accueil',
+          items: [
+            {
+              label: 'Acceuil',
+              icon: 'pi pi-home',
+              routerLink: ['/home'],
+            },
+          ],
+        },
+        {
+          label: 'Pages de Gestion',
+          items: [
+            {
+              label: 'Gestion de Mobilité',
+              icon: 'pi pi-sort-alt',
+              items: [
+                {
+                  label: 'Convenances personnelles',
+                  routerLink: ['/dren-affectation-convenance-personnelle'],
+                },
+                {
+                  label: 'Néccesité de service ',
+                  routerLink: ['/dren-necessite-service'],
+                },
+                {
+                  label: 'Nomination',
+                  routerLink: ['/agent-nomination'],
+                },
+                {
+                  label: 'Permutation',
+                  routerLink: ['/dren-affectation-permutation'],
+                },
+              ],
+            },
+          ],
+        },
+      ];
     }
     if (this.role === 'ROLE_COMMISSION') {
     }
@@ -85,19 +120,15 @@ export class AppMenuComponent implements OnInit {
             {
               label: 'MODULE 1: Gestion de Mobilité',
               icon: 'pi pi-fw pi-user',
-              roles: ['Utilisateur', 'Administrateur', 'Dren', 'Grh'],
               items: [
                 {
                   label: 'Enregistrements',
-                  routerLink: ['/mobilite'],
                 },
                 {
                   label: 'Appréciations',
-                  roles: ['Utilisateur', 'Administrateur', 'Dren', 'Grh'],
                 },
                 {
                   label: 'Etats',
-                  roles: ['Administrateur', 'Grh'],
                 },
               ],
             },

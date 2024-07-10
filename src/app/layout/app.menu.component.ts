@@ -84,12 +84,19 @@ export class AppMenuComponent implements OnInit {
                   routerLink: ['/dren-necessite-service'],
                 },
                 {
-                  label: 'Nomination',
-                  routerLink: ['/agent-nomination'],
-                },
-                {
-                  label: 'Permutation',
-                  routerLink: ['/dren-affectation-permutation'],
+                  label: 'Recapiulatif',
+                  items: [
+                    {
+                      label: 'Convenance Personnelle',
+                      icon: 'pi pi-list-check ',
+                      routerLink: ['/recapitulatif-convenance-personnelle'],
+                    },
+                    {
+                      label: 'Permutation',
+                      icon: 'pi pi-list-check ',
+                      routerLink: ['/recapitulatif-permutation'],
+                    },
+                  ],
                 },
               ],
             },

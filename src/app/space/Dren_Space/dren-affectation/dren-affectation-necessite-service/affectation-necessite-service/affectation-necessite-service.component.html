@@ -1,0 +1,291 @@
+<p-toast
+  [showTransformOptions]="'translateY(100%)'"
+  [showTransitionOptions]="'1000ms'"
+  [hideTransitionOptions]="'1000ms'"
+  [showTransformOptions]="'translateX(100%)'"
+/>
+
+<p-confirmDialog />
+<div>
+  <div>
+    <button
+      pButton
+      pRipple
+      class="p-button-primary flex-1 m-2"
+      label="Besoin DREN"
+      icon="pi pi-eye"
+    ></button>
+  </div>
+
+  <div class="container">
+    <div class="border-1 surface-border border-round p-fluid mb-2">
+      <span class="text-900 font-bold block border-bottom-1 surface-border p-3"
+        >Formulaire
+      </span>
+      <div class="p-fluid p-formgrid grid m-2">
+        <div class="field col-12 md:col-3">
+          <label for="nni">NNI</label>
+          <input
+            id="nni"
+            type="Number"
+            pInputText
+            [(ngModel)]="affectationsortant.NNI"
+            [ngModelOptions]="{ standalone: true }"
+            placeholder="NNI"
+          />
+        </div>
+        <div class="field col-12 md:col-3">
+          <label for="np">Nom et Prénom</label>
+          <input
+            id="np"
+            type="text"
+            pInputText
+            [(ngModel)]="affectationsortant.NomPrenom"
+            [ngModelOptions]="{ standalone: true }"
+            placeholder="Entrez le Nom et Prénom"
+          />
+        </div>
+        <div class="field col-12 md:col-3">
+          <label for="sex">Sexe</label>
+          <p-dropdown
+            id="sex"
+            [(ngModel)]="affectationsortant.sexe"
+            [options]="Sexe"
+            placeholder="Selectionner le sexe"
+          />
+        </div>
+        <div class="field col-12 md:col-3">
+          <label class="font-medium text-900">Date de Naissance</label>
+          <p-calendar
+            id="datenaiss"
+            [dateFormat]="'yy-mm-dd '"
+            [(ngModel)]="affectationsortant.DateNaissance"
+            placeholder="Entre la date(yyyy-mm-dd)"
+            styleClass="mb-1"
+            appendTo="body"
+            [showTime]="false"
+          />
+        </div>
+        <div class="field col-12 md:col-3">
+          <label for="diplome" class="font-medium text-900"
+            >Diplôme Professionnel</label
+          >
+          <input
+            id="diplome"
+            type="text"
+            [(ngModel)]="affectationsortant.DiplomeProfessionel"
+            pInputText
+            placeholder="Diplôme Professionnel"
+          />
+        </div>
+        <div class="field col-12 md:col-3">
+          <label for="diplomeAcade" class="font-medium text-900"
+            >Diplôme Académique</label
+          >
+          <input
+            id="diplomeAcade"
+            type="text"
+            pInputText
+            [(ngModel)]="affectationsortant.DiplomeAcademique"
+            placeholder="Entrer Diplôme Académique"
+          />
+        </div>
+        <div class="field col-12 md:col-3">
+          <label for="bilanAcade" class="font-medium text-900"
+            >Bilan Académique</label
+          >
+          <input
+            id="bilanAcade"
+            type="text"
+            pInputText
+            [(ngModel)]="affectationsortant.BilanAcademie"
+            placeholder="Entrer le bilan Académique"
+          />
+        </div>
+        <div class="field col-12 md:col-3">
+          <label for="cors">Corps</label>
+          <p-dropdown
+            id="cors"
+            [(ngModel)]="affectationsortant.Corps"
+            [options]="Listcorps"
+            placeholder="Selectionner le corp"
+          />
+        </div>
+        <div class="field col-12 md:col-3">
+          <label for="situationMatri" class="font-medium text-900"
+            >Situation Matrimoniale</label
+          >
+          <input
+            id="situationMatri"
+            type="text"
+            pInputText
+            [(ngModel)]="affectationsortant.SituationMatrimonial"
+            placeholder="Entrer la Situation Matrimoniale"
+          />
+        </div>
+        <div class="field col-12 md:col-3">
+          <label for="rang" class="font-medium text-900">Rang</label>
+          <input
+            id="rang"
+            type="number"
+            pInputText
+            [(ngModel)]="affectationsortant.Rang"
+            placeholder="Entrer le rang"
+          />
+        </div>
+
+        <div class="field col-12 md:col-3">
+          <label for="choixMajor" class="font-medium text-900"
+            >Choix du major de la promotion</label
+          >
+          <input
+            id="choixMajor"
+            type="text"
+            pInputText
+            [(ngModel)]="affectationsortant.ChoixDuMajor"
+            placeholder="Entrer le Choix du major "
+          />
+        </div>
+
+        <div class="field col-12 md:col-3">
+          <label for="Dren">Dren</label>
+          <p-dropdown
+            id="Dren"
+            [(ngModel)]="affectationsortant.Dren"
+            [options]="ListDren"
+            placeholder="Selectionner le Dren"
+          />
+        </div>
+        <button
+          pButton=""
+          pRipple=""
+          (click)="ajouterForm()"
+          label="Ajouter a la liste"
+          icon="pi pi-plus"
+          class="p-element w-15rem p-ripple p-button-outlined p-button-primary p-button p-component"
+        ></button>
+      </div>
+    </div>
+
+    <!--        Liste dans la tale-->
+    <div class="col-12">
+      <div class="text-900 font-bold text-3xl mb-4 mt-2">
+        Lise des affectations sortants
+      </div>
+      <p-table
+        [columns]="colsForm"
+        [value]="list"
+        #dt1
+        dataKey="id"
+        [rows]="5"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="Page {currentPage} sur {totalPages}"
+        [paginator]="true"
+        styleClass="p-datatable-gridlines p-datatable-striped"
+        responsiveLayout="scroll"
+        [rowHover]="true"
+        [rowsPerPageOptions]="[5, 10]"
+        tableStyleClass="p-datatable-gridlines"
+      >
+        <ng-template let-columns pTemplate="header">
+          <tr>
+            @for (col of columns; track col.field) {
+            <th
+              style="min-width: 15rem"
+              [pSortableColumn]="col.field"
+              class="font-weight-bold"
+            >
+              {{ col.header }}
+              <p-sortIcon [field]="col.field"></p-sortIcon>
+            </th>
+            }
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-piece>
+          <tr>
+            <td>{{ piece.NNI }}</td>
+            <td>{{ piece.NomPrenom }}</td>
+            <td>{{ piece.sexe }}</td>
+            <td>{{ piece.DateNaissance | date : "dd/MM/yyyy" }}</td>
+            <td>{{ piece.DiplomeProfessionel }}</td>
+            <td>{{ piece.DiplomeAcademique }}</td>
+            <td>{{ piece.BilanAcademie }}</td>
+
+            <td>{{ piece.Corps }}</td>
+            <td>{{ piece.SituationMatrimonial }}</td>
+            <td>{{ piece.Rang }}</td>
+            <td>{{ piece.ChoixDuMajor }}</td>
+            <td>{{ piece.Dren }}</td>
+            <!--          <td>    <button-->
+            <!--            pButton-->
+            <!--            type="button"-->
+            <!--            pTooltip="Valider"-->
+            <!--            tooltipPosition="top"-->
+            <!--            pRipple-->
+            <!--            icon="pi pi-check"-->
+            <!--            (click)="valider()"-->
+            <!--            class="p-button-rounded p-button-success mx-2"-->
+            <!--            iconPos="left"-->
+
+            <!--          ></button></td>-->
+
+            <td>
+              <button
+                pButton
+                type="button"
+                pTooltip="Modifier"
+                tooltipPosition="top"
+                pRipple
+                icon="pi pi-pencil"
+                class="p-button-rounded p-button-info mx-2"
+                iconPos="left"
+              ></button>
+            </td>
+            <td>
+              <!--          Bouton pour supprimer un element de la liste -->
+              <button
+                pButton
+                type="button"
+                pTooltip="Retirer"
+                tooltipPosition="top"
+                pRipple
+                icon="pi pi-trash"
+                class="p-button-rounded p-button-danger mx-2"
+                iconPos="left"
+                (click)="removeFormulaire(piece)"
+              ></button>
+            </td>
+
+            <td></td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="8">Aucun élement.</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>
+
+<div class="flex justify-content-between gap-3">
+  <button
+    pButton
+    pRipple
+    class="p-button-primary flex-1"
+    label="Enregistrer"
+    (click)="valider()"
+    icon="pi pi-fw pi-check"
+  ></button>
+  <button
+    pButton
+    pRipple
+    class="p-button-danger flex-1 p-button-outlined"
+    label="Annuler"
+    icon="pi pi-fw pi-times"
+  ></button>
+</div>

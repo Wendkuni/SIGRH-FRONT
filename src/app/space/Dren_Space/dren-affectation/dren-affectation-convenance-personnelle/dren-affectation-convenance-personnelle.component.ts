@@ -8,6 +8,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { CardModule } from 'primeng/card';
 
 @Component({
   selector: 'mrt-dren-affectation-convenance-personnelle',
@@ -20,6 +21,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     InputTextModule,
     ToastModule,
     ConfirmDialogModule,
+    CardModule,
   ],
   templateUrl: './dren-affectation-convenance-personnelle.component.html',
   styleUrl: './dren-affectation-convenance-personnelle.component.scss',

@@ -1,9 +1,42 @@
 <p-toast
+  autoZIndex="true"
   [showTransformOptions]="'translateY(100%)'"
   [showTransitionOptions]="'1000ms'"
   [hideTransitionOptions]="'1000ms'"
   [showTransformOptions]="'translateX(100%)'"
 />
+
+<p-confirmDialog #cd appendTo="body">
+  <ng-template pTemplate="headless" let-message>
+    <div
+      class="flex flex-column align-items-center p-5 surface-overlay border-round"
+    >
+      <div
+        class="border-circle bg-primary inline-flex justify-content-center align-items-center h-6rem w-6rem"
+      >
+        <i class="pi pi-question text-5xl"></i>
+      </div>
+      <span class="font-bold text-2xl block mb-2 mt-4">
+        {{ message.header }}
+      </span>
+      <p class="mb-0">{{ message.message }}</p>
+      <div class="flex align-items-center gap-2 mt-4">
+        <button
+          pButton
+          label="Oui"
+          (click)="cd.accept()"
+          class="w-8rem"
+        ></button>
+        <button
+          pButton
+          label="Non"
+          (click)="cd.reject()"
+          class="p-button-outlined p-button-danger w-8rem"
+        ></button>
+      </div>
+    </div>
+  </ng-template>
+</p-confirmDialog>
 
 <div class="layout-menu-profile">
   <button
@@ -54,38 +87,6 @@
         <i class="pi pi-power-off pi-fw"></i>
         <span>Logout</span>
       </button>
-
-      <p-confirmDialog #cd>
-        <ng-template pTemplate="headless" let-message>
-          <div
-            class="flex flex-column align-items-center p-5 surface-overlay border-round"
-          >
-            <div
-              class="border-circle bg-primary inline-flex justify-content-center align-items-center h-6rem w-6rem"
-            >
-              <i class="pi pi-question text-5xl"></i>
-            </div>
-            <span class="font-bold text-2xl block mb-2 mt-4">
-              {{ message.header }}
-            </span>
-            <p class="mb-0">{{ message.message }}</p>
-            <div class="flex align-items-center gap-2 mt-4">
-              <button
-                pButton
-                label="Oui"
-                (click)="cd.accept()"
-                class="w-8rem"
-              ></button>
-              <button
-                pButton
-                label="Non"
-                (click)="cd.reject()"
-                class="p-button-outlined p-button-danger w-8rem"
-              ></button>
-            </div>
-          </div>
-        </ng-template>
-      </p-confirmDialog>
     </li>
   </ul>
 </div>

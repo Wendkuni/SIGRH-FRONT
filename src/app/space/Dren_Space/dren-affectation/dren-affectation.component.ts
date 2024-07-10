@@ -7,14 +7,14 @@ import { DrenAffectationConvenancePersonnelleComponent } from './dren-affectatio
   standalone: true,
   imports: [TabViewModule, DrenAffectationConvenancePersonnelleComponent],
   template: `
-    <p-tabView>
-      <!-- Entrant -->
-      <p-tabPanel header="Entrant"></p-tabPanel>
-      <!-- Sortant -->
-      <p-tabPanel header="Sortant">
-        <mrt-dren-affectation-convenance-personnelle />
-      </p-tabPanel>
-    </p-tabView>
+    <!-- <p-tabView> -->
+    <!-- Entrant -->
+    <!-- <p-tabPanel header="Entrant"></p-tabPanel> -->
+    <!-- Sortant -->
+    <!-- <p-tabPanel header="Sortant"> -->
+    <mrt-dren-affectation-convenance-personnelle />
+    <!--  </p-tabPanel>
+    </p-tabView> -->
   `,
 })
 export class DrenAffectationComponent {}

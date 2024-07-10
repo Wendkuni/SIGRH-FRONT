@@ -66,8 +66,8 @@ export const routes: Routes = [
         path: 'dren-affectation-convenance-personnelle',
         loadComponent: () =>
           import(
-            './space/Dren_Space/dren-affectation/dren-affectation.component'
-          ).then((item) => item.DrenAffectationComponent),
+            './space/Dren_Space/dren-affectation/dren-affectation-convenance-personnelle/dren-affectation-convenance-personnelle.component'
+          ).then((item) => item.DrenAffectationConvenancePersonnelleComponent),
       },
       {
         path: 'dren-necessite-service',
@@ -82,6 +82,22 @@ export const routes: Routes = [
           import(
             './space/Dren_Space/dren-affectation/dren-affectation-permutation/dren-affectation-permutation.component'
           ).then((item) => item.DrenAffectationPermutationComponent),
+      },
+      {
+        path: 'recapitulatif-convenance-personnelle',
+        loadComponent: () =>
+          import(
+            './space/Statistiques/Affectation/statistique-affectation-convenance-personnel/statistique-affectation-convenance-personnel.component'
+          ).then(
+            (item) => item.StatistiqueAffectationConvenancePersonnelComponent
+          ),
+      },
+      {
+        path: 'recapitulatif-permutation',
+        loadComponent: () =>
+          import(
+            './space/Statistiques/Affectation/statistique-affectation-permutation/statistique-affectation-permutation.component'
+          ).then((item) => item.StatistiqueAffectationPermutationComponent),
       },
     ],
   },

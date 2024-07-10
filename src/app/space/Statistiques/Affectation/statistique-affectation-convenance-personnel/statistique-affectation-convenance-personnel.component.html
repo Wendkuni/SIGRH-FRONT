@@ -1,0 +1,76 @@
+<p-tabView>
+  <!-- Depart -->
+  <p-tabPanel header="Depart">
+    <div class="text-900 font-bold text-3xl mb-4 mt-2">
+      Liste des demandes de depart pour convenance personnelles
+    </div>
+    <button
+      pButton=""
+      pRipple=""
+      label="PDF"
+      icon="pi pi-file-pdf"
+      class="p-button-warning mr-2"
+    ></button>
+    <p-calendar
+      [(ngModel)]="date"
+      view="year"
+      placeholder="Selectionner la session"
+      dateFormat="yy"
+    />
+
+    <div class="mt-4">
+      <p-table>
+        [value]="product" styleClass="p-datatable-gridlines"
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Wilaya</th>
+            <th>Nb de demandes</th>
+            <th>Femmes</th>
+            <th>Handicap</th>
+            <th>Dossier médicaux</th>
+            <th>Regroupements familiaux</th>
+            <th>Cas sociaux</th>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </p-tabPanel>
+
+  <!--  Régional -->
+  <p-tabPanel header="Arrivée">
+    <div class="text-900 font-bold text-3xl mb-4 mt-2">
+      Liste des demandes d'arrivées pour convenance personnelles
+    </div>
+
+    <button
+      pButton=""
+      pRipple=""
+      label="PDF"
+      icon="pi pi-file-pdf"
+      class="p-button-warning mr-2"
+    ></button>
+
+    <p-calendar
+      [(ngModel)]="date"
+      view="year"
+      placeholder="Selectionner la session"
+      dateFormat="yy"
+    />
+    <div class="mt-4">
+      <p-table>
+        [value]="product" styleClass="p-datatable-gridlines"
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Wilaya</th>
+            <th>Nb de demandes</th>
+            <th>Femmes</th>
+            <th>Handicap</th>
+            <th>Dossiers médicaux</th>
+            <th>Regroupements familiaux</th>
+            <th>Cas sociaux</th>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </p-tabPanel>
+</p-tabView>

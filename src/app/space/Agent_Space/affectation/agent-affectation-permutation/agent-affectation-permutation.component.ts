@@ -8,35 +8,22 @@ import { CardModule } from 'primeng/card';
   selector: 'mrt-agent-affectation-permutation',
   standalone: true,
   template: `
-    <!-- <p-tabView> -->
-    <!-- Envoi -->
-    <!-- <p-tabPanel header="Envoi">
-        <div class="text-900 font-bold text-3xl mb-4 mt-2">
-          Formulaire de permutation niveau national
-        </div>
-        <div class="m-2">
-          <mrt-permutation-niveau-national></mrt-permutation-niveau-national>
-        </div>
-      </p-tabPanel> -->
+    <p-tabView>
+      <!-- Demande en attente -->
+      <p-tabPanel header="Demande en attente">
+        <mrt-permutation-niveau-national />
+      </p-tabPanel>
 
-    <!-- Reception -->
-    <!-- <p-tabPanel header="Reception">
+      <!-- Formulaire -->
+      <p-tabPanel header="Formulaire">
         <div class="text-900 font-bold text-3xl mb-4 mt-2">
-          Formulaire de permutation niveau national
+          Demande de permutation
         </div>
         <div class="m-2">
           <mrt-permutation-reception></mrt-permutation-reception>
         </div>
-      </p-tabPanel> -->
-    <!-- </p-tabView> -->
-    <p-card>
-      <div class="text-900 font-bold text-3xl mb-4 mt-2">
-        Demande de permutation
-      </div>
-      <div class="m-2">
-        <mrt-permutation-reception></mrt-permutation-reception>
-      </div>
-    </p-card>
+      </p-tabPanel>
+    </p-tabView>
   `,
   imports: [
     TabViewModule,

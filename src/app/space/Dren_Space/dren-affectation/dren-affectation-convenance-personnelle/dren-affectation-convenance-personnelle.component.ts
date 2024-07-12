@@ -27,7 +27,7 @@ import { CardModule } from 'primeng/card';
   styleUrl: './dren-affectation-convenance-personnelle.component.scss',
   providers: [MessageService, ConfirmationService],
 })
-export class DrenAffectationConvenancePersonnelleComponent implements OnInit {
+export class DrenAffectationConvenancePersonnelleComponent {
   // colonne du tableau
   colsDossierSortant: Cols[] = [
     { field: 'N°', header: 'N°' },
@@ -158,15 +158,12 @@ export class DrenAffectationConvenancePersonnelleComponent implements OnInit {
   confirmationService = inject(ConfirmationService);
   selectedDossier: any = [];
 
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
-
   // Methode pour filtrer les elements du tableau
   onGlobalFilter(table: Table, event: Event) {
     table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
   }
 
+  // Methode pour validation
   validerFavorable() {
     this.confirmationService.confirm({
       message: 'Voulez-vous vraiment valider cette opération ?',
@@ -180,9 +177,9 @@ export class DrenAffectationConvenancePersonnelleComponent implements OnInit {
       },
       reject: () => {
         this.messageService.add({
-          severity: 'error',
-          summary: 'Rejeté',
-          detail: 'Opération rejetée',
+          severity: 'info',
+          summary: 'Annuler',
+          detail: 'Opération annulée',
           life: 3000,
         });
       },

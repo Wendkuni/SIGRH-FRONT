@@ -9,19 +9,19 @@ import { CardModule } from 'primeng/card';
   standalone: true,
   template: `
     <p-tabView>
-      <!-- Demande en attente -->
-      <!-- <p-tabPanel header="Demande en attente">
-        <mrt-permutation-niveau-national />
-      </p-tabPanel> -->
-
       <!-- Formulaire -->
-      <p-tabPanel header="Formulaire">
+      <p-tabPanel header="Formulaire de demande">
         <div class="text-900 font-bold text-3xl mb-4 mt-2">
           Demande de permutation
         </div>
         <div class="m-2">
           <mrt-permutation-reception></mrt-permutation-reception>
         </div>
+      </p-tabPanel>
+
+      <!-- Demande en attente -->
+      <p-tabPanel header="Liste des demandes">
+        <mrt-permutation-niveau-national />
       </p-tabPanel>
     </p-tabView>
   `,

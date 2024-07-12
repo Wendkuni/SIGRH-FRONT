@@ -39,7 +39,7 @@ export class AppMenuComponent implements OnInit {
           items: [
             // Mobilite
             {
-              label: 'Affection',
+              label: 'Mobilité',
               icon: 'pi pi-sort-alt',
               items: [
                 {
@@ -86,12 +86,62 @@ export class AppMenuComponent implements OnInit {
                   routerLink: ['/dren-necessite-service'],
                 },
                 {
+                  label: 'Permutation',
+                  routerLink: ['/dren-affectation-permutation'],
+                },
+              ],
+            },
+          ],
+        },
+      ];
+    }
+
+    // Espace commission
+    if (this.role === 'ROLE_COMMISSION') {
+      this.model = [
+        {
+          label: 'Page Accueil',
+          items: [
+            {
+              label: 'Acceuil',
+              icon: 'pi pi-home',
+              routerLink: ['/home'],
+            },
+          ],
+        },
+        {
+          label: 'Pages de Gestion',
+          items: [
+            {
+              label: 'Gestion de Mobilité',
+              icon: 'pi pi-sort-alt',
+              items: [
+                {
+                  label: 'Convenances personnelles',
+                  routerLink: [
+                    '/commission-affectation-convenance-personnelle',
+                  ],
+                },
+                {
+                  label: 'Néccesité de service ',
+                  routerLink: ['/commission-necessite-service'],
+                },
+                {
+                  label: 'Permutation',
+                  routerLink: ['/commission-affectation-permutation'],
+                },
+                {
                   label: 'Recapiulatif',
                   items: [
                     {
                       label: 'Convenance Personnelle',
                       icon: 'pi pi-list-check ',
                       routerLink: ['/recapitulatif-convenance-personnelle'],
+                    },
+                    {
+                      label: 'Nomination',
+                      icon: 'pi pi-list-check ',
+                      routerLink: ['/recapitulatif-nomination'],
                     },
                     {
                       label: 'Permutation',
@@ -105,10 +155,6 @@ export class AppMenuComponent implements OnInit {
           ],
         },
       ];
-    }
-
-    // Espace commission
-    if (this.role === 'ROLE_COMMISSION') {
     }
 
     // Espace GRH
@@ -184,7 +230,7 @@ export class AppMenuComponent implements OnInit {
           items: [
             // Mobilite
             {
-              label: 'MODULE 1: Gestion de Mobilité',
+              label: 'Gestion de Mobilité',
               icon: 'pi pi-fw pi-user',
               items: [
                 {

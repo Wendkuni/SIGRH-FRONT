@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { Cols } from '../../../../../core/data/primeng/primeng.model';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { Table, TableModule } from 'primeng/table';
@@ -24,6 +24,12 @@ import { BadgeModule } from 'primeng/badge';
   providers: [MessageService, ConfirmationService],
 })
 export class ConvenancePersonnelPersonnelListComponent {
+  @Output()
+  activeIndex = new EventEmitter<number>();
+
+  @Output()
+  selectedDemande = new EventEmitter<any>();
+
   // colonne du tableau
   colDemandeEnAttente: Cols[] = [
     { field: 'num', header: 'N° Demande' },
@@ -77,6 +83,12 @@ export class ConvenancePersonnelPersonnelListComponent {
   // Methode pour filtrer les elements du tableau
   onGlobalFilter(table: Table, event: Event) {
     table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+  }
+
+  // Methode pour modifier une demande
+  onEdit(dmd: any) {
+    this.activeIndex.emit(0);
+    this.selectedDemande.emit(dmd);
   }
 
   onCancel() {

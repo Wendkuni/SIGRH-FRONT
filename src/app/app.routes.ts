@@ -113,6 +113,29 @@ export const routes: Routes = [
             './space/Grh-Space/Affectation/affectation-necessite-service/affectation-necessite-service.component'
           ).then((item) => item.AffectationNecessiteServiceComponent),
       },
+      {
+        path: 'commission-affectation-convenance-personnelle',
+        loadComponent: () =>
+          import(
+            './space/Comission_Space/Affectation/traitement-affectation-convenance-personnel/traitement-affectation-convenance-personnel.component'
+          ).then(
+            (item) => item.TraitementAffectationConvenancePersonnelComponent
+          ),
+      },
+      {
+        path: 'commission-necessite-service',
+        loadComponent: () =>
+          import(
+            './space/Comission_Space/Affectation/traitement-necessite-service/traitement-necessite-service.component'
+          ).then((item) => item.TraitementNecessiteServiceComponent),
+      },
+      {
+        path: 'commission-affectation-permutation',
+        loadComponent: () =>
+          import(
+            './space/Comission_Space/Affectation/traitement-permutation/traitement-permutation.component'
+          ).then((item) => item.TraitementPermutationComponent),
+      },
     ],
   },
   {

@@ -52,6 +52,20 @@ export class AppMenuComponent implements OnInit {
                 },
               ],
             },
+            // Affaire sociale
+            {
+              label: 'Affaire sociale',
+              icon: 'pi pi-wallet',
+              items: [
+                {
+                  label: 'Allocations Familiales',
+                  routerLink: ['/agent-allocation'],
+                },
+                {
+                  label: 'Assurances Maladie CNAM',
+                },
+              ],
+            },
           ],
         },
       ];

@@ -50,3 +50,16 @@ export interface Assurance {
 //    finAssurance: Date;
 //    etatAct: string;
 //  }
+
+
+export interface Agent {
+  id?: number;
+  nom?: string;
+  prenom?: string;
+  email?: string;
+  genre?: string;
+  profession?: string;
+  cni?: Date;
+  pieces?: File | null;
+  deleted?: boolean;
+}

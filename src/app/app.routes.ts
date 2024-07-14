@@ -136,6 +136,13 @@ export const routes: Routes = [
             './space/Comission_Space/Affectation/traitement-permutation/traitement-permutation.component'
           ).then((item) => item.TraitementPermutationComponent),
       },
+      {
+        path: 'agent-allocation',
+        loadComponent: () =>
+          import(
+            './space/Affaire_Sociale/allocation/agent-allocation/agent-allocation.component'
+          ).then((item) => item.AgentAllocationComponent),
+      },
     ],
   },
   {

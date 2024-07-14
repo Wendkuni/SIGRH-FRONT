@@ -46,5 +46,11 @@ export interface DemandeConvenancePersonnelle {
   regroupementConjoint: string;
   autreSituationSociale: string;
   listPieceJustificatif: Array<PieceJustificatif>;
+  sessionDemande: string;
+  enregistre: boolean;
+  envoyer: boolean;
+  avisDren: string;
+  decisionCommissionZone1: string;
+  totalPoint: number;
 }
 export type DemandeConvenancePersonnelleList = DemandeConvenancePersonnelle[];

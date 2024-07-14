@@ -1,0 +1,447 @@
+<p-tabView>
+  <p-tabPanel header="Agent">
+    <div class="p-grid p-fluid">
+      <div class="p-col-12">
+        <div class="card">
+          <h2 class="p-mb-4">Ajouter un Agent</h2>
+          <form (ngSubmit)="onSave()" [formGroup]="agentForm" class="p-fluid">
+            <div class="p-grid">
+              <!-- Données personnelles -->
+              <div class="p-col-12">
+                <p-fieldset legend="Données personnelles" class="p-mb-3">
+                  <div class="p-grid p-fluid">
+                    <!-- Nom -->
+                    <div class="p-col-12 p-md-6">
+                      <div class="p-field p-inputgroup">
+                        <label for="nom" class="p-inputgroup-addon">Nom</label>
+                        <input
+                          id="nom"
+                          type="text"
+                          formControlName="nom"
+                          pInputText
+                          class="p-inputtext p-d-block"
+                        />
+                        <small
+                          *ngIf="
+                            agentForm.controls['nom'].invalid &&
+                            agentForm.controls['nom'].touched
+                          "
+                          class="p-error"
+                          >Nom est requis.</small
+                        >
+                      </div>
+                    </div>
+                    <!-- Prénom -->
+                    <div class="p-col-12 p-md-6">
+                      <div class="p-field p-inputgroup">
+                        <label for="prenom" class="p-inputgroup-addon"
+                          >Prénom</label
+                        >
+                        <input
+                          id="prenom"
+                          type="text"
+                          formControlName="prenom"
+                          pInputText
+                          class="p-inputtext p-d-block"
+                        />
+                        <small
+                          *ngIf="
+                            agentForm.controls['prenom'].invalid &&
+                            agentForm.controls['prenom'].touched
+                          "
+                          class="p-error"
+                          >Prénom est requis.</small
+                        >
+                      </div>
+                    </div>
+                    <!-- Sexe -->
+                    <div class="p-col-12 p-md-6">
+                      <div class="p-field p-inputgroup">
+                        <label for="sexe" class="p-inputgroup-addon"
+                          >Sexe</label
+                        >
+                        <p-dropdown
+                          [options]="genderOptions"
+                          formControlName="sexe"
+                        ></p-dropdown>
+                        <small
+                          *ngIf="
+                            agentForm.controls['sexe'].invalid &&
+                            agentForm.controls['sexe'].touched
+                          "
+                          class="p-error"
+                          >Sexe est requis.</small
+                        >
+                      </div>
+                    </div>
+                    <!-- Date de naissance -->
+                    <div class="p-col-12 p-md-6">
+                      <div class="p-field p-inputgroup">
+                        <label for="dateNaiss" class="p-inputgroup-addon"
+                          >Date de naissance</label
+                        >
+                        <p-calendar
+                          id="dateNaiss"
+                          formControlName="dateNaiss"
+                          dateFormat="dd/mm/yy"
+                        ></p-calendar>
+                        <small
+                          *ngIf="
+                            agentForm.controls['dateNaiss'].invalid &&
+                            agentForm.controls['dateNaiss'].touched
+                          "
+                          class="p-error"
+                          >Date valide est requise.</small
+                        >
+                      </div>
+                    </div>
+                    <!-- Lieu de naissance -->
+                    <div class="p-col-12 p-md-6">
+                      <div class="p-field p-inputgroup">
+                        <label for="lieuNaiss" class="p-inputgroup-addon"
+                          >Lieu de naissance</label
+                        >
+                        <input
+                          id="lieuNaiss"
+                          type="text"
+                          formControlName="lieuNaiss"
+                          pInputText
+                          class="p-inputtext p-d-block"
+                        />
+                        <small
+                          *ngIf="
+                            agentForm.controls['lieuNaiss'].invalid &&
+                            agentForm.controls['lieuNaiss'].touched
+                          "
+                          class="p-error"
+                          >Lieu de naissance est requis.</small
+                        >
+                      </div>
+                    </div>
+                    <!-- Situation matrimoniale -->
+                    <div class="p-col-12 p-md-6">
+                      <div class="p-field p-inputgroup">
+                        <label for="situationMat" class="p-inputgroup-addon"
+                          >Situation matrimoniale</label
+                        >
+                        <input
+                          id="situationMat"
+                          type="text"
+                          formControlName="situationMat"
+                          pInputText
+                          class="p-inputtext p-d-block"
+                        />
+                        <small
+                          *ngIf="
+                            agentForm.controls['situationMat'].invalid &&
+                            agentForm.controls['situationMat'].touched
+                          "
+                          class="p-error"
+                          >Situation matrimoniale est requise.</small
+                        >
+                      </div>
+                    </div>
+                    <!-- Nombre d'enfants -->
+                    <div class="p-col-12 p-md-6">
+                      <div class="p-field p-inputgroup">
+                        <label for="nbEnfants" class="p-inputgroup-addon"
+                          >Nombre d'enfants</label
+                        >
+                        <input
+                          id="nbEnfants"
+                          type="number"
+                          formControlName="nbEnfants"
+                          pInputText
+                          class="p-inputtext p-d-block"
+                        />
+                        <small
+                          *ngIf="
+                            agentForm.controls['nbEnfants'].invalid &&
+                            agentForm.controls['nbEnfants'].touched
+                          "
+                          class="p-error"
+                          >Nombre d'enfants est requis.</small
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </p-fieldset>
+              </div>
+
+              <!-- Informations professionnelles -->
+              <div class="p-col-12">
+                &nbsp;
+                <p-fieldset
+                  legend="Informations professionnelles"
+                  class="p-mb-3"
+                >
+                  <div class="p-grid p-fluid">
+                    <!-- NNI -->
+                    <div class="p-col-12 p-md-6">
+                      <div class="p-field p-inputgroup">
+                        <label for="nni" class="p-inputgroup-addon">NNI</label>
+                        <input
+                          id="nni"
+                          type="text"
+                          formControlName="nni"
+                          pInputText
+                          class="p-inputtext p-d-block"
+                        />
+                        <small
+                          *ngIf="
+                            agentForm.controls['nni'].invalid &&
+                            agentForm.controls['nni'].touched
+                          "
+                          class="p-error"
+                          >NNI est requis.</small
+                        >
+                      </div>
+                    </div>
+                    <!-- Corps/grade -->
+                    <div class="p-col-12 p-md-6">
+                      <div class="p-field p-inputgroup">
+                        <label for="corpsGrade" class="p-inputgroup-addon"
+                          >Corps/grade</label
+                        >
+                        <input
+                          id="corpsGrade"
+                          type="text"
+                          formControlName="corpsGrade"
+                          pInputText
+                          class="p-inputtext p-d-block"
+                        />
+                        <small
+                          *ngIf="
+                            agentForm.controls['corpsGrade'].invalid &&
+                            agentForm.controls['corpsGrade'].touched
+                          "
+                          class="p-error"
+                          >Corps/grade est requis.</small
+                        >
+                      </div>
+                    </div>
+                    <!-- Echellon -->
+                    <div class="p-col-12 p-md-6">
+                      <div class="p-field p-inputgroup">
+                        <label for="echellon" class="p-inputgroup-addon"
+                          >Echellon</label
+                        >
+                        <input
+                          id="echellon"
+                          type="text"
+                          formControlName="echellon"
+                          pInputText
+                          class="p-inputtext p-d-block"
+                        />
+                        <small
+                          *ngIf="
+                            agentForm.controls['echellon'].invalid &&
+                            agentForm.controls['echellon'].touched
+                          "
+                          class="p-error"
+                          >Echellon est requis.</small
+                        >
+                      </div>
+                    </div>
+                    <!-- Diplôme professionnel -->
+                    <div class="p-col-12 p-md-6">
+                      <div class="p-field p-inputgroup">
+                        <label for="diplomeProf" class="p-inputgroup-addon"
+                          >Diplôme professionnel</label
+                        >
+                        <input
+                          id="diplomeProf"
+                          type="text"
+                          formControlName="diplomeProf"
+                          pInputText
+                          class="p-inputtext p-d-block"
+                        />
+                        <small
+                          *ngIf="
+                            agentForm.controls['diplomeProf'].invalid &&
+                            agentForm.controls['diplomeProf'].touched
+                          "
+                          class="p-error"
+                          >Diplôme professionnel est requis.</small
+                        >
+                      </div>
+                    </div>
+                    <!-- Diplôme académique -->
+                    <div class="p-col-12 p-md-6">
+                      <div class="p-field p-inputgroup">
+                        <label for="diplomeAca" class="p-inputgroup-addon"
+                          >Diplôme académique</label
+                        >
+                        <input
+                          id="diplomeAca"
+                          type="text"
+                          formControlName="diplomeAca"
+                          pInputText
+                          class="p-inputtext p-d-block"
+                        />
+                        <small
+                          *ngIf="
+                            agentForm.controls['diplomeAca'].invalid &&
+                            agentForm.controls['diplomeAca'].touched
+                          "
+                          class="p-error"
+                          >Diplôme académique est requis.</small
+                        >
+                      </div>
+                    </div>
+                    <!-- Poste actuel -->
+                    <div class="p-col-12 p-md-6">
+                      <div class="p-field p-inputgroup">
+                        <label for="posteActuel" class="p-inputgroup-addon"
+                          >Poste actuel</label
+                        >
+                        <input
+                          id="posteActuel"
+                          type="text"
+                          formControlName="posteActuel"
+                          pInputText
+                          class="p-inputtext p-d-block"
+                        />
+                        <small
+                          *ngIf="
+                            agentForm.controls['posteActuel'].invalid &&
+                            agentForm.controls['posteActuel'].touched
+                          "
+                          class="p-error"
+                          >Poste actuel est requis.</small
+                        >
+                      </div>
+                    </div>
+                    <!-- DREN -->
+                    <div class="p-col-12 p-md-6">
+                      <div class="p-field p-inputgroup">
+                        <label for="dren" class="p-inputgroup-addon"
+                          >DREN</label
+                        >
+                        <input
+                          id="dren"
+                          type="text"
+                          formControlName="dren"
+                          pInputText
+                          class="p-inputtext p-d-block"
+                        />
+                        <small
+                          *ngIf="
+                            agentForm.controls['dren'].invalid &&
+                            agentForm.controls['dren'].touched
+                          "
+                          class="p-error"
+                          >DREN est requis.</small
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </p-fieldset>
+              </div>
+
+              <!-- Contact -->
+              <div class="p-col-12">
+                &nbsp;
+                <p-fieldset legend="Contact">
+                  <div class="p-grid p-fluid">
+                    <!-- Email -->
+                    <div class="p-col-12 p-md-6">
+                      <div class="p-field p-inputgroup">
+                        <label for="email" class="p-inputgroup-addon"
+                          >Email</label
+                        >
+                        <input
+                          id="email"
+                          type="email"
+                          formControlName="email"
+                          pInputText
+                          class="p-inputtext p-d-block"
+                        />
+                        <small
+                          *ngIf="
+                            agentForm.controls['email'].invalid &&
+                            agentForm.controls['email'].touched
+                          "
+                          class="p-error"
+                          >Email valide est requis.</small
+                        >
+                      </div>
+                    </div>
+                    <!-- Téléphone -->
+                    <div class="p-col-12 p-md-6">
+                      <div class="p-field p-inputgroup">
+                        <label for="tel" class="p-inputgroup-addon"
+                          >Téléphone</label
+                        >
+                        <input
+                          id="tel"
+                          type="text"
+                          formControlName="tel"
+                          pInputText
+                          class="p-inputtext p-d-block"
+                        />
+                        <small
+                          *ngIf="
+                            agentForm.controls['tel'].invalid &&
+                            agentForm.controls['tel'].touched
+                          "
+                          class="p-error"
+                          >Téléphone est requis.</small
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </p-fieldset>
+              </div>
+
+              <!-- Pièces jointes -->
+              <div class="p-col-12">
+                &nbsp;
+                <p-fieldset legend="Pièces jointes">
+                  <div class="p-grid p-fluid">
+                    <div class="p-col-12">
+                      <div class="p-field p-inputgroup">
+                        <label for="pieces" class="p-inputgroup-addon"
+                          >Pièces jointes</label
+                        >
+                        <p-fileUpload
+                          name="pieces"
+                          url="./upload"
+                          accept=".pdf,.jpg,.png"
+                          maxFileSize="5000000"
+                        ></p-fileUpload>
+                        <small class="p-d-block"
+                          >Formats acceptés: PDF, JPEG, PNG (max 5 Mo)</small
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </p-fieldset>
+              </div>
+
+              <!-- Bouton Enregistrer -->
+              <div class="p-col-12 p-d-flex p-jc-end">
+                <button
+                  type="submit"
+                  pButton
+                  pRipple
+                  label="Enregistrer"
+                  class="p-button-primary"
+                ></button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </p-tabPanel>
+  <p-tabPanel header="DREN">
+    <p>
+      Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+      accusantium...
+    </p>
+  </p-tabPanel>
+  <p-tabPanel header="DRH">
+    <p>At vero eos et accusamus et iusto odio dignissimos...</p>
+  </p-tabPanel>
+</p-tabView>

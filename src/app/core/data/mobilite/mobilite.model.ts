@@ -19,5 +19,32 @@ export interface Mobilite {
   notePedagogique: string;
   // Date de la mobilité
   dateEffet: string;
-
 }
+
+export interface PieceJustificatif {
+  libelle: string;
+  images: File;
+}
+
+export interface DemandeConvenancePersonnelle {
+  idDemande: number;
+  posteActuel: string;
+  drenActuelle: string;
+  zoneDemande1: string;
+  zoneDemande2: string;
+  zoneDemande3: string;
+  zoneDemande4: string;
+  zoneDemande5: string;
+  ancieneteFonctionPublique: number;
+  anciennetePosteActuel: number;
+  noteInspectionPedagogique: number;
+  noteEvaluationAdministrative: number;
+  distinction: string;
+  nombreEnfantsACharge: number;
+  discriminationPositive: string;
+  situationSanitaire: string;
+  regroupementConjoint: string;
+  autreSituationSociale: string;
+  listPieceJustificatif: Array<PieceJustificatif>;
+}
+export type DemandeConvenancePersonnelleList = DemandeConvenancePersonnelle[];

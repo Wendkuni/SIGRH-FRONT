@@ -87,6 +87,8 @@ export class ConvenancePersonnelleNiveauNationaleComponent implements OnInit {
 
   listPieceJustificatif = Array<PieceJustificatif>();
 
+  demandeObject: any;
+
   // injection du formBuilder
   fb = inject(FormBuilder);
 

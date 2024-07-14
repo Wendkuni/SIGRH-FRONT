@@ -26,14 +26,13 @@ import { Utilisateur } from '../../core/data/users/user.model';
     ButtonModule,
     PasswordModule,
     DialogModule,
-    RippleModule
+    RippleModule,
   ],
   templateUrl: './login-agent.component.html',
   styleUrl: './login-agent.component.scss',
-  providers: [MessageService]
+  providers: [MessageService],
 })
 export class LoginAgentComponent {
-
   layoutService = inject(LayoutService);
   authService = inject(AuthService);
   fb = inject(FormBuilder);
@@ -42,9 +41,9 @@ export class LoginAgentComponent {
   //Inject message service from primeng
   messageService = inject(MessageService);
 
-  loginForm =this.fb.group({
-    email: this.fb.control('',[Validators.required, Validators.email]),
-    password: this.fb.control('',[Validators.required]),
+  loginForm = this.fb.group({
+    email: this.fb.control('', [Validators.required, Validators.email]),
+    password: this.fb.control('', [Validators.required]),
   });
 
   get dark(): boolean {
@@ -52,18 +51,38 @@ export class LoginAgentComponent {
   }
 
   handleLogin() {
-    const email:any = this.loginForm.value.email;
-    const passwd:any = this.loginForm.value.password;
-    this.authService.getAllUsers().subscribe((users: Utilisateur[]) => {
-      const user = users.find((user) => user.email === email && user.password === passwd);
-      if(user != null){
-        localStorage.setItem('user', JSON.stringify(user));
-        this.router.navigateByUrl("/home");
-      }
-      else {
-        this.messageService.add({severity:'error', summary:'Error', detail:'Email ou Mot de passe incorrect'});
-      }
-    });
-  }
+    const matricule: any = this.loginForm.value.email;
+    const passwd: any = this.loginForm.value.password;
 
+    this.authService.login(matricule, passwd);
+    let user = JSON.parse(localStorage.getItem('user') as string);
+    if (user) {
+      if (user.roles.includes('ROLE_USER')) {
+        this.router.navigateByUrl('/home-agent-space');
+      } else {
+        this.router.navigateByUrl('/home');
+      }
+    } else {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Matricule ou Mot de passe incorrect',
+      });
+      // this.personnelService
+      //   .findPersonnelByMatricule(matricule)
+      //   .subscribe((user: Personnel) => {
+      //     if (user != null && passwd == 'admin123') {
+      //       user.espace = 'ESPACE AGENT';
+      //       localStorage.setItem('user', JSON.stringify(user));
+      //       this.router.navigateByUrl('/home');
+      //     } else {
+      //       this.messageService.add({
+      //         severity: 'error',
+      //         summary: 'Error',
+      //         detail: 'Matricule ou Mot de passe incorrect',
+      //       });
+      //     }
+      //   });
+    }
+  }
 }

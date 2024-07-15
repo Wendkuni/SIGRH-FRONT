@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { Cols } from '../../../../../core/data/primeng/primeng.model';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { Table, TableModule } from 'primeng/table';
@@ -7,6 +7,10 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { BadgeModule } from 'primeng/badge';
+import { DemandeConvenancePersonnelleList } from '../../../../../core/data/mobilite/mobilite.model';
+import { MobiliteService } from '../../../../../core/data/mobilite/mobilite.service';
+import { AffectationService } from '../../../../../core/data/affectation/affectation.service';
+import { Personnel } from '../../../../../core/data/personals/personnel.model';
 
 @Component({
   selector: 'mrt-convenance-personnel-personnel-list',
@@ -23,12 +27,15 @@ import { BadgeModule } from 'primeng/badge';
   styleUrl: './mrt-convenance-personnel-personnel-list.component.scss',
   providers: [MessageService, ConfirmationService],
 })
-export class ConvenancePersonnelPersonnelListComponent {
+export class ConvenancePersonnelPersonnelListComponent implements OnInit {
   @Output()
   activeIndex = new EventEmitter<number>();
 
   @Output()
   selectedDemande = new EventEmitter<any>();
+
+  @Output()
+  action = new EventEmitter<any>();
 
   // colonne du tableau
   colDemandeEnAttente: Cols[] = [
@@ -79,6 +86,12 @@ export class ConvenancePersonnelPersonnelListComponent {
 
   messageService = inject(MessageService);
   confirmationService = inject(ConfirmationService);
+  mobliteService = inject(AffectationService);
+  listeDemande: DemandeConvenancePersonnelleList = [];
+
+  ngOnInit(): void {
+    this.getAgentDemandeConvenancePersonnelle();
+  }
 
   // Methode pour filtrer les elements du tableau
   onGlobalFilter(table: Table, event: Event) {
@@ -89,6 +102,7 @@ export class ConvenancePersonnelPersonnelListComponent {
   onEdit(dmd: any) {
     this.activeIndex.emit(0);
     this.selectedDemande.emit(dmd);
+    this.action.emit('Edit');
   }
 
   onCancel() {
@@ -104,5 +118,20 @@ export class ConvenancePersonnelPersonnelListComponent {
         });
       },
     });
+  }
+
+  selectedPersonnel: Personnel = JSON.parse(
+    localStorage.getItem('user') as string
+  );
+  getAgentDemandeConvenancePersonnelle() {
+    this.mobliteService
+      .getAllDemandeConvenancePersonnelle()
+      .subscribe((response) => {
+        response.forEach((element) => {
+          if (element.idUtilisateur === this.selectedPersonnel.idAgent) {
+            this.listeDemande.push(element);
+          }
+        });
+      });
   }
 }

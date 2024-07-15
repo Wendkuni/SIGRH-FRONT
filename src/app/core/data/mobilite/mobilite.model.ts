@@ -1,3 +1,5 @@
+import { Personnel } from '../personals/personnel.model';
+
 export interface Mobilite {
   // Identifiant unique de la mobilité
   id: string;
@@ -28,6 +30,8 @@ export interface PieceJustificatif {
 
 export interface DemandeConvenancePersonnelle {
   idDemande: number;
+  id: number;
+  idUtilisateur: number;
   posteActuel: string;
   drenActuelle: string;
   zoneDemande1: string;
@@ -52,5 +56,7 @@ export interface DemandeConvenancePersonnelle {
   avisDren: string;
   decisionCommissionZone1: string;
   totalPoint: number;
+  personnel: Personnel;
+  annulerDemande: boolean;
 }
 export type DemandeConvenancePersonnelleList = DemandeConvenancePersonnelle[];

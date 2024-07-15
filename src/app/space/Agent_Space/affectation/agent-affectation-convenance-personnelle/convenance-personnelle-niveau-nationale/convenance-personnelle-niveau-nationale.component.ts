@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, HostListener } from '@angular/core';
+import { Component, OnInit, inject, HostListener, Input } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { PersonnelService } from '../../../../../core/data/personals/personnel.service';
 import {
@@ -31,6 +31,8 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
 import { DividerModule } from 'primeng/divider';
 import { TooltipModule } from 'primeng/tooltip';
 import { AgentFormDetailsViewComponent } from '../../../agent-form-details-view/agent-form-details-view.component';
+import { DemandeConvenancePersonnelle } from '../../../../../core/data/mobilite/mobilite.model';
+import { FormValidatorsComponent } from '../../../../../shared/form-validators/form-validators.component';
 
 @Component({
   selector: 'mrt-convenance-personnelle-niveau-nationale',
@@ -54,6 +56,8 @@ import { AgentFormDetailsViewComponent } from '../../../agent-form-details-view/
     DividerModule,
     TooltipModule,
     AgentFormDetailsViewComponent,
+    FormValidatorsComponent,
+    FormValidatorsComponent,
   ],
   templateUrl: './convenance-personnelle-niveau-nationale.component.html',
   styles: `
@@ -87,7 +91,8 @@ export class ConvenancePersonnelleNiveauNationaleComponent implements OnInit {
 
   listPieceJustificatif = Array<PieceJustificatif>();
 
-  demandeObject: any;
+  demandeObject: DemandeConvenancePersonnelle =
+    {} as DemandeConvenancePersonnelle;
 
   // injection du formBuilder
   fb = inject(FormBuilder);
@@ -123,6 +128,10 @@ export class ConvenancePersonnelleNiveauNationaleComponent implements OnInit {
   messageService = inject(MessageService);
 
   personnelService = inject(PersonnelService);
+
+  @Input({ required: false }) action = 'Add';
+  @Input({ required: false }) selectedDossier: DemandeConvenancePersonnelle =
+    {} as DemandeConvenancePersonnelle;
 
   selectedPersonnel: Personnel = JSON.parse(
     localStorage.getItem('user') as string
@@ -188,31 +197,45 @@ export class ConvenancePersonnelleNiveauNationaleComponent implements OnInit {
 
   ngOnInit(): void {
     this.affectationForm = this.fb.group({
-      // ancieneteGenerale: this.fb.control('', [Validators.required, Validators.min(1), Validators.max(100)]),
-      // noteInspectionPedagogique: this.fb.control('', [Validators.required, Validators.min(0)]),
-      // noteEvaluationPedagogique: this.fb.control('', [Validators.required, Validators.min(0)]),
-      // ancienetePoste: this.fb.control('', [Validators.required, Validators.min(1), Validators.max(100)]),
-      // distinction: this.fb.control('', [Validators.required]),
-      // nbrEnfants: this.fb.control('', [Validators.required, Validators.min(0)]),
-      // zoneAffectation1: this.fb.control('', [Validators.required]),
-      // zoneAffectation2: this.fb.control('', [Validators.required]),
-      // zoneAffectation3: this.fb.control('', [Validators.required]),
-      // discriminationPositive: this.fb.control('', [Validators.required]),
-      // situationSanitaire: this.fb.control('', [Validators.required]),
-      // regroupementConjoints: this.fb.control('', [Validators.required]),
-      // autreSituationSociale: this.fb.control('' , [Validators.required]),
-      nombreFant: this.fb.control('', [Validators.required]),
-      ancieneteGen: this.fb.control('', [Validators.required]),
-      ancienetePoste: this.fb.control('', [Validators.required]),
-      posteDestinat1: this.fb.control('', [Validators.required]),
-      posteDestinat2: this.fb.control('', [Validators.required]),
-      posteDestinat3: this.fb.control('', [Validators.required]),
-      notePedagogiq: this.fb.control('', [Validators.required]),
-      motif: this.fb.control('', [Validators.required]),
-      dateEffet: this.fb.control('', [Validators.required]),
+      posteActuel: this.fb.control('', [Validators.required]),
+      drenActuelle: this.fb.control('', [Validators.required]),
+      // zoneDemande1: this.fb.control('', [Validators.required]),
+      zoneDemande2: this.fb.control('', [Validators.required]),
+      zoneDemande3: this.fb.control('', [Validators.required]),
+      zoneDemande4: this.fb.control('', [Validators.required]),
+      zoneDemande5: this.fb.control('', [Validators.required]),
+      ancieneteFonctionPublique: this.fb.control('', [
+        Validators.required,
+        Validators.min(3),
+        Validators.max(100),
+      ]),
+      anciennetePosteActuel: this.fb.control('', [
+        Validators.required,
+        Validators.min(1),
+        Validators.max(100),
+      ]),
+      noteInspectionPedagogique: this.fb.control('', [
+        Validators.required,
+        Validators.min(0),
+      ]),
+      noteEvaluationAdministrative: this.fb.control('', [
+        Validators.required,
+        Validators.min(0),
+      ]),
+      distinction: this.fb.control('', [Validators.required]),
+      nombreEnfantsACharge: this.fb.control('', [
+        Validators.required,
+        Validators.min(0),
+      ]),
+      discriminationPositive: this.fb.control('', [Validators.required]),
+      situationSanitaire: this.fb.control('', [Validators.required]),
+      regroupementConjoint: this.fb.control('', [Validators.required]),
+      autreSituationSociale: this.fb.control('', [Validators.required]),
     });
-
-    this.getLocalite();
+    if (this.action === 'Edit') {
+      this.affectationForm.patchValue(this.selectedDossier);
+      this.listPieceJustificatif = this.selectedDossier.listPieceJustificatif;
+    }
   }
 
   // Methode pour recuperer les localites
@@ -289,56 +312,57 @@ export class ConvenancePersonnelleNiveauNationaleComponent implements OnInit {
 
   createAffectation() {
     const data = this.getFormData();
-    data.personnel = this.selectedPersonnel;
-    console.log(this.listPieceJustificatif);
-    this.mobiliteService
-      .createAffectationByConvenance(data, this.listPieceJustificatif)
-      .subscribe(
-        () => {
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Succès',
-            detail: 'Affectation enregistrée avec succès',
-          });
-          this.cancelMobilite();
-        },
-        (error) => {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: 'Affectation non enregistrée',
-            life: 3000,
-          });
-        }
-      );
+    let selectedPersonnel: any = JSON.parse(
+      localStorage.getItem('user') as string
+    );
+    data.idUtilisateur = selectedPersonnel.idAgent;
+    data.listPieceJustificatif = this.listPieceJustificatif;
+    this.mobiliteService.addDemandeConvenancePersonnelle(data).subscribe(
+      () => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Succès',
+          detail: 'Affectation enregistrée avec succès',
+        });
+        this.cancelMobilite();
+      },
+      (error) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Affectation non enregistrée',
+          life: 3000,
+        });
+      }
+    );
   }
 
-  getFormData(): Affectation {
+  getFormData(): DemandeConvenancePersonnelle {
     const formData = this.affectationForm.value;
-    return <Affectation>{
-      // ancieneteGenerale: formData.ancieneteGenerale,
-      // noteInspectionPedagogique: formData.noteInspectionPedagogique,
-      // noteEvaluationPedagogique: formData.noteEvaluationPedagogique,
-      // ancienetePoste: formData.ancienetePoste,
-      // distinction: formData.distinction,
-      // nbrEnfants: formData.nbrEnfants,
-      // zoneAffectation1: formData.zoneAffectation1,
-      // zoneAffectation2: formData.zoneAffectation2,
-      // zoneAffectation3: formData.zoneAffectation3,
-      // discriminationPositive: formData.discriminationPositive,
-      // situationSanitaire: formData.situationSanitaire,
-      // regroupementConjoints: formData.regroupementConjoints,
-      // autreSituationSociale: formData.autreSituationSociale
-
-      nombreFant: formData.nombreFant,
-      ancieneteGen: formData.ancieneteGen,
-      ancienetePoste: formData.ancienetePoste,
-      posteDestinat1: formData.posteDestinat1,
-      posteDestinat2: formData.posteDestinat2,
-      posteDestinat3: formData.posteDestinat3,
-      notePedagogiq: formData.notePedagogiq,
-      motif: formData.motif,
-      dateEffet: formData.dateEffet,
+    return <DemandeConvenancePersonnelle>{
+      posteActuel: formData.posteActuel,
+      drenActuelle: formData.drenActuelle,
+      zoneDemande1: this.selectZoneAffectation1,
+      zoneDemande2: formData.zoneDemande2,
+      zoneDemande3: formData.zoneDemande3,
+      zoneDemande4: formData.zoneDemande4,
+      zoneDemande5: formData.zoneDemande5,
+      ancieneteFonctionPublique: formData.ancieneteFonctionPublique,
+      anciennetePosteActuel: formData.anciennetePosteActuel,
+      noteInspectionPedagogique: formData.noteInspectionPedagogique,
+      noteEvaluationAdministrative: formData.noteEvaluationAdministrative,
+      distinction: formData.distinction,
+      nombreEnfantsACharge: formData.nombreEnfantsACharge,
+      discriminationPositive: formData.discriminationPositive,
+      situationSanitaire: formData.situationSanitaire,
+      regroupementConjoint: formData.regroupementConjoint,
+      autreSituationSociale: formData.autreSituationSociale,
+      sessionDemande: '2021',
+      enregistre: false,
+      envoyer: false,
+      avisDren: '',
+      decisionCommissionZone1: '',
+      totalPoint: 0,
     };
   }
 

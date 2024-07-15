@@ -23,7 +23,9 @@
       "cleRib": "001F",
       "detacher": "ME",
       "ministerOrigine": "MS",
-      "roles": ["ROLE_USER"]
+      "roles": [
+        "ROLE_USER"
+      ]
     },
     {
       "idAgent": 79,
@@ -48,7 +50,9 @@
       "cleRib": "002F",
       "detacher": "WE",
       "ministerOrigine": "MP",
-      "roles": ["ROLE_DREN"]
+      "roles": [
+        "ROLE_DREN"
+      ]
     },
     {
       "idAgent": 80,
@@ -73,7 +77,9 @@
       "cleRib": "003F",
       "detacher": "ER",
       "ministerOrigine": "MQ",
-      "roles": ["ROLE_GRH"]
+      "roles": [
+        "ROLE_GRH"
+      ]
     },
     {
       "idAgent": 81,
@@ -98,7 +104,9 @@
       "cleRib": "004F",
       "detacher": "RT",
       "ministerOrigine": "MA",
-      "roles": ["ROLE_DRH"]
+      "roles": [
+        "ROLE_DRH"
+      ]
     },
     {
       "idAgent": 82,
@@ -123,7 +131,9 @@
       "cleRib": "005F",
       "detacher": "TY",
       "ministerOrigine": "MB",
-      "roles": ["ROLE_COMMISSION"]
+      "roles": [
+        "ROLE_COMMISSION"
+      ]
     },
     {
       "idAgent": 83,
@@ -148,7 +158,9 @@
       "cleRib": "006F",
       "detacher": "UI",
       "ministerOrigine": "MC",
-      "roles": ["ROLE_ADMIN"]
+      "roles": [
+        "ROLE_ADMIN"
+      ]
     },
     {
       "idAgent": 84,
@@ -173,7 +185,92 @@
       "cleRib": "007F",
       "detacher": "IO",
       "ministerOrigine": "MD",
-      "roles": ["ROLE_USER"]
+      "roles": [
+        "ROLE_USER"
+      ]
+    }
+  ],
+  "demandeConvenancePersonnelle": [
+    {
+      "posteActuel": "Ouaga",
+      "drenActuelle": "Centre",
+      "zoneDemande1": "",
+      "zoneDemande2": "Nouakchott Ouest",
+      "zoneDemande3": "Nouakchott Sud",
+      "zoneDemande4": "Trarza-Inchiri",
+      "zoneDemande5": "Nouadhibou",
+      "ancieneteFonctionPublique": 3,
+      "anciennetePosteActuel": "Moins de 15 ans",
+      "noteInspectionPedagogique": 2,
+      "noteEvaluationAdministrative": 2,
+      "distinction": "Nationale",
+      "nombreEnfantsACharge": "Moins de 5 enfants",
+      "discriminationPositive": "Homme",
+      "situationSanitaire": "Bonne",
+      "regroupementConjoint": "Non",
+      "autreSituationSociale": "Neant",
+      "sessionDemande": "2021",
+      "enregistre": true,
+      "envoyer": false,
+      "avisDren": "",
+      "decisionCommissionZone1": "",
+      "totalPoint": 0,
+      "id": "7ff8",
+      "listPieceJustificatif": [
+        {
+          "libelle": "Photocopie de l'arrêter de recrutement",
+          "images": {
+            "objectURL": {
+              "changingThisBreaksApplicationSecurity": "blob:http://localhost:4200/3b146833-45d4-4526-b2cd-abba3209086f"
+            }
+          }
+        },
+        {
+          "libelle": "Note de service d'affectation vers la Wilaya/attestation de travail signee par le Dren",
+          "images": {
+            "objectURL": {
+              "changingThisBreaksApplicationSecurity": "blob:http://localhost:4200/831d6ddc-f79c-40c5-9c7d-6bda1903fae5"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "08ab",
+      "posteActuel": "Fada",
+      "drenActuelle": "Est",
+      "zoneDemande1": "",
+      "zoneDemande2": "Nouakchott Ouest",
+      "zoneDemande3": "Nouakchott Sud",
+      "zoneDemande4": "Trarza-Inchiri",
+      "zoneDemande5": "Nouadhibou",
+      "ancieneteFonctionPublique": 4,
+      "anciennetePosteActuel": "Moins de 15 ans",
+      "noteInspectionPedagogique": 4,
+      "noteEvaluationAdministrative": 4,
+      "distinction": "Nationale",
+      "nombreEnfantsACharge": "Moins de 5 enfants",
+      "discriminationPositive": "Homme",
+      "situationSanitaire": "Bonne",
+      "regroupementConjoint": "Non",
+      "autreSituationSociale": "Neant",
+      "sessionDemande": "2021",
+      "enregistre": false,
+      "envoyer": true,
+      "avisDren": "",
+      "decisionCommissionZone1": "",
+      "totalPoint": 0,
+      "idUtilisateur": 78,
+      "listPieceJustificatif": [
+        {
+          "libelle": "Photocopie de l'arrêter de recrutement",
+          "images": {
+            "objectURL": {
+              "changingThisBreaksApplicationSecurity": "blob:http://localhost:4200/27713f3f-5001-49c6-92cf-17ae478a670a"
+            }
+          }
+        }
+      ]
     }
   ],
   "personnels": [

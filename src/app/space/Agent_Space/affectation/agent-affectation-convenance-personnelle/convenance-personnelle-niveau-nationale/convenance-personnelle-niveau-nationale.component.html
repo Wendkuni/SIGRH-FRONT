@@ -9,83 +9,118 @@
 
 <mrt-agent-form-details-view></mrt-agent-form-details-view>
 
-<div class="container">
-  <div class="p-fluid p-formgrid grid m-2">
-    <div class="flex align-items-center flex-wrap gap-2 m-3">
-      <label for="postActuel" class="w-9rem">Poste actuel</label>
-      <input
-        id="postActuel"
-        type="text"
-        pInputText
-        placeholder="Entrez le poste actuel"
-      />
-    </div>
-    <div class="flex align-items-center flex-wrap gap-2 m-3">
-      <label for="dren" class="w-9rem">DREN</label>
-      <input id="dren" type="text" pInputText placeholder="Entrez le dren" />
-    </div>
-  </div>
-</div>
-
-<div class="container">
-  <div class="border-1 surface-border border-round p-fluid mb-4">
-    <span class="text-900 font-bold block border-bottom-1 surface-border p-3"
-      >Wilayas demandées (Par ordre de préférence)</span
-    >
-    <div class="p-fluid p-formgrid grid m-2">
-      <!--        Zone géographique de destination 1   -->
-      <div class="field col-12 md:col-4">
-        <label for="localite">Zone géographique de destination </label>
-        <p-dropdown
-          id="localite"
-          [options]="listWilaya"
-          [(ngModel)]="selectZoneAffectation1"
-          [ngModelOptions]="{ standalone: true }"
-          placeholder="Selectionner la zone de destination nº1"
-        />
-      </div>
-      <!--        Zone géographique de destination 2   -->
-      <div class="field col-12 md:col-4">
-        <label for="localite2">Zone géographique de destination 2</label>
-        <p-dropdown
-          id="localite2"
-          [options]="listWilaya"
-          placeholder="Selectionner la zone de destination nº2"
-        />
-      </div>
-      <!--        Zone géographique de destination 3   -->
-      <div class="field col-12 md:col-4">
-        <label for="localite3">Zone géographique de destination 3</label>
-        <p-dropdown
-          id="localite3"
-          [options]="listWilaya"
-          placeholder="Selectionner la zone de destination nº3"
-        />
-      </div>
-      <!--        Zone géographique de destination 4   -->
-      <div class="field col-12 md:col-4">
-        <label for="localite4">Zone géographique de destination 4</label>
-        <p-dropdown
-          id="localite4"
-          [options]="listWilaya"
-          placeholder="Selectionner la zone de destination nº4"
-        />
-      </div>
-      <!--        Zone géographique de destination 5   -->
-      <div class="field col-12 md:col-4">
-        <label for="localite5">Zone géographique de destination 5</label>
-        <p-dropdown
-          id="localite5"
-          [options]="listWilaya"
-          placeholder="Selectionner la zone de destination nº5"
-        />
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="container py-5">
   <form [formGroup]="affectationForm">
+    <div class="p-fluid p-formgrid grid m-2">
+      <!-- Poste actuel -->
+      <div class="flex align-items-center flex-wrap gap-2 m-3">
+        <label for="postActuel" class="w-9rem">Poste actuel</label>
+        <input
+          id="postActuel"
+          type="text"
+          pInputText
+          formControlName="posteActuel"
+          placeholder="Entrez le poste actuel"
+        />
+        <mrt-form-validators
+          [entityField]="'posteActuel'"
+          [formGroup]="affectationForm"
+        />
+      </div>
+      <!-- Dren actuelle -->
+      <div class="flex align-items-center flex-wrap gap-2 m-3">
+        <label for="dren" class="w-9rem">DREN</label>
+        <input
+          id="dren"
+          type="text"
+          pInputText
+          placeholder="Entrez le dren"
+          formControlName="drenActuelle"
+        />
+        <mrt-form-validators
+          [entityField]="'drenActuelle'"
+          [formGroup]="affectationForm"
+        />
+      </div>
+    </div>
+
+    <div class="border-1 surface-border border-round p-fluid mb-4">
+      <span class="text-900 font-bold block border-bottom-1 surface-border p-3"
+        >Wilayas demandées (Par ordre de préférence)</span
+      >
+      <div class="p-fluid p-formgrid grid m-2">
+        <!--        Zone géographique de destination 1   -->
+        <div class="field col-12 md:col-4">
+          <label for="localite">Zone géographique de destination </label>
+          <p-dropdown
+            id="localite"
+            [options]="listWilaya"
+            [(ngModel)]="demandeObject.zoneDemande1"
+            [checkmark]="true"
+            [showClear]="true"
+            [ngModelOptions]="{ standalone: true }"
+            placeholder="Selectionner la zone de destination nº1"
+          />
+        </div>
+        <!--        Zone géographique de destination 2   -->
+        <div class="field col-12 md:col-4">
+          <label for="localite2">Zone géographique de destination 2</label>
+          <p-dropdown
+            id="localite2"
+            [options]="listWilaya"
+            formControlName="zoneDemande2"
+            placeholder="Selectionner la zone de destination nº2"
+          />
+          <mrt-form-validators
+            [entityField]="'zoneDemande2'"
+            [formGroup]="affectationForm"
+          />
+        </div>
+        <!--        Zone géographique de destination 3   -->
+        <div class="field col-12 md:col-4">
+          <label for="localite3">Zone géographique de destination 3</label>
+          <p-dropdown
+            id="localite3"
+            [options]="listWilaya"
+            formControlName="zoneDemande3"
+            placeholder="Selectionner la zone de destination nº3"
+          />
+          <mrt-form-validators
+            [entityField]="'zoneDemande3'"
+            [formGroup]="affectationForm"
+          />
+        </div>
+        <!--        Zone géographique de destination 4   -->
+        <div class="field col-12 md:col-4">
+          <label for="localite4">Zone géographique de destination 4</label>
+          <p-dropdown
+            id="localite4"
+            [options]="listWilaya"
+            formControlName="zoneDemande4"
+            placeholder="Selectionner la zone de destination nº4"
+          />
+          <mrt-form-validators
+            [entityField]="'zoneDemande4'"
+            [formGroup]="affectationForm"
+          />
+        </div>
+        <!--        Zone géographique de destination 5   -->
+        <div class="field col-12 md:col-4">
+          <label for="localite5">Zone géographique de destination 5</label>
+          <p-dropdown
+            id="localite5"
+            [options]="listWilaya"
+            formControlName="zoneDemande5"
+            placeholder="Selectionner la zone de destination nº5"
+          />
+          <mrt-form-validators
+            [entityField]="'zoneDemande5'"
+            [formGroup]="affectationForm"
+          />
+        </div>
+      </div>
+    </div>
+
     <div class="border-1 surface-border border-round p-fluid mb-4">
       <span class="text-900 font-bold block border-bottom-1 surface-border p-3"
         >Critères d’affectation pour convenances personnelles des
@@ -101,8 +136,13 @@
             type="number"
             pInputText
             id="AnciennetéGenerale"
+            formControlName="ancieneteFonctionPublique"
             placeholder="Entrez l'ancienneté dans la Fonction publique"
             required
+          />
+          <mrt-form-validators
+            [entityField]="'ancieneteFonctionPublique'"
+            [formGroup]="affectationForm"
           />
         </div>
         <!-- Note administrative ou pédagogique -->
@@ -113,7 +153,12 @@
             pInputText
             placeholder="Entrez la note d’inspection pédagogique"
             id="notePedagogiq"
+            formControlName="noteInspectionPedagogique"
             required
+          />
+          <mrt-form-validators
+            [entityField]="'noteInspectionPedagogique'"
+            [formGroup]="affectationForm"
           />
         </div>
         <!-- Note administrative ou pédagogique -->
@@ -124,9 +169,14 @@
           <input
             type="number"
             pInputText
+            formControlName="noteEvaluationAdministrative"
             placeholder="Entrez la note d’évaluation administrative"
             id="noteAdministrative"
             required
+          />
+          <mrt-form-validators
+            [entityField]="'noteEvaluationAdministrative'"
+            [formGroup]="affectationForm"
           />
         </div>
         <!-- Ancienneté poste -->
@@ -135,7 +185,12 @@
           <p-dropdown
             id="ancienetePost"
             [options]="ancieneteList"
+            formControlName="anciennetePosteActuel"
             placeholder="L’ancienneté dans la wilaya d’exercice"
+          />
+          <mrt-form-validators
+            [entityField]="'anciennetePosteActuel'"
+            [formGroup]="affectationForm"
           />
         </div>
         <!-- Distinction -->
@@ -144,7 +199,12 @@
           <p-dropdown
             id="distinction"
             [options]="listeDistinction"
+            formControlName="distinction"
             placeholder="Selectionner la distinction"
+          />
+          <mrt-form-validators
+            [entityField]="'distinction'"
+            [formGroup]="affectationForm"
           />
         </div>
         <!-- Nombre d’enfants à charge -->
@@ -153,7 +213,12 @@
           <p-dropdown
             id="nbrEnfants"
             [options]="nbrEnfantsOptions"
+            formControlName="nombreEnfantsACharge"
             placeholder="Nombre d’enfants à charge"
+          />
+          <mrt-form-validators
+            [entityField]="'nombreEnfantsACharge'"
+            [formGroup]="affectationForm"
           />
         </div>
 
@@ -162,7 +227,11 @@
           <label for="localite">8- Zone géographique de destination 1</label>
           <input
             type="text"
-            [value]="selectZoneAffectation1"
+            [value]="
+              demandeObject.zoneDemande1
+                ? demandeObject.zoneDemande1
+                : 'Zone Geographique 1'
+            "
             pInputText
             disabled
             id="localite"
@@ -172,28 +241,61 @@
         <!-- Discrimination positive -->
         <div class="field col-12 md:col-4">
           <label for="discrimination">9- Discrimination positive</label>
-          <p-dropdown
+          <input
             id="discrimination"
-            [options]="sexeOptions"
-            placeholder="Genre"
+            type="text"
+            pInputText
+            formControlName="discriminationPositive"
+            placeholder="discrimination"
+          />
+          <mrt-form-validators
+            [entityField]="'discriminationPositive'"
+            [formGroup]="affectationForm"
           />
         </div>
         <!-- Situation sanitaire -->
         <div class="field col-12 md:col-4">
           <label for="situationSanitaire">10- Situation sanitaire</label>
-          <input type="text" pInputText id="situationSanitaire" />
+          <input
+            type="text"
+            pInputText
+            id="situationSanitaire"
+            formControlName="situationSanitaire"
+          />
+          <mrt-form-validators
+            [entityField]="'situationSanitaire'"
+            [formGroup]="affectationForm"
+          />
         </div>
         <!-- Regroupement de conjoints -->
         <div class="field col-12 md:col-4">
           <label for="regroupement">11- Regroupement de conjoints</label>
-          <input type="text" pInputText id="regroupement" />
+          <input
+            type="text"
+            pInputText
+            id="regroupement"
+            formControlName="regroupementConjoint"
+          />
+          <mrt-form-validators
+            [entityField]="'regroupementConjoint'"
+            [formGroup]="affectationForm"
+          />
         </div>
         <!--          Autres situations sociales    -->
         <div class="field col-12 md:col-4">
           <label for="autreSituationSociale"
             >12- Autres situations sociales</label
           >
-          <input type="text" pInputText id="autreSituationSociale" />
+          <input
+            type="text"
+            pInputText
+            id="autreSituationSociale"
+            formControlName="autreSituationSociale"
+          />
+          <mrt-form-validators
+            [entityField]="'autreSituationSociale'"
+            [formGroup]="affectationForm"
+          />
         </div>
       </div>
     </div>
@@ -347,6 +449,7 @@
     class="p-button-primary flex-1"
     label="Enregistrer"
     icon="pi pi-fw pi-check"
+    [disabled]="!affectationForm.valid"
     (click)="save()"
   ></button>
   <button

@@ -1,45 +1,41 @@
-import { Component, inject, OnInit, Output } from '@angular/core';
-import { TabViewModule } from 'primeng/tabview';
-import { ConvenancePersonnelleNiveauNationaleComponent } from './convenance-personnelle-niveau-nationale/convenance-personnelle-niveau-nationale.component';
-import { CardModule } from 'primeng/card';
-import { ConvenancePersonnelPersonnelListComponent } from './mrt-convenance-personnel-personnel-list/mrt-convenance-personnel-personnel-list.component';
-import { DatePipe } from '@angular/common';
+import {Component, inject, OnInit} from '@angular/core';
+import {TabViewModule} from 'primeng/tabview';
 import {
-  ReactiveFormsModule,
-  FormsModule,
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
-import { CalendarModule } from 'primeng/calendar';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { DialogModule } from 'primeng/dialog';
-import { DividerModule } from 'primeng/divider';
-import { DropdownModule } from 'primeng/dropdown';
-import { FileUploadModule } from 'primeng/fileupload';
-import { InputTextModule } from 'primeng/inputtext';
-import { MultiSelectModule } from 'primeng/multiselect';
-import { RippleModule } from 'primeng/ripple';
-import { Table, TableModule } from 'primeng/table';
-import { ToastModule } from 'primeng/toast';
-import { ToggleButtonModule } from 'primeng/togglebutton';
-import { TooltipModule } from 'primeng/tooltip';
-import { FormValidatorsComponent } from '../../../../shared/form-validators/form-validators.component';
-import { AgentFormDetailsViewComponent } from '../../agent-form-details-view/agent-form-details-view.component';
-import { MessageService, ConfirmationService } from 'primeng/api';
-import { AffectationService } from '../../../../core/data/affectation/affectation.service';
+  ConvenancePersonnelleNiveauNationaleComponent
+} from './convenance-personnelle-niveau-nationale/convenance-personnelle-niveau-nationale.component';
+import {CardModule} from 'primeng/card';
 import {
+  ConvenancePersonnelPersonnelListComponent
+} from './mrt-convenance-personnel-personnel-list/mrt-convenance-personnel-personnel-list.component';
+import {DatePipe} from '@angular/common';
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators,} from '@angular/forms';
+import {ButtonModule} from 'primeng/button';
+import {CalendarModule} from 'primeng/calendar';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {DialogModule} from 'primeng/dialog';
+import {DividerModule} from 'primeng/divider';
+import {DropdownModule} from 'primeng/dropdown';
+import {FileUploadModule} from 'primeng/fileupload';
+import {InputTextModule} from 'primeng/inputtext';
+import {MultiSelectModule} from 'primeng/multiselect';
+import {RippleModule} from 'primeng/ripple';
+import {Table, TableModule} from 'primeng/table';
+import {ToastModule} from 'primeng/toast';
+import {ToggleButtonModule} from 'primeng/togglebutton';
+import {TooltipModule} from 'primeng/tooltip';
+import {FormValidatorsComponent} from '../../../../shared/form-validators/form-validators.component';
+import {AgentFormDetailsViewComponent} from '../../agent-form-details-view/agent-form-details-view.component';
+import {ConfirmationService, MessageService} from 'primeng/api';
+import {AffectationService} from '../../../../core/data/affectation/affectation.service';
+import {
+  AffectationBack,
   DemandeConvenancePersonnelle,
   DemandeConvenancePersonnelleList,
 } from '../../../../core/data/mobilite/mobilite.model';
-import {
-  Personnel,
-  PieceJustificatif,
-} from '../../../../core/data/personals/personnel.model';
-import { PersonnelService } from '../../../../core/data/personals/personnel.service';
-import { Cols } from '../../../../core/data/primeng/primeng.model';
-import { BadgeModule } from 'primeng/badge';
+import {Personnel, PieceJustificatif,} from '../../../../core/data/personals/personnel.model';
+import {PersonnelService} from '../../../../core/data/personals/personnel.service';
+import {Cols} from '../../../../core/data/primeng/primeng.model';
+import {BadgeModule} from 'primeng/badge';
 
 @Component({
   selector: 'mrt-agent-affectation-convenance-personnelle',
@@ -75,20 +71,20 @@ import { BadgeModule } from 'primeng/badge';
   :host ::ng-deep {
     .p-fileupload {
       padding: 0;
-  
+
       .p-fileupload-buttonbar {
         display: none;
       }
-  
+
       .p-fileupload-content {
         border: 0 none;
         padding: 0;
       }
-  
+
       .p-fileupload-row {
         display: none;
       }
-  
+
       .p-progressbar {
         display: none;
       }
@@ -97,25 +93,20 @@ import { BadgeModule } from 'primeng/badge';
   providers: [MessageService, ConfirmationService],
 })
 export class AgentAffectationConvenancePersonnelleComponent implements OnInit {
-  activeIndex: number = 0;
-  dmd: any;
-  action: string = 'Add';
+
+  activeIndex: number = 0; // index de l'onglet actif
+
+  action: string = 'Add'; // index de l'onglet actif
   image!: any;
   // injection du formBuilder
   fb = inject(FormBuilder);
   // Service mobilite
   mobiliteService = inject(AffectationService);
   confirmationService = inject(ConfirmationService);
-  // list localite
-  listLocalite$!: any;
-
-  listUtilisateur$!: any;
 
   pieceLibelle: string = '';
 
   selectZoneAffectation1: string = '';
-
-  situationMatrimonial: boolean = false;
 
   messageService = inject(MessageService);
 
@@ -124,10 +115,14 @@ export class AgentAffectationConvenancePersonnelleComponent implements OnInit {
   selectedPersonnel: Personnel = JSON.parse(
     localStorage.getItem('user') as string
   );
+
   listeDemande: DemandeConvenancePersonnelleList = [];
+
   demandeObject: DemandeConvenancePersonnelle =
     {} as DemandeConvenancePersonnelle;
+
   listPieceJustificatif = Array<PieceJustificatif>();
+
   selectedDemande: DemandeConvenancePersonnelle =
     {} as DemandeConvenancePersonnelle;
 
@@ -148,8 +143,6 @@ export class AgentAffectationConvenancePersonnelleComponent implements OnInit {
     { field: 'images', header: 'Images' },
   ];
 
-  // Sexe
-  sexeOptions = ['Masculin', 'Féminin'];
 
   // Nombre d'enfants
   nbrEnfantsOptions = ['Moins de 5 enfants', '5 enfants et plus'];
@@ -160,8 +153,6 @@ export class AgentAffectationConvenancePersonnelleComponent implements OnInit {
   // Distinction
   listeDistinction = ['Nationale', 'Régionale', 'Départementale'];
 
-  // Situation matrimoniale
-  situationMatrimonialeOptions = ['Célibataire', 'Marié', 'Divorcé', 'Veuf'];
 
   // Liste de Wilaya
   listWilaya = [
@@ -247,7 +238,6 @@ export class AgentAffectationConvenancePersonnelleComponent implements OnInit {
 
   onUploadFile(event: any) {
     this.image = event.files[0];
-    console.log(this.image);
   }
 
   removeFile() {
@@ -290,16 +280,9 @@ export class AgentAffectationConvenancePersonnelleComponent implements OnInit {
   confirm() {
     this.confirmationService.confirm({
       message: 'Êtes-vous sûr de vouloir continuer ?',
-      icon: 'pi pi-check-circle',
-      acceptIcon: 'pi pi-check mr-1',
-      rejectIcon: 'pi pi-times mr-1',
-      acceptLabel: 'Oui',
-      rejectLabel: 'Non',
-      rejectButtonStyleClass: 'p-button-danger p-button-sm',
-      acceptButtonStyleClass: 'p-button-success p-button-sm',
       accept: () => {
         if (this.action === 'Add') {
-          // this.createAffectation();
+          // this.createAffectationBack();
           this.createAffectation();
         } else {
           this.updateAffectation();
@@ -317,10 +300,7 @@ export class AgentAffectationConvenancePersonnelleComponent implements OnInit {
 
   createAffectation() {
     const data = this.getFormData();
-    let selectedPersonnel: any = JSON.parse(
-      localStorage.getItem('user') as string
-    );
-    data.idUtilisateur = selectedPersonnel.idAgent;
+    data.idUtilisateur = this.selectedPersonnel.idAgent;
     data.listPieceJustificatif = this.listPieceJustificatif;
     this.mobiliteService.addDemandeConvenancePersonnelle(data).subscribe(
       () => {
@@ -344,12 +324,31 @@ export class AgentAffectationConvenancePersonnelleComponent implements OnInit {
   }
 
   createAffectationBack() {
-    const data = this.getFormData();
-    let selectedPersonnel: any = JSON.parse(
-      localStorage.getItem('user') as string
-    );
-    data.personnel = selectedPersonnel;
-    data.listPieceJustificatif = this.listPieceJustificatif;
+    const data = this.getFormDataBack();
+    data.personnel = {
+      idAgent: this.selectedPersonnel.idAgent,
+      matricule: this.selectedPersonnel.matricule,
+      nomPrenom: this.selectedPersonnel.nomPrenom,
+      nomPrenomArab: this.selectedPersonnel.nomPrenomArab,
+      nni: this.selectedPersonnel.nni,
+      dteRecrutement: this.selectedPersonnel.dteRecrutement,
+      dteTitularisation: this.selectedPersonnel.dteTitularisation,
+      dteSortie: this.selectedPersonnel.dteSortie,
+      statusEmp: this.selectedPersonnel.statusEmp,
+      tlphone: this.selectedPersonnel.tlphone,
+      adressEmp: this.selectedPersonnel.adressEmp,
+      debutCntrat: this.selectedPersonnel.debutCntrat,
+      finCntrat: this.selectedPersonnel.finCntrat,
+      dateNaiss: this.selectedPersonnel.dateNaiss,
+      lieuNaiss: this.selectedPersonnel.lieuNaiss,
+      actifOrNot: this.selectedPersonnel.actifOrNot,
+      bank: this.selectedPersonnel.bank,
+      codeBank: this.selectedPersonnel.codeBank,
+      numroCpte: this.selectedPersonnel.numroCpte,
+      cleRib: this.selectedPersonnel.cleRib,
+      detacher: this.selectedPersonnel.detacher,
+      ministerOrigine: this.selectedPersonnel.ministerOrigine,
+    } as Personnel;
     this.mobiliteService
       .createAffectationByConvenance(data, this.listPieceJustificatif)
       .subscribe(
@@ -401,6 +400,29 @@ export class AgentAffectationConvenancePersonnelleComponent implements OnInit {
     };
   }
 
+  getFormDataBack(): AffectationBack {
+    const formData = this.affectationForm.value;
+    return <AffectationBack>{
+      personnel: this.selectedPersonnel,
+      dren: formData.drenActuelle,
+      notePedagogiq: formData.noteInspectionPedagogique,
+      situationSanit: formData.situationSanitaire,
+      nombreFant: formData.nombreEnfantsACharge,
+      ancieneteGen: formData.ancieneteFonctionPublique,
+      anciennetePoste: formData.anciennetePosteActuel,
+      posteOrrigin: formData.posteActuel,
+      posteDestina1: this.selectZoneAffectation1,
+      posteDestina2: formData.zoneDemande2,
+      posteDestina3: formData.zoneDemande3,
+      posteDestina4: formData.zoneDemande4,
+      posteDestina5: formData.zoneDemande5,
+      distinction: formData.discriminationPositive,
+      regroupementConjoint: formData.regroupementConjoint,
+      autresSocial: formData.autreSituationSociale,
+      noteAdministrative: formData.noteEvaluationAdministrative,
+    };
+  }
+
   onEdit(dmd: any) {
     this.activeIndex = 0;
     this.action = 'Edit';
@@ -414,7 +436,7 @@ export class AgentAffectationConvenancePersonnelleComponent implements OnInit {
     data.id = this.selectedDemande.id;
     data.listPieceJustificatif = this.listPieceJustificatif;
     this.mobiliteService.updateDemandeConvenancePersonnelle(data).subscribe(
-      (response) => {
+      () => {
         this.messageService.add({
           severity: 'success',
           summary: 'Succès',
@@ -449,9 +471,7 @@ export class AgentAffectationConvenancePersonnelleComponent implements OnInit {
       .subscribe((response) => {
         response.forEach((element) => {
           if (
-            element.idUtilisateur === this.selectedPersonnel.idAgent &&
-            element.envoyer === false &&
-            element.annulerDemande === false
+            element.idUtilisateur === this.selectedPersonnel.idAgent && !element.envoyer && !element.annulerDemande
           ) {
             this.listeDemande.push(element);
           }
@@ -474,7 +494,7 @@ export class AgentAffectationConvenancePersonnelleComponent implements OnInit {
             });
             this.getAgentDemandeConvenancePersonnelle();
           },
-          (error) => {
+          () => {
             this.messageService.add({
               severity: 'error',
               summary: 'Error',

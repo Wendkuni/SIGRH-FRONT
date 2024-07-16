@@ -213,6 +213,7 @@
       "enregistre": true,
       "envoyer": false,
       "avisDren": "",
+      "annulerDemande": false,
       "decisionCommissionZone1": "",
       "totalPoint": 0,
       "id": "7ff8",
@@ -258,6 +259,7 @@
       "enregistre": false,
       "envoyer": true,
       "avisDren": "",
+      "annulerDemande": false,
       "decisionCommissionZone1": "",
       "totalPoint": 0,
       "idUtilisateur": 78,
@@ -267,6 +269,54 @@
           "images": {
             "objectURL": {
               "changingThisBreaksApplicationSecurity": "blob:http://localhost:4200/27713f3f-5001-49c6-92cf-17ae478a670a"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "demandePermutations": [
+    {
+      "id": "707d",
+      "matriculeCopermutant": "1013412",
+      "matriculePermutant": "2310NO",
+      "lieuPermutation": "Ouaga",
+      "dateDemandePermutation": "2024-07-16T14:54:10.040Z",
+      "enregistrerPermutant": true,
+      "envoyerPermutant": false,
+      "enregistreCopermutant": false,
+      "envoyerCopermutant": false,
+      "annulerDemandePermutant": false,
+      "annulerDemandeCopermutant": false,
+      "listPieceJustificatifPermutant": [
+        {
+          "libelle": "Demande manuscrite des copermutants",
+          "images": {
+            "objectURL": {
+              "changingThisBreaksApplicationSecurity": "blob:http://localhost:4200/4b96dd0a-dea8-45d4-9f8d-eec661041939"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "708",
+      "matriculeCopermutant": "2310NO",
+      "matriculePermutant": "1013412",
+      "lieuPermutation": "Koudougou",
+      "dateDemandePermutation": "2024-07-16T14:54:10.040Z",
+      "enregistrerPermutant": true,
+      "envoyerPermutant": true,
+      "enregistreCopermutant": false,
+      "envoyerCopermutant": false,
+      "annulerDemandePermutant": false,
+      "annulerDemandeCopermutant": false,
+      "listPieceJustificatifPermutant": [
+        {
+          "libelle": "Demande manuscrite des copermutants",
+          "images": {
+            "objectURL": {
+              "changingThisBreaksApplicationSecurity": "blob:http://localhost:4200/4b96dd0a-dea8-45d4-9f8d-eec661041939"
             }
           }
         }

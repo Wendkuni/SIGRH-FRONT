@@ -26,13 +26,13 @@
           pButton
           label="Oui"
           (click)="cd.accept()"
-          class="p-button-danger w-8rem"
+          class="p-button-success w-8rem"
         ></button>
         <button
           pButton
           label="Non"
           (click)="cd.reject()"
-          class="p-button-outlined p-button-success w-8rem"
+          class="p-button-outlined p-button-danger w-8rem"
         ></button>
       </div>
     </div>
@@ -46,6 +46,7 @@
       Formulaire d'affectation pour convenances personnelles niveau national
     </div>
     <div class="m-2">
+<!--      Details agent -->
       <mrt-agent-form-details-view></mrt-agent-form-details-view>
 
       <div class="container py-5">
@@ -275,7 +276,7 @@
 
               <!--        Zone géographique de destination 1   -->
               <div class="field col-12 md:col-4">
-                <label for="localite"
+                <label for="localite6"
                   >8- Zone géographique de destination 1</label
                 >
                 <input
@@ -287,7 +288,7 @@
                   "
                   pInputText
                   disabled
-                  id="localite"
+                  id="localite6"
                 />
               </div>
 

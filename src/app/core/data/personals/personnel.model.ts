@@ -54,11 +54,18 @@ export interface Personnel{
   cleRib: string;
   detacher: string;
   ministerOrigine: string;
-  typeeducation: TypeEducation;
+
+  Typeeducation:string;
   imagPers: any;
   sexePers: string;
   situationMatri: string;
-  espace: string;
+  autres:string;
+  autres2: string;
+  corpsRecrt: string;
+  typeF: string;
+  refRec:string;
+  fonctnRef:string;
+
 }
 
 export type Personnels = Personnel[];

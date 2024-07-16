@@ -4,8 +4,9 @@ import { Affectation, Mobilite, Mobilites } from './mobilite.model';
 import { environment } from '../../../../environments/environment';
 import { PieceJustificatif } from '../personals/personnel.model';
 import {
+  AffectationBack,
   DemandeConvenancePersonnelle,
-  DemandeConvenancePersonnelleList,
+  DemandeConvenancePersonnelleList, Permutation, PermutationList,
 } from '../mobilite/mobilite.model';
 
 @Injectable({
@@ -81,16 +82,14 @@ export class AffectationService {
   }
 
   createAffectationByConvenance(
-    data: DemandeConvenancePersonnelle,
+    data: AffectationBack,
     listPieceJustificatif: PieceJustificatif[]
   ) {
     const formData = new FormData();
+    formData.append('image', JSON.stringify(listPieceJustificatif));
     formData.append('affectation', JSON.stringify(data));
-    listPieceJustificatif.forEach((piece) => {
-      formData.append('files', piece.images, piece.libelle);
-    });
 
-    // console.log(formData);
+    console.log(formData);
 
     return this.http.post(
       'http://localhost:8082/v1/api/affectation/create',
@@ -124,5 +123,21 @@ export class AffectationService {
       `${this.apiUrlJsonServer}/demandeConvenancePersonnelle/${asignmentRequest.id}`,
       asignmentRequest
     );
+  }
+
+
+  createPermuttionJson(data: Permutation) {
+    return this.http.post(
+      `${this.apiUrlJsonServer}/demandePermutations`,
+      data
+    );
+  }
+
+  updatePermuttionJson(data: Permutation) {
+    return this.http.put(`${this.apiUrlJsonServer}/demandePermutations/${data.id}`,data)
+  }
+
+  getAllPermutationJson(){
+    return this.http.get<PermutationList>(`${this.apiUrlJsonServer}/demandePermutations`);
   }
 }

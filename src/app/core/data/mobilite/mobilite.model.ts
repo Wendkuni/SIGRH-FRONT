@@ -60,3 +60,58 @@ export interface DemandeConvenancePersonnelle {
   annulerDemande: boolean;
 }
 export type DemandeConvenancePersonnelleList = DemandeConvenancePersonnelle[];
+
+export type Permutation = {
+  id:string;
+  idDemandePermutation: number;
+  idAgent: number;
+  numDemande: string;
+  matriculeCopermutant: string;
+  matriculePermutant: string;
+  lieuPermutation: string;
+  listPieceJustificatifPermutant: Array<PieceJustificatif>;
+  listPieceJustificatifCopermutant: Array<PieceJustificatif>;
+  dateDemandePermutation: Date;
+  enregistrerPermutant: boolean;
+  envoyerPermutant: boolean;
+  avisDrenPermutant: string;
+  enregistreCopermutant: boolean;
+  envoyerCopermutant: boolean;
+  avisDrenCopermutant: string;
+  annulerDemandePermutant: boolean;
+  annulerDemandeCopermutant: boolean;
+};
+
+export type PermutationList = Permutation[];
+
+export type AffectationBack = {
+  idAffectation: number;
+  personnel: Personnel;
+  serviceEcole: string;
+  dateEffet: Date;
+  dren: string;
+  notePedagogiq: string;
+  nature: string;
+  motif: string;
+  situationSanit: string;
+  nombreFant: number;
+  ancieneteGen: number;
+  anciennetePoste: number;
+  posteOrrigin: string;
+  posteDestina1: string;
+  posteDestina2: string;
+  posteDestina3: string;
+  posteDestina4: string;
+  posteDestina5: string;
+  distinction: string;
+  regroupementConjoint: string;
+  autresSocial: string;
+  noteAdministrative: number;
+  situationMatrimo: string;
+  etatAffect: string;
+  pointPondere: number;
+  autreDiplome: string;
+  dateDemande: Date;
+  destinationRetenue: string;
+  appreciation: string;
+};

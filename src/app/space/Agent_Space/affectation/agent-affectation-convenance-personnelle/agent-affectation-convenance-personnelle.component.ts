@@ -1,12 +1,6 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {TabViewModule} from 'primeng/tabview';
-import {
-  ConvenancePersonnelleNiveauNationaleComponent
-} from './convenance-personnelle-niveau-nationale/convenance-personnelle-niveau-nationale.component';
 import {CardModule} from 'primeng/card';
-import {
-  ConvenancePersonnelPersonnelListComponent
-} from './mrt-convenance-personnel-personnel-list/mrt-convenance-personnel-personnel-list.component';
 import {DatePipe} from '@angular/common';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators,} from '@angular/forms';
 import {ButtonModule} from 'primeng/button';
@@ -43,9 +37,7 @@ import {BadgeModule} from 'primeng/badge';
   templateUrl: './agent-affectation-convenance-personnelle.component.html',
   imports: [
     TabViewModule,
-    ConvenancePersonnelleNiveauNationaleComponent,
     CardModule,
-    ConvenancePersonnelPersonnelListComponent,
     ButtonModule,
     RippleModule,
     CalendarModule,
@@ -376,7 +368,7 @@ export class AgentAffectationConvenancePersonnelleComponent implements OnInit {
     return <DemandeConvenancePersonnelle>{
       posteActuel: formData.posteActuel,
       drenActuelle: formData.drenActuelle,
-      zoneDemande1: this.selectZoneAffectation1,
+      zoneDemande1: this.demandeObject.zoneDemande1,
       zoneDemande2: formData.zoneDemande2,
       zoneDemande3: formData.zoneDemande3,
       zoneDemande4: formData.zoneDemande4,
@@ -435,6 +427,7 @@ export class AgentAffectationConvenancePersonnelleComponent implements OnInit {
     const data = this.getFormData();
     data.id = this.selectedDemande.id;
     data.listPieceJustificatif = this.listPieceJustificatif;
+    data.idUtilisateur = this.selectedPersonnel.idAgent;
     this.mobiliteService.updateDemandeConvenancePersonnelle(data).subscribe(
       () => {
         this.messageService.add({
@@ -443,8 +436,8 @@ export class AgentAffectationConvenancePersonnelleComponent implements OnInit {
           detail: 'Affectation modifiée avec succès',
           life: 3000,
         });
-        this.getAgentDemandeConvenancePersonnelle();
         this.cancelMobilite();
+        this.getAgentDemandeConvenancePersonnelle();
       },
       () => {
         this.messageService.add({
@@ -486,13 +479,13 @@ export class AgentAffectationConvenancePersonnelleComponent implements OnInit {
         dmd.envoyer = true;
         this.mobiliteService.updateDemandeConvenancePersonnelle(dmd).subscribe(
           () => {
+            this.getAgentDemandeConvenancePersonnelle();
             this.messageService.add({
               severity: 'success',
               summary: 'Succès',
               detail: 'Demande envoyée avec succès',
               life: 3000,
             });
-            this.getAgentDemandeConvenancePersonnelle();
           },
           () => {
             this.messageService.add({
@@ -516,13 +509,13 @@ export class AgentAffectationConvenancePersonnelleComponent implements OnInit {
         this.mobiliteService
           .updateDemandeConvenancePersonnelle(dmd)
           .subscribe(() => {
+            this.getAgentDemandeConvenancePersonnelle();
             this.messageService.add({
               severity: 'success',
               summary: 'Succès',
               detail: 'Demande annulée avec succès',
               life: 3000,
             });
-            this.getAgentDemandeConvenancePersonnelle();
           });
       },
     });

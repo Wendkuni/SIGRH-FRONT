@@ -39,7 +39,7 @@
   </ng-template>
 </p-confirmDialog>
 
-<p-tabView>
+<p-tabView [(activeIndex)]="activeIndex">
   <!-- Formulaire Permutation-->
   <p-tabPanel header="Formulaire de demande">
     <div class="text-900 font-bold text-3xl mb-4 mt-2">
@@ -158,7 +158,6 @@
                   <p-table
                     [columns]="colsDossier"
                     [value]="listPieceJustificatifAgent1"
-                    #dt1
                     dataKey="id"
                     [rows]="5"
                     [showCurrentPageReport]="true"
@@ -283,7 +282,23 @@
                   severity="secondary"
                   icon="pi pi-arrow-left"
                 />
-                <p-button label="Enregistrer" icon="pi pi-check" iconPos="right" (click)="savePermutation()" />
+                <div class="flex justify-content-between gap-3">
+                  <button
+                    pButton
+                    pRipple
+                    class="p-button-primary flex-1"
+                    label="Enregistrer"
+                    icon="pi pi-fw pi-check"
+                    (click)="savePermutation()"
+                  ></button>
+                  <button
+                    pButton
+                    pRipple
+                    class="p-button-danger flex-1 p-button-outlined"
+                    label="Annuler"
+                    icon="pi pi-fw pi-times"
+                  ></button>
+                </div>
               </div>
             </ng-template>
           </p-stepperPanel>
@@ -317,7 +332,6 @@
               <input
                 pInputText
                 type="text"
-                #filter
                 (input)="onGlobalFilter(personnelDemandePermutationTable, $event)"
                 placeholder="Recherche..."
                 class="w-full"
@@ -369,6 +383,7 @@
               label="Modifier"
               icon="pi pi-pencil"
               class="p-button-info"
+              (click)="onEdit(dmd)"
             ></button>
           </td>
           <td>
@@ -419,7 +434,6 @@
               <input
                 pInputText
                 type="text"
-                #filter
                 (input)="onGlobalFilter(personnelDemandePermutationRecuTable, $event)"
                 placeholder="Recherche..."
                 class="w-full"

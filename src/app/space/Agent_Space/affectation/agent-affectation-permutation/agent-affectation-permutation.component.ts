@@ -76,7 +76,7 @@ import {ToastModule} from "primeng/toast";
 })
 export class AgentAffectationPermutationComponent implements OnInit{
 
-  active: number = 0; // index de l'onglet actif
+  activeIndex: number = 0; // index de l'onglet actif
   action :string = 'Add'; // action
   listeDemande: PermutationList = [];
   listePermutationRecut: PermutationList = [];
@@ -96,6 +96,8 @@ export class AgentAffectationPermutationComponent implements OnInit{
   matriculeCopermutant: string = '';
 
   lieuPermutation: string = '';
+
+  selectedDemande: Permutation = {} as Permutation;
 
   // agent connecté
   selectedPersonnel: Personnel = JSON.parse(
@@ -188,6 +190,15 @@ export class AgentAffectationPermutationComponent implements OnInit{
     }
   }
 
+  onEdit(dmd: Permutation) {
+    this.activeIndex = 0;
+    this.action = 'Edit';
+    this.selectedDemande = dmd;
+    this.matriculeCopermutant = dmd.matriculeCopermutant;
+    this.lieuPermutation = dmd.lieuPermutation;
+    this.listPieceJustificatifAgent1 = dmd.listPieceJustificatifPermutant;
+  }
+
   confirm() {
     this.confirmationService.confirm({
       header: 'Êtes-vous sûr ? ',
@@ -197,8 +208,10 @@ export class AgentAffectationPermutationComponent implements OnInit{
           // this.createPermutation();
           this.createPermutationJson();
         } else {
-          // this.updatePermutation()
-         this.updatePermutationJson();
+          if(this.action === 'Edit'){
+              // this.updatePermutation();
+              this.updatePermutationJson();
+          }
         }
       },
       reject: () => {
@@ -247,7 +260,25 @@ export class AgentAffectationPermutationComponent implements OnInit{
 
   // Methode de modification Json server
   updatePermutationJson() {
-
+    const data = this.getFormData();
+    data.listPieceJustificatifPermutant = this.listPieceJustificatifAgent1;
+    this.mobiliteService.updatePermuttionJson(data).subscribe(() => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Succès',
+          detail: 'Affectation enregistrée avec succès',
+        });
+        this.getAllDemandePermutationAgent();
+        this.cancelDmdPermutation();
+      },
+      () => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Affectation non enregistrée',
+          life: 3000,
+        });
+      })
   }
 
   getFormData(): Permutation{

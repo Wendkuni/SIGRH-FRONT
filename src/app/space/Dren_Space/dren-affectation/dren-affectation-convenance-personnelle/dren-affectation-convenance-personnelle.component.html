@@ -39,37 +39,15 @@
 
 <p-card>
   <div class="container">
-    <p-toolbar styleClass="mb-4">
-      <ng-template pTemplate="right">
-        <div class="my-2">
-          <button
-            pButton
-            pRipple
-            label="Favorable"
-            icon="pi pi-check"
-            class="p-button-success mr-2"
-            [disabled]="!selectedDossier || !selectedDossier.length"
-            (click)="validerFavorable()"
-          ></button>
-          <button
-            pButton
-            pRipple
-            label="Défavorable"
-            icon="pi pi-times"
-            class="p-button-danger"
-            [disabled]="!selectedDossier || !selectedDossier.length"
-            (click)="validerDefavorable()"
-          ></button>
-        </div>
-      </ng-template>
-    </p-toolbar>
+    <div class="text-900 font-bold text-3xl mb-4 mt-2">
+      Avis Convenance Personnelle
+    </div>
 
     <p-table
       #dt
       [value]="tableDataDossierSortant"
       [columns]="colsDossierSortant"
       responsiveLayout="scroll"
-      [rows]="10"
       [globalFilterFields]="['nbrPoint', 'matricule', 'nomPrenom', 'nni']"
       [rows]="10"
       [paginator]="true"
@@ -99,9 +77,9 @@
       </ng-template>
       <ng-template let-columns pTemplate="header">
         <tr>
-          <th style="width: 3rem">
-            <p-tableHeaderCheckbox />
-          </th>
+<!--          <th style="width: 3rem">-->
+<!--            <p-tableHeaderCheckbox />-->
+<!--          </th>-->
           @for (col of columns; track col.field) {
           <th
             style="min-width: 10rem"
@@ -112,15 +90,16 @@
             <p-sortIcon [field]="col.field"></p-sortIcon>
           </th>
           }
+          <th></th>
           <th>Actions</th>
           <th></th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-dossier>
         <tr>
-          <td>
-            <p-tableCheckbox [value]="dossier" />
-          </td>
+<!--          <td>-->
+<!--            <p-tableCheckbox [value]="dossier" />-->
+<!--          </td>-->
           <td>{{ dossier.n }}</td>
           <td>{{ dossier.nbrPoint }}</td>
           <td>{{ dossier.Matricule }}</td>
@@ -147,6 +126,16 @@
             <button
               pButton
               pRipple
+              label="Visualiser"
+              icon="pi pi-eye"
+              class="p-button-info mr-2"
+              (click)="visualiserDemandeConvenancePersonnelle(dossier)"
+            ></button>
+          </td>
+          <td>
+            <button
+              pButton
+              pRipple
               label="Favorable"
               icon="pi pi-check"
               class="p-button-success mr-2"
@@ -166,3 +155,161 @@
     </p-table>
   </div>
 </p-card>
+
+<p-dialog
+  [modal]="true"
+  [(visible)]="convenancePersonnelDialog"
+  [style]="{ width: '70rem' }"
+  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+  [maximizable]="true"
+>
+  <div class="flex flex-column align-items-center mb-6">
+    <div class="text-900 text-2xl mb-4 font-medium">FICHE DE DEMANDE DE CONVENANCE PERSONNELLE</div>
+  </div>
+  <p-divider></p-divider>
+  <div class="grid">
+    <div class="col-12 lg:col-4">
+      <!-- <span class="text-900 block mb-3 font-bold">Informations: </span> -->
+      <ul class="list-none p-0 m-0 text-600 mb-2 text-600">
+        <li class="mb-3">
+            <span class="font-semibold">
+              Année scolaire :
+            </span>
+          2024-2025
+        </li>
+        <li class="mb-3">
+            <span class="font-semibold">
+              Nom et Prénoms :
+            </span>
+
+        </li>
+        <li class="mb-3">
+            <span class="font-semibold">
+              NNI :
+            </span>
+
+        </li>
+        <li class="mb-3">
+            <span class="font-semibold">
+              Matricule :
+            </span>
+
+        </li>
+        <li class="mb-3">
+            <span class="font-semibold">
+              Date de naissance :
+            </span>
+        </li>
+      </ul>
+    </div>
+    <div class="col-12 lg:col-4">
+      <ul class="list-none p-0 m-0 text-600 mb-2 text-600">
+        <li class="mb-3"><span class="font-semibold">Echelon :</span> </li>
+        <li class="mb-3"><span class="font-semibold">Sexe :</span> Masculin</li>
+        <li class="mb-3"><span class="font-semibold">Diplôme professionnel :</span> </li>
+        <li class="mb-3"><span class="font-semibold">Diplôme académique le plus élevé :</span> </li>
+        <li class="mb-3"><span class="font-semibold">Lieu de naissance : </span> </li>
+      </ul>
+    </div>
+    <div class="col-12 lg:col-4">
+      <ul class="list-none p-0 m-0 text-600 mb-4 text-600">
+        <li class="mb-3"><span class="font-semibold">Discipline enseignée :</span> </li>
+        <li class="mb-3"><span class="font-semibold">Téléphone :</span> </li>
+        <li class="mb-3"><span class="font-semibold">Email :</span> </li>
+        <li class="mb-3">
+          <span class="font-semibold">
+            Corps/Grade :
+          </span>
+        </li>
+        <li class="mb-3"><span class="font-semibold">Discipline d'origine :</span> </li>
+      </ul>
+    </div></div>
+  <p-divider></p-divider>
+  <div class="flex flex-column align-items-center mb-2">
+    <div class="text-900 text-xl mb-4 font-medium">Wilayas demandées (par ordre de préférence)</div>
+  </div>
+  <div class="col-12">
+  <ul class="list-none p-0 m-0 text-600 mb-4 text-600">
+    <li class="mb-3"><span class="font-semibold">Zone géographique de destination 1 :   </span>-------------</li>
+    <li class="mb-3"><span class="font-semibold">Zone géographique de destination 2 :   </span>-------------</li>
+    <li class="mb-3"><span class="font-semibold">Zone géographique de destination 3 :   </span>-------------</li>
+    <li class="mb-3"><span class="font-semibold">Zone géographique de destination 4 :   </span>-------------</li>
+    <li class="mb-3"><span class="font-semibold">Zone géographique de destination 5 :   </span>-------------</li>
+  </ul>
+  </div>
+    <p-divider></p-divider>
+    <div class="flex flex-column align-items-center mb-2">
+      <div class="text-900 text-xl mb-4 font-medium">Critères d’affectation pour convenances personnelles des enseignants</div>
+    </div>
+    <div class="col-12">
+    <div class="overflow-x-auto">
+      <table class="w-full" style="border-collapse: collapse; table-layout: auto">
+        <thead>
+        <tr>
+          <th class="text-left font-semibold py-3 border-bottom-1 surface-border white-space-nowrap">Critères</th>
+          <th class="text-right font-semibold py-3 border-bottom-1 surface-border white-space-nowrap">Valeur</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td class="text-left py-3 border-bottom-1 surface-border white-space-nowrap">Ancienneté dans la Fonction publique</td>
+          <td class="text-right py-3 border-bottom-1 surface-border">--</td>
+        </tr>
+        <tr>
+          <td class="text-left py-3 border-bottom-1 surface-border white-space-nowrap">Note d’inspection pédagogique</td>
+          <td class="text-right py-3 border-bottom-1 surface-border">--</td>
+        </tr>
+        <tr>
+          <td class="text-left py-3 border-bottom-1 surface-border white-space-nowrap">Note d’évaluation administrative</td>
+          <td class="text-right py-3 border-bottom-1 surface-border">--</td>
+        </tr>
+        <tr>
+          <td class="text-left py-3 border-bottom-1 surface-border white-space-nowrap">Ancienneté dans la wilaya</td>
+          <td class="text-right py-3 border-bottom-1 surface-border">--</td>
+        </tr>
+        <tr>
+          <td class="text-left py-3 border-bottom-1 surface-border white-space-nowrap">Distinction</td>
+          <td class="text-right py-3 border-bottom-1 surface-border">--</td>
+        </tr>
+        <tr>
+          <td class="text-left py-3 border-bottom-1 surface-border white-space-nowrap">Nombre d’enfants à charge</td>
+          <td class="text-right py-3 border-bottom-1 surface-border">--</td>
+        </tr>
+        <tr>
+          <td class="text-left py-3 border-bottom-1 surface-border white-space-nowrap">Zone géographique </td>
+          <td class="text-right py-3 border-bottom-1 surface-border">--</td>
+        </tr>
+        <tr>
+          <td class="text-left py-3 border-bottom-1 surface-border white-space-nowrap">Discrimination positive </td>
+          <td class="text-right py-3 border-bottom-1 surface-border">--</td>
+        </tr>
+        <tr>
+          <td class="text-left py-3 border-bottom-1 surface-border white-space-nowrap">Situation sanitaire</td>
+          <td class="text-right py-3 border-bottom-1 surface-border">--</td>
+        </tr>
+        <tr>
+          <td class="text-left py-3 border-bottom-1 surface-border white-space-nowrap">Regroupement de conjoints</td>
+          <td class="text-right py-3 border-bottom-1 surface-border">--</td>
+        </tr>
+        <tr>
+          <td class="text-left py-3 border-bottom-1 surface-border white-space-nowrap">Autres situations sociales</td>
+          <td class="text-right py-3 border-bottom-1 surface-border">--</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <p-accordion>
+    <p-accordionTab header="Header I" [selected]="true" class="line-height-3 m-0">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+      et dolore magna aliqua.
+      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat.
+      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+      pariatur.
+      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+      est laborum.
+    </p-accordionTab>
+  </p-accordion>
+</p-dialog>

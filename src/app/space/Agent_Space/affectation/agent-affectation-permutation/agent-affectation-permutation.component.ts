@@ -302,6 +302,7 @@ export class AgentAffectationPermutationComponent implements OnInit{
         response.forEach((element) => {
           if (element.matriculePermutant === this.selectedPersonnel.matricule && element.enregistrerPermutant && !element.envoyerPermutant) {
             this.listeDemande.push(element);
+
           }
         });
       });

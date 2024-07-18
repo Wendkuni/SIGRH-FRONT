@@ -1,1 +1,319 @@
-<p>traitement-permutation works!</p>
+<!-- Toast module part -->
+<p-toast
+  [showTransformOptions]="'translateY(100%)'"
+  [showTransitionOptions]="'1000ms'"
+  [hideTransitionOptions]="'1000ms'"
+  [showTransformOptions]="'translateX(100%)'"
+/>
+
+<!--Confirmation module part-->
+<p-confirmDialog #cd>
+  <ng-template pTemplate="headless" let-message>
+    <div
+      class="flex flex-column align-items-center p-5 surface-overlay border-round"
+    >
+      <div
+        class="border-circle bg-primary inline-flex justify-content-center align-items-center h-6rem w-6rem"
+      >
+        <i class="pi pi-question text-5xl"></i>
+      </div>
+      <span class="font-bold text-2xl block mb-2 mt-4">
+        {{ message.header }}
+      </span>
+      <p class="mb-0">{{ message.message }}</p>
+      <div class="flex align-items-center gap-2 mt-4">
+        <button
+          pButton
+          label="Oui"
+          (click)="cd.accept()"
+          class="w-8rem"
+        ></button>
+        <button
+          pButton
+          label="Non"
+          (click)="cd.reject()"
+          class="p-button-outlined p-button-danger w-8rem"
+        ></button>
+      </div>
+    </div>
+  </ng-template>
+</p-confirmDialog>
+
+<p-card>
+  <div class="container">
+<!--    Titre de la page -->
+    <div class="text-900 font-bold text-3xl mb-4 mt-2">
+      Decision Commission Nationale
+    </div>
+    <!--    Table -->
+    <p-table
+      #dt
+      [value]="listeDemande"
+      [columns]="colDossiersPermutaitons"
+      responsiveLayout="scroll"
+      [globalFilterFields]="['nbrPoint', 'matricule', 'nomPrenom', 'nni']"
+      [rows]="5"
+      [paginator]="true"
+      [rowsPerPageOptions]="[5,10, 20, 30]"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Affichage du {first} au {last} des {totalRecords} entrées"
+      [rowHover]="true"
+      dataKey="n"
+    >
+<!--      Global filter -->
+      <ng-template pTemplate="caption">
+        <div
+          class="flex flex-column md:flex-row md:justify-content-between md:align-items-center"
+        >
+          <span class="block mt-2 md:mt-0 p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input
+              pInputText
+              type="text"
+              (input)="onGlobalFilter(dt, $event)"
+              placeholder="Search..."
+              class="w-full sm:w-auto"
+            />
+          </span>
+        </div>
+      </ng-template>
+<!--Table body -->
+      <ng-template let-columns pTemplate="header">
+        <tr>
+          @for (col of columns; track col.field) {
+            <th
+              style="min-width: 10rem"
+              [pSortableColumn]="col.field"
+              class="font-weight-bold"
+            >
+              {{ col.header }}
+              <p-sortIcon [field]="col.field"></p-sortIcon>
+            </th>
+          }
+          <th>Actions</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </ng-template>
+<!--      Table body -->
+      <ng-template pTemplate="body" let-dossier>
+        <tr>
+          <td>{{ dossier.id}}</td>
+          <td>{{ dossier.matriculePermutant}}</td>
+          <td>{{dossier.nomPrenom}}</td>
+          <td>{{dossier.matriculeCopermutant}}</td>
+          <td></td>
+          <td>{{ dossier.dateDemandePermutation | date:'dd/MM/yyyy'}}</td>
+          <td></td>
+          <td>{{ dossier.lieuPermutation}}</td>
+<!--          Button pour visualiser la demande -->
+          <td>
+            <button
+              pButton
+              pRipple
+              label="Visualiser"
+              icon="pi pi-eye"
+              class="p-button-info mr-2"
+              (click)="viewPermutationDetails(dossier)"
+            ></button>
+          </td>
+<!--          Button de traitement accoder -->
+          <td>
+            <button
+              pButton
+              pRipple
+              label="Accorder"
+              icon="pi pi-send"
+              class="p-button-success"
+            ></button>
+          </td>
+<!--          Button de traitement Rejeter -->
+          <td>
+            <button
+              pButton
+              pRipple
+              label="Rejeter"
+              icon="pi pi-trash"
+              class="p-button-danger"
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</p-card>
+
+<!-- Dialog view fiche -->
+<p-dialog
+  [modal]="true"
+  [(visible)]="ficheDialogeShow"
+  [style]="{ width: '70rem' }"
+  (onHide)="onHideDialog()"
+>
+  <div class="flex flex-column align-items-center mb-2">
+    <div class="text-900 text-2xl mb-4 font-medium">FICHE DE DEMANDE DE PERMUTATION</div>
+  </div>
+  <p-tabView>
+<!--    Fiche du premier agent-->
+    <p-tabPanel header="Fiche agent permutant">
+      <div class="flex flex-column align-items-center mb-2">
+        <div class="text-900 text-xl mb-4 font-medium">Informations personnelles</div>
+      </div>
+      <div class="grid">
+        <div class="col-12 lg:col-4">
+          <ul class="list-none p-0 m-0 text-600 mb-2 text-600">
+            <li class="mb-3">
+            <span class="font-semibold">
+              Année scolaire :
+            </span>
+              2024-2025
+            </li>
+            <li class="mb-3">
+            <span class="font-semibold">
+              Nom et Prénoms :
+            </span>
+
+            </li>
+            <li class="mb-3">
+            <span class="font-semibold">
+              NNI :
+            </span>
+
+            </li>
+            <li class="mb-3">
+            <span class="font-semibold">
+              Matricule :
+            </span>
+
+            </li>
+            <li class="mb-3">
+            <span class="font-semibold">
+              Date de naissance :
+            </span>
+            </li>
+          </ul>
+        </div>
+        <div class="col-12 lg:col-4">
+          <ul class="list-none p-0 m-0 text-600 mb-2 text-600">
+            <li class="mb-3"><span class="font-semibold">Echelon :</span> </li>
+            <li class="mb-3"><span class="font-semibold">Sexe :</span> Masculin</li>
+            <li class="mb-3"><span class="font-semibold">Diplôme professionnel :</span> </li>
+            <li class="mb-3"><span class="font-semibold">Diplôme académique le plus élevé :</span> </li>
+            <li class="mb-3"><span class="font-semibold">Lieu de naissance : </span> </li>
+          </ul>
+        </div>
+        <div class="col-12 lg:col-4">
+          <ul class="list-none p-0 m-0 text-600 mb-4 text-600">
+            <li class="mb-3"><span class="font-semibold">Discipline enseignée :</span> </li>
+            <li class="mb-3"><span class="font-semibold">Téléphone :</span> </li>
+            <li class="mb-3"><span class="font-semibold">Email :</span> </li>
+            <li class="mb-3">
+          <span class="font-semibold">
+            Corps/Grade :
+          </span>
+            </li>
+            <li class="mb-3"><span class="font-semibold">Discipline d'origine :</span> </li>
+          </ul>
+        </div></div>
+      <p-accordion>
+        <p-accordionTab header="Piece Jointe" [selected]="false" class="line-height-3 m-0">
+          <div class="grid">
+            <div class="col-12 md:col-6 xl:col-4">
+              <div class="p-2 border-1 surface-border flex align-items-center justify-content-between hover:surface-100 cursor-pointer border-round">
+                <div class="flex align-items-center">
+                  <i class="pi pi-file-pdf text-2xl mr-3"></i>
+                  <span class="text-900 text-lg font-medium">folder name</span>
+                </div>
+                <!--            Button pour consulter la piece actuel -->
+                <span class="text-600 text-lg font-semibold">
+                <button pButton pRipple icon="pi pi-eye" pTooltip="Voir" tooltipPosition="top" class="p-button-text p-button-info hover:bg-blue-100"></button>
+              </span>
+              </div>
+            </div>
+          </div>
+        </p-accordionTab>
+      </p-accordion>
+    </p-tabPanel>
+<!--    Fiche du copermutant-->
+    <p-tabPanel header="Fiche agent copermutant">
+      <div class="flex flex-column align-items-center mb-2">
+        <div class="text-900 text-xl mb-4 font-medium">Informations personnelles</div>
+      </div>
+      <div class="grid">
+        <div class="col-12 lg:col-4">
+          <ul class="list-none p-0 m-0 text-600 mb-2 text-600">
+            <li class="mb-3">
+            <span class="font-semibold">
+              Année scolaire :
+            </span>
+              2024-2025
+            </li>
+            <li class="mb-3">
+            <span class="font-semibold">
+              Nom et Prénoms :
+            </span>
+
+            </li>
+            <li class="mb-3">
+            <span class="font-semibold">
+              NNI :
+            </span>
+
+            </li>
+            <li class="mb-3">
+            <span class="font-semibold">
+              Matricule :
+            </span>
+
+            </li>
+            <li class="mb-3">
+            <span class="font-semibold">
+              Date de naissance :
+            </span>
+            </li>
+          </ul>
+        </div>
+        <div class="col-12 lg:col-4">
+          <ul class="list-none p-0 m-0 text-600 mb-2 text-600">
+            <li class="mb-3"><span class="font-semibold">Echelon :</span> </li>
+            <li class="mb-3"><span class="font-semibold">Sexe :</span> Masculin</li>
+            <li class="mb-3"><span class="font-semibold">Diplôme professionnel :</span> </li>
+            <li class="mb-3"><span class="font-semibold">Diplôme académique le plus élevé :</span> </li>
+            <li class="mb-3"><span class="font-semibold">Lieu de naissance : </span> </li>
+          </ul>
+        </div>
+        <div class="col-12 lg:col-4">
+          <ul class="list-none p-0 m-0 text-600 mb-4 text-600">
+            <li class="mb-3"><span class="font-semibold">Discipline enseignée :</span> </li>
+            <li class="mb-3"><span class="font-semibold">Téléphone :</span> </li>
+            <li class="mb-3"><span class="font-semibold">Email :</span> </li>
+            <li class="mb-3">
+          <span class="font-semibold">
+            Corps/Grade :
+          </span>
+            </li>
+            <li class="mb-3"><span class="font-semibold">Discipline d'origine :</span> </li>
+          </ul>
+        </div></div>
+      <p-accordion>
+        <p-accordionTab header="Piece Jointe" [selected]="false" class="line-height-3 m-0">
+          <div class="grid">
+            <div class="col-12 md:col-6 xl:col-4">
+              <div class="p-2 border-1 surface-border flex align-items-center justify-content-between hover:surface-100 cursor-pointer border-round">
+                <div class="flex align-items-center">
+                  <i class="pi pi-file-pdf text-2xl mr-3"></i>
+                  <span class="text-900 text-lg font-medium">folder name</span>
+                </div>
+                <!--            Button pour consulter la piece actuel -->
+                <span class="text-600 text-lg font-semibold">
+                <button pButton pRipple icon="pi pi-eye" pTooltip="Voir" tooltipPosition="top" class="p-button-text p-button-info hover:bg-blue-100"></button>
+              </span>
+              </div>
+            </div>
+          </div>
+        </p-accordionTab>
+      </p-accordion>
+    </p-tabPanel>
+  </p-tabView>
+
+</p-dialog>

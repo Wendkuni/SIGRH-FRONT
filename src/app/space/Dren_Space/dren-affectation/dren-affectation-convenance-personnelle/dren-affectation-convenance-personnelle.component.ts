@@ -14,6 +14,7 @@ import {DialogModule} from "primeng/dialog";
 import {Personnel} from "../../../../core/data/personals/personnel.model";
 import {DividerModule} from "primeng/divider";
 import {AccordionModule} from "primeng/accordion";
+import {TooltipModule} from "primeng/tooltip";
 
 @Component({
   selector: 'mrt-dren-affectation-convenance-personnelle',
@@ -30,6 +31,7 @@ import {AccordionModule} from "primeng/accordion";
     DialogModule,
     DividerModule,
     AccordionModule,
+    TooltipModule,
   ],
   templateUrl: './dren-affectation-convenance-personnelle.component.html',
   styleUrl: './dren-affectation-convenance-personnelle.component.scss',
@@ -604,5 +606,10 @@ export class DrenAffectationConvenancePersonnelleComponent {
     this.convenancePersonnelDialog=true;
     this.selectDemande = dmd;
     this.selectDemande.personnel = {} as Personnel;
+  }
+
+  onHideDialog(){
+    this.convenancePersonnelDialog = false;
+    this.selectDemande = null;
   }
 }

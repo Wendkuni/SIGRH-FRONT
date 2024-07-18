@@ -39,28 +39,9 @@
 
 <p-card>
   <div class="container">
-    <p-toolbar styleClass="mb-4">
-      <ng-template pTemplate="right">
-        <div class="my-2">
-          <button
-            pButton
-            pRipple
-            label="Favorable"
-            icon="pi pi-check"
-            class="p-button-success mr-2"
-            [disabled]="!selectedDossier || !selectedDossier.length"
-          ></button>
-          <button
-            pButton
-            pRipple
-            label="Défavorable"
-            icon="pi pi-times"
-            class="p-button-danger"
-            [disabled]="!selectedDossier || !selectedDossier.length"
-          ></button>
-        </div>
-      </ng-template>
-    </p-toolbar>
+    <div class="text-900 font-bold text-3xl mb-4 mt-2">
+      Avis Permutation
+    </div>
 
     <p-table
       #dt

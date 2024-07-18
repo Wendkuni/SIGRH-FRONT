@@ -111,21 +111,20 @@
             </ng-template>
             <ng-template pTemplate="body" let-piece>
               <tr>
-                <td>{{ piece.PosteDemander }}</td>
-                <td>{{ piece.NombreDepost }}</td>
-
-                <!--          Bouton pour supprimer un element de la liste -->
-                <button
-                  pButton
-                  type="button"
-                  pTooltip="Retirer"
-                  tooltipPosition="top"
-                  pRipple
-                  icon="pi pi-trash"
-                  class="p-button-rounded p-button-danger mx-2"
-                  iconPos="left"
-                  (click)="removeFormulaire(piece)"
-                ></button>
+                <td>{{ piece.posteDemander }}</td>
+                <td>{{ piece.nombreDepost }}</td>
+                <td>
+                  <!--          Bouton pour supprimer un element de la liste -->
+                  <button
+                    pButton
+                    type="button"
+                    label="Retirer"
+                    pRipple
+                    icon="pi pi-trash"
+                    class="p-button-rounded p-button-danger mx-2"
+                    iconPos="left"
+                    (click)="removeFormulaire(piece)"
+                  ></button></td>
               </tr>
             </ng-template>
             <ng-template pTemplate="emptymessage">
@@ -190,8 +189,9 @@
                       pButton
                       pRipple
                       type="button"
+                      label="Retirer"
                       icon="pi pi-times"
-                      class="p-button-rounded p-button-primary text-sm absolute justify-content-center align-items-center"
+                      class="p-button-rounded p-button-danger text-sm absolute justify-content-center align-items-center"
                       style="top: -10px; right: -10px"
                       (click)="$event.stopPropagation(); removeFile()"
                     ></button>
@@ -260,8 +260,7 @@
                   <button
                     pButton
                     type="button"
-                    pTooltip="Retirer"
-                    tooltipPosition="top"
+                    label="Supprimer"
                     pRipple
                     icon="pi pi-trash"
                     class="p-button-rounded p-button-danger mx-2"

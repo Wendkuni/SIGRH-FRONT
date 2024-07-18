@@ -1,3 +1,4 @@
+<!--Toast -->
 <p-toast
   [showTransformOptions]="'translateY(100%)'"
   [showTransitionOptions]="'1000ms'"
@@ -5,6 +6,7 @@
   [showTransformOptions]="'translateX(100%)'"
 />
 
+<!-- Confirmation -->
 <p-confirmDialog #cd>
   <ng-template pTemplate="headless" let-message>
     <div
@@ -39,10 +41,12 @@
 
 <p-card>
   <div class="container">
+<!--    Page title -->
     <div class="text-900 font-bold text-3xl mb-4 mt-2">
       Avis Convenance Personnelle
     </div>
 
+<!--    Table -->
     <p-table
       #dt
       [value]="tableDataDossierSortant"
@@ -58,6 +62,8 @@
       [rowHover]="true"
       dataKey="n"
     >
+
+<!--      Global filter -->
       <ng-template pTemplate="caption">
         <div
           class="flex flex-column md:flex-row md:justify-content-between md:align-items-center"
@@ -75,6 +81,8 @@
           </span>
         </div>
       </ng-template>
+
+<!--      Table header part-->
       <ng-template let-columns pTemplate="header">
         <tr>
 <!--          <th style="width: 3rem">-->
@@ -95,6 +103,8 @@
           <th></th>
         </tr>
       </ng-template>
+
+<!--      Table body   -->
       <ng-template pTemplate="body" let-dossier>
         <tr>
 <!--          <td>-->
@@ -122,6 +132,8 @@
           <td>{{ dossier.choix3 }}</td>
           <td>{{ dossier.choix4 }}</td>
           <td>{{ dossier.choix5 }}</td>
+
+<!--          Button pour visualiser la fiche de demande -->
           <td>
             <button
               pButton
@@ -132,6 +144,8 @@
               (click)="visualiserDemandeConvenancePersonnelle(dossier)"
             ></button>
           </td>
+
+<!--          Buttonn traitement avis favorable-->
           <td>
             <button
               pButton
@@ -141,6 +155,8 @@
               class="p-button-success mr-2"
             ></button>
           </td>
+
+<!--          Button traitement avis defavorable -->
           <td>
             <button
               pButton
@@ -162,14 +178,20 @@
   [style]="{ width: '70rem' }"
   [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
   [maximizable]="true"
+  (onHide)="onHideDialog()"
 >
+  <!--  Titre de la fiche-->
   <div class="flex flex-column align-items-center mb-6">
     <div class="text-900 text-2xl mb-4 font-medium">FICHE DE DEMANDE DE CONVENANCE PERSONNELLE</div>
   </div>
   <p-divider></p-divider>
+
+  <!--  Information Personnel de l'agent -->
+  <div class="flex flex-column align-items-center mb-2">
+    <div class="text-900 text-xl mb-4 font-medium">Informations personnelles</div>
+  </div>
   <div class="grid">
     <div class="col-12 lg:col-4">
-      <!-- <span class="text-900 block mb-3 font-bold">Informations: </span> -->
       <ul class="list-none p-0 m-0 text-600 mb-2 text-600">
         <li class="mb-3">
             <span class="font-semibold">
@@ -225,23 +247,27 @@
       </ul>
     </div></div>
   <p-divider></p-divider>
+
+  <!--  ZOne d'affectation demander-->
   <div class="flex flex-column align-items-center mb-2">
     <div class="text-900 text-xl mb-4 font-medium">Wilayas demandées (par ordre de préférence)</div>
   </div>
   <div class="col-12">
-  <ul class="list-none p-0 m-0 text-600 mb-4 text-600">
-    <li class="mb-3"><span class="font-semibold">Zone géographique de destination 1 :   </span>-------------</li>
-    <li class="mb-3"><span class="font-semibold">Zone géographique de destination 2 :   </span>-------------</li>
-    <li class="mb-3"><span class="font-semibold">Zone géographique de destination 3 :   </span>-------------</li>
-    <li class="mb-3"><span class="font-semibold">Zone géographique de destination 4 :   </span>-------------</li>
-    <li class="mb-3"><span class="font-semibold">Zone géographique de destination 5 :   </span>-------------</li>
-  </ul>
+    <ul class="list-none p-0 m-0 text-600 mb-4 text-600">
+      <li class="mb-3"><span class="font-semibold">Zone géographique de destination 1 :   </span>-------------</li>
+      <li class="mb-3"><span class="font-semibold">Zone géographique de destination 2 :   </span>-------------</li>
+      <li class="mb-3"><span class="font-semibold">Zone géographique de destination 3 :   </span>-------------</li>
+      <li class="mb-3"><span class="font-semibold">Zone géographique de destination 4 :   </span>-------------</li>
+      <li class="mb-3"><span class="font-semibold">Zone géographique de destination 5 :   </span>-------------</li>
+    </ul>
   </div>
-    <p-divider></p-divider>
-    <div class="flex flex-column align-items-center mb-2">
-      <div class="text-900 text-xl mb-4 font-medium">Critères d’affectation pour convenances personnelles des enseignants</div>
-    </div>
-    <div class="col-12">
+  <p-divider></p-divider>
+
+  <!--  Critere(s) de la demande -->
+  <div class="flex flex-column align-items-center mb-2">
+    <div class="text-900 text-xl mb-4 font-medium">Critères d’affectation pour convenances personnelles des enseignants</div>
+  </div>
+  <div class="col-12">
     <div class="overflow-x-auto">
       <table class="w-full" style="border-collapse: collapse; table-layout: auto">
         <thead>
@@ -300,16 +326,23 @@
     </div>
   </div>
 
+  <!--  Piece jointe-->
   <p-accordion>
-    <p-accordionTab header="Header I" [selected]="true" class="line-height-3 m-0">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-      et dolore magna aliqua.
-      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat.
-      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-      pariatur.
-      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.
+    <p-accordionTab header="Piece Jointe" [selected]="false" class="line-height-3 m-0">
+      <div class="grid">
+        <div class="col-12 md:col-6 xl:col-4">
+          <div class="p-2 border-1 surface-border flex align-items-center justify-content-between hover:surface-100 cursor-pointer border-round">
+            <div class="flex align-items-center">
+              <i class="pi pi-file-pdf text-2xl mr-3"></i>
+              <span class="text-900 text-lg font-medium">folder name</span>
+            </div>
+            <!--            Button pour consulter la piece actuel -->
+            <span class="text-600 text-lg font-semibold">
+                <button pButton pRipple icon="pi pi-eye" pTooltip="Voir" tooltipPosition="top" class="p-button-text p-button-info hover:bg-blue-100"></button>
+              </span>
+          </div>
+        </div>
+      </div>
     </p-accordionTab>
   </p-accordion>
 </p-dialog>

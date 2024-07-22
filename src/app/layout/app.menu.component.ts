@@ -66,6 +66,66 @@ export class AppMenuComponent implements OnInit {
                 },
               ],
             },
+            {
+              label: 'Cariere',
+              icon: ' pi pi-id-card',
+              items: [
+
+                {
+                  label: 'Pieces a téléchargées',
+                  routerLink: ['/mes-dossiers']
+                },
+
+                {
+                  label: 'Demande Integration',
+                  routerLink: ['/agent-integration'],
+                },
+
+                {
+                  label: 'Demande Titularisation',
+                  routerLink: ['/agent-demande-titularisation'],
+                },
+
+                {
+                  label: 'Demande Avancement',
+                  routerLink: ['/avancement-choix'],
+                },
+                {
+                  label: 'Demande Bonification',
+                  routerLink: ['/bonification'],
+                },
+                {
+                  label: 'Demande Reclassement',
+                  routerLink: ['/reclassement'],
+                },
+                {
+                  label: 'Fiche Evaluation',
+                  routerLink: ['/evaluation-fiche'],
+                },
+
+
+                {
+                  label: 'Demande Position de detachement',
+                  routerLink: ['/position-detachemnt']
+                },
+
+                {
+                  label: 'Demande position de disponibilité',
+                  routerLink: ['/position-disponibilite']
+                },
+
+
+                {
+                  label: 'Demande Retraite Anticiper',
+                  routerLink: ['/retraite-anticiper']
+                },
+
+                {
+                  label: 'Demande de demission',
+                  routerLink: ['/demission']
+                },
+              ]
+            },
           ],
         },
       ];

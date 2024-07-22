@@ -149,6 +149,14 @@ export const routes: Routes = [
           import(
             './space/Comission_Space/Affectation/traitement-nomination/traitement-nomination.component'
           ).then((item) => item.TraitementNominationComponent),
+      },
+      //Cariere
+      {
+        path:'mes-dossiers',
+        loadComponent: () =>
+          import(
+            './space/Agent_Space/Carriere/mes-dossiers/mes-dossiers.component'
+          ).then((item) => item.MesDossiersComponent),
       }
     ],
   },

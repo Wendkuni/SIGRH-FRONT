@@ -96,7 +96,7 @@ export class AppMenuComponent implements OnInit {
                 },
                 {
                   label: 'Demande Reclassement',
-                  routerLink: ['/reclassement'],
+                  routerLink: ['/agent-reclassement'],
                 },
                 {
                   label: 'Fiche Evaluation',

@@ -181,6 +181,12 @@ export const routes: Routes = [
       loadComponent: () => import(
         './space/Agent_Space/Carriere/agent-bonification/agent-bonification.component'
       ).then((item) => item.AgentBonificationComponent),
+      },
+      {
+        path:'agent-reclassement',
+        loadComponent: () => import(
+          './space/Agent_Space/Carriere/agent-reclassement/agent-reclassement.component'
+        ).then((item) => item.AgentReclassementComponent),
       }
     ],
   },

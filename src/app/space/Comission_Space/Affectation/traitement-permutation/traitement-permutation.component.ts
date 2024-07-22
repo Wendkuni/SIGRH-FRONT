@@ -15,25 +15,27 @@ import {AccordionModule} from "primeng/accordion";
 import {DividerModule} from "primeng/divider";
 import {TabViewModule} from "primeng/tabview";
 import {TooltipModule} from "primeng/tooltip";
+import {ToolbarModule} from "primeng/toolbar";
 
 @Component({
   selector: 'mrt-traitement-permutation',
   standalone: true,
-  imports: [
-    ToastModule,
-    ConfirmDialogModule,
-    CardModule,
-    TableModule,
-    InputTextModule,
-    DialogModule,
-    DropdownModule,
-    RippleModule,
-    DatePipe,
-    AccordionModule,
-    DividerModule,
-    TabViewModule,
-    TooltipModule
-  ],
+    imports: [
+        ToastModule,
+        ConfirmDialogModule,
+        CardModule,
+        TableModule,
+        InputTextModule,
+        DialogModule,
+        DropdownModule,
+        RippleModule,
+        DatePipe,
+        AccordionModule,
+        DividerModule,
+        TabViewModule,
+        TooltipModule,
+        ToolbarModule
+    ],
   templateUrl: './traitement-permutation.component.html',
   styleUrl: './traitement-permutation.component.scss',
   providers: [MessageService, ConfirmationService],

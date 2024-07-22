@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, WritableSignal} from '@angular/core';
 import {Cols} from "../../../../core/data/primeng/primeng.model";
 import {ConfirmationService, MessageService, SharedModule} from "primeng/api";
 import {Table, TableModule} from "primeng/table";
@@ -16,27 +16,30 @@ import {ToolbarModule} from "primeng/toolbar";
 import {DropdownModule} from "primeng/dropdown";
 import {BadgeModule} from "primeng/badge";
 import {TooltipModule} from "primeng/tooltip";
+import {NgxExtendedPdfViewerModule} from "ngx-extended-pdf-viewer";
+import {Subject} from "rxjs";
 
 @Component({
   selector: 'mrt-traitement-affectation-convenance-personnel',
   standalone: true,
-    imports: [
-        ButtonModule,
-        CardModule,
-        ConfirmDialogModule,
-        InputTextModule,
-        RippleModule,
-        SharedModule,
-        TableModule,
-        ToastModule,
-        AccordionModule,
-        DialogModule,
-        DividerModule,
-        ToolbarModule,
-        DropdownModule,
-        BadgeModule,
-        TooltipModule
-    ],
+  imports: [
+    ButtonModule,
+    CardModule,
+    ConfirmDialogModule,
+    InputTextModule,
+    RippleModule,
+    SharedModule,
+    TableModule,
+    ToastModule,
+    AccordionModule,
+    DialogModule,
+    DividerModule,
+    ToolbarModule,
+    DropdownModule,
+    BadgeModule,
+    TooltipModule,
+    NgxExtendedPdfViewerModule
+  ],
   templateUrl: './traitement-affectation-convenance-personnel.component.html',
   styleUrl: './traitement-affectation-convenance-personnel.component.scss',
   providers: [MessageService, ConfirmationService],
@@ -554,10 +557,16 @@ export class TraitementAffectationConvenancePersonnelComponent {
       choix5: "Mission à l'étranger",
     },
   ];
-
+  visiblePdf: boolean | WritableSignal<boolean> = false;
   messageService = inject(MessageService);
   confirmationService = inject(ConfirmationService);
-  choice: any[] = [];
+  choice: any[] = [
+    'Zone Géographique 1',
+    'Zone Géographique 2',
+    'Zone Géographique 3',
+    'Zone Géographique 4',
+    'Zone Géographique 5',
+  ];
 
   // Methode pour filtrer les elements du tableau
   onGlobalFilter(table: Table, event: Event) {
@@ -578,5 +587,9 @@ export class TraitementAffectationConvenancePersonnelComponent {
 
   traitementDialog() {
     this.traitementDialogeShow = true;
+  }
+
+  viewPiece(){
+    this.visiblePdf = true;
   }
 }

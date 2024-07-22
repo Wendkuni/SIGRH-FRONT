@@ -1,0 +1,505 @@
+<!-- Toast notification -->
+<p-toast
+  [showTransformOptions]="'translateY(100%)'"
+  [showTransitionOptions]="'1000ms'"
+  [hideTransitionOptions]="'1000ms'"
+  [showTransformOptions]="'translateX(100%)'"
+/>
+
+<!-- Confirmation dialog -->
+<p-confirmDialog #cd>
+  <ng-template pTemplate="headless" let-message>
+    <div
+      class="flex flex-column align-items-center p-5 surface-overlay border-round"
+    >
+      <div
+        class="border-circle bg-primary inline-flex justify-content-center align-items-center h-6rem w-6rem"
+      >
+        <i class="pi pi-question text-5xl"></i>
+      </div>
+      <span class="font-bold text-2xl block mb-2 mt-4">
+        {{ message.header }}
+      </span>
+      <p class="mb-0">{{ message.message }}</p>
+      <div class="flex align-items-center gap-2 mt-4">
+        <button
+          pButton
+          label="Oui"
+          (click)="cd.accept()"
+          class="p-button-success w-8rem"
+        ></button>
+        <button
+          pButton
+          label="Non"
+          (click)="cd.reject()"
+          class="p-button-outlined p-button-danger w-8rem"
+        ></button>
+      </div>
+    </div>
+  </ng-template>
+</p-confirmDialog>
+
+<p-tabView [(activeIndex)]="activeIndex">
+  <!-- Formulaire Permutation-->
+  <p-tabPanel header="Formulaire de demande">
+    <div class="text-900 font-bold text-3xl mb-4 mt-2">
+      Demande de permutation
+    </div>
+    <div class="m-2">
+      <div class="justify-content-center">
+        <p-stepper>
+          <!-- Vos informations start -->
+          <p-stepperPanel header="Vos Informations">
+            <ng-template pTemplate="content" let-nextCallback="nextCallback">
+              <div class="text-center mt-3 mb-3 text-xl font-semibold">
+                Vos Informations
+              </div>
+            <!--   Details agent connectee -->
+              <mrt-agent-form-details-view />
+
+              <div class="flex pt-4 justify-content-end">
+                <p-button
+                  (onClick)="nextCallback.emit()"
+                  label="Suivant"
+                  icon="pi pi-arrow-right"
+                  iconPos="right"
+                />
+              </div>
+            </ng-template>
+          </p-stepperPanel>
+          <!-- Vos informations end -->
+
+          <!-- Vos piece jointes start -->
+          <p-stepperPanel header="Pièces jointes">
+            <ng-template
+              pTemplate="content"
+              let-prevCallback="prevCallback"
+              let-nextCallback="nextCallback"
+            >
+              <div class="p-fluid p-formgrid grid m-2">
+                <div class="col-12 lg:col-5">
+                  <!-- Libelle de la piece -->
+                  <div class="field col-12">
+                    <label class="font-medium text-900"
+                      >Libellé de votre Pièce</label
+                    >
+                    <p-dropdown
+                      id="libelle"
+                      [options]="listeLibellePiece"
+                      [(ngModel)]="pieceLibelle"
+                      [ngModelOptions]="{ standalone: true }"
+                      placeholder="Selectionner le libelle de la piece"
+                    />
+                    <!-- Upload de la piece -->
+                    <p-fileUpload
+                      #fileUpload
+                      (onUpload)="onUploadFile($event)"
+                      [customUpload]="true"
+                      (onSelect)="onUploadFile($event)"
+                      accept=".png,.jpg"
+                      [showUploadButton]="false"
+                      [showCancelButton]="false"
+                      [auto]="true"
+                      styleClass="border-1 surface-border surface-card p-0 border-round m-2"
+                    >
+                      <ng-template pTemplate="content">
+                        <div class="h-20rem m-1 border-round">
+                          @if(!image){
+                          <div
+                            class="flex flex-column w-full h-full justify-content-center align-items-center cursor-pointer"
+                            (click)="
+                              fileUpload.advancedFileInput.nativeElement.click()
+                            "
+                          >
+                            <i
+                              class="pi pi-fw pi-file text-4xl text-primary"
+                            ></i>
+                            <span
+                              class="block font-semibold text-900 text-lg mt-3"
+                              >Déposer ou sélectionner une image</span
+                            >
+                          </div>
+                          } @if(image){
+                          <div class="w-full h-full relative border-round p-0">
+                            <img
+                              [src]="image.objectURL"
+                              class="w-full h-full border-round"
+                              alt="blog cover"
+                            />
+                            <button
+                              pButton
+                              pRipple
+                              type="button"
+                              label="Retirer"
+                              icon="pi pi-times"
+                              class="p-button-rounded p-button-danger text-sm absolute justify-content-center align-items-center"
+                              style="top: -10px; right: -10px"
+                              (click)="$event.stopPropagation(); removeFile()"
+                            ></button>
+                          </div>
+                          }
+                        </div>
+                      </ng-template>
+                    </p-fileUpload>
+                  </div>
+                  <!-- Button ajout de la piece jointe -->
+                  <button
+                    pButton=""
+                    pRipple=""
+                    (click)="ajouterAgent1()"
+                    label="Ajouter"
+                    icon="pi pi-plus"
+                    class="p-element p-ripple p-button-outlined p-button-primary p-button p-component"
+                  ></button>
+                </div>
+
+                <!-- Tableau des pieces jointes -->
+                <div class="col-12 lg:col-7">
+                  <p-table
+                    [columns]="colsDossier"
+                    [value]="listPieceJustificatifAgent1"
+                    dataKey="id"
+                    [rows]="5"
+                    [showCurrentPageReport]="true"
+                    currentPageReportTemplate="Page {currentPage} sur {totalPages}"
+                    [paginator]="true"
+                    styleClass="p-datatable-gridlines p-datatable-striped"
+                    responsiveLayout="scroll"
+                    [rowHover]="true"
+                    [rowsPerPageOptions]="[5, 10]"
+                    tableStyleClass="p-datatable-gridlines"
+                  >
+                    <ng-template let-columns pTemplate="header">
+                      <tr>
+                        @for (col of columns; track col.field) {
+                        <th
+                          style="min-width: 15rem"
+                          [pSortableColumn]="col.field"
+                          class="font-weight-bold"
+                        >
+                          {{ col.header }}
+                          <p-sortIcon [field]="col.field"></p-sortIcon>
+                        </th>
+                        }
+                        <th>Actions</th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-piece>
+                      <tr>
+                        <td>{{ piece.libelle }}</td>
+                        <td>
+                          <div
+                            class="flex flex-column w-2 justify-content-between"
+                            style="row-gap: 1rem"
+                          ></div>
+                          <img
+                            [src]="piece.images.objectURL"
+                            alt=""
+                            class="w-10rem shadow-4"
+                          />
+                        </td>
+                        <td>
+                          <!--          Bouton pour supprimer un element de la liste -->
+                          <button
+                            pButton
+                            type="button"
+                            label="Supprimer"
+                            pRipple
+                            icon="pi pi-trash"
+                            class="p-button-rounded p-button-danger mx-2"
+                            iconPos="left"
+                            (click)="removePieceAgent1(piece)"
+                          ></button>
+                        </td>
+                      </tr>
+                    </ng-template>
+                    <!-- Element vide dans le tableau -->
+                    <ng-template pTemplate="emptymessage">
+                      <tr>
+                        <td colspan="8">Aucun élement.</td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+                </div>
+              </div>
+              <!-- Button de direction du steppers -->
+              <div class="flex pt-4 justify-content-between">
+                <p-button
+                  (onClick)="prevCallback.emit()"
+                  label="Retour"
+                  severity="secondary"
+                  icon="pi pi-arrow-left"
+                />
+                <p-button
+                  (onClick)="nextCallback.emit()"
+                  label="Suivant"
+                  icon="pi pi-arrow-right"
+                  iconPos="right"
+                />
+              </div>
+            </ng-template>
+          </p-stepperPanel>
+          <!-- Vos piece jointe end -->
+
+          <!-- Information du copermutant -->
+          <p-stepperPanel header="Information du copermutant">
+            <ng-template pTemplate="content" let-prevCallback="prevCallback">
+              <div class="container">
+                <div class="p-fluid p-formgrid grid m-2">
+                  <!-- Matricule du copermutant -->
+                  <div class="flex align-items-center flex-wrap gap-2 m-3">
+                    <label for="matricule">Matricule du copermutant</label>
+                    <input
+                      id="matricule"
+                      type="text"
+                      pInputText
+                      [(ngModel)]="matriculeCopermutant"
+                      placeholder="Matricule du copermutant"
+                    />
+                  </div>
+                  <!-- Lieu de permutation -->
+                  <div class="flex align-items-center flex-wrap gap-2 m-3">
+                    <label for="lieuPermutation">Lieu de permutation</label>
+                    <input
+                      id="lieuPermutation"
+                      type="text"
+                      pInputText
+                      [(ngModel)]="lieuPermutation"
+                      placeholder="Entrez le lieu de permutation"
+                    />
+                  </div>
+                  <!-- <div class="flex align-items-center flex-wrap gap-2 m-3 p-3">
+              <p-button icon="pi pi-search" label="Sélectionner un agent" />
+            </div> -->
+                </div>
+              </div>
+
+              <!-- Button de direction suivant du stepper -->
+              <div class="flex pt-4 justify-content-between">
+                <p-button
+                  (onClick)="prevCallback.emit()"
+                  label="Retour"
+                  severity="secondary"
+                  icon="pi pi-arrow-left"
+                />
+                <div class="flex justify-content-between gap-3">
+                  <button
+                    pButton
+                    pRipple
+                    class="p-button-primary flex-1"
+                    label="Enregistrer"
+                    icon="pi pi-fw pi-check"
+                    (click)="savePermutation()"
+                  ></button>
+                  <button
+                    pButton
+                    pRipple
+                    class="p-button-danger flex-1 p-button-outlined"
+                    label="Annuler"
+                    icon="pi pi-fw pi-times"
+                  ></button>
+                </div>
+              </div>
+            </ng-template>
+          </p-stepperPanel>
+        </p-stepper>
+      </div>
+    </div>
+  </p-tabPanel>
+
+  <!-- Demande en enregistre dans son espace -->
+  <p-tabPanel header="Permutation enregistre">
+    <p-table
+      [columns]="colsPermutationSave"
+      [value]="listeDemande"
+      #personnelDemandePermutationTable
+      dataKey="id"
+      [rows]="5"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Page {currentPage} sur {totalPages}"
+      [paginator]="true"
+      styleClass="p-datatable-gridlines p-datatable-striped"
+      responsiveLayout="scroll"
+      [rowHover]="true"
+      [rowsPerPageOptions]="[5, 10, 20, 50]"
+      tableStyleClass="p-datatable-gridlines"
+      [globalFilterFields]="['num']"
+    >
+      <ng-template pTemplate="caption">
+        <div class="flex justify-content-between flex-column sm:flex-row">
+            <span class="p-input-icon-left mb-2">
+              <i class="pi pi-search"></i>
+              <input
+                pInputText
+                type="text"
+                (input)="onGlobalFilter(personnelDemandePermutationTable, $event)"
+                placeholder="Recherche..."
+                class="w-full"
+              />
+            </span>
+        </div>
+      </ng-template>
+
+      <ng-template let-columns pTemplate="header">
+        <tr>
+          @for (col of columns; track col.field) {
+            <th
+              [pSortableColumn]="col.field"
+              class="font-weight-bold"
+              style="min-width: 13rem"
+            >
+              {{ col.header }}
+              @if(col.header != 'Photo'){
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+              }
+            </th>
+          }
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-dmd>
+        <tr>
+          <td>{{ dmd.id }}</td>
+          <td>{{dmd.lieuPermutation}}</td>
+          <td>{{dmd.matriculeCopermutant}}</td>
+          <td>{{dmd.dateDemandePermutation | date: 'dd/MM/yyyy'}}</td>
+          <td>
+              <span
+                class="inline-flex align-items-center py-2 px-3 font-medium border-1 surface-border border-round"
+                pBadge
+                severity="info"
+                badgeSize="large"
+                value="{{ dmd.listPieceJustificatifPermutant.length }}"
+              >
+                <i class="pi pi-file-pdf text-7xl text-red-500"></i>
+              </span>
+          </td>
+          <td>
+            <button
+              pButton
+              pRipple
+              label="Modifier"
+              icon="pi pi-pencil"
+              class="p-button-info"
+              (click)="onEdit(dmd)"
+            ></button>
+          </td>
+          <td>
+            <button
+              pButton
+              pRipple
+              label="Envoyer"
+              icon="pi pi-send"
+              class="p-button-success"
+            ></button>
+          </td>
+          <td>
+            <button
+              pButton
+              pRipple
+              label="Annuler"
+              icon="pi pi-trash"
+              class="p-button-danger"
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-tabPanel>
+
+  <!-- Demande de permutaion recu -->
+  <p-tabPanel header="Permutation reçu">
+    <p-table
+      [columns]="colsPermutationRecuSave"
+      [value]="listePermutationRecut"
+      #personnelDemandePermutationRecuTable
+      dataKey="id"
+      [rows]="5"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Page {currentPage} sur {totalPages}"
+      [paginator]="true"
+      styleClass="p-datatable-gridlines p-datatable-striped"
+      responsiveLayout="scroll"
+      [rowHover]="true"
+      [rowsPerPageOptions]="[5, 10, 20, 50]"
+      tableStyleClass="p-datatable-gridlines"
+      [globalFilterFields]="['num']"
+    >
+<!--      Global filter -->
+      <ng-template pTemplate="caption">
+        <div class="flex justify-content-between flex-column sm:flex-row">
+            <span class="p-input-icon-left mb-2">
+              <i class="pi pi-search"></i>
+              <input
+                pInputText
+                type="text"
+                (input)="onGlobalFilter(personnelDemandePermutationRecuTable, $event)"
+                placeholder="Recherche..."
+                class="w-full"
+              />
+            </span>
+        </div>
+      </ng-template>
+<!-- Table header -->
+      <ng-template let-columns pTemplate="header">
+        <tr>
+          @for (col of columns; track col.field) {
+            <th
+              [pSortableColumn]="col.field"
+              class="font-weight-bold"
+              style="min-width: 13rem"
+            >
+              {{ col.header }}
+              @if(col.header != 'Photo'){
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+              }
+            </th>
+          }
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-dmd>
+        <tr>
+          <td>{{ dmd.id }}</td>
+          <td>{{dmd.lieuPermutation}}</td>
+          <td>{{dmd.matriculePermutant}}</td>
+          <td>{{dmd.dateDemandePermutation | date: 'dd/MM/yyyy'}}</td>
+          <td>
+              <span
+                class="inline-flex align-items-center py-2 px-3 font-medium border-1 surface-border border-round"
+                pBadge
+                severity="info"
+                badgeSize="large"
+                value="{{ dmd.listPieceJustificatifPermutant.length }}"
+              >
+                <i class="pi pi-file-pdf text-7xl text-red-500"></i>
+              </span>
+          </td>
+          <td>
+            <button
+              pButton
+              pRipple
+              label="Valider"
+              icon="pi pi-send"
+              class="p-button-success"
+            ></button>
+          </td>
+          <td>
+            <button
+              pButton
+              pRipple
+              label="Rejeter"
+              icon="pi pi-trash"
+              class="p-button-danger"
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-tabPanel
+  >
+</p-tabView>

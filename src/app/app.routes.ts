@@ -38,21 +38,21 @@ export const routes: Routes = [
         path: 'home-agent-space',
         loadComponent: () =>
           import(
-            './space/Agent_Space/agent-space-home/agent-space-home.component'
+            './space/Agent_Space/Mobilite/agent-space-home/agent-space-home.component'
           ).then((item) => item.AgentSpaceHomeComponent),
       },
       {
         path: 'agent-convenance-personnelle',
         loadComponent: () =>
           import(
-            './space/Agent_Space/affectation/agent-affectation-convenance-personnelle/agent-affectation-convenance-personnelle.component'
+            './space/Agent_Space/Mobilite/affectation/agent-affectation-convenance-personnelle/agent-affectation-convenance-personnelle.component'
           ).then((item) => item.AgentAffectationConvenancePersonnelleComponent),
       },
       {
         path: 'agent-permutation-poste',
         loadComponent: () =>
           import(
-            './space/Agent_Space/affectation/agent-affectation-permutation/agent-affectation-permutation.component'
+            './space/Agent_Space/Mobilite/affectation/agent-affectation-permutation/agent-affectation-permutation.component'
           ).then((item) => item.AgentAffectationPermutationComponent),
       },
       {
@@ -66,21 +66,21 @@ export const routes: Routes = [
         path: 'dren-affectation-convenance-personnelle',
         loadComponent: () =>
           import(
-            './space/Dren_Space/dren-affectation/dren-affectation-convenance-personnelle/dren-affectation-convenance-personnelle.component'
+            './space/Dren_Space/Mobilite/dren-affectation/dren-affectation-convenance-personnelle/dren-affectation-convenance-personnelle.component'
           ).then((item) => item.DrenAffectationConvenancePersonnelleComponent),
       },
       {
         path: 'dren-necessite-service',
         loadComponent: () =>
           import(
-            './space/Dren_Space/dren-affectation/dren-affectation-necessite-service/dren-affectation-necessite-service.component'
+            './space/Dren_Space/Mobilite/dren-affectation/dren-affectation-necessite-service/dren-affectation-necessite-service.component'
           ).then((item) => item.DrenAffectationNecessiteServiceComponent),
       },
       {
         path: 'dren-affectation-permutation',
         loadComponent: () =>
           import(
-            './space/Dren_Space/dren-affectation/dren-affectation-permutation/dren-affectation-permutation.component'
+            './space/Dren_Space/Mobilite/dren-affectation/dren-affectation-permutation/dren-affectation-permutation.component'
           ).then((item) => item.DrenAffectationPermutationComponent),
       },
       {
@@ -143,6 +143,13 @@ export const routes: Routes = [
             './space/Affaire_Sociale/allocation/agent-allocation/agent-allocation.component'
           ).then((item) => item.AgentAllocationComponent),
       },
+      {
+        path:'commission-nomination',
+        loadComponent: () =>
+          import(
+            './space/Comission_Space/Affectation/traitement-nomination/traitement-nomination.component'
+          ).then((item) => item.TraitementNominationComponent),
+      }
     ],
   },
   {

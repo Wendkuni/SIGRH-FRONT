@@ -145,6 +145,10 @@ export class AppMenuComponent implements OnInit {
                   routerLink: ['/commission-affectation-permutation'],
                 },
                 {
+                  label: 'Nomination',
+                  routerLink: ['/commission-nomination'],
+                },
+                {
                   label: 'Recapiulatif',
                   items: [
                     {

@@ -1,0 +1,246 @@
+<p-toast
+  [showTransformOptions]="'translateY(100%)'"
+  [showTransitionOptions]="'1000ms'"
+  [hideTransitionOptions]="'1000ms'"
+  [showTransformOptions]="'translateX(100%)'"
+/>
+
+<p-confirmDialog />
+
+<div class="text-900 font-bold text-3xl mb-4 mt-2">Formulaire de certification de prise de service</div>
+<div class="grid">
+  <div class="col-12 lg:col-6">
+    <!-- <span class="text-900 block mb-3 font-bold">Informations: </span> -->
+    <ul class="list-none p-0 m-0 text-600 mb-2 text-600">
+      <li class="mb-3">
+            <span class="font-semibold">
+              Année scolaire :
+            </span>
+        2024-2025
+      </li>
+      <li class="mb-3">
+            <span class="font-semibold">
+              Nom et Prénoms :
+            </span>
+        {{selectedPersonnel.nomPrenom}}-{{selectedPersonnel.nomPrenomArab}}
+      </li>
+      <li class="mb-3">
+            <span class="font-semibold">
+              NNI :
+            </span>
+        {{selectedPersonnel.nni}}
+      </li>
+      <li class="mb-3">
+            <span class="font-semibold">
+              Matricule :
+            </span>
+        {{selectedPersonnel.matricule}}
+      </li>
+      <li class="mb-3">
+            <span class="font-semibold">
+              Date de naissance : {{selectedPersonnel.dateNaiss}}
+            </span>
+      </li>
+    </ul>
+  </div>
+  <div class="col-12 lg:col-6">
+    <ul class="list-none p-0 m-0 text-600 mb-2 text-600">
+      <li class="mb-3"><span class="font-semibold">Echelle :</span> </li>
+      <li class="mb-3"><span class="font-semibold">Echelon :</span> </li>
+      <li class="mb-3"><span class="font-semibold">Grade :</span> </li>
+      <li class="mb-3"><span class="font-semibold">Corps :</span> </li>
+      <li class="mb-3"><span class="font-semibold">Lieu de naissance :</span> </li>
+
+    </ul>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="p-fluid p-formgrid grid m-2">
+
+    <!--     <div class="flex align-items-center flex-wrap gap-2 m-3">
+      <label for="postActuel" class="w-9rem">N° Compte Banquaire </label>
+      <input
+        id="postActuel"
+        type="text"
+        pInputText
+        placeholder="Entrez le N° de compte"
+      />
+    </div>-->
+
+
+    <!--   <div class="flex align-items-center flex-wrap gap-2 m-3">
+      <label for="dren" class="w-9rem">Nom de la Banque</label>
+      <input id="dren" type="text" pInputText placeholder="Nom Banque" />
+    </div>   -->
+
+  </div>
+
+
+
+  <!--    Piece a joindre-->
+
+  <div class="border-1 surface-border border-round p-fluid mb-4">
+      <span class="text-900 font-bold block border-bottom-1 surface-border p-3"
+      >Pièces a joindre</span
+      >
+    <div class="p-fluid p-formgrid grid m-2">
+      <div class="col-12 lg:col-5">
+        <div class="field">
+          <label for="libelle" class="font-medium text-900">Libellé de la Pièce</label>
+          <p-dropdown
+            id="libelle"
+            [options]="listeLibellePiece"
+            [(ngModel)]="listeLibellePiece"
+            [ngModelOptions]="{ standalone: true }"
+            placeholder="Selectionner le libelle de la piece"
+          />
+
+          <p-fileUpload
+            #fileUpload
+            (onUpload)="onUploadFile($event)"
+            [customUpload]="true"
+            (onSelect)="onUploadFile($event)"
+            accept=".png,.jpg,.jpeg"
+            [showUploadButton]="false"
+            [showCancelButton]="false"
+            [auto]="true"
+            styleClass="border-1 surface-border surface-card p-0 border-round m-2"
+          >
+            <ng-template pTemplate="content">
+              <div class="h-20rem m-1 border-round">
+                @if(!image){
+                  <div
+                    class="flex flex-column w-full h-full justify-content-center align-items-center cursor-pointer"
+                    (click)="fileUpload.advancedFileInput.nativeElement.click()"
+                  >
+                    <i class="pi pi-file-pdf text-8xl text-red-500"></i>
+                    <span class="block font-semibold text-900 text-lg mt-3"
+                    >Déposer ou sélectionner une image</span>
+
+                  </div>
+                } @if(image){
+                <div class="w-full h-full relative border-round p-0">
+                  <img
+                    [src]="image.objectURL"
+                    class="w-full h-full border-round"
+                    alt="blog cover"
+                  />
+
+                  <button
+                    pButton
+                    pRipple
+                    type="button"
+                    icon="pi pi-times"
+                    class="p-button-rounded p-button-primary text-sm absolute justify-content-center align-items-center"
+                    style="top: -10px; right: -10px"
+                    (click)="$event.stopPropagation(); removeFile()"
+                  ></button>
+                </div>
+              }
+              </div>
+            </ng-template>
+          </p-fileUpload>
+        </div>
+        <button
+          pButton=""
+          pRipple=""
+          (click)="ajouter()"
+          label="Ajouter"
+          icon="pi pi-plus"
+          class="p-element p-ripple p-button-outlined p-button-primary p-button p-component"
+        ></button>
+      </div>
+      <div class="col-12 lg:col-7">
+        <p-table
+          [columns]="colsDossier"
+          [value]="listPieceJustificatif"
+          #dt1
+          dataKey="id"
+          [rows]="5"
+          [showCurrentPageReport]="true"
+          currentPageReportTemplate="Page {currentPage} sur {totalPages}"
+          [paginator]="true"
+          styleClass="p-datatable-gridlines p-datatable-striped"
+          responsiveLayout="scroll"
+          [rowHover]="true"
+          [rowsPerPageOptions]="[5, 10]"
+          tableStyleClass="p-datatable-gridlines"
+        >
+          <ng-template let-columns pTemplate="header">
+            <tr>
+              @for (col of columns; track col.field) {
+                <th
+                  style="min-width: 15rem"
+                  [pSortableColumn]="col.field"
+                  class="font-weight-bold"
+                >
+                  {{ col.header }}
+                  <p-sortIcon [field]="col.field"></p-sortIcon>
+                </th>
+              }
+              <th>Actions</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-piece>
+            <tr>
+              <td>{{ piece.libelle }}</td>
+              <td>
+                <div
+                  class="flex flex-column w-2 justify-content-between"
+                  style="row-gap: 1rem"
+                ></div>
+                <img
+                  [src]="piece.images.objectURL"
+                  alt=""
+                  class="w-10rem shadow-4"
+                />
+              </td>
+              <td>
+                <!--          Bouton pour supprimer un element de la liste -->
+                <button
+                  pButton
+                  type="button"
+                  pTooltip="Retirer"
+                  tooltipPosition="top"
+                  pRipple
+                  icon="pi pi-trash"
+                  class="p-button-rounded p-button-danger mx-2"
+                  iconPos="left"
+                  (click)="removePiece(piece)"
+                ></button>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="8">Aucun élement.</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="flex justify-content-between gap-3">
+  <button
+    pButton
+    pRipple
+    class="p-button-primary flex-1"
+    label="Enregistrer"
+    icon="pi pi-fw pi-check"
+    (click)="save()"
+  ></button>
+  <button
+    pButton
+    pRipple
+    class="p-button-danger flex-1 p-button-outlined"
+    label="Annuler"
+    (click)="cancel()"
+    icon="pi pi-fw pi-times"
+  ></button>
+</div>
+
+

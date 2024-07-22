@@ -199,6 +199,24 @@ export const routes: Routes = [
         loadComponent: () => import(
           './space/Agent_Space/Carriere/agent-position-detachemnt/agent-position-detachemnt.component'
         ).then((item) => item.AgentPositionDetachemntComponent),
+      },
+      {
+        path:'agent-position-disponibilite',
+        loadComponent: () => import(
+          './space/Agent_Space/Carriere/agent-position-disponibilite/agent-position-disponibilite.component'
+        ).then((item) => item.AgentPositionDisponibiliteComponent),
+      },
+      {
+        path:'agent-retraite-anticiper',
+        loadComponent: () => import(
+          './space/Agent_Space/Carriere/agent-retraite-anticiper/agent-retraite-anticiper.component'
+        ).then((item) => item.AgentRetraiteAnticiperComponent),
+      },
+      {
+        path:'agent-demission',
+        loadComponent: () => import(
+          './space/Agent_Space/Carriere/agent-demission/agent-demission.component'
+        ).then((item) => item.AgentDemissionComponent),
       }
     ],
   },

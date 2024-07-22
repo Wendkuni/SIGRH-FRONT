@@ -109,19 +109,36 @@ export class AppMenuComponent implements OnInit {
 
                 {
                   label: 'Demande position de disponibilité',
-                  routerLink: ['/position-disponibilite']
+                  routerLink: ['/agent-position-disponibilite']
                 },
 
 
                 {
                   label: 'Demande Retraite Anticiper',
-                  routerLink: ['/retraite-anticiper']
+                  routerLink: ['/agent-retraite-anticiper']
                 },
 
                 {
                   label: 'Demande de demission',
-                  routerLink: ['/demission']
+                  routerLink: ['/agent-demission']
                 },
+                //
+                // {
+                //   label: 'Demande Certification prise de service',
+                //   routerLink: ['/agent-certificat-prise-service']
+                // },
+                // {
+                //   label: 'Demande Attestation de travail',
+                //   routerLink: ['/agent-attesttaion-travail']
+                // },
+                // {
+                //   label: 'Demande Annulation acte',
+                //   routerLink: ['/agent-anulation-acte']
+                // },
+                // {
+                //   label: 'Demande Rectification',
+                //   routerLink: ['/agent-rectification']
+                // },
               ]
             },
           ],

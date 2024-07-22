@@ -100,13 +100,11 @@ export class AppMenuComponent implements OnInit {
                 },
                 {
                   label: 'Fiche Evaluation',
-                  routerLink: ['/evaluation-fiche'],
+                  routerLink: ['/agent-evaluation-fiche'],
                 },
-
-
                 {
                   label: 'Demande Position de detachement',
-                  routerLink: ['/position-detachemnt']
+                  routerLink: ['/agent-position-detachemnt']
                 },
 
                 {

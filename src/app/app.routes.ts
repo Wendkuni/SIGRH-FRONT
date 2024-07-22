@@ -187,6 +187,18 @@ export const routes: Routes = [
         loadComponent: () => import(
           './space/Agent_Space/Carriere/agent-reclassement/agent-reclassement.component'
         ).then((item) => item.AgentReclassementComponent),
+      },
+      {
+      path:'agent-evaluation-fiche',
+      loadComponent: () => import(
+        './space/Agent_Space/Carriere/agent-evaluation-fiche/agent-evaluation-fiche.component'
+      ).then((item) => item.AgentEvaluationFicheComponent),
+      },
+      {
+        path:'agent-position-detachemnt',
+        loadComponent: () => import(
+          './space/Agent_Space/Carriere/agent-position-detachemnt/agent-position-detachemnt.component'
+        ).then((item) => item.AgentPositionDetachemntComponent),
       }
     ],
   },

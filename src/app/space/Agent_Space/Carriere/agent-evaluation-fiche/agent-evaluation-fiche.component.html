@@ -1,0 +1,258 @@
+<p-toast
+  [showTransformOptions]="'translateY(100%)'"
+  [showTransitionOptions]="'1000ms'"
+  [hideTransitionOptions]="'1000ms'"
+  [showTransformOptions]="'translateX(100%)'"
+/>
+
+<p-confirmDialog />
+
+<p-card>
+  <div class="text-900 font-bold text-3xl mb-4 mt-2">Fiche d'evaluation</div>
+  <div class="grid">
+    <div class="col-12 lg:col-6">
+      <!-- <span class="text-900 block mb-3 font-bold">Informations: </span> -->
+      <ul class="list-none p-0 m-0 text-600 mb-2 text-600">
+        <li class="mb-3">
+            <span class="font-semibold">
+              Année en cours :
+            </span>
+          2024-2025
+        </li>
+        <li class="mb-3">
+            <span class="font-semibold">
+              Nom et Prénoms :
+            </span>
+          Ousmane
+        </li>
+        <li class="mb-3">
+            <span class="font-semibold">
+              NNI :
+            </span>
+          1025YUTG
+        </li>
+        <li class="mb-3">
+            <span class="font-semibold">
+              Matricule :
+            </span>
+          Matricule de l'agent
+        </li>
+        <li class="mb-3">
+            <span class="font-semibold">
+              Date de naissance : 10/02/1998
+            </span>
+        </li>
+        <li class="mb-3">
+            <span class="font-semibold">
+              Wilaya :
+            </span>
+        </li>
+
+      </ul>
+    </div>
+    <div class="col-12 lg:col-6">
+      <ul class="list-none p-0 m-0 text-600 mb-2 text-600">
+        <li class="mb-3"><span class="font-semibold">Echelle :</span> </li>
+        <li class="mb-3"><span class="font-semibold">Echelon :</span> </li>
+        <li class="mb-3"><span class="font-semibold">Grade :</span> </li>
+        <li class="mb-3"><span class="font-semibold">Corps :</span> </li>
+        <li class="mb-3"><span class="font-semibold">Lieu de naissance :</span> </li>
+
+      </ul>
+    </div>
+  </div>
+  <div class="container">
+    <div class="p-fluid p-formgrid grid m-2">
+
+    </div>
+
+
+    <div class="container py-5">
+      <form>
+        <!--      <div class="text-sm mb-2">-->
+        <!--        Champs obligatoires:-->
+        <!--        <span class="text-red-500">*</span>-->
+        <!--      </div>-->
+        <div class="border-1 surface-border border-round p-fluid mb-4">
+          <!--        <span class="text-900 font-bold block border-bottom-1 surface-border p-3">Critères d’affectation pour convenances personnelles des enseignants</span>-->
+          <div class="p-fluid p-formgrid grid m-2">
+
+            <!-- etablissement -->
+            <div class="field col-12 md:col-4">
+              <label for="notePedagogiq">Etablissement</label>
+              <input
+                type="text"
+                pInputText
+                placeholder="Etablissement"
+                id="notePedagogiq"
+                required
+              />
+            </div>
+
+            <!-- Telephone-->
+            <div class="field col-12 md:col-4">
+              <label for="phone">Téléphone </label>
+              <input
+                type="number"
+                pInputText
+                placeholder="Téléphone"
+                id="phone"
+                required
+              />
+            </div>
+
+            <div class="field col-12 md:col-4">
+              <label for="g"> Grade </label>
+              <input
+                type="text"
+                pInputText
+                placeholder="Grade"
+                id="g"
+                required
+              />
+            </div>
+
+            <div class="field col-12 md:col-4">
+              <label for="d"> Date Recrutement </label>
+              <input
+                type="Date"
+                pInputText
+                placeholder="Date Recrutement"
+                id="d"
+                required
+              />
+            </div>
+
+            <div class="field col-12 md:col-4">
+              <label for="Fonction">9- Fonction </label>
+              <input
+                type="text"
+                pInputText
+                placeholder="Grade"
+                id="Fonction"
+                required
+              />
+            </div>
+            <!-- Distinction -->
+            <div class="field col-12 md:col-4">
+              <label for="distinction">Situation familiale</label>
+              <p-dropdown
+                id="distinction"
+                [options]="listeLibellePiece"
+                placeholder="Selectionner Situation familiale" />
+            </div>
+
+            <!-- Nombre d’enfants -->
+            <div class="field col-12 md:col-4">
+              <label for="nen">Nombre d'enfant</label>
+              <input
+                type="number"
+                pInputText
+                placeholder=""
+                id="nen"
+                required
+              />
+            </div>
+
+            <div class="field col-12 md:col-4">
+              <label for="Fonctiono">Choix d'affectation 1</label>
+              <input
+                type="text"
+                pInputText
+                placeholder="Choix d'affectation 1"
+                id="Fonctiono"
+                required
+              />
+            </div>
+
+
+            <div class="field col-12 md:col-4">
+              <label for="Fonctionp">Choix d'affectation 2</label>
+              <input
+                type="text"
+                pInputText
+                placeholder="Choix d'affectation 2"
+                id="Fonctionp"
+                required
+              />
+            </div>
+
+            <div class="field col-12 md:col-4">
+              <label for="Fonctionuy">Choix d'affectation 3</label>
+              <input
+                type="text"
+                pInputText
+                placeholder="Choix d'affectation 3"
+                id="Fonctionuy"
+                required
+              />
+            </div>
+
+
+            <div class="field col-12 md:col-4">
+              <label for="Fonctiong">Bilan des abscences Justifiées</label>
+              <input
+                type="number"
+                pInputText
+                placeholder=""
+                id="Fonctiong"
+                required
+              />
+            </div>
+
+            <div class="field col-12 md:col-4">
+              <label for="Fonction">Bilan des abscences Non Justifiées</label>
+              <input
+                type="number"
+                pInputText
+                placeholder=""
+                id="ne"
+                required
+              />
+            </div>
+
+
+            <div class="field col-12 md:col-4">
+              <label for="Fonction">Matricule du superieure</label>
+              <input
+                type="text"
+                pInputText
+                placeholder="Matricule superieure"
+                id="ms"
+                required
+              />
+            </div>
+
+
+
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+  <div class="flex justify-content-between gap-3">
+    <button
+      pButton
+      pRipple
+      class="p-button-primary flex-1"
+      label="Enregistrer"
+      icon="pi pi-fw pi-check"
+      (click)="save()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      class="p-button-danger flex-1 p-button-outlined"
+      label="Annuler"
+      (click)="cancel()"
+      icon="pi pi-fw pi-times"
+    ></button>
+  </div>
+</p-card>
+
+
+
+
+

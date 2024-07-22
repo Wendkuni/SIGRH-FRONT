@@ -92,7 +92,7 @@ export class AppMenuComponent implements OnInit {
                 },
                 {
                   label: 'Demande Bonification',
-                  routerLink: ['/bonification'],
+                  routerLink: ['/agent-bonification'],
                 },
                 {
                   label: 'Demande Reclassement',

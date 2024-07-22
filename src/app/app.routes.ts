@@ -163,6 +163,24 @@ export const routes: Routes = [
         loadComponent: () => import(
           './space/Agent_Space/Carriere/agent-integration/agent-integration.component'
         ).then((item) => item.AgentIntegrationComponent),
+      },
+      {
+        path:'agent-demande-titularisation',
+        loadComponent: () => import(
+          './space/Agent_Space/Carriere/agent-demande-titularisation/agent-demande-titularisation.component'
+        ).then((item) => item.AgentDemandeTitularisationComponent),
+      },
+      {
+        path:'avancement-choix',
+        loadComponent: () => import(
+          './space/Agent_Space/Carriere/avancement-choix/avancement-choix.component'
+        ).then((item) => item.AvancementChoixComponent),
+      },
+      {
+      path:'agent-bonification',
+      loadComponent: () => import(
+        './space/Agent_Space/Carriere/agent-bonification/agent-bonification.component'
+      ).then((item) => item.AgentBonificationComponent),
       }
     ],
   },

@@ -157,6 +157,12 @@ export const routes: Routes = [
           import(
             './space/Agent_Space/Carriere/mes-dossiers/mes-dossiers.component'
           ).then((item) => item.MesDossiersComponent),
+      },
+      {
+        path:'agent-integration',
+        loadComponent: () => import(
+          './space/Agent_Space/Carriere/agent-integration/agent-integration.component'
+        ).then((item) => item.AgentIntegrationComponent),
       }
     ],
   },

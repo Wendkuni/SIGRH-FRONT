@@ -31,6 +31,7 @@
     "@ngrx/store": "^17.2.0",
     "@txtextcontrol/tx-ng-document-editor": "^32.3.0",
     "bootstrap-icons": "^1.11.3",
+    "chart.js": "^4.4.3",
     "file-saver": "^2.0.5",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.8.2",

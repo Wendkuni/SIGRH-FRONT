@@ -229,6 +229,12 @@ export const routes: Routes = [
         loadComponent: () => import(
           './space/Grh-Space/Affaire_Sociale/drh-allocation-familiale/drh-allocation-familiale.component'
           ).then((item) => item.DrhAllocationFamilialeComponent),
+      },
+      {
+        path: 'dren-besoin-personnel',
+        loadComponent: () => import(
+          './space/Dren_Space/Recrutement/dren-recrutement.component'
+          ).then((item) => item.DrenRecrutementComponent),
       }
     ],
   },

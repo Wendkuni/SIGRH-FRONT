@@ -174,6 +174,12 @@ export class AppMenuComponent implements OnInit {
                 },
               ],
             },
+            // Recrutement
+            {
+              label: 'Gestion de Récrutement',
+              icon: 'pi pi-fw pi-user',
+              routerLink: ['/dren-besoin-personnel'],
+            },
           ],
         },
       ];

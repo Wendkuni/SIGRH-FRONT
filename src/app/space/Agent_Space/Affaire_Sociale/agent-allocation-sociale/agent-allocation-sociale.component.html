@@ -1,0 +1,225 @@
+<p-card>
+  <div class="p-grid p-fluid">
+    <div class="p-col-12">
+      <div class="card">
+        <h2 class="p-mb-4">Ajouter un Agent</h2>
+        <form (ngSubmit)="onSave()" [formGroup]="agentForm" class="p-fluid">
+          <div class="p-grid">
+            <!-- Données personnelles -->
+            <div class="p-col-12">
+              <p-fieldset class="p-mb-3" legend="Données personnelles">
+                <div class="p-grid p-fluid">
+                  <!-- Nom -->
+                  <div class="p-col-12 p-md-6">
+                    <div class="p-field p-inputgroup">
+                      <label class="p-inputgroup-addon" for="nom">Nom</label> <input class="p-inputtext p-d-block"
+                      formControlName="nom" id="nom" pInputText type="text"/> <small
+                      *ngIf="agentForm.controls['nom'].invalid && agentForm.controls['nom'].touched"
+                      class="p-error">Nom est requis.</small>
+                    </div>
+                  </div>
+                  <!-- Prénom -->
+                  <div class="p-col-12 p-md-6">
+                    <div class="p-field p-inputgroup">
+                      <label class="p-inputgroup-addon" for="prenom">Prénom</label> <input class="p-inputtext p-d-block"
+                      formControlName="prenom" id="prenom" pInputText
+                      type="text"/> <small
+                      *ngIf="agentForm.controls['prenom'].invalid && agentForm.controls['prenom'].touched"
+                      class="p-error">Prénom est requis.</small>
+                    </div>
+                  </div>
+                  <!-- Sexe -->
+                  <div class="p-col-12 p-md-6">
+                    <div class="p-field p-inputgroup">
+                      <label class="p-inputgroup-addon" for="sexe">Sexe</label>
+                      <p-dropdown [options]="genderOptions" formControlName="sexe" id="sexe"></p-dropdown>
+                      <small *ngIf="agentForm.controls['sexe'].invalid && agentForm.controls['sexe'].touched"
+                        class="p-error">Sexe est requis.</small>
+                    </div>
+                  </div>
+                  <!-- Date de naissance -->
+                  <div class="p-col-12 p-md-6">
+                    <div class="p-field p-inputgroup">
+                      <label class="p-inputgroup-addon" for="dateNaiss">Date de naissance</label>
+                      <p-calendar dateFormat="dd/mm/yy" formControlName="dateNaiss" id="dateNaiss"></p-calendar>
+                      <small
+                        *ngIf="agentForm.controls['dateNaiss'].invalid && agentForm.controls['dateNaiss'].touched"
+                        class="p-error">Date valide est requise.</small>
+                    </div>
+                  </div>
+                  <!-- Lieu de naissance -->
+                  <div class="p-col-12 p-md-6">
+                    <div class="p-field p-inputgroup">
+                      <label class="p-inputgroup-addon" for="lieuNaiss">Lieu de naissance</label> <input
+                      class="p-inputtext p-d-block" formControlName="lieuNaiss" id="lieuNaiss" pInputText
+                      type="text"/> <small
+                      *ngIf="agentForm.controls['lieuNaiss'].invalid && agentForm.controls['lieuNaiss'].touched"
+                      class="p-error">Lieu de naissance est requis.</small>
+                    </div>
+                  </div>
+                  <!-- Situation matrimoniale -->
+                  <div class="p-col-12 p-md-6">
+                    <div class="p-field p-inputgroup">
+                      <label class="p-inputgroup-addon" for="situationMat">Situation matrimoniale</label> <input
+                      class="p-inputtext p-d-block" formControlName="situationMat" id="situationMat" pInputText
+                      type="text"/> <small
+                      *ngIf="agentForm.controls['situationMat'].invalid && agentForm.controls['situationMat'].touched"
+                      class="p-error">Situation matrimoniale est requise.</small>
+                    </div>
+                  </div>
+                  <!-- Nombre d'enfants -->
+                  <div class="p-col-12 p-md-6">
+                    <div class="p-field p-inputgroup">
+                      <label class="p-inputgroup-addon" for="nbEnfants">Nombre d'enfants</label> <input
+                      class="p-inputtext p-d-block" formControlName="nbEnfants" id="nbEnfants" pInputText
+                      type="number"/> <small
+                      *ngIf="agentForm.controls['nbEnfants'].invalid && agentForm.controls['nbEnfants'].touched"
+                      class="p-error">Nombre d'enfants est requis.</small>
+                    </div>
+                  </div>
+
+                  <div class="p-col-12 p-md-6">
+                    <div class="p-field p-inputgroup">
+                      <label class="p-inputgroup-addon" for="nbEnfantsCn">Nombre d'enfants concernés</label> <input
+                      class="p-inputtext p-d-block" formControlName="nbEnfants" id="nbEnfantsCn" pInputText
+                      type="number"/> <small
+                      *ngIf="agentForm.controls['nbEnfants'].invalid && agentForm.controls['nbEnfants'].touched"
+                      class="p-error">Nombre d'enfants est requis.</small>
+                    </div>
+                  </div>
+                </div>
+              </p-fieldset>
+            </div>
+
+            <!-- Informations professionnelles -->
+            <div class="p-col-12">
+              &nbsp;
+              <p-fieldset class="p-mb-3" legend="Informations professionnelles">
+                <div class="p-grid p-fluid">
+                  <!-- NNI -->
+                  <div class="p-col-12 p-md-6">
+                    <div class="p-field p-inputgroup">
+                      <label class="p-inputgroup-addon" for="nni">NNI</label> <input class="p-inputtext p-d-block"
+                      formControlName="nni" id="nni" pInputText type="text"/> <small
+                      *ngIf="agentForm.controls['nni'].invalid && agentForm.controls['nni'].touched"
+                      class="p-error">NNI est requis.</small>
+                    </div>
+                  </div>
+                  <!-- Corps/grade -->
+                  <div class="p-col-12 p-md-6">
+                    <div class="p-field p-inputgroup">
+                      <label class="p-inputgroup-addon" for="corpsGrade">Corps/grade</label> <input
+                      class="p-inputtext p-d-block" formControlName="corpsGrade" id="corpsGrade" pInputText
+                      type="text"/> <small
+                      *ngIf="agentForm.controls['corpsGrade'].invalid && agentForm.controls['corpsGrade'].touched"
+                      class="p-error">Corps/grade est requis.</small>
+                    </div>
+                  </div>
+                  <!-- Echellon -->
+                  <div class="p-col-12 p-md-6">
+                    <div class="p-field p-inputgroup">
+                      <label class="p-inputgroup-addon" for="echellon">Echellon</label> <input
+                      class="p-inputtext p-d-block" formControlName="echellon" id="echellon" pInputText
+                      type="text"/> <small
+                      *ngIf="agentForm.controls['echellon'].invalid && agentForm.controls['echellon'].touched"
+                      class="p-error">Echellon est requis.</small>
+                    </div>
+                  </div>
+                  <!-- Diplôme professionnel -->
+                  <div class="p-col-12 p-md-6">
+                    <div class="p-field p-inputgroup">
+                      <label class="p-inputgroup-addon" for="diplomeProf">Diplôme professionnel</label> <input
+                      class="p-inputtext p-d-block" formControlName="diplomeProf" id="diplomeProf" pInputText
+                      type="text"/> <small
+                      *ngIf="agentForm.controls['diplomeProf'].invalid && agentForm.controls['diplomeProf'].touched"
+                      class="p-error">Diplôme professionnel est requis.</small>
+                    </div>
+                  </div>
+                  <!-- Diplôme académique -->
+                  <div class="p-col-12 p-md-6">
+                    <div class="p-field p-inputgroup">
+                      <label class="p-inputgroup-addon" for="diplomeAca">Diplôme académique</label> <input
+                      class="p-inputtext p-d-block" formControlName="diplomeAca" id="diplomeAca" pInputText
+                      type="text"/> <small
+                      *ngIf="agentForm.controls['diplomeAca'].invalid && agentForm.controls['diplomeAca'].touched"
+                      class="p-error">Diplôme académique est requis.</small>
+                    </div>
+                  </div>
+                  <!-- Poste actuel -->
+                  <div class="p-col-12 p-md-6">
+                    <div class="p-field p-inputgroup">
+                      <label class="p-inputgroup-addon" for="posteActuel">Poste actuel</label> <input
+                      class="p-inputtext p-d-block" formControlName="posteActuel" id="posteActuel" pInputText
+                      type="text"/> <small
+                      *ngIf="agentForm.controls['posteActuel'].invalid && agentForm.controls['posteActuel'].touched"
+                      class="p-error">Poste actuel est requis.</small>
+                    </div>
+                  </div>
+                  <!-- DREN -->
+                  <div class="p-col-12 p-md-6">
+                    <div class="p-field p-inputgroup">
+                      <label class="p-inputgroup-addon" for="dren">DREN</label> <input class="p-inputtext p-d-block"
+                      formControlName="dren" id="dren" pInputText type="text"/> <small
+                      *ngIf="agentForm.controls['dren'].invalid && agentForm.controls['dren'].touched"
+                      class="p-error">DREN est requis.</small>
+                    </div>
+                  </div>
+                </div>
+              </p-fieldset>
+            </div>
+
+            <!-- Contact -->
+            <div class="p-col-12">
+              &nbsp;
+              <p-fieldset legend="Contact">
+                <div class="p-grid p-fluid">
+                  <!-- Email -->
+                  <div class="p-col-12 p-md-6">
+                    <div class="p-field p-inputgroup">
+                      <label class="p-inputgroup-addon" for="email">Email</label> <input class="p-inputtext p-d-block"
+                      formControlName="email" id="email" pInputText
+                      type="email"/> <small
+                      *ngIf="agentForm.controls['email'].invalid && agentForm.controls['email'].touched"
+                      class="p-error">Email valide est requis.</small>
+                    </div>
+                  </div>
+                  <!-- Téléphone -->
+                  <div class="p-col-12 p-md-6">
+                    <div class="p-field p-inputgroup">
+                      <label class="p-inputgroup-addon" for="tel">Téléphone</label> <input class="p-inputtext p-d-block"
+                      formControlName="tel" id="tel" pInputText type="text"/> <small
+                      *ngIf="agentForm.controls['tel'].invalid && agentForm.controls['tel'].touched"
+                      class="p-error">Téléphone est requis.</small>
+                    </div>
+                  </div>
+                </div>
+              </p-fieldset>
+            </div>
+
+            <!-- Pièces jointes -->
+            <div class="p-col-12">
+              &nbsp;
+              <p-fieldset legend="Pièces jointes">
+                <div class="p-grid p-fluid">
+                  <div class="p-col-12">
+                    <div class="p-field p-inputgroup">
+                      <label class="p-inputgroup-addon" for="pieces">Pièces jointes</label>
+                      <p-fileUpload accept=".pdf,.jpg,.png" maxFileSize="5000000" name="pieces"
+                        id="pieces" url="./upload"></p-fileUpload>
+                      <small class="p-d-block">Formats acceptés: PDF, JPEG, PNG (max 5 Mo)</small>
+                    </div>
+                  </div>
+                </div>
+              </p-fieldset>
+            </div>
+
+            <!-- Bouton Enregistrer -->
+            <div class="p-col-12 p-d-flex p-jc-end">
+              <button class="p-button-primary" label="Enregistrer" pButton pRipple type="submit"></button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</p-card>

@@ -244,7 +244,7 @@ export class AppMenuComponent implements OnInit {
       ];
     }
 
-    // Espace GRH
+    // Espace DRH
     if (this.role === 'ROLE_GRH') {
       this.model = [
         {
@@ -291,6 +291,20 @@ export class AppMenuComponent implements OnInit {
                       routerLink: ['/recapitulatif-permutation'],
                     },
                   ],
+                },
+              ],
+            },
+            // Affaire sociale
+            {
+              label: 'Gestion des affaires sociales',
+              icon: 'pi pi-wallet',
+              items: [
+                {
+                  label: 'Allocations Familiales',
+                  routerLink: ['/drh-allocation-familiale'],
+                },
+                {
+                  label: 'Assurances Maladie CNAM',
                 },
               ],
             },

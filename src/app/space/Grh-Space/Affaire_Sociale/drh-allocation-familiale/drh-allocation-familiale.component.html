@@ -1,0 +1,371 @@
+<p-card>
+  <div class="p-col-12">
+    <h2>Liste des Agents</h2>
+    <div class="p-col-12">
+      <div class="p-grid p-align-center p-justify-between p-mb-12">
+        <div class="p-col-12 p-md-6">
+          <div class="p-d-flex p-ai-center p-jc-between p-mb-6">
+            <input (input)="onSearch()" [(ngModel)]="searchQuery" class="p-mr-2" pInputText
+              placeholder="Rechercher..."
+              type="text">
+            <button (click)="showAddDialog()" class="p-button-success pull-right" icon="pi pi-plus" label="Ajouter"
+              pButton
+              type="button"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    &nbsp;
+    <p-table [paginator]="true" [responsiveLayout]="'scroll'"
+      [rowsPerPageOptions]="[10, 20, 50]" [rows]="10"
+      [value]="filteredAgents" styleClass="p-datatable-gridlines p-datatable-striped"
+      tableStyleClass="p-datatable-gridlines">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>N°Matricule</th>
+          <th>Nom</th>
+          <th>Prénom(s)</th>
+          <th>Date Naiss</th>
+          <th>Profession</th>
+          <th>Corps/Grade</th>
+          <th>Echellon</th>
+          <th>Telephone</th>
+          <th>DREN</th>
+          <th>Action</th>
+        </tr>
+      </ng-template>
+      <ng-template let-agent pTemplate="body">
+        <tr>
+          <td>{{ agent.nni }}</td>
+          <td>{{ agent.nom }}</td>
+          <td>{{ agent.prenom }}</td>
+          <td>{{ agent.dateNaiss }}</td>
+          <td>{{ agent.posteActuel }}</td>
+          <td>{{ agent.corpsGrade }}</td>
+          <td>{{ agent.echellon }}</td>
+          <td>{{ agent.tel }}</td>
+          <td>{{ agent.dren }}</td>
+          <td>
+            <button (click)="showDialog(agent)" icon="pi pi-search" pButton type="button"></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</p-card>
+
+
+<!-- Dialog pour ajouter un agent -->
+<p-dialog (onHide)="onHideAddDialog()" [(visible)]="displayAddDialog" [modal]="true" [responsive]="true"
+  [style]="{width: '50vw'}" header="Ajouter un Agent">
+  <div class="p-grid p-fluid">
+    <div class="p-col-12">
+      <div class="card">
+        <h2 class="p-mb-4">Ajouter un Agent</h2>
+        <form (ngSubmit)="onSave()" [formGroup]="agentForm" class="p-fluid">
+          <div class="p-grid">
+            <!-- Données personnelles -->
+            <div class="p-col-12">
+              <p-fieldset class="p-mb-3" legend="Données personnelles">
+                <div class="p-grid p-fluid">
+                  <!-- Nom -->
+                  <div class="p-col-12 p-md-6">
+                    <div class="p-field p-inputgroup">
+                      <label class="p-inputgroup-addon" for="nom">Nom</label> <input class="p-inputtext p-d-block"
+                      formControlName="nom" id="nom" pInputText type="text"/> <small
+                      *ngIf="agentForm.controls['nom'].invalid && agentForm.controls['nom'].touched"
+                      class="p-error">Nom est requis.</small>
+                    </div>
+                  </div>
+                  <!-- Prénom -->
+                  <div class="p-col-12 p-md-6">
+                    <div class="p-field p-inputgroup">
+                      <label class="p-inputgroup-addon" for="prenom">Prénom</label> <input
+                      class="p-inputtext p-d-block" formControlName="prenom" id="prenom" pInputText
+                      type="text"/> <small
+                      *ngIf="agentForm.controls['prenom'].invalid && agentForm.controls['prenom'].touched"
+                      class="p-error">Prénom est requis.</small>
+                    </div>
+                  </div>
+                  <!-- Sexe -->
+                  <div class="p-col-12 p-md-6">
+                    <div class="p-field p-inputgroup">
+                      <label class="p-inputgroup-addon" for="sexe">Sexe</label>
+                      <p-dropdown [options]="genderOptions" formControlName="sexe" id="sexe"></p-dropdown>
+                      <small *ngIf="agentForm.controls['sexe'].invalid && agentForm.controls['sexe'].touched"
+                        class="p-error">Sexe est requis.</small>
+                    </div>
+                  </div>
+                  <!-- Date de naissance -->
+                  <div class="p-col-12 p-md-6">
+                    <div class="p-field p-inputgroup">
+                      <label class="p-inputgroup-addon" for="dateNaiss">Date de naissance</label>
+                      <p-calendar dateFormat="dd/mm/yy" formControlName="dateNaiss" id="dateNaiss"></p-calendar>
+                      <small
+                        *ngIf="agentForm.controls['dateNaiss'].invalid && agentForm.controls['dateNaiss'].touched"
+                        class="p-error">Date valide est requise.</small>
+                    </div>
+                  </div>
+                  <!-- Lieu de naissance -->
+                  <div class="p-col-12 p-md-6">
+                    <div class="p-field p-inputgroup">
+                      <label class="p-inputgroup-addon" for="lieuNaiss">Lieu de naissance</label> <input
+                      class="p-inputtext p-d-block" formControlName="lieuNaiss" id="lieuNaiss" pInputText
+                      type="text"/> <small
+                      *ngIf="agentForm.controls['lieuNaiss'].invalid && agentForm.controls['lieuNaiss'].touched"
+                      class="p-error">Lieu de naissance est requis.</small>
+                    </div>
+                  </div>
+                  <!-- Situation matrimoniale -->
+                  <div class="p-col-12 p-md-6">
+                    <div class="p-field p-inputgroup">
+                      <label class="p-inputgroup-addon" for="situationMat">Situation matrimoniale</label> <input
+                      class="p-inputtext p-d-block" formControlName="situationMat" id="situationMat" pInputText
+                      type="text"/> <small
+                      *ngIf="agentForm.controls['situationMat'].invalid && agentForm.controls['situationMat'].touched"
+                      class="p-error">Situation matrimoniale est requise.</small>
+                    </div>
+                  </div>
+                  <!-- Nombre d'enfants -->
+                  <div class="p-col-12 p-md-6">
+                    <div class="p-field p-inputgroup">
+                      <label class="p-inputgroup-addon" for="nbEnfants">Nombre d'enfants</label> <input
+                      class="p-inputtext p-d-block" formControlName="nbEnfants" id="nbEnfants" pInputText
+                      type="number"/> <small
+                      *ngIf="agentForm.controls['nbEnfants'].invalid && agentForm.controls['nbEnfants'].touched"
+                      class="p-error">Nombre d'enfants est requis.</small>
+                    </div>
+                  </div>
+                </div>
+              </p-fieldset>
+            </div>
+
+            <!-- Informations professionnelles -->
+            <div class="p-col-12">
+              &nbsp;
+              <p-fieldset class="p-mb-3" legend="Informations professionnelles">
+                <div class="p-grid p-fluid">
+                  <!-- NNI -->
+                  <div class="p-col-12 p-md-6">
+                    <div class="p-field p-inputgroup">
+                      <label class="p-inputgroup-addon" for="nni">NNI</label> <input class="p-inputtext p-d-block"
+                      formControlName="nni" id="nni" pInputText type="text"/> <small
+                      *ngIf="agentForm.controls['nni'].invalid && agentForm.controls['nni'].touched"
+                      class="p-error">NNI est requis.</small>
+                    </div>
+                  </div>
+                  <!-- Corps/grade -->
+                  <div class="p-col-12 p-md-6">
+                    <div class="p-field p-inputgroup">
+                      <label class="p-inputgroup-addon" for="corpsGrade">Corps/grade</label> <input
+                      class="p-inputtext p-d-block" formControlName="corpsGrade" id="corpsGrade" pInputText
+                      type="text"/> <small
+                      *ngIf="agentForm.controls['corpsGrade'].invalid && agentForm.controls['corpsGrade'].touched"
+                      class="p-error">Corps/grade est requis.</small>
+                    </div>
+                  </div>
+                  <!-- Echellon -->
+                  <div class="p-col-12 p-md-6">
+                    <div class="p-field p-inputgroup">
+                      <label class="p-inputgroup-addon" for="echellon">Echellon</label> <input
+                      class="p-inputtext p-d-block" formControlName="echellon" id="echellon" pInputText
+                      type="text"/> <small
+                      *ngIf="agentForm.controls['echellon'].invalid && agentForm.controls['echellon'].touched"
+                      class="p-error">Echellon est requis.</small>
+                    </div>
+                  </div>
+                  <!-- Diplôme professionnel -->
+                  <div class="p-col-12 p-md-6">
+                    <div class="p-field p-inputgroup">
+                      <label class="p-inputgroup-addon" for="diplomeProf">Diplôme professionnel</label> <input
+                      class="p-inputtext p-d-block" formControlName="diplomeProf" id="diplomeProf" pInputText
+                      type="text"/> <small
+                      *ngIf="agentForm.controls['diplomeProf'].invalid && agentForm.controls['diplomeProf'].touched"
+                      class="p-error">Diplôme professionnel est requis.</small>
+                    </div>
+                  </div>
+                  <!-- Diplôme académique -->
+                  <div class="p-col-12 p-md-6">
+                    <div class="p-field p-inputgroup">
+                      <label class="p-inputgroup-addon" for="diplomeAca">Diplôme académique</label> <input
+                      class="p-inputtext p-d-block" formControlName="diplomeAca" id="diplomeAca" pInputText
+                      type="text"/> <small
+                      *ngIf="agentForm.controls['diplomeAca'].invalid && agentForm.controls['diplomeAca'].touched"
+                      class="p-error">Diplôme académique est requis.</small>
+                    </div>
+                  </div>
+                  <!-- Poste actuel -->
+                  <div class="p-col-12 p-md-6">
+                    <div class="p-field p-inputgroup">
+                      <label class="p-inputgroup-addon" for="posteActuel">Poste actuel</label> <input
+                      class="p-inputtext p-d-block" formControlName="posteActuel" id="posteActuel" pInputText
+                      type="text"/> <small
+                      *ngIf="agentForm.controls['posteActuel'].invalid && agentForm.controls['posteActuel'].touched"
+                      class="p-error">Poste actuel est requis.</small>
+                    </div>
+                  </div>
+                  <!-- DREN -->
+                  <div class="p-col-12 p-md-6">
+                    <div class="p-field p-inputgroup">
+                      <label class="p-inputgroup-addon" for="dren">DREN</label> <input class="p-inputtext p-d-block"
+                      formControlName="dren" id="dren" pInputText type="text"/> <small
+                      *ngIf="agentForm.controls['dren'].invalid && agentForm.controls['dren'].touched"
+                      class="p-error">DREN est requis.</small>
+                    </div>
+                  </div>
+                </div>
+              </p-fieldset>
+            </div>
+
+            <!-- Contact -->
+            <div class="p-col-12">
+              &nbsp;
+              <p-fieldset legend="Contact">
+                <div class="p-grid p-fluid">
+                  <!-- Email -->
+                  <div class="p-col-12 p-md-6">
+                    <div class="p-field p-inputgroup">
+                      <label class="p-inputgroup-addon" for="email">Email</label> <input
+                      class="p-inputtext p-d-block" formControlName="email" id="email" pInputText
+                      type="email"/> <small
+                      *ngIf="agentForm.controls['email'].invalid && agentForm.controls['email'].touched"
+                      class="p-error">Email valide est requis.</small>
+                    </div>
+                  </div>
+                  <!-- Téléphone -->
+                  <div class="p-col-12 p-md-6">
+                    <div class="p-field p-inputgroup">
+                      <label class="p-inputgroup-addon" for="tel">Téléphone</label> <input
+                      class="p-inputtext p-d-block" formControlName="tel" id="tel" pInputText type="text"/> <small
+                      *ngIf="agentForm.controls['tel'].invalid && agentForm.controls['tel'].touched"
+                      class="p-error">Téléphone est requis.</small>
+                    </div>
+                  </div>
+                </div>
+              </p-fieldset>
+            </div>
+
+            <!-- Pièces jointes -->
+            <div class="p-col-12">
+              &nbsp;
+              <p-fieldset legend="Pièces jointes">
+                <div class="p-grid p-fluid">
+                  <div class="p-col-12">
+                    <div class="p-field p-inputgroup">
+                      <label class="p-inputgroup-addon" for="pieces">Pièces jointes</label>
+                      <p-fileUpload accept=".pdf,.jpg,.png" maxFileSize="5000000" name="pieces"
+                        id="pieces" url="./upload"></p-fileUpload>
+                      <small class="p-d-block">Formats acceptés: PDF, JPEG, PNG (max 5 Mo)</small>
+                    </div>
+                  </div>
+                </div>
+              </p-fieldset>
+            </div>
+
+            <!-- Bouton Enregistrer -->
+            <div class="p-col-12 p-d-flex p-jc-end">
+              <button class="p-button-primary" label="Enregistrer" pButton pRipple type="submit"></button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</p-dialog>
+
+<!-- Dialog pour afficher les détails de l'agent -->
+<p-dialog (onHide)="onHideDialog()" [(visible)]="displayDialog" [responsive]="true" [style]="{width: '60vw'}">
+
+  <p-header>
+    Détails de l'Agent
+  </p-header>
+
+  <ng-container *ngIf="selectedAgent">
+    <div class="p-grid p-fluid">
+      <div class="p-col-12">
+        <div class="card p-shadow-4 p-mb-4">
+          <!-- Titre et bouton Annuler -->
+          <div class="p-d-flex p-ai-center p-jc-between p-mb-4">
+            <h2 class="p-mb-0">Détails de {{ selectedAgent?.nom }} {{ selectedAgent?.prenom }}</h2>
+          </div>
+
+          <!-- Détails de l'agent en colonnes -->
+          <div class="p-grid p-mb-4">
+            <div class="p-col-12 p-md-6">
+              <div class="p-field">
+                <label for="nom">Nom:</label>
+                <div class="p-inputtext p-component">{{ selectedAgent?.nom }}</div>
+              </div>
+              <div class="p-field">
+                <label for="prenom">Prénom:</label>
+                <div class="p-inputtext p-component">{{ selectedAgent?.prenom }}</div>
+              </div>
+              <div class="p-field">
+                <label for="email">Email:</label>
+                <div class="p-inputtext p-component">{{ selectedAgent?.email }}</div>
+              </div>
+              <div class="p-field">
+                <label for="dateNaiss">Date de Naissance:</label>
+                <div class="p-inputtext p-component">{{ selectedAgent?.dateNaiss | date: 'dd/MM/yyyy' }}</div>
+              </div>
+              <div class="p-field">
+                <label for="posteActuel">Poste Actuel:</label>
+                <div class="p-inputtext p-component">{{ selectedAgent?.posteActuel }}</div>
+              </div>
+              <div class="p-field">
+                <label for="corpsGrade">Corps / Grade:</label>
+                <div class="p-inputtext p-component">{{ selectedAgent?.corpsGrade }}</div>
+              </div>
+              <div class="p-field">
+                <label for="echellon">Échellon:</label>
+                <div class="p-inputtext p-component">{{ selectedAgent?.echellon }}</div>
+              </div>
+              <div class="p-field">
+                <label for="tel">Téléphone:</label>
+                <div class="p-inputtext p-component">{{ selectedAgent?.tel }}</div>
+              </div>
+              <div class="p-field">
+                <label for="dren">DREN:</label>
+                <div class="p-inputtext p-component">{{ selectedAgent?.dren }}</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pièces Jointes avec une meilleure présentation -->
+          <div class="p-field">
+            <label>Pièces Jointes:</label>
+            <div class="p-inputtext p-component p-d-flex p-ai-center">
+              <p-tag class="p-mr-2" value="{{ selectedAgent?.pieces }}"></p-tag>
+              <!-- Ajout d'un lien de téléchargement si nécessaire -->
+              <a *ngIf="selectedAgent?.pieces" [href]="getDownloadLink(selectedAgent?.pieces)"
+                class="p-button p-button-text"
+                target="_blank">Télécharger</a>
+            </div>
+          </div>
+
+          <!-- Choix d'avis avec radio buttons pour l'exclusivité -->
+          <div class="p-field p-d-flex p-ai-center p-mt-4">
+            <div class="p-mr-4">
+              <label>Avis Favorable:</label>
+              <p-radioButton [(ngModel)]="selectedDecision" inputId="approve" name="avis"
+                value="approve"></p-radioButton>
+              <label>Oui</label>
+            </div>
+            <div>
+              <label>Rejeter:</label>
+              <p-radioButton [(ngModel)]="selectedDecision" inputId="reject" name="avis"
+                value="reject"></p-radioButton>
+              <label>Non</label>
+            </div>
+          </div>
+
+          <!-- Boutons d'action -->
+          <div class="p-field p-d-flex p-jc-end p-mt-4">
+            <button (click)="onSaveDecision()" class="p-button-primary p-mr-2" label="Enregistrer" pButton
+              type="button"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</p-dialog>

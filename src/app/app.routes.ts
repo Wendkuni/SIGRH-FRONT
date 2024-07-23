@@ -223,6 +223,12 @@ export const routes: Routes = [
         loadComponent: () => import(
           './space/Dren_Space/Affaire_Sociale/dren-allocation-familiale/dren-allocation-familiale.component'
           ).then((item) => item.DrenAllocationFamilialeComponent),
+      },
+      {
+        path: 'drh-allocation-familiale',
+        loadComponent: () => import(
+          './space/Grh-Space/Affaire_Sociale/drh-allocation-familiale/drh-allocation-familiale.component'
+          ).then((item) => item.DrhAllocationFamilialeComponent),
       }
     ],
   },

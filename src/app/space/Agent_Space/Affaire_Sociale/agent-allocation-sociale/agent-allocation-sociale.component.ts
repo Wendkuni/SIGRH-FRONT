@@ -67,6 +67,12 @@ export class AgentAllocationSocialeComponent implements OnInit {
       conjoints: [''],
       pieces: ['']
     });
+
+    this.genderOptions = [
+      {label: 'Homme', value: 'Homme'},
+      {label: 'Femme', value: 'Femme'},
+      {label: 'Autre', value: 'Autre'}
+    ];
   }
 
 }

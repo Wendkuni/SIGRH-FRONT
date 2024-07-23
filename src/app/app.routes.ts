@@ -217,6 +217,12 @@ export const routes: Routes = [
         loadComponent: () => import(
           './space/Agent_Space/Carriere/agent-demission/agent-demission.component'
           ).then((item) => item.AgentDemissionComponent),
+      },
+      {
+        path: 'dren-allocation-familiale',
+        loadComponent: () => import(
+          './space/Dren_Space/Affaire_Sociale/dren-allocation-familiale/dren-allocation-familiale.component'
+          ).then((item) => item.DrenAllocationFamilialeComponent),
       }
     ],
   },

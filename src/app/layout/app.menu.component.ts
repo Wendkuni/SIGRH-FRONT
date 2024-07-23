@@ -1,9 +1,6 @@
-import { OnInit } from '@angular/core';
-import { Component } from '@angular/core';
-import { AppMenuitemComponent } from './app.menuitem.component';
-import { NgForOf, NgIf } from '@angular/common';
-import { Personnel } from '../core/data/personals/personnel.model';
-import { RouterLink } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {AppMenuitemComponent} from './app.menuitem.component';
+import {NgForOf, NgIf} from '@angular/common';
 
 @Component({
   selector: 'mrt-menu',
@@ -121,24 +118,7 @@ export class AppMenuComponent implements OnInit {
                 {
                   label: 'Demande de demission',
                   routerLink: ['/agent-demission']
-                },
-                //
-                // {
-                //   label: 'Demande Certification prise de service',
-                //   routerLink: ['/agent-certificat-prise-service']
-                // },
-                // {
-                //   label: 'Demande Attestation de travail',
-                //   routerLink: ['/agent-attesttaion-travail']
-                // },
-                // {
-                //   label: 'Demande Annulation acte',
-                //   routerLink: ['/agent-anulation-acte']
-                // },
-                // {
-                //   label: 'Demande Rectification',
-                //   routerLink: ['/agent-rectification']
-                // },
+                }
               ]
             },
           ],
@@ -163,7 +143,7 @@ export class AppMenuComponent implements OnInit {
           label: 'Pages de Gestion',
           items: [
             {
-              label: 'Gestion de Mobilité',
+              label: 'Gestion de la mobilité',
               icon: 'pi pi-sort-alt',
               items: [
                 {
@@ -177,6 +157,20 @@ export class AppMenuComponent implements OnInit {
                 {
                   label: 'Permutation',
                   routerLink: ['/dren-affectation-permutation'],
+                },
+              ],
+            },
+            // Affaire sociale
+            {
+              label: 'Gestion des affaires sociales',
+              icon: 'pi pi-wallet',
+              items: [
+                {
+                  label: 'Allocations Familiales',
+                  routerLink: ['/dren-allocation-familiale'],
+                },
+                {
+                  label: 'Assurances Maladie CNAM',
                 },
               ],
             },

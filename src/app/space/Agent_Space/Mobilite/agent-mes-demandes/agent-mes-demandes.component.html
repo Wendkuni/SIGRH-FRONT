@@ -1,0 +1,78 @@
+<p-card>
+  <div class="text-900 font-bold text-3xl mb-4 mt-2">
+    Mes demandes
+  </div>
+  <!-- table -->
+  <p-table
+    [columns]="colDemandeTraite"
+    [value]="dataDemandeTraite"
+    #personnelDemandeTable
+    dataKey="id"
+    [rows]="5"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Page {currentPage} sur {totalPages}"
+    [paginator]="true"
+    styleClass="p-datatable-gridlines p-datatable-striped"
+    responsiveLayout="scroll"
+    [rowHover]="true"
+    [rowsPerPageOptions]="[5, 10, 20, 50]"
+    tableStyleClass="p-datatable-gridlines"
+    [globalFilterFields]="['num']"
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex justify-content-between flex-column sm:flex-row">
+            <span class="p-input-icon-left mb-2">
+              <i class="pi pi-search"></i>
+              <input
+                pInputText
+                type="text"
+                #filter
+                (input)="onGlobalFilter(personnelDemandeTable, $event)"
+                placeholder="Recherche..."
+                class="w-full"
+              />
+            </span>
+      </div>
+    </ng-template>
+
+    <ng-template let-columns pTemplate="header">
+      <tr>
+        @for (col of columns; track col.field) {
+          <th
+            [pSortableColumn]="col.field"
+            class="font-weight-bold"
+            style="min-width: 13rem"
+          >
+            {{ col.header }}
+            @if (col.header != 'Photo') {
+              <p-sortIcon [field]="col.field"></p-sortIcon>
+            }
+          </th>
+        }
+        <th> Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-dmd>
+      <tr>
+        <td class="align-items-center">{{ dmd.num }}</td>
+        <td>{{ dmd.dateDemande | date: 'dd/MM/yyyy' }}</td>
+        <td>{{ dmd.typeDemande }}</td>
+        <td>
+          <p-tag [value]="dmd.statut.toUpperCase()" [rounded]="true" [severity]="getStatusSeverity(dmd.statut)"/>
+        </td>
+        <td>
+          @if (dmd.statut === 'Acceptée') {
+            <button
+              pButton
+              pRipple
+              label="Fichier affectation"
+              icon="pi pi-download"
+              class="p-button-success"
+            ></button>
+          }
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+</p-card>

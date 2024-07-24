@@ -47,6 +47,10 @@ export class AppMenuComponent implements OnInit {
                   label: 'Permutation de poste',
                   routerLink: ['/agent-permutation-poste'],
                 },
+                {
+                  label: 'Mes demandes',
+                  routerLink: ['/agent-mes-demandes'],
+                }
               ],
             },
             // Affaire sociale
@@ -314,6 +318,21 @@ export class AppMenuComponent implements OnInit {
                 },
               ],
             },
+            //   Recrutement
+            {
+              label: 'Gestion de Récrutement',
+              icon: 'pi pi-fw pi-user',
+              items: [
+                {
+                  label: 'Integration Direct',
+                  routerLink: ['/drh-integration-direct'],
+                },
+                {
+                  label: 'Stage de Recrutement',
+                  routerLink: ['/drh-stage-recrutement'],
+                },
+              ],
+            }
           ],
         },
       ];

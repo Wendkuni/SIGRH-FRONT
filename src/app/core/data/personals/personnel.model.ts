@@ -1,7 +1,7 @@
 import {Cols} from "../primeng/primeng.model";
 
 
-export let personnelColonneTable : Cols[] = [
+export let personnelColonneTable: Cols[] = [
   {field: 'photo', header: 'Photo'},
   {field: 'nni', header: 'NNI'},
   {field: 'matricule', header: 'Matricule'},
@@ -31,7 +31,7 @@ export let personnelColonneTable : Cols[] = [
 /*
 * Personnel model
 */
-export interface Personnel{
+export interface Personnel {
   idAgent: number;
   matricule: string;
   nomPrenom: string;
@@ -55,16 +55,16 @@ export interface Personnel{
   detacher: string;
   ministerOrigine: string;
 
-  Typeeducation:string;
+  Typeeducation: string;
   imagPers: any;
   sexePers: string;
   situationMatri: string;
-  autres:string;
+  autres: string;
   autres2: string;
   corpsRecrt: string;
   typeF: string;
-  refRec:string;
-  fonctnRef:string;
+  refRec: string;
+  fonctnRef: string;
 
 }
 
@@ -86,4 +86,11 @@ export interface UploadEvent {
 export interface PieceJustificatif {
   libelle: string;
   images: File;
+}
+
+export interface PersonnelPieceJustificatif {
+  personnelId: number;
+  libelle: string;
+  type: string;
+  image: string;
 }

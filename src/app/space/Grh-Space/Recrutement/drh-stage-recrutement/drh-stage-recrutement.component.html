@@ -1,1 +1,71 @@
-<p>drh-stage-recrutement works!</p>
+<!-- Toast notification part start-->
+<p-toast
+  [showTransformOptions]="'translateY(100%)'"
+  [showTransitionOptions]="'1000ms'"
+  [hideTransitionOptions]="'1000ms'"
+  [showTransformOptions]="'translateX(100%)'"/>
+<p-confirmDialog/>
+
+<p-toolbar styleClass="mb-4 gap-2">
+  <ng-template pTemplate="left">
+    <div class="text-900 font-bold text-3xl mb-4 mt-2">
+      Recrutement par stage
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="right">
+    <p-button
+      severity="success"
+      label="Ajouter"
+      icon="pi pi-plus"
+      class="mr-2"
+
+    />
+  </ng-template>
+</p-toolbar>
+
+<p-table
+  [columns]="colListePersonnels"
+  #personnelTable
+  dataKey="id"
+  [rows]="5"
+  [showCurrentPageReport]="true"
+  currentPageReportTemplate="Page {currentPage} sur {totalPages}"
+  [paginator]="true"
+  styleClass="p-datatable-gridlines p-datatable-striped"
+  responsiveLayout="scroll"
+  [rowHover]="true"
+  [rowsPerPageOptions]="[5,10, 20, 50]"
+  tableStyleClass="p-datatable-gridlines"
+  [globalFilterFields]="['nni','matricule','nomPrenom','nomPrenomArab','nni','dteRecrutement','dteTitularisation','lieuNaiss','bank','codeBank','ministereOrigine','typeeducation']"
+>
+  <ng-template pTemplate="caption">
+    <div class="flex justify-content-between flex-column sm:flex-row">
+              <span class="p-input-icon-left mb-2">
+							<i class="pi pi-search"></i>
+							<input pInputText type="text" #filter (input)="onGlobalFilter(personnelTable, $event)"
+                placeholder="Recherche..." class="w-full"/>
+						</span>
+    </div>
+  </ng-template>
+
+  <ng-template let-columns pTemplate="header">
+    <tr>
+      @for (col of columns; track col.field) {
+        <th
+          [pSortableColumn]="col.field"
+          class="font-weight-bold "
+          style="min-width: 13rem;"
+        >
+          {{ col.header }}
+          @if (col.header != 'Photo') {
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          }
+        </th>
+      }
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </ng-template>
+</p-table>

@@ -231,28 +231,22 @@ export const routes: Routes = [
           ).then((item) => item.DrhAllocationFamilialeComponent),
       },
       {
-        path: 'dren-besoin-personnel',
-        loadComponent: () => import(
-          './space/Dren_Space/Recrutement/dren-recrutement.component'
-          ).then((item) => item.DrenRecrutementComponent),
-      },
-      {
-        path: 'drh-integration-direct',
-        loadComponent: () => import(
-          './space/Grh-Space/Recrutement/drh-recrutement-integration-direct/drh-recrutement-integration-direct.component'
-          ).then((item) => item.DrhRecrutementIntegrationDirectComponent),
-      },
-      {
-        path: 'drh-stage-recrutement',
-        loadComponent: () => import(
-          './space/Grh-Space/Recrutement/drh-stage-recrutement/drh-stage-recrutement.component'
-          ).then((item) => item.DrhStageRecrutementComponent),
-      },
-      {
         path: 'agent-mes-demandes',
         loadComponent: () => import(
           './space/Agent_Space/Mobilite/agent-mes-demandes/agent-mes-demandes.component'
           ).then((item) => item.AgentMesDemandesComponent),
+      },
+      {
+        path: 'drh-expression-besoin-personnel',
+        loadComponent: () => import(
+          './space/Grh-Space/Recrutement/drh-expression-besoin-personnel/drh-expression-besoin-personnel.component'
+          ).then((item) => item.DrhExpressionBesoinPersonnelComponent),
+      },
+      {
+        path: 'drh-participation-concours',
+        loadComponent: () => import(
+          './space/Grh-Space/Recrutement/drh-participation-concours/drh-participation-concours.component'
+          ).then((item) => item.DrhParticipationConcoursComponent),
       }
     ],
   },

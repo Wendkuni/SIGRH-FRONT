@@ -1,12 +1,14 @@
-import { inject, Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Affectation, Mobilite, Mobilites } from './mobilite.model';
-import { environment } from '../../../../environments/environment';
-import { PieceJustificatif } from '../personals/personnel.model';
+import {inject, Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {Mobilite, Mobilites} from './mobilite.model';
+import {environment} from '../../../../environments/environment';
 import {
   AffectationBack,
   DemandeConvenancePersonnelle,
-  DemandeConvenancePersonnelleList, Permutation, PermutationList,
+  DemandeConvenancePersonnelleList,
+  Permutation,
+  PermutationList,
+  PieceJustificatif,
 } from '../mobilite/mobilite.model';
 
 @Injectable({
@@ -22,7 +24,7 @@ export class AffectationService {
   http = inject(HttpClient);
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Access-Control-Allow-Origin': '*' }),
+    headers: new HttpHeaders({'Access-Control-Allow-Origin': '*'}),
   };
 
   // get all mobilites
@@ -134,10 +136,10 @@ export class AffectationService {
   }
 
   updatePermuttionJson(data: Permutation) {
-    return this.http.put(`${this.apiUrlJsonServer}/demandePermutations/${data.id}`,data)
+    return this.http.put(`${this.apiUrlJsonServer}/demandePermutations/${data.id}`, data)
   }
 
-  getAllPermutationJson(){
+  getAllPermutationJson() {
     return this.http.get<PermutationList>(`${this.apiUrlJsonServer}/demandePermutations`);
   }
 }

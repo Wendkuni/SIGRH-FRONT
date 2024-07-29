@@ -10,6 +10,8 @@ import {RippleModule} from "primeng/ripple";
 import {Agent} from "../../../../core/data/affaireSocial-Assurance/affaire-social-assurance.model";
 import {FormValidatorsComponent} from "../../../../shared/form-validators/form-validators.component";
 import {NgIf} from "@angular/common";
+import {DividerModule} from "primeng/divider";
+import {TableModule} from "primeng/table";
 
 @Component({
   selector: 'mrt-agent-allocation-sociale',
@@ -24,7 +26,9 @@ import {NgIf} from "@angular/common";
     FileUploadModule,
     RippleModule,
     FormValidatorsComponent,
-    NgIf
+    NgIf,
+    DividerModule,
+    TableModule
   ],
   templateUrl: './agent-allocation-sociale.component.html',
   styleUrl: './agent-allocation-sociale.component.scss'
@@ -64,6 +68,7 @@ export class AgentAllocationSocialeComponent implements OnInit {
       posteActuel: ['', Validators.required],
       dren: ['', Validators.required],
       nbEnfants: ['', Validators.required],
+      nomConjoint: [''],
       conjoints: [''],
       pieces: ['']
     });

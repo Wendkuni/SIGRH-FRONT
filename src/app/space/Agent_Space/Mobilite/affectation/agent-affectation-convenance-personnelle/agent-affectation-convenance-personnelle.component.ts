@@ -25,8 +25,9 @@ import {
   AffectationBack,
   DemandeConvenancePersonnelle,
   DemandeConvenancePersonnelleList,
+  PieceJustificatif,
 } from '../../../../../core/data/mobilite/mobilite.model';
-import {Personnel, PieceJustificatif,} from '../../../../../core/data/personals/personnel.model';
+import {Personnel,} from '../../../../../core/data/personals/personnel.model';
 import {PersonnelService} from '../../../../../core/data/personals/personnel.service';
 import {Cols} from '../../../../../core/data/primeng/primeng.model';
 import {BadgeModule} from 'primeng/badge';
@@ -60,28 +61,28 @@ import {BadgeModule} from 'primeng/badge';
     BadgeModule,
   ],
   styles: `
-  :host ::ng-deep {
-    .p-fileupload {
-      padding: 0;
-
-      .p-fileupload-buttonbar {
-        display: none;
-      }
-
-      .p-fileupload-content {
-        border: 0 none;
+    :host ::ng-deep {
+      .p-fileupload {
         padding: 0;
-      }
 
-      .p-fileupload-row {
-        display: none;
-      }
+        .p-fileupload-buttonbar {
+          display: none;
+        }
 
-      .p-progressbar {
-        display: none;
+        .p-fileupload-content {
+          border: 0 none;
+          padding: 0;
+        }
+
+        .p-fileupload-row {
+          display: none;
+        }
+
+        .p-progressbar {
+          display: none;
+        }
       }
-    }
-  }`,
+    }`,
   providers: [MessageService, ConfirmationService],
 })
 export class AgentAffectationConvenancePersonnelleComponent implements OnInit {
@@ -120,19 +121,19 @@ export class AgentAffectationConvenancePersonnelleComponent implements OnInit {
 
   // colonne du tableau
   colDemandeEnAttente: Cols[] = [
-    { field: 'num', header: 'N° Demande' },
-    { field: 'choix1', header: 'Choix 1' },
-    { field: 'choix2', header: 'Choix 2' },
-    { field: 'choix3', header: 'Choix 3' },
-    { field: 'choix4', header: 'Choix 4' },
-    { field: 'choix5', header: 'Choix 5' },
-    { field: 'piece', header: 'Pièce(s) jointe(s)' },
+    {field: 'num', header: 'N° Demande'},
+    {field: 'choix1', header: 'Choix 1'},
+    {field: 'choix2', header: 'Choix 2'},
+    {field: 'choix3', header: 'Choix 3'},
+    {field: 'choix4', header: 'Choix 4'},
+    {field: 'choix5', header: 'Choix 5'},
+    {field: 'piece', header: 'Pièce(s) jointe(s)'},
   ];
 
   // colonne du tableau
   colsDossier: Cols[] = [
-    { field: 'libelle', header: 'Libellé de la pièce' },
-    { field: 'images', header: 'Images' },
+    {field: 'libelle', header: 'Libellé de la pièce'},
+    {field: 'images', header: 'Images'},
   ];
 
 
@@ -210,15 +211,15 @@ export class AgentAffectationConvenancePersonnelleComponent implements OnInit {
         Validators.required,
         Validators.min(0),
       ]),
-      distinction: this.fb.control('', [Validators.required]),
+      distinction: this.fb.control(''),
       nombreEnfantsACharge: this.fb.control('', [
         Validators.required,
         Validators.min(0),
       ]),
-      discriminationPositive: this.fb.control('', [Validators.required]),
-      situationSanitaire: this.fb.control('', [Validators.required]),
-      regroupementConjoint: this.fb.control('', [Validators.required]),
-      autreSituationSociale: this.fb.control('', [Validators.required]),
+      discriminationPositive: this.fb.control(''),
+      situationSanitaire: this.fb.control(''),
+      regroupementConjoint: this.fb.control(''),
+      autreSituationSociale: this.fb.control(''),
     });
     this.getAgentDemandeConvenancePersonnelle();
   }
@@ -234,6 +235,15 @@ export class AgentAffectationConvenancePersonnelleComponent implements OnInit {
 
   removeFile() {
     this.image = null;
+  }
+
+  convertToBase64(file: any): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = error => reject(error);
+    })
   }
 
   ajouter() {
@@ -274,8 +284,8 @@ export class AgentAffectationConvenancePersonnelleComponent implements OnInit {
       message: 'Êtes-vous sûr de vouloir continuer ?',
       accept: () => {
         if (this.action === 'Add') {
-          // this.createAffectationBack();
-          this.createAffectation();
+          this.createAffectationBack();
+          // this.createAffectation();
         } else {
           this.updateAffectation();
         }
@@ -288,32 +298,31 @@ export class AgentAffectationConvenancePersonnelleComponent implements OnInit {
         });
       },
     });
-  }
+  }  // createAffectation() {
+  //   const data = this.getFormData();
+  //   data.idUtilisateur = this.selectedPersonnel.idAgent;
+  //   data.listPieceJustificatif = this.listPieceJustificatif;
+  //   this.mobiliteService.addDemandeConvenancePersonnelle(data).subscribe(
+  //     () => {
+  //       this.messageService.add({
+  //         severity: 'success',
+  //         summary: 'Succès',
+  //         detail: 'Affectation enregistrée avec succès',
+  //       });
+  //       this.getAgentDemandeConvenancePersonnelle();
+  //       this.cancelMobilite();
+  //     },
+  //     () => {
+  //       this.messageService.add({
+  //         severity: 'error',
+  //         summary: 'Error',
+  //         detail: 'Affectation non enregistrée',
+  //         life: 3000,
+  //       });
+  //     }
+  //   );
+  // }
 
-  createAffectation() {
-    const data = this.getFormData();
-    data.idUtilisateur = this.selectedPersonnel.idAgent;
-    data.listPieceJustificatif = this.listPieceJustificatif;
-    this.mobiliteService.addDemandeConvenancePersonnelle(data).subscribe(
-      () => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Succès',
-          detail: 'Affectation enregistrée avec succès',
-        });
-        this.getAgentDemandeConvenancePersonnelle();
-        this.cancelMobilite();
-      },
-      () => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'Affectation non enregistrée',
-          life: 3000,
-        });
-      }
-    );
-  }
 
   createAffectationBack() {
     const data = this.getFormDataBack();

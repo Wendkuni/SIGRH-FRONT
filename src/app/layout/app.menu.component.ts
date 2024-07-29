@@ -178,12 +178,6 @@ export class AppMenuComponent implements OnInit {
                 },
               ],
             },
-            // Recrutement
-            {
-              label: 'Gestion de Récrutement',
-              icon: 'pi pi-fw pi-user',
-              routerLink: ['/dren-besoin-personnel'],
-            },
           ],
         },
       ];
@@ -324,12 +318,12 @@ export class AppMenuComponent implements OnInit {
               icon: 'pi pi-fw pi-user',
               items: [
                 {
-                  label: 'Integration Direct',
-                  routerLink: ['/drh-integration-direct'],
+                  label: 'Expression des besoins',
+                  routerLink: ['/drh-expression-besoin-personnel'],
                 },
                 {
-                  label: 'Stage de Recrutement',
-                  routerLink: ['/drh-stage-recrutement'],
+                  label: 'Participation aux concours',
+                  routerLink: ['/drh-participation-concours'],
                 },
               ],
             }

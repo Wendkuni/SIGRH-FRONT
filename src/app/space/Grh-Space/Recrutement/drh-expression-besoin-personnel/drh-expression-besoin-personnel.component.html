@@ -1,0 +1,146 @@
+<p-card>
+  <!--  Toolbar part-->
+  <p-toolbar styleClass="mb-4 gap-2">
+    <ng-template pTemplate="left">
+      <div class="text-900 font-bold text-3xl mb-4 mt-2">
+        Expression des besoins en personnel
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="right">
+      <p-button
+        severity="success"
+        label="Ajouter"
+        icon="pi pi-plus"
+        class="mr-2"
+        (click)="showExpressionBesoinPersonnelDialog()"
+      />
+    </ng-template>
+  </p-toolbar>
+
+  <!--  End Toolbar bart-->
+
+  <!--  Table des besoins -->
+  <p-table
+    [value]="besoinPersonnel"
+    [columns]="colsTableBesoinPersonnel"
+    [paginator]="true"
+    [rows]="5"
+    #expressionBesoinPersonnelTable
+    [rowsPerPageOptions]="[5, 10, 20]"
+    [globalFilterFields]="['structure', 'profile', 'discipline', 'date']"
+  >
+    <!--      Global filter -->
+    <ng-template pTemplate="caption">
+      <div
+        class="flex flex-column md:flex-row md:justify-content-between md:align-items-center"
+      >
+        <span class="block mt-2 md:mt-0 p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input
+              pInputText
+              type="text"
+              (input)="onGlobalFilter(expressionBesoinPersonnelTable, $event)"
+              placeholder="Search..."
+              class="w-full sm:w-auto"
+            />
+          </span>
+      </div>
+    </ng-template>
+    <ng-template let-columns pTemplate="header">
+      <tr>
+        @for (col of columns; track col.field) {
+          <th
+            style="min-width: 15rem"
+            [pSortableColumn]="col.field"
+            class="font-weight-bold"
+          >
+            {{ col.header }}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+        }
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-besoin>
+      <tr>
+        <td>{{ besoin.structure }}</td>
+        <td>{{ besoin.profile }}</td>
+        <td>{{ besoin.discipline }}</td>
+        <td>{{ besoin.date | date: 'yyyy' }}</td>
+        <td>{{ besoin.nbrPostes }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-card>
+
+
+<!-- Dialog ajout expression des besoins en personnels -->
+<p-dialog
+  [style]="{ width: '50rem' }"
+  header="Formulaire expression des besoins en personnels"
+  [modal]="true"
+  [(visible)]="showExpressionEnPersonnelDialogVisibility"
+>
+  <div class="p-fluid p-formgrid grid m-2">
+    <div class="col-12">
+      <div class="field">
+        <label class="font-medium text-900">Structure</label>
+        <p-dropdown
+          placeholder="Selectionner une structure"/>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="field">
+        <label class="font-medium text-900">Profile</label>
+        <p-dropdown
+          placeholder="Selectionner le profile"/>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="field">
+        <label class="font-medium text-900">Discipline</label>
+        <p-dropdown
+          placeholder="Selectionner une discipline"/>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="field">
+        <label class="font-medium text-900">Date</label>
+        <p-calendar
+          placeholder="Date de besoin"
+          [showIcon]="true"
+          [showButtonBar]="true"
+          appendTo="body"
+          view="year"
+          dateFormat="yy"
+        />
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="field">
+        <label class="font-medium text-900">Nombre de postes</label>
+        <p-inputNumber
+          placeholder="Nombre de postes"
+          [showButtons]="true"
+          [min]="1"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="flex justify-content-between gap-3">
+    <button
+      pButton
+      pRipple
+      class="p-button-primary flex-1"
+      label="Enregistrer"
+      icon="pi pi-fw pi-check"
+    ></button>
+    <button
+      pButton
+      pRipple
+      class="p-button-danger flex-1 p-button-outlined"
+      label="Annuler"
+      icon="pi pi-fw pi-times"
+    ></button>
+  </div>
+</p-dialog>

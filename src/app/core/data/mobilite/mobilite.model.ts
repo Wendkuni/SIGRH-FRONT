@@ -1,4 +1,4 @@
-import { Personnel } from '../personals/personnel.model';
+import {Personnel} from '../personals/personnel.model';
 
 export interface Mobilite {
   // Identifiant unique de la mobilité
@@ -59,10 +59,11 @@ export interface DemandeConvenancePersonnelle {
   personnel: Personnel;
   annulerDemande: boolean;
 }
+
 export type DemandeConvenancePersonnelleList = DemandeConvenancePersonnelle[];
 
 export type Permutation = {
-  id:string;
+  id: string;
   idDemandePermutation: number;
   idAgent: number;
   numDemande: string;
@@ -84,6 +85,10 @@ export type Permutation = {
 
 export type PermutationList = Permutation[];
 
+export enum Nature {
+  PERMUTATION, PERSONNEL, NOMINATION, NECESSITE
+}
+
 export type AffectationBack = {
   idAffectation: number;
   personnel: Personnel;
@@ -91,7 +96,7 @@ export type AffectationBack = {
   dateEffet: Date;
   dren: string;
   notePedagogiq: string;
-  nature: string;
+  nature: Nature;
   motif: string;
   situationSanit: string;
   nombreFant: number;
@@ -111,7 +116,7 @@ export type AffectationBack = {
   etatAffect: string;
   pointPondere: number;
   autreDiplome: string;
-  dateDemande: Date;
-  destinationRetenue: string;
-  appreciation: string;
+  // dateDemande: Date;
+  // destinationRetenue: string;
+  // appreciation: string;
 };

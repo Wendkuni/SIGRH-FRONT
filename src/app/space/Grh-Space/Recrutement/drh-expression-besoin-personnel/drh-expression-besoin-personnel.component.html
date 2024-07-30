@@ -26,6 +26,7 @@
     [columns]="colsTableBesoinPersonnel"
     [paginator]="true"
     [rows]="5"
+    scrollable="true"
     #expressionBesoinPersonnelTable
     [rowsPerPageOptions]="[5, 10, 20]"
     [globalFilterFields]="['structure', 'profile', 'discipline', 'date']"
@@ -59,6 +60,8 @@
             <p-sortIcon [field]="col.field"></p-sortIcon>
           </th>
         }
+        <th>Actions</th>
+        <th></th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-besoin>
@@ -68,6 +71,22 @@
         <td>{{ besoin.discipline }}</td>
         <td>{{ besoin.date | date: 'yyyy' }}</td>
         <td>{{ besoin.nbrPostes }}</td>
+        <td>
+          <p-button
+            severity="info"
+            label="Modifier"
+            icon="pi pi-pencil"
+            class="mr-2"
+          />
+        </td>
+        <td>
+          <p-button
+            severity="danger"
+            label="Supprimer"
+            icon="pi pi-trash"
+            class="mr-2"
+          />
+        </td>
       </tr>
     </ng-template>
   </p-table>

@@ -691,6 +691,129 @@
       "typeEducation": "Bac+5"
     }
   ],
+  "eleves": [
+    {
+      "id": "1",
+      "photo": "assets/demo/images/avatar/circle/avatar-m-2@2x.png",
+      "matricule": "12345",
+      "nni": "01234567890",
+      "nomEtPrenom": "Pierre Dubois",
+      "nomPrenomArab": "بيير دوبوا",
+      "actifOrNot": "Actif",
+      "tlphone": "+33123456789",
+      "adressEmp": "1 rue de l'Hôtel de Ville, 75001 Paris",
+      "dteNaiss": "1980-05-15",
+      "lieuNaiss": "Paris, France"
+    },
+    {
+      "id": "2",
+      "photo": "assets/demo/images/avatar/circle/avatar-f-1@2x.png",
+      "matricule": "54321",
+      "nni": "98765432101",
+      "nomEtPrenom": "Marie Durand",
+      "nomPrenomArab": "ماري دوراند",
+      "tlphone": "+33698765432",
+      "adressEmp": "2 rue Victor Hugo, 33000 Bordeaux",
+      "dteNaiss": "1990-10-20",
+      "lieuNaiss": "Lyon, France"
+    },
+    {
+      "id": "3",
+      "photo": "assets/demo/images/avatar/circle/avatar-m-1@2x.png",
+      "matricule": "67890",
+      "nni": "12345678902",
+      "nomEtPrenom": "Ahmed Hassan",
+      "nomPrenomArab": "احمد حسن",
+      "tlphone": "+212654321098",
+      "adressEmp": "3 avenue Mohammed V, Rabat, Maroc",
+      "dteNaiss": "1975-12-24",
+      "lieuNaiss": "Casablanca, Maroc"
+    },
+    {
+      "id": "4",
+      "photo": "assets/demo/images/avatar/circle/avatar-f-2@2x.png",
+      "matricule": "34567",
+      "nni": "98765432103",
+      "nomEtPrenom": "Fatoumata Diallo",
+      "nomPrenomArab": "فاطمة جالو",
+      "tlphone": "+221776543210",
+      "adressEmp": "4 rue Blaise Diagne, Dakar, Sénégal",
+      "dteNaiss": "1995-03-08",
+      "lieuNaiss": "Dakar, Sénégal"
+    },
+    {
+      "id": "5",
+      "photo": "assets/demo/images/avatar/circle/avatar-m-3@2x.png",
+      "matricule": "89012",
+      "nni": "12345678904",
+      "nomEtPrenom": "Jean-Marc Tremblay",
+      "nomPrenomArab": "جان مارك تريمبلاي",
+      "tlphone": "+15149876543",
+      "adressEmp": "5 rue Sherbrooke Ouest, Montréal, Québec, Canada",
+      "dteNaiss": "1985-06-21",
+      "lieuNaiss": "Montréal, Canada"
+    },
+    {
+      "id": "6",
+      "photo": "assets/demo/images/avatar/circle/avatar-f-4@2x.png",
+      "matricule": "23456",
+      "nni": "12345678905",
+      "nomEtPrenom": "Maria Sanchez",
+      "nomPrenomArab": "ماريا سانشيز",
+      "tlphone": "+34654321098",
+      "adressEmp": "6 Calle Mayor, Madrid, Espagne",
+      "dteNaiss": "1992-01-16",
+      "lieuNaiss": "Madrid, Espagne"
+    },
+    {
+      "id": "7",
+      "photo": "assets/demo/images/avatar/circle/avatar-m-5@2x.png",
+      "matricule": "M123",
+      "nni": "123456789",
+      "nomEtPrenom": "Jean Dupont",
+      "nomPrenomArab": "جان دوبون",
+      "tlphone": "+33 6 12 34 56 78",
+      "adressEmp": "123 Rue des Employés",
+      "dteNaiss": "1985-05-20",
+      "lieuNaiss": "Paris, France"
+    },
+    {
+      "id": "8",
+      "photo": "assets/demo/images/avatar/circle/avatar-f-6@2x.png",
+      "matricule": "M456",
+      "nni": "987654321",
+      "nomEtPrenom": "Fatoumata Diop",
+      "nomPrenomArab": "فاطمة جوب",
+      "tlphone": "+221 77 654 32 10",
+      "adressEmp": "456 Avenue des Employés",
+      "dteNaiss": "1990-10-20",
+      "lieuNaiss": "Dakar, Sénégal"
+    },
+    {
+      "id": "9",
+      "photo": "assets/demo/images/avatar/circle/avatar-m-8@2x.png",
+      "matricule": "M789",
+      "nni": "123456789",
+      "nomEtPrenom": "Ahmed Mohamed",
+      "nomPrenomArab": "احمد محمد",
+      "tlphone": "+212 65 43 21 09",
+      "adressEmp": "789 Boulevard des Employés",
+      "dteNaiss": "1975-12-24",
+      "lieuNaiss": "Casablanca, Maroc"
+    },
+    {
+      "id": "10",
+      "photo": "assets/demo/images/avatar/circle/avatar-f-11@2x.png",
+      "matricule": "M101",
+      "nni": "987654321",
+      "nomEtPrenom": "Jeanne Dupuis",
+      "nomPrenomArab": "جان دوبوا",
+      "tlphone": "+33 6 12 34 56 78",
+      "adressEmp": "101 Rue des Employés",
+      "debutCntrat": "2021-01-15",
+      "lieuNaiss": "Paris, France"
+    }
+  ],
   "fonctions": [
     {
       "fonction": "Ingénieur informatique",

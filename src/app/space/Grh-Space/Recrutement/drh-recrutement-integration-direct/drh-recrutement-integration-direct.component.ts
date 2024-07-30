@@ -1,4 +1,4 @@
-import {Component, WritableSignal} from '@angular/core';
+import {Component, inject, OnInit, WritableSignal} from '@angular/core';
 import {ButtonModule} from "primeng/button";
 import {CardModule} from "primeng/card";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
@@ -18,6 +18,7 @@ import {FileUploadModule} from "primeng/fileupload";
 import {FormValidatorsComponent} from "../../../../shared/form-validators/form-validators.component";
 import {PaginatorModule} from "primeng/paginator";
 import {ReactiveFormsModule} from "@angular/forms";
+import {JsonServerService} from "../../../../core/data/json-server/json-server.service";
 
 @Component({
   selector: 'mrt-drh-recrutement-integration-direct',
@@ -45,10 +46,19 @@ import {ReactiveFormsModule} from "@angular/forms";
   styleUrl: './drh-recrutement-integration-direct.component.scss',
   providers: [MessageService, ConfirmationService]
 })
-export class DrhRecrutementIntegrationDirectComponent {
+export class DrhRecrutementIntegrationDirectComponent implements OnInit {
 
   protected readonly colListePersonnels = personnelColonneTable;
   formDialog: boolean | WritableSignal<boolean> = false;
+  typeEducation: string[] = ['Fonctionaire'];
+  actif: string[] = ['Actif', 'Inactif'];
+  listePersonnels!: any;
+  selectedPersonnel: any = {};
+  jsonService = inject(JsonServerService);
+
+  ngOnInit() {
+    this.getAllPersonnelsJson();
+  }
 
   onGlobalFilter(table: Table, event: Event) {
     table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
@@ -60,5 +70,11 @@ export class DrhRecrutementIntegrationDirectComponent {
 
   close() {
     this.formDialog = false;
+  }
+
+  getAllPersonnelsJson() {
+    this.jsonService.getAllPersonnels().subscribe((data) => {
+      this.listePersonnels = data;
+    });
   }
 }

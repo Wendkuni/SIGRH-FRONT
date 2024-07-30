@@ -81,8 +81,7 @@ export class DrhExpressionBesoinPersonnelComponent {
     {field: 'profile', header: 'Profile'},
     {field: 'discipline', header: 'Discipline'},
     {field: 'date', header: 'Annee'},
-    {field: 'nbrPostes', header: 'Nombre de postes'},
-    {field: 'actions', header: 'Actions'}
+    {field: 'nbrPostes', header: 'Nombre de postes'}
   ];
 
   showExpressionBesoinPersonnelDialog() {

@@ -25,12 +25,12 @@ import {
   AffectationBack,
   DemandeConvenancePersonnelle,
   DemandeConvenancePersonnelleList,
-  PieceJustificatif,
 } from '../../../../../core/data/mobilite/mobilite.model';
 import {Personnel,} from '../../../../../core/data/personals/personnel.model';
 import {PersonnelService} from '../../../../../core/data/personals/personnel.service';
 import {Cols} from '../../../../../core/data/primeng/primeng.model';
 import {BadgeModule} from 'primeng/badge';
+import {Dossier} from "../../../../../core/data/dossier/dossier.model";
 
 @Component({
   selector: 'mrt-agent-affectation-convenance-personnelle',
@@ -114,7 +114,7 @@ export class AgentAffectationConvenancePersonnelleComponent implements OnInit {
   demandeObject: DemandeConvenancePersonnelle =
     {} as DemandeConvenancePersonnelle;
 
-  listPieceJustificatif = Array<PieceJustificatif>();
+  listPieceJustificatif = Array<Dossier>();
 
   selectedDemande: DemandeConvenancePersonnelle =
     {} as DemandeConvenancePersonnelle;
@@ -249,8 +249,10 @@ export class AgentAffectationConvenancePersonnelleComponent implements OnInit {
   ajouter() {
     if (this.image != null && this.pieceLibelle != '') {
       this.listPieceJustificatif.push({
-        libelle: this.pieceLibelle,
-        images: this.image,
+        libelDossier: this.pieceLibelle,
+        imageFold: this.image,
+        idAgent: this.selectedPersonnel.idAgent,
+        dateUpload: new Date()
       });
       this.pieceLibelle = '';
       this.image = null;

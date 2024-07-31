@@ -8,8 +8,8 @@ import {
   DemandeConvenancePersonnelleList,
   Permutation,
   PermutationList,
-  PieceJustificatif,
 } from '../mobilite/mobilite.model';
+import {Dossier} from "../dossier/dossier.model";
 
 @Injectable({
   providedIn: 'root',
@@ -85,7 +85,7 @@ export class AffectationService {
 
   createAffectationByConvenance(
     data: AffectationBack,
-    listPieceJustificatif: PieceJustificatif[]
+    listPieceJustificatif: Dossier[]
   ) {
     const formData = new FormData();
     formData.append('image', JSON.stringify(listPieceJustificatif));

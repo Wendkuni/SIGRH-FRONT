@@ -1,4 +1,5 @@
 import {Personnel} from '../personals/personnel.model';
+import {Dossier} from "../dossier/dossier.model";
 
 export interface Mobilite {
   // Identifiant unique de la mobilité
@@ -49,7 +50,7 @@ export interface DemandeConvenancePersonnelle {
   situationSanitaire: string;
   regroupementConjoint: string;
   autreSituationSociale: string;
-  listPieceJustificatif: Array<PieceJustificatif>;
+  listPieceJustificatif: Array<Dossier>;
   sessionDemande: string;
   enregistre: boolean;
   envoyer: boolean;
@@ -89,7 +90,7 @@ export enum Nature {
   PERMUTATION, PERSONNEL, NOMINATION, NECESSITE
 }
 
-export type AffectationBack = {
+export interface AffectationBack {
   idAffectation: number;
   personnel: Personnel;
   serviceEcole: string;
@@ -119,4 +120,4 @@ export type AffectationBack = {
   // dateDemande: Date;
   // destinationRetenue: string;
   // appreciation: string;
-};
+}

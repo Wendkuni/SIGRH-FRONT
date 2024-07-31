@@ -1,5 +1,4 @@
 import {Component, WritableSignal} from '@angular/core';
-import {personnelColonneTable} from "../../../../core/data/personals/personnel.model";
 import {Table, TableModule} from "primeng/table";
 import {ButtonModule} from "primeng/button";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
@@ -41,9 +40,29 @@ import {RippleModule} from "primeng/ripple";
 })
 export class DrhStageRecrutementComponent {
 
-  protected readonly colListePersonnels = personnelColonneTable;
+  protected readonly colListePersonnels = [
+    {field: 'nni', header: 'NNI'},
+    {field: 'nomPrenom', header: 'Nom et prénom'},
+    {field: 'nomPrenomArab', header: 'Nom et prénom Arab'},
+    {field: 'tlphone', header: 'Téléphone'},
+    {field: 'adressEmp', header: 'Adresse'},
+    {field: 'lieuNaiss', header: 'Lieu naissance'},
+    {field: 'dateNaiss', header: 'Date naissance'},
+    {field: 'dteRecrutement', header: 'Date récrutement'},
+    {field: 'bank', header: 'Banque'},
+    {field: 'codeBank', header: 'Code banque'},
+    {field: 'numroCpte', header: 'Numéro compte'},
+    {field: 'cleRib', header: 'Clé rib'},
+    {field: 'sexe', header: 'Genre'},
+    {field: 'statusEmp', header: 'Statut employé'},
+    {field: 'typeAgent', header: 'Type agent'},
+  ];
   formDialog: boolean | WritableSignal<boolean> = false;
-  typeEducation: any[] = ['Contractuel(le)', 'Prestataire'];
+  typeEducation: string[] = ['Fonctionaire', 'Contractuel', 'Prestataire'];
+  sexeOptions: any[] = [
+    'Masculin',
+    'Féminin',
+  ];
 
   onGlobalFilter(table: Table, event: Event) {
     table.filterGlobal((event.target as HTMLInputElement).value, 'contains');

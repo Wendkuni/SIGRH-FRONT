@@ -6,7 +6,6 @@ import {RippleModule} from "primeng/ripple";
 import {ToastModule} from "primeng/toast";
 import {ToolbarModule} from "primeng/toolbar";
 import {ConfirmationService, MessageService} from "primeng/api";
-import {personnelColonneTable} from "../../../../core/data/personals/personnel.model";
 import {InputTextModule} from "primeng/inputtext";
 import {Table, TableModule} from "primeng/table";
 import {CalendarModule} from "primeng/calendar";
@@ -48,13 +47,33 @@ import {JsonServerService} from "../../../../core/data/json-server/json-server.s
 })
 export class DrhRecrutementIntegrationDirectComponent implements OnInit {
 
-  protected readonly colListePersonnels = personnelColonneTable;
+  protected readonly colListePersonnels = [
+    {field: 'nni', header: 'NNI'},
+    {field: 'nomPrenom', header: 'Nom et prénom'},
+    {field: 'nomPrenomArab', header: 'Nom et prénom Arab'},
+    {field: 'tlphone', header: 'Téléphone'},
+    {field: 'adressEmp', header: 'Adresse'},
+    {field: 'lieuNaiss', header: 'Lieu naissance'},
+    {field: 'dateNaiss', header: 'Date naissance'},
+    {field: 'dteRecrutement', header: 'Date récrutement'},
+    {field: 'bank', header: 'Banque'},
+    {field: 'codeBank', header: 'Code banque'},
+    {field: 'numroCpte', header: 'Numéro compte'},
+    {field: 'cleRib', header: 'Clé rib'},
+    {field: 'sexe', header: 'Genre'},
+    {field: 'statusEmp', header: 'Statut employé'},
+    {field: 'typeAgent', header: 'Type agent'},
+  ];
   formDialog: boolean | WritableSignal<boolean> = false;
-  typeEducation: string[] = ['Fonctionaire'];
+  typeEducation: string[] = ['Fonctionaire', 'Contractuel', 'Prestataire'];
   actif: string[] = ['Actif', 'Inactif'];
   listePersonnels!: any;
   selectedPersonnel: any = {};
   jsonService = inject(JsonServerService);
+  sexeOptions: any[] = [
+    'Masculin',
+    'Féminin',
+  ];
 
   ngOnInit() {
     this.getAllPersonnelsJson();

@@ -247,7 +247,13 @@ export const routes: Routes = [
         loadComponent: () => import(
           './space/Grh-Space/Recrutement/drh-participation-concours/drh-participation-concours.component'
           ).then((item) => item.DrhParticipationConcoursComponent),
-      }
+      },
+      {
+        path: 'drh-statistique-recrutement',
+        loadComponent: () => import(
+          './space/Grh-Space/Recrutement/recrutement-statistique/recrutement-statistique.component'
+          ).then((item) => item.RecrutementStatistiqueComponent),
+      },
     ],
   },
   {

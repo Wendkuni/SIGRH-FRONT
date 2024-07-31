@@ -445,14 +445,14 @@
                   </ng-template>
                   <ng-template pTemplate="body" let-piece>
                     <tr>
-                      <td>{{ piece.libelle }}</td>
+                      <td>{{ piece.libelDossier }}</td>
                       <td>
                         <div
                           class="flex flex-column w-2 justify-content-between"
                           style="row-gap: 1rem"
                         ></div>
                         <img
-                          [src]="piece.images.objectURL"
+                          [src]="piece.imageFold.objectURL"
                           alt=""
                           class="w-10rem shadow-4"
                         />

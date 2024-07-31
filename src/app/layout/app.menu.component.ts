@@ -325,6 +325,10 @@ export class AppMenuComponent implements OnInit {
                   label: 'Participation aux concours',
                   routerLink: ['/drh-participation-concours'],
                 },
+                {
+                  label: 'Statistiques',
+                  routerLink: ['/drh-statistique-recrutement'],
+                }
               ],
             }
           ],

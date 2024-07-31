@@ -7,21 +7,24 @@
 <p-confirmDialog/>
 
 <p-toolbar styleClass="mb-4 gap-2">
-  <ng-template pTemplate="left">
-    <div class="text-900 font-bold text-3xl mb-4 mt-2">
-      Formulaire agents admis aux écoles de formation
+  <div class="grid">
+    <div class="col-12">
+      <div class="text-900 font-bold text-3xl mb-4 mt-2">
+        Formulaire agents admis aux écoles de formation
+      </div>
     </div>
-  </ng-template>
-
-  <ng-template pTemplate="right">
-    <p-button
-      severity="success"
-      label="Ajouter"
-      icon="pi pi-plus"
-      class="mr-2"
-      (click)="showFormDialog()"
-    />
-  </ng-template>
+    <div class="col-12 ">
+      <p-button
+        severity="success"
+        label="Ajouter"
+        icon="pi pi-plus"
+        class="mr-2"
+        (click)="showFormDialog()"
+      />
+      <p-button icon="pi pi-file-excel" severity="info" label="Generer la liste Excel" class="mr-2"/>
+      <p-button icon="pi pi-file-pdf" severity="warning" label="Generer la liste Pdf" class="mr-2"/>
+    </div>
+  </div>
 </p-toolbar>
 
 <p-table
@@ -37,7 +40,7 @@
   [rowHover]="true"
   [rowsPerPageOptions]="[5,10, 20, 50]"
   tableStyleClass="p-datatable-gridlines"
-  [globalFilterFields]="['nni','nomPrenom','nomPrenomArab','nni','dteRecrutement','lieuNaiss','bank','codeBank','ministereOrigine','typeeducation']"
+  [globalFilterFields]="['nni','nomPrenom','nomPrenomArab','nni','dteRecrutement','lieuNaiss','bank','codeBank']"
 >
   <ng-template pTemplate="caption">
     <div class="flex justify-content-between flex-column sm:flex-row">
@@ -88,29 +91,6 @@
       <form>
         <div class="col-12">
           <div class="card">
-            <div class="field col-12">
-              <label for="selectedStudent" class="font-medium text-900">Selectionner l'eleve </label>
-              <p-dropdown
-                id="selectedStudent"
-                [options]="listePersonnels"
-                optionLabel="nomEtPrenom"
-                [(ngModel)]="selectedPersonnel"
-                [ngModelOptions]="{standalone: true}"
-                [filter]="true"
-                filterBy="nni"
-                [showClear]="true"
-                appendTo="body"
-                placeholder="Rechercher par le NNI">
-                <ng-template let-eleve pTemplate="item">
-                  <div class="flex align-items-center gap-2">
-                    <div>{{ eleve.nni }}</div>
-                    <div>{{ eleve.nomEtPrenom }}</div>
-                  </div>
-                </ng-template>
-              </p-dropdown>
-            </div>
-          </div>
-          <div class="card">
             <!--          Informations personnels de l'agent-->
 
             <div class="flex justify-content-between border-bottom-1 surface-border p-3">
@@ -122,21 +102,18 @@
               <!--              Nom Prenom-->
               <div class="field col-12 md:col-6">
                 <label for="nometprenom" class="font-medium text-900">Nom et Prénom </label> <input id="nometprenom"
-                [(ngModel)]="selectedPersonnel.nomEtPrenom" [ngModelOptions]="{standalone: true}"
                 pInputText class="w-full p-component p-element form-control mb-1" type="text"/>
               </div>
 
               <!--              Nom Prenom Arab-->
               <div class="field col-12 md:col-6">
                 <label for="nometprenomarab" class="font-medium text-900">Nom et Prénom Arab </label> <input
-                [(ngModel)]="selectedPersonnel.nomPrenomArab" [ngModelOptions]="{standalone: true}"
                 id="nometprenomarab" pInputText class="w-full p-component p-element form-control mb-1" type="text"/>
               </div>
 
               <!--              Numero de telephone-->
               <div class="field col-12 md:col-4">
                 <label for="tlphone" class="font-medium text-900">Numero de telephone</label> <input id="tlphone"
-                [(ngModel)]="selectedPersonnel.tlphone" [ngModelOptions]="{standalone: true}"
                 pInputText class="w-full p-component p-element form-control mb-1" type="text"/>
               </div>
 
@@ -148,8 +125,6 @@
                   [dateFormat]="'yy-mm-dd'"
                   placeholder="Entre la date(yyyy-mm-dd)"
                   styleClass="mb-1"
-                  [(ngModel)]="selectedPersonnel.dteNaiss"
-                  [ngModelOptions]="{standalone: true}"
                   appendTo="body"
                   [showTime]="false"
                 />
@@ -158,14 +133,23 @@
               <!--              Lieu de naissance-->
               <div class="field col-12 md:col-4">
                 <label for="lieunaiss" class="font-medium text-900">Lieu de naissance</label> <input id="lieunaiss"
-                [(ngModel)]="selectedPersonnel.lieuNaiss" [ngModelOptions]="{standalone: true}"
                 pInputText class="w-full p-component p-element form-control mb-1" type="text"/>
               </div>
 
+              <!--              Sexe-->
+              <div class="field col-12 md:col-6">
+                <label for="sexe" class="font-medium text-900">Sexe</label>
+                <p-dropdown
+                  id="sexe"
+                  [options]="sexeOptions"
+                  placeholder="Selectionner le sexe"
+                >
+                </p-dropdown>
+              </div>
+
               <!--          Adresse de l'agent    -->
-              <div class="field col-12 md:col-12">
+              <div class="field col-12 md:col-6">
                 <label for="adressemp" class="font-medium text-900">Adresse de l'agent</label> <input id="adressemp"
-                [(ngModel)]="selectedPersonnel.adressEmp" [ngModelOptions]="{standalone: true}"
                 pInputText class="w-full p-component p-element form-control mb-1" type="text"/>
               </div>
 
@@ -178,35 +162,30 @@
               <!--              NNI-->
               <div class="field col-12 md:col-6">
                 <label for="nni" class="font-medium text-900">NNI </label> <input pInputText id="nni"
-                [(ngModel)]="selectedPersonnel.nni" [ngModelOptions]="{standalone: true}"
-                class="w-full p-component p-element form-control mb-1" type="text" disabled/>
+                class="w-full p-component p-element form-control mb-1" type="text"/>
               </div>
 
               <!--              Bank-->
               <div class="field col-12 md:col-6">
                 <label for="bank" class="font-medium text-900">Bank </label> <input id="bank" pInputText
-                [(ngModel)]="selectedPersonnel.bank" [ngModelOptions]="{standalone: true}"
                 class="w-full p-component p-element form-control mb-1" type="text"/>
               </div>
 
               <!--              Code Bank-->
               <div class="field col-12 md:col-6">
                 <label for="codebank" class="font-medium text-900">Code Bank </label> <input id="codebank" pInputText
-                [(ngModel)]="selectedPersonnel.codeBank" [ngModelOptions]="{standalone: true}"
                 class="w-full p-component p-element form-control mb-1" type="text"/>
               </div>
 
               <!--              Numero Compte-->
               <div class="field col-12 md:col-6">
                 <label for="numeroCompte" class="font-medium text-900">Numero Compte </label> <input id="numeroCompte"
-                [(ngModel)]="selectedPersonnel.numeroCompte" [ngModelOptions]="{standalone: true}"
                 pInputText class="w-full p-component p-element form-control mb-1" type="text"/>
               </div>
 
               <!--              Cle Rib-->
               <div class="field col-12 md:col-6">
                 <label for="cleRib" class="font-medium text-900">Clé rib </label> <input id="cleRib" pInputText
-                [(ngModel)]="selectedPersonnel.cleRib" [ngModelOptions]="{standalone: true}"
                 class="w-full p-component p-element form-control mb-1" type="text"/>
               </div>
 
@@ -218,13 +197,6 @@
                   placeholder="Selectionner le status"
                 >
                 </p-dropdown>
-              </div>
-
-
-              <!--              Detacher    -->
-              <div class="field col-12 md:col-6">
-                <label for="detacher" class="font-medium text-900">Service </label> <input id="detacher" pInputText
-                class="w-full p-component p-element form-control mb-1" type="text"/>
               </div>
 
               <!--              Type Education -->

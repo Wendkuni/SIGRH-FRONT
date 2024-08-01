@@ -252,7 +252,7 @@
               </div>
               <!-- Distinction -->
               <div class="field col-12 md:col-4">
-                <label for="distinction">5- Distinction <span class="text-red-500">*</span></label>
+                <label for="distinction">5- Distinction </label>
                 <p-dropdown
                   id="distinction"
                   [options]="listeDistinction"
@@ -358,7 +358,7 @@
                     (onUpload)="onUploadFile($event)"
                     [customUpload]="true"
                     (onSelect)="onUploadFile($event)"
-                    accept=".png, .jpg"
+                    accept=".png, .jpg, .pdf"
                     [showUploadButton]="false"
                     [showCancelButton]="false"
                     [auto]="true"
@@ -373,19 +373,32 @@
                             fileUpload.advancedFileInput.nativeElement.click()
                           "
                           >
-                            <i class="pi pi-file-pdf text-8xl text-red-500"></i> <span
+                            <i
+                              class="pi pi-fw pi-file text-4xl text-primary"
+                            ></i> <span
                             class="block font-semibold text-900 text-lg mt-3"
-                          >Déposer ou sélectionner une image</span
+                          >Déposer ou sélectionner un fichier (.jpg, .pdf, .png)</span
                           >
                           </div>
                         }
                         @if (image) {
                           <div class="w-full h-full relative border-round p-0">
-                            <img
-                              [src]="image.objectURL"
-                              class="w-full h-full border-round"
-                              alt="blog cover"
-                            />
+                            @if (image.type === 'image/png' || image.type === 'image/jpeg' || image.type === 'image/jpg') {
+                              <img
+                                [src]="image.objectURL"
+                                class="w-full h-full border-round"
+                                alt="blog cover"
+                              />
+                            }
+                            @if (image.type === 'application/pdf') {
+                              <div
+                                class="surface-card border-round shadow-2 flex flex-column w-full h-full justify-content-center align-items-center">
+                                <i class="pi pi-file-pdf text-8xl text-red-500"></i> <span
+                                class="block font-semibold text-900 text-lg mt-3"
+                              >{{ image.name }}</span
+                              >
+                              </div>
+                            }
 
                             <button
                               pButton

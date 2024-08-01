@@ -47,10 +47,6 @@ export class AppMenuComponent implements OnInit {
                   label: 'Permutation de poste',
                   routerLink: ['/agent-permutation-poste'],
                 },
-                {
-                  label: 'Mes demandes',
-                  routerLink: ['/agent-mes-demandes'],
-                }
               ],
             },
             // Affaire sociale

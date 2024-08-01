@@ -85,21 +85,15 @@ export class AffectationService {
 
   createAffectationByConvenance(
     data: AffectationBack,
-    listPieceJustificatif: Dossier[]
+    dossier: Dossier[]
   ) {
     const formData = new FormData();
-    formData.append('image', JSON.stringify(listPieceJustificatif));
+    formData.append('dossier', JSON.stringify(dossier));
     formData.append('affectation', JSON.stringify(data));
 
-    console.log(formData);
-
     return this.http.post(
-      'http://localhost:8082/v1/api/affectation/create',
-      formData,
-      {
-        reportProgress: true,
-        responseType: 'text',
-      }
+      'http://localhost:8082/v1/api/affectation/createAffectation',
+      formData, {headers: {'Content-Type': 'multipart/form-data'}}
     );
   }
 

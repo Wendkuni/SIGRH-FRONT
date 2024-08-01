@@ -231,6 +231,7 @@ export class AgentAffectationConvenancePersonnelleComponent implements OnInit {
 
   onUploadFile(event: any) {
     this.image = event.files[0];
+    console.log(this.image);
   }
 
   removeFile() {
